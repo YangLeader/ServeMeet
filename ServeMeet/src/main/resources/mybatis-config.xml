@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC
+"-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.yang.ServeMeet.batting.model.vo.Batting" alias="Batting"/>
+		<typeAlias type="com.yang.ServeMeet.batting.model.vo.BattingUser" alias="BattingUser"/>
+		<typeAlias type="com.yang.ServeMeet.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.yang.ServeMeet.board.model.vo.BoardComment" alias="BoardComment"/>
+		<typeAlias type="com.yang.ServeMeet.board.model.vo.BoardFile" alias="BoardFile"/>
+		<typeAlias type="com.yang.ServeMeet.category.model.vo.Category" alias="Category"/>
+		<typeAlias type="com.yang.ServeMeet.location.model.vo.Location" alias="Location"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.Chatting" alias="Chatting"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingLog" alias="ChattingLog"/>
+		<typeAlias type="com.yang.ServeMeet.matching.model.vo.Matching" alias="Matching"/>
+		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingHistory" alias="MatchingHistory"/>
+		<typeAlias type="com.yang.ServeMeet.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.yang.ServeMeet.point.model.vo.Point" alias="Point"/>
+	</typeAliases>
+	
+
+
+</configuration>
+
+
+
+
+
+
+
+
+
+
