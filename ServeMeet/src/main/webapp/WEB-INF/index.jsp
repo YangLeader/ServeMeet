@@ -281,7 +281,6 @@
     <!-- Back to top -->
     <script src="resources/js/back-to-top.js" type="text/javascript"></script>
 
-	
 </body>
 
 </html>
