@@ -126,6 +126,7 @@
 			<version>2.3.1</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -140,22 +141,18 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- DataBase Connection -->
-		<!-- OJDBC lib -->
+		<!-- DataBase Connection Pool lib -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.4.0-atlassian-hosted</version>
 		</dependency>
-
-		<!-- Database Connection Pool lib -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-
-		<!-- Mybatis-Spring lib -->
+		<!-- mybatis-spring lib -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
@@ -171,10 +168,7 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
-		<!-- 비밀번호 암호화 관련 -->
-
-		<!-- SHA-512관련은 4버전까지밖에 지원을 안하고. 5버전부터는 비크립트. -->
+		<!--security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -193,10 +187,6 @@
 			<!-- <version>${org.springframework-version}</version> -->
 			<version>4.2.6.RELEASE</version>
 		</dependency>
-
-
-
-		<!-- JSON 라이브러리 -->
 
 		<!-- JSON -->
 		<dependency>
@@ -221,25 +211,45 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.5</version>
 		</dependency>
-
-		<!-- log4jdbc 라이브러리 -->
+		<!-- log4jdbc -->
 		<dependency>
 			<groupId>org.lazyluke</groupId>
 			<artifactId>log4jdbc-remix</artifactId>
 			<version>0.2.7</version>
 		</dependency>
+		<!-- fileupload -->
 
-		<!-- file upload lib -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.3</version>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.6</version>
-		</dependency>     
+		</dependency>
+<!-- websocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>5.1.3.RELEASE</version>
+		</dependency>
+		<!-- jackson core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.6</version>
+		</dependency>
+		<!-- jackson DataBind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.6</version>
+		</dependency>
+		      
+
 	</dependencies>
     <build>
         <plugins>
