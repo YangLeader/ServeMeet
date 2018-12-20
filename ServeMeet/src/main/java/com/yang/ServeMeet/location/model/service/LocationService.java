@@ -1,8 +1,8 @@
-package com.yang.serveMeet.location.model.service;
+package com.yang.ServeMeet.location.model.service;
 
 import java.util.List;
 
-import com.yang.serveMeet.location.model.vo.Location;
+import com.yang.ServeMeet.location.model.vo.Location;
 
 
 public interface LocationService {

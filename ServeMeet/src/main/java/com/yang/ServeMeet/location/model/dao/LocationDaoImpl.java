@@ -1,4 +1,4 @@
-package com.yang.serveMeet.location.model.dao;
+package com.yang.ServeMeet.location.model.dao;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yang.serveMeet.location.model.vo.Location;
+import com.yang.ServeMeet.location.model.vo.Location;
 
 @Repository
 public class LocationDaoImpl implements LocationDao {

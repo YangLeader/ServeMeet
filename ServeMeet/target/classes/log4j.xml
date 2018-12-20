@@ -44,7 +44,7 @@
 	</appender>
 
 
-	<appender name="fileAppender"
+	<!-- <appender name="fileAppender"
 		class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file"
 			value="D:/springWrokspace/04_SpringProject/src/main/resources/logs/system/system.log" />
@@ -54,7 +54,7 @@
 			<param name="ConversionPattern"
 				value="%-5p: [%d{yyyy-MM-dd HH:mm:ss}] %F:%L - %m%n" />
 		</layout>
-	</appender>
+	</appender> -->
 
 	<!-- log4jdbc-remix Appender -->
 

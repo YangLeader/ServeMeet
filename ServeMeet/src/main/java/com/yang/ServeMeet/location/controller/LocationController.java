@@ -1,4 +1,4 @@
-package com.yang.serveMeet.location.controller;
+package com.yang.ServeMeet.location.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.yang.serveMeet.location.model.service.LocationService;
-import com.yang.serveMeet.location.model.vo.Location;
+import com.yang.ServeMeet.location.model.service.LocationService;
+import com.yang.ServeMeet.location.model.vo.Location;
 
 @Controller
 public class LocationController {

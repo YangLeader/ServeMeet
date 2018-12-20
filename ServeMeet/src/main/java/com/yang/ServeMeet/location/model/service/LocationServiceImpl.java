@@ -1,12 +1,12 @@
-package com.yang.serveMeet.location.model.service;
+package com.yang.ServeMeet.location.model.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yang.serveMeet.location.model.dao.LocationDao;
-import com.yang.serveMeet.location.model.vo.Location;
+import com.yang.ServeMeet.location.model.dao.LocationDao;
+import com.yang.ServeMeet.location.model.vo.Location;
 
 @Service
 public class LocationServiceImpl implements LocationService {
