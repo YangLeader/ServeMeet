@@ -1,17 +1,15 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-
+<html >
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Restaurant responsive website templates free download for personal and commerical. Download Free Website Template for your great projects.">
-    <meta name="keywords" content="restaurant responsive website templates free download,online restaurant website templates,bootstrap restaurant templates free download,restaurant website templates free download html with css, catering website templates free download">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Restaurant Responsive Website Templates Free Download</title>
-    <!-- Bootstrap -->
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+	<link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <!-- Style Custom CSS -->
     <link href="resources/css/font-awesome.min.css" rel="stylesheet">
     <!-- Fontello CSS -->
@@ -26,75 +24,13 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<meta charset="UTF-8">
+	<title>ServeMeet</title>
+	<c:import url="views/common/header.jsp"/>
 </head>
 
+
 <body>
-    <div class="top-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <div class="top-social">
-                        <ul class="listnone">
-                            <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-8  col-xs-6">
-                    <div class="top-text">
-                        <span class="text-block call-block"> 
-                                <i class="icon-phone-call"></i>
-                                <span class="call-no">1800-123-4562</span>
-                        </span>
-                        <span class="text-block mail-block hidden-xs hidden-sm"> <i class="icon-envelope-1"></i>
-                                <span class="mail-text">info@restaurant.com</span>
-                        </span>
-                        <span class="text-block time-block"> <i class="icon-time"></i>
-                                <span class="time-text">Mo-Fr 11:00-10:00, Sa-Su 10:00-11:00</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                    <div class="logo">
-                        <a href="index.html"><img src="resources/images/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                    <!-- navigation -->
-                    <div class="navigation">
-                        <div id="navigation">
-                            <ul>
-                                <li class="active"><a href="${pageContext.request.contextPath}/location/location.do" title="Home">Home</a></li>
-                                <li><a href="menu.html" title="Menu">Menu</a></li>
-                                <li class="has-sub"><a href="service-list.html" title="Service List">Service List</a>
-                                    <ul>
-                                        <li><a href="service-list.html" title="Service List">Service List</a></li>
-                                        <li><a href="service-detail.html" title="Service Detail">Service Detail</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-sub"><a href="blog-default.html" title="Blog">News</a>
-                                    <ul>
-                                        <li><a href="blog-default.html" title="Blog" >Blog Default</a></li>
-                                        <li><a href="blog-single.html" title="Blog Single" >Blog Single</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html" title="Contact Us">Contact</a> </li>
-                                <li><a href="styleguide.html" title="Styleguide">styleguide</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="hero-section">
         <div class=" ">
             <!-- navigation -->
@@ -329,73 +265,9 @@
                     <a href="menu.html" class="btn btn-white">book now</a> </div>
             </div>
         </div>
+        
     </div>
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="footer-widget mb30">
-                        <h2 class="footer-title">About restaurant</h2>
-                        <p>Lorem ipsum dolor sit amet lorem is consectetur adipiscing eti mteleisede urna id, aliquam dignsim liburabitur tortor vitaecus tepor suscipit.</p>
-                        <div class="footer-social mb60">
-                            <ul class="listnone">
-                                <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                    <div class="footer-widget mb30">
-                        <h2 class="footer-title">qUICK LINKS</h2>
-                        <ul class="listnone">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a href="service-list.html">Services</a></li>
-                            <li><a href="blog-default.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
-                    <div class="footer-widget footer-contact mb30">
-                        <h2 class="footer-title">Contact info</h2>
-                        <ul class="listnone">
-                            <li><i class="fa fa-map-marker"></i>
-                                <p>2426 Snowbird Lane Prague, NE 68050</p>
-                            </li>
-                            <li><i class="fa fa-phone"></i>
-                                <p>800-123-4567
-                                    <br> 800-123-8910
-                                </p>
-                            </li>
-                            <li><i class="fa fa-envelope-o"></i>
-                                <p>info@restaurant.com</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <div class="footer-widget mb30">
-                        <h2 class="footer-title">Subscribe here</h2>
-                        <p>Stay update with the latest our menu special offers & restaurant events!</p>
-                        <input type="text" placeholder="Your Email" class="form-control">
-                        <a href="#" class="btn btn-primary">SUbscribe</a> </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tiny-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p>Copyright © All Rights Reserved. 2017 </p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <c:import url="views/common/footer.jsp"/>
     <!-- back to top icon -->
     <a href="#0" class="cd-top" title="Go to top">Top</a>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -409,6 +281,8 @@
     <script src="resources/js/menumaker.js"></script>
     <!-- Back to top -->
     <script src="resources/js/back-to-top.js" type="text/javascript"></script>
+
+	
 </body>
 
 </html>
