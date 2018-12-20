@@ -27,7 +27,7 @@
 		var chatNo = $(this).val;
 
 		
-		console.log('chatNo');
+		console.log(chatNo);
 	}
 </script>
 </body>
