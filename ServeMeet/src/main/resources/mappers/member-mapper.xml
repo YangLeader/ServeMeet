@@ -9,31 +9,21 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="member">
 
-	<resultMap type="Member" id="memberMap">
-		<result column="hobby" property="hobby" typeHandler="strArrTypeHandler"/>
-	</resultMap>
-	<select id="loginMember" parameterType="string" 
-	       resultMap="memberMap">
+	<select id="loginMember" parameterType="string">
 	SELECT * FROM MEMBER 
 	WHERE USERID = #{userId}
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES(
-			#{userId}, #{password}, #{userName},
-			#{gender}, #{age}, #{email}, #{phone},
-			#{address}, #{hobby, typeHandler=strArrTypeHandler}, DEFAULT
+			SEQ_MEMBER.NEXTVAL,#{userId}, #{userPwd}, #{userName},#{email},0
 		)
 	</insert>
 	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER 
-		SET PASSWORD = #{password},
-		EMAIL = #{email}, 
-		AGE = #{age}, 
-		PHONE = #{phone}, 
-		ADDRESS = #{address}, 
-		HOBBY = #{hobby, typeHandler=strArrTypeHandler}
+		SET PASSWORD = #{userPwd},
+		EMAIL = #{email},
 		WHERE USERID = #{userId}
 	</update>
 	
