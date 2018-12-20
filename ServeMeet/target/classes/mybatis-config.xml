@@ -5,18 +5,17 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias type="com.yang.serveMeet.batting.model.vo.Batting" alias="Batting"/>
-		<typeAlias type="com.yang.serveMeet.batting.model.vo.BattingUser" alias="BattingUser"/>
-		<typeAlias type="com.yang.serveMeet.board.model.vo.Board" alias="Board"/>
-		<typeAlias type="com.yang.serveMeet.board.model.vo.Board" alias="BoardComment"/>
-		<typeAlias type="com.yang.serveMeet.board.model.vo.Board" alias="BoardFile"/>
-		<typeAlias type="com.yang.serveMeet.category.model.vo.Category" alias="Category"/>
-		<typeAlias type="com.yang.serveMeet.location.model.vo.Location" alias="Location"/>
-		<typeAlias type="com.yang.serveMeet.chatting.model.vo.Chatting" alias="Chatting"/>
-		<typeAlias type="com.yang.serveMeet.chatting.model.vo.ChattingLog" alias="ChattingLog"/>
-		<typeAlias type="com.yang.serveMeet.chatting.model.vo.Chatting" alias="Chatting"/>
-		<typeAlias type="com.yang.serveMeet.matching.model.vo.Matching" alias="Matching"/>
-		<typeAlias type="com.yang.serveMeet.matching.model.vo.MatchingHistory" alias="MatchingHistory"/>
+		<typeAlias type="com.yang.ServeMeet.batting.model.vo.Batting" alias="Batting"/>
+		<typeAlias type="com.yang.ServeMeet.batting.model.vo.BattingUser" alias="BattingUser"/>
+		<typeAlias type="com.yang.ServeMeet.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.yang.ServeMeet.board.model.vo.BoardComment" alias="BoardComment"/>
+		<typeAlias type="com.yang.ServeMeet.board.model.vo.BoardFile" alias="BoardFile"/>
+		<typeAlias type="com.yang.ServeMeet.category.model.vo.Category" alias="Category"/>
+		<typeAlias type="com.yang.ServeMeet.location.model.vo.Location" alias="Location"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.Chatting" alias="Chatting"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingLog" alias="ChattingLog"/>
+		<typeAlias type="com.yang.ServeMeet.matching.model.vo.Matching" alias="Matching"/>
+		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingHistory" alias="MatchingHistory"/>
 	</typeAliases>
 	
 

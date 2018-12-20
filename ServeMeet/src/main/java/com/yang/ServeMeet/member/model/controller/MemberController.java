@@ -1,4 +1,4 @@
-package com.yang.serveMeet.member.controller;
+package com.yang.ServeMeet.member.model.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
