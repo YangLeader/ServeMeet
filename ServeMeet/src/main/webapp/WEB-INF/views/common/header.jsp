@@ -49,7 +49,7 @@
 	                		<span><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}" title="내정보보기">${member.userName}</a> 님, 안녕하세요</span>
 	                		&nbsp;
 							<span>
-								<a class = "btn-link" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberlogout.do'">LOG OUT</a>
+								<a class = "btn-link" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">LOG OUT</a>
 							</span>
 	                	</span>
 	                </c:if>

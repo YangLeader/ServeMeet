@@ -79,7 +79,7 @@ public class MemberController {
 	@RequestMapping(value="/member/memberLogin.do",
 	        method = RequestMethod.POST)
 	public ModelAndView memberLogin(@RequestParam String userId,
-							  @RequestParam String password) {
+							  @RequestParam String userPwd) {
 		
 		if(logger.isDebugEnabled()) logger.debug("회원 로그인 기능 확인!");
 		
@@ -92,21 +92,27 @@ public class MemberController {
 		
 		if( m == null) {
 			msg = "존재하지 않는 회원입니다.";
-		} /*else {
+		} else {
 			
-			if(bcryptPasswordEncoder.matches(password, m.getUserPwd())) {
+			if(userPwd.equals(m.getUserPwd())) {
+				msg="로그인 성공";
+				mv.addObject("member",m);
+			}else {
+				msg = "비밀번호가 틀렸습니다.";
+			}
+			//if(bcryptPasswordEncoder.matches(password, m.getUserPwd())) {
 				
 				msg="로그인 성공!";
 				
 				// Model 객체는 일반적으로 데이터 저장 시 Request영역을 사용한다.
 				// 하지만 @SessionAttribute 어노테이션을 활용하면
 				// 세션 영역에 데이터를 저장할 수 도 있다.
-				mv.addObject("member", m);
+				//mv.addObject("member", m);
 				
-			} else {
-				msg = "비밀번호가 틀렸습니다!";
-			}
-		}*/
+			//} else {
+				//msg = "비밀번호가 틀렸습니다!";
+			//}
+		}
 		
 		mv.addObject("loc", loc).addObject("msg", msg);
 		

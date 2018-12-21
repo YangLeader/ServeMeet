@@ -9,7 +9,10 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="member">
 
-	<select id="loginMember" parameterType="string">
+
+
+	<select id="loginMember" parameterType="string"
+		resultType = "Member">
 	SELECT * FROM MEMBER 
 	WHERE USERID = #{userId}
 	</select>
