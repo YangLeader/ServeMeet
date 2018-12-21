@@ -25,8 +25,10 @@
 	$(".chatName").click(function() {
 		//var chatNo = $(this).attr("value");
 		var chatNo = $(this).children(".chatNo").val();
+		var userName = $(this).children(".chatUser").val();
 		console.log(chatNo);
-		location.href="";
+		console.log(userName);
+		//location.href="${pageContext.request.contextPath }/chat/chatting/do?chatNo2="+chatNo+"&userName2="+userName;
 		
 		
 		
