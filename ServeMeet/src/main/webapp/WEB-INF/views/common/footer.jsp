@@ -68,5 +68,19 @@
             </div>
         </div>
     </div>
+    
+    <!-- back to top icon -->
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <!-- Sticky Header -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/sticky-header.js"></script>
+    <!-- Menu Maker - Navigations -->
+    <script src="${pageContext.request.contextPath}/resources/js/menumaker.js"></script>
+    <!-- Back to top -->
+    <script src="${pageContext.request.contextPath}/resources/js/back-to-top.js" type="text/javascript"></script>
    </footer>
 </html>
