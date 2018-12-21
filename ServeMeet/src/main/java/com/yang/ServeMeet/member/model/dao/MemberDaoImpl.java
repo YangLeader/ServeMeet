@@ -42,4 +42,10 @@ public class MemberDaoImpl implements MemberDao {
 		return (Integer)hmap.get("result");
 	}
 
+	@Override
+	public int checkNameDuplicate(HashMap<String, Object> hmap) {
+		sqlSession.selectOne("member.checkNameDuplicate",hmap);
+		return (Integer)hmap.get("result");
+	}
+
 }

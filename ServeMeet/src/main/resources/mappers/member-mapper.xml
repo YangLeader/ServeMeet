@@ -45,6 +45,18 @@
 			)
 		}
 	</select>
+	
+	<select id="checkNameDuplicate" statementType="CALLABLE" 
+	       parameterType="hashmap">
+		<!-- CallableStatement 는 { } 로 묶여 실행되며
+		    시작괄호 '{' 다음에 tab 기호를 읽지 못한다. -->
+		{ CALL NAME_DUP_CHK(
+			#{userName, mode=IN, jdbcType=VARCHAR},
+			#{result, mode=OUT, jdbcType=NUMERIC,
+			  javaType=integer}
+			)
+		}
+	</select>
 <!--
 
 // 아이디 체크 프로시저
@@ -61,6 +73,28 @@ CREATE OR REPLACE PROCEDURE ID_DUP_CHK
   
 // 컴파일 결과 확인
 
+SET SERVEROUTPUT ON;
+
+DECLARE
+     RESULT NUMBER;
+BEGIN
+     ID_DUP_CHK('admina', RESULT);
+     DBMS_OUTPUT.PUT_LINE('RESULT :: ' || RESULT);
+END;
+/
+
+// 닉네임 체크 프로시저
+CREATE OR REPLACE PROCEDURE ID_DUP_CHK
+( V_ID IN MEMBER.USERID%TYPE,
+  PR_RESULT OUT NUMBER)
+  IS
+  BEGIN
+     SELECT COUNT(*) INTO PR_RESULT
+     FROM MEMBER
+     WHERE USERID = V_ID;
+  END;
+  /
+  
 SET SERVEROUTPUT ON;
 
 DECLARE

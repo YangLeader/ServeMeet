@@ -31,8 +31,8 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	/*@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;*/
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@RequestMapping("/member/memberEnroll.do")
 	public String memberEnroll() {
@@ -50,7 +50,7 @@ public class MemberController {
 			
 			// ***** 암호화 코드 ***** //
 			// BcryptPasswordEncoder - 랜덤 salt 생성하는 암호 모듈
-			// member.setUserPwd(bcryptPasswordEncoder.encode(rawPassword));
+			 member.setUserPwd(bcryptPasswordEncoder.encode(rawPassword));
 			// $2a$10$YhQOO0726Fco64zmRybgGeKRYjA5wm/lcDonK81atI.00Y8NA06fu
 			// $2a$10$ : 암호화에 사용된 알고리즘
 			// ******************* //
@@ -94,24 +94,24 @@ public class MemberController {
 			msg = "존재하지 않는 회원입니다.";
 		} else {
 			
-			if(userPwd.equals(m.getUserPwd())) {
+			/*if(userPwd.equals(m.getUserPwd())) {
 				msg="로그인 성공";
 				mv.addObject("member",m);
 			}else {
 				msg = "비밀번호가 틀렸습니다.";
-			}
-			//if(bcryptPasswordEncoder.matches(password, m.getUserPwd())) {
+			}*/
+			if(bcryptPasswordEncoder.matches(userPwd, m.getUserPwd())) {
 				
 				msg="로그인 성공!";
 				
 				// Model 객체는 일반적으로 데이터 저장 시 Request영역을 사용한다.
 				// 하지만 @SessionAttribute 어노테이션을 활용하면
 				// 세션 영역에 데이터를 저장할 수 도 있다.
-				//mv.addObject("member", m);
+				mv.addObject("member", m);
 				
-			//} else {
-				//msg = "비밀번호가 틀렸습니다!";
-			//}
+			} else {
+				msg = "비밀번호가 틀렸습니다!";
+			}
 		}
 		
 		mv.addObject("loc", loc).addObject("msg", msg);
@@ -209,6 +209,20 @@ public class MemberController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		boolean isUsable = memberService.checkIdDuplicate(userId) == 0 ? true : false;
+		
+		map.put("isUsable", isUsable);
+		
+		return map;
+	}
+	
+	@RequestMapping("/member/checkNameDuplicate.do")
+	@ResponseBody
+	public Map<String, Object> checkNameDuplicate(@RequestParam String userName){
+		
+		if(logger.isDebugEnabled()) logger.debug("닉네임 일치 여부 확인!");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean isUsable = memberService.checkNameDuplicate(userName) == 0 ? true : false;
 		
 		map.put("isUsable", isUsable);
 		

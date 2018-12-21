@@ -64,11 +64,7 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group" align="center">
                 <br>
-                  
-                  
-                  <button type ="submit" id="sendbutton" name="sendbutton" class="btn btn-default" onclick="sendBtn();">Send</button>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="reset" id="cancelbutton" name="cancelbutton" class="btn btn-default">Cancel</button> 
+                  <button type ="submit" id="sendbutton" name="sendbutton" class="btn-lg btn-default" onclick="sendBtn();"><b>Sign in</b></button>
                 </div>
               </div>
             </form>
