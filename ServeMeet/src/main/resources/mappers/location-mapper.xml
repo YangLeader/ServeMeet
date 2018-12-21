@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="location">
+
+	<!-- 자바의 배열이나 서로 다른 (자바와 DB의 컬럼내용이 다른)
+	     객체가 있을 경우, typeHandler 객체를 통해 원하는 자료형으로 변환이 가능하다. -->
+	
+	<resultMap type="Location" id="locList"/>
+	
+	<select id="selectLoc" resultMap="locList">
+		SELECT * FROM LOCATION
+	</select>
+	
+	<select id="selectBloc" parameterType="string" resultMap="locList">
+		SELECT DISTINCT MIDLOCATION FROM LOCATION WHERE BIGLOCATION = #{bigloCation} ORDER BY 1
+	</select>
+	
+	<select id="selectBloc2" parameterType="string" resultMap="locList">
+		SELECT DISTINCT SMALLCATEGORY FROM LOCATION WHERE BIGLOCATION = #{bigloCation} ORDER BY 1
+	</select>
+	
+	<select id="selectCloc" parameterType="String" resultMap="locList">
+		SELECT DISTINCT SMALLCATEGORY FROM LOCATION WHERE MIDLOCATION = #{midloCation} ORDER BY 1
+	</select>
+</mapper>

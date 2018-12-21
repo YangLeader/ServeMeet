@@ -85,7 +85,9 @@
                                         <li><a href="blog-single.html" title="Blog Single" >Blog Single</a></li>
                                     </ul>
                                 </li>
+
                                 <li><a href="${pageContext.request.contextPath }/board/boardList.bo" title="Contact Us">게시판</a> </li>
+
                                 <li><a href="styleguide.html" title="Styleguide">styleguide</a> </li>
                             </ul>
                         </div>
