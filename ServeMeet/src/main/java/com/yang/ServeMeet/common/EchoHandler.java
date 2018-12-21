@@ -18,44 +18,56 @@ public class EchoHandler extends TextWebSocketHandler {
 	//접속 사용자 리스트
 	private List<WebSocketSession> sessionList = new ArrayList();
 	
+	private Map<Integer,List> rMap = new HashedMap(); 
 	//에러가 났을 때 로거
 	private Logger logger = LoggerFactory.getLogger(EchoHandler.class);
-	private int chatNo;
+	 
 	//사용자 연결 후 실행할 메소드
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		//Websocket의 세션은 HttpSession과 다르다.
-		chatNo = (Integer)(session.getAttributes().get("chatNo"));
+		int chatNo = (Integer)(session.getAttributes().get("chatNo"));
 		//사용자 연결 시에 sessionList라는 사용자 리스트에 접속한 사용자를 추가한다.
-		sessionList.add(session);
-	
-
-
-		logger.info("{}연결됨", session.getId());
 		
-		System.out.println("채팅방 입장자 :"+session.getId() );
+		if(rMap.containsKey(chatNo)) {
+			(rMap.get(chatNo)).add(session);
+		}else {
+			sessionList.add(session);
+			rMap.put(chatNo, sessionList);
+		}
+		sessionList = new ArrayList();
+
+//		logger.info("{}연결됨", session.getId());
+//		
+//		System.out.println("채팅방 입장자 :"+session.getId() );
 		// super.afterConnectionEstablished(session);
 	}
 
 	//사용자가 메세지를 보냈을 때 접속한 사람 모두에게 해당 메세지를 전달하는 메소드
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		//session.sendMessage(new TextMessage(session.getId() + "|" + message.getPayload()));
+		//session.sendMessage(new TextMessage(session.gadminetId() + "|" + message.getPayload()));
 		System.out.println("session주소 : "+session.getRemoteAddress());
 		System.out.println(session.getAttributes().get("userName1"));
-	
-		
+		int chatNo = (Integer)(session.getAttributes().get("chatNo"));
+		List<WebSocketSession> rSessionList=new ArrayList<WebSocketSession>();
+		rSessionList=rMap.get(chatNo);
+				
 		//사용자 모두에게 데이터를 전달하는 반복문
-		for (WebSocketSession one : sessionList) {
-			one.sendMessage(new TextMessage(session.getId() + " | " + message.getPayload()+"|"+session.getRemoteAddress()+"|"+session.getAttributes().get("userName1")));
+		for (WebSocketSession one : rSessionList) {
+			one.sendMessage(new TextMessage(session.getId() + " | " + message.getPayload()+"|"+session.getRemoteAddress()+"|"+session.getAttributes().get("userName")));
 		}
 		// super.handleTextMessage(session, message);
 	}
 	//사용자가 채팅방, 접속을 종료할 때 실행 되는 메소드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-
-		sessionList.remove(session);
+		int chatNo = (Integer)(session.getAttributes().get("chatNo"));
+		List<WebSocketSession> rSessionList=new ArrayList<WebSocketSession>();
+		rSessionList=rMap.get(chatNo);
+		
+		rSessionList.remove(session);
+		rMap.put(chatNo, rSessionList);
 		logger.info("{}연결끊김",session.getId());
 		
 		for (WebSocketSession one : sessionList) {
