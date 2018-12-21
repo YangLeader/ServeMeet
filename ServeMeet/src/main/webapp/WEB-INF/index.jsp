@@ -24,7 +24,7 @@
                         <div class="hero-caption">
                             <h1 class="hero-title">wanna eat delicious food?</h1>
                             <p class="hero-text">Looking for a epicure experience? We have it all here!</p>
-                            <a href="menu.html" class="btn btn-default">Book Now</a> </div>
+                            <a href="${pageContext.request.contextPath }/chat/chatList.do" class="btn btn-default">Book Now</a> </div>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"><a href="menu.html" class="btn btn-default">view all menu</a></div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"><a href="/chat.do" class="btn btn-default">view all menu</a></div>
             </div>
         </div>
     </div>
