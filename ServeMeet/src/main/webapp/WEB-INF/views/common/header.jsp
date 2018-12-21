@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
+<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.min.js"></script>
 <html>
 <head>
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +23,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<meta charset="UTF-8">
-    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Restaurant responsive website templates free download for personal and commerical. Download Free Website Template for your great projects.">
     <meta name="keywords" content="restaurant responsive website templates free download,online restaurant website templates,bootstrap restaurant templates free download,restaurant website templates free download html with css, catering website templates free download">
@@ -85,7 +85,7 @@
                                         <li><a href="blog-single.html" title="Blog Single" >Blog Single</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html" title="Contact Us">Contact</a> </li>
+                                <li><a href="${pageContext.request.contextPath }/board/boardList.bo" title="Contact Us">게시판</a> </li>
                                 <li><a href="styleguide.html" title="Styleguide">styleguide</a> </li>
                             </ul>
                         </div>
