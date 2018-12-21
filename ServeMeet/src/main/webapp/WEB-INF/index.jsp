@@ -8,21 +8,6 @@
 <!DOCTYPE html>
 <html >
 <head>
-	<link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Style Custom CSS -->
-    <link href="resources/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Fontello CSS -->
-    <link href="resources/css/fontello.css" rel="stylesheet">
-    <!-- Style Custom CSS -->
-    <link href="resources/css/style.css" rel="stylesheet">
-    <!-- Font CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 	<meta charset="UTF-8">
 	<title>ServeMeet</title>
 	<c:import url="views/common/header.jsp"/>
@@ -39,7 +24,7 @@
                         <div class="hero-caption">
                             <h1 class="hero-title">wanna eat delicious food?</h1>
                             <p class="hero-text">Looking for a epicure experience? We have it all here!</p>
-                            <a href="menu.html" class="btn btn-default">Book Now</a> </div>
+                            <a href="${pageContext.request.contextPath }/chat/chatList.do" class="btn btn-default">Book Now</a> </div>
                     </div>
                 </div>
             </div>
@@ -111,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"><a href="menu.html" class="btn btn-default">view all menu</a></div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"><a href="/chat.do" class="btn btn-default">view all menu</a></div>
             </div>
         </div>
     </div>
@@ -267,21 +252,9 @@
         
     </div>
     <c:import url="views/common/footer.jsp"/>
-    <!-- back to top icon -->
-    <a href="#0" class="cd-top" title="Go to top">Top</a>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="resources/js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="resources/js/bootstrap.min.js"></script>
-    <!-- Sticky Header -->
-    <script src="resources/js/jquery.sticky.js"></script>
-    <script src="resources/js/sticky-header.js"></script>
-    <!-- Menu Maker - Navigations -->
-    <script src="resources/js/menumaker.js"></script>
-    <!-- Back to top -->
-    <script src="resources/js/back-to-top.js" type="text/javascript"></script>
+    
 
+	
 </body>
 
 </html>
-
