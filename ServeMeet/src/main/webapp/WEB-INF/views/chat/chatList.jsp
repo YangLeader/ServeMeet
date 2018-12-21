@@ -14,21 +14,27 @@
 <body>
 <c:forEach items="${list}" var="c">
 
-	<div class = "chatName" style="border: solid 1px black" onclick="chattingView();">
-		<label class="chatNo" hidden>${c.chattingId }</label>
+	<div class = "chatName" style="border: solid 1px black" >
+		<input  name="chatNo" class="chatNo" value="${c.chattingId }" hidden>
 		<label class = "chatUser">${c.userName2 }</label>
 	</div>
 	<br><br><br>
 </c:forEach>
 
 <script type="text/javascript">
-	
-	function chattingView() {
-		var chatNo = $(this).val;
-
-		
+	$(".chatName").click(function() {
+		//var chatNo = $(this).attr("value");
+		var chatNo = $(this).children(".chatNo").val();
+		var userName = $(this).children(".chatUser").val();
 		console.log(chatNo);
-	}
+		console.log(userName);
+		//location.href="${pageContext.request.contextPath }/chat/chatting/do?chatNo2="+chatNo+"&userName2="+userName;
+		
+		
+		
+		
+	});
+	
 </script>
 </body>
 </html>

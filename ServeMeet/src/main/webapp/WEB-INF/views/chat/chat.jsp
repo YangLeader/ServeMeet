@@ -7,7 +7,7 @@
 <title>스프링 웹소켓</title>
 </head>
 <body>
-	<form action="chatList.do" method="post">
+	<form action="${pageContext.request.contextPath }/chat/chatList.do" method="post">
 		시용자 이름1 : <input type="text" name = "userName1" id = "userName"> <br>
 		시용자 이름2 : <input type="text" name = "userName2" id = "userName"> <br>
 		<input type="submit" value="입장하기">

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
+import com.yang.ServeMeet.member.model.vo.Member;
 
 @Controller
 public class WebSocketChattingController {
@@ -20,22 +21,24 @@ public class WebSocketChattingController {
 	@Autowired
 	private ChattingService cs;
 	
-	@RequestMapping(value ="/chat.do",method = RequestMethod.GET)
+	@RequestMapping(value ="/chat/chat.do",method = RequestMethod.GET)
 	public String chat() {
 		return "chat/chat";
 	}
 	
-	@RequestMapping("/chatList.do")
-	public String chatList(String userName1,Model model, HttpSession session ) {
+	@RequestMapping("/chat/chatList.do")
+	public String chatList(Model model, HttpSession session ) {
 		
-		session.setAttribute("userName1", userName1);
-		List<Chatting> list = cs.selectChatList(userName1);
+		
+		String userName=((Member)session.getAttribute("member")).getUserName();
+		List<Chatting> list = cs.selectChatList(userName);
+		
 		model.addAttribute("list",list);
 		
 		return "chat/chatList";
 	}
 	
-	@RequestMapping(value = "/chatting.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/chat/chatting.do", method = RequestMethod.POST)
 	public String chattingMethod(String userName1,String userName2,Model model,HttpServletRequest req, HttpSession session) throws Exception {
 
 		req.setCharacterEncoding("utf-8");
