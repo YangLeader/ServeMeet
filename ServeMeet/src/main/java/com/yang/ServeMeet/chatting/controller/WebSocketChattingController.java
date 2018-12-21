@@ -30,8 +30,8 @@ public class WebSocketChattingController {
 		session.setAttribute("userName1", userName1);
 		
 		String userName=session.getAttribute("userName1").toString();
-		System.out.println(userName);
 		List<Chatting> list = cs.selectChatList(userName);
+		
 		model.addAttribute("list",list);
 		
 		return "chat/chatList";

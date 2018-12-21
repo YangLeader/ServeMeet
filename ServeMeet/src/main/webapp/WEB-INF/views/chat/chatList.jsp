@@ -26,6 +26,7 @@
 		//var chatNo = $(this).attr("value");
 		var chatNo = $(this).children(".chatNo").val();
 		console.log(chatNo);
+		location.href="";
 		
 		
 		
