@@ -7,5 +7,23 @@
 	<select id="battingSelect" resultType="Batting">
 		SELECT * FROM BATTING WHERE BATTINGID = #{battingId}
 	</select>
+	
+	<select id="battingList" resultType="Batting">
+		SELECT * FROM BATTING WHERE BSTATUS = 'N'
+	</select>
+	
+	<update id="battingPick" parameterType="map">
+		UPDATE BATTING SET 
+		<if test="battingSelect == 'A'">
+			BATTINGPNUMA = BATTINGPNUMA+1 
+		</if><if test="battingSelect != 'A'">
+			BATTINGPNUMB = BATTINGPNUMB+1 
+		</if>
+		WHERE BATTINGID = #{battingId}
+	</update>
+
+	<insert id="battingPickUser" parameterType="BattingUser">
+		INSERT INTO BATTINGUSER(#{battingId},#{userName},#{battingSelect})
+	</insert>
 
 </mapper>
