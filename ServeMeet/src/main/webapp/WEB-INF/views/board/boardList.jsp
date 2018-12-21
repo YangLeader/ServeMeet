@@ -70,7 +70,7 @@
 	<script>
 		$(document).ready(function() {
 			// 화면 전환 효과
-			$('.preloader').fadeOut(300);
+			$('.preloader').fadeOut(150);
 
 			$('.navbar-brand').width($('.navbar-brand > img').width());
 			$(window).resize(function() {
@@ -93,7 +93,7 @@
 					</div>
 
 					<div class="button_box">
-						<a href="./write.php?bo_table=funny" class="bbs_btn btn_write">
+						<a href="${pageContext.request.contextPath }/board/boardForm.bo" class="bbs_btn btn_write">
 							<span class="glyphicon glyphicon-pencil"></span> 글쓰기
 						</a>
 					</div>
@@ -141,361 +141,25 @@
 							</li>
 							<li class="bbs_list_basic">
 								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<a class="subject_text" ><b>제목</b></a> 
 									<span class="w45 icon"> </span>
 								</span> 
 								<span class="dec"> 
 									<span class="w45 wr_name"> 
 										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
+										<span class="sv_member">작성자</span>
 									</span> 
 									<span class="w45 wr_date"> 
 										<span class="glyphicon glyphicon-time"></span> 
-											05-06
+											작성일자 
 									</span> 
 									<span class="w45 wr_hit"> 
 										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
+											조회수
 									</span> 
 									<span class="w45 wr_good gdtxt"> 
 										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
-									</span> 
-								</span>
-							</li>
-							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>코끼리 근황</b></a> 
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">감성흔녀</span>
-									</span> 
-									<span class="w45 wr_date"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											05-06
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											79
-									</span> 
-									<span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		0
+									 		추천수
 									</span> 
 								</span>
 							</li>
@@ -534,7 +198,7 @@
 					<!-- } 게시판 검색 끝 -->
 
 					<div class="button_box" style="float: unset;">
-						<a href="./write.php?bo_table=funny" class="bbs_btn btn_write">
+						<a href="${pageContext.request.contextPath }/board/boardForm.bo" class="bbs_btn btn_write">
 							<span class="glyphicon glyphicon-pencil"></span> 글쓰기
 						</a>
 					</div>
@@ -658,6 +322,8 @@ $(function() {
 });
 </script>
 <![endif]-->
+
+<c:import url="../common/footer.jsp" />
 
 </body>
 </html>
