@@ -17,4 +17,10 @@ public class boardController {
 		
 		return "board/boardList";
 	}
+	
+	@RequestMapping("/board/boardForm.bo")
+	public String boardForm() {
+		
+		return "board/boardForm";
+	}
 }
