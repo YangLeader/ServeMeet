@@ -15,7 +15,7 @@
 <c:forEach items="${list}" var="c">
 
 	<div class = "chatName" style="border: solid 1px black" >
-		<input  name="chatNo" class="chatNo" value="${c.chattingId }">
+		<input  name="chatNo" class="chatNo" value="${c.chattingId }" hidden>
 		<label class = "chatUser">${c.userName2 }</label>
 	</div>
 	<br><br><br>
@@ -26,6 +26,9 @@
 		//var chatNo = $(this).attr("value");
 		var chatNo = $(this).children(".chatNo").val();
 		console.log(chatNo);
+		
+		
+		
 		
 	});
 	

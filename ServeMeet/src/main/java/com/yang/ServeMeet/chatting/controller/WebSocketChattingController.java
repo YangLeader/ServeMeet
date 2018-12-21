@@ -26,10 +26,12 @@ public class WebSocketChattingController {
 	}
 	
 	@RequestMapping("/chatList.do")
-	public String chatList(String userName1,Model model, HttpSession session ) {
-		
+	public String chatList(String userName1,String userName2,Model model, HttpSession session ) {
 		session.setAttribute("userName1", userName1);
-		List<Chatting> list = cs.selectChatList(userName1);
+		
+		String userName=session.getAttribute("userName1").toString();
+		System.out.println(userName);
+		List<Chatting> list = cs.selectChatList(userName);
 		model.addAttribute("list",list);
 		
 		return "chat/chatList";
