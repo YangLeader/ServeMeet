@@ -4,7 +4,7 @@ public class Location {
 
 	private static final long serialVersionUID = 5001L;
 	
-	private int locationId;
+	private String locationId;
 	private String bigloCation;
 	private String midloCation;
 	private String smallCategory;
@@ -30,8 +30,10 @@ public class Location {
 		this.midloCation = midloCation;
 		this.smallCategory = smallCategory;
 	}
+	
+	
 
-	public Location(int locationId, String bigloCation, String midloCation, String smallCategory) {
+	public Location(String locationId, String bigloCation, String midloCation, String smallCategory) {
 		super();
 		this.locationId = locationId;
 		this.bigloCation = bigloCation;
@@ -39,11 +41,12 @@ public class Location {
 		this.smallCategory = smallCategory;
 	}
 
-	public int getLocationId() {
+
+	public String getLocationId() {
 		return locationId;
 	}
 
-	public void setLocationId(int locationId) {
+	public void setLocationId(String locationId) {
 		this.locationId = locationId;
 	}
 

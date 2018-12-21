@@ -72,7 +72,7 @@
                                         <li><a href="blog-single.html" title="Blog Single" >Blog Single</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html" title="Contact Us">Contact</a> </li>
+                                <li><a href="${pageContext.request.contextPath}/location/location.do" title="Contact Us">Contact</a> </li>
                                 <li><a href="styleguide.html" title="Styleguide">styleguide</a> </li>
                             </ul>
                         </div>
