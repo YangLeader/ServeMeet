@@ -28,8 +28,7 @@
 			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
-	</websocket:handlers> 
-	
+	</websocket:handlers> 	
 	 <beans:bean id="echoHandler" class = "com.yang.ServeMeet.common.EchoHandler"/> 
 	
 	<!-- JSON 데이터를 전송할 때 사용할 viewResolver 등록하기 -->
