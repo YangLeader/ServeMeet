@@ -1,57 +1,37 @@
 package com.yang.ServeMeet.chatting.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
-import com.yang.ServeMeet.chatting.model.vo.Chatting;
-import com.yang.ServeMeet.member.model.vo.Member;
 
-@Controller
+@RestController
 public class WebSocketChattingController {
 
 	@Autowired
 	private ChattingService cs;
 	
-	@RequestMapping(value ="/chat/chat.do",method = RequestMethod.GET)
-	public String chat() {
-		return "chat/chat";
-	}
-	
-	@RequestMapping("/chat/chatList.do")
-	public String chatList(Model model, HttpSession session ) {
 		
+	@RequestMapping(value = "/chat/chatting.do/{chatNo}", method = RequestMethod.POST)
+	public ModelAndView chattingMethod(@PathVariable("chatNo")int chatNo,HttpServletRequest req, HttpSession session) throws Exception {
 		
-		String userName=((Member)session.getAttribute("member")).getUserName();
-		List<Chatting> list = cs.selectChatList(userName);
-		
-		model.addAttribute("list",list);
-		
-		return "chat/chatList";
-	}
-	
-	@RequestMapping(value = "/chat/chatting.do", method = RequestMethod.POST)
-	public String chattingMethod(String userName1,String userName2,Model model,HttpServletRequest req, HttpSession session) throws Exception {
-
+		ModelAndView mv = new ModelAndView();
 		req.setCharacterEncoding("utf-8");
-		session.setAttribute("userName1", userName1);
-		session.setAttribute("userName2", userName2);
 		
 		String ipAddr = req.getRemoteAddr();
+		session.setAttribute("chatNo", chatNo);
 		
-		List<Chatting> list = cs.selectChatList(userName1);
+		mv.addObject("host", ipAddr);
+		mv.setViewName("chat/chattingView");
 		
-		model.addAttribute("list",list);
-		model.addAttribute("host", ipAddr);
-		
-		return "chat/chattingView";
+		return mv;
 	}
 }

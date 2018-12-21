@@ -5,7 +5,7 @@
 <mapper namespace="chat">
 
 	<select id="selectCahtList" parameterType="String" resultType="Chatting">
-		select * from Chatting where username1 = #{userName}
+		select * from Chatting where username1 = #{userName} or username2=#{userName}
 	</select>
 
 </mapper>
