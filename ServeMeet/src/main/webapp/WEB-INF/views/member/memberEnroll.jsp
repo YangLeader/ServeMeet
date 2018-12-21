@@ -68,7 +68,7 @@
                       <label class=" control-label" for="pwd">비밀번호 :</label>
                     </div>
                     <div class="col-md-9">
-                      <input id="pwd" name="userPwd" type="password" class="form-control" placeholder="비밀번호를 입력하세요" required>
+                      <input id="pwd" name="userPwd" type="text" class="form-control" placeholder="비밀번호를 입력하세요" required>
                     </div>
                   </div>
                 </div>
@@ -81,7 +81,7 @@
                       <label class=" control-label" for="pwd2">비밀번호 확인 :</label>
                     </div>
                     <div class="col-md-9">
-                      <input id="pwd2" name="userPwd2" type="password" class="form-control" placeholder="비밀번호를 다시 입력하세요" required>
+                      <input id="pwd2" name="userPwd2" type="text" class="form-control" placeholder="비밀번호를 다시 입력하세요" required>
                     </div>
                   </div>
                 </div>
@@ -94,7 +94,7 @@
                       <label class=" control-label" for="email">E-mail :</label>
                     </div>
                     <div class="col-md-9">
-                      <input id="email" name="email" type="email" class="form-control" placeholder="Enter your email address" required>
+                      <input id="email" name="email" type="text" class="form-control" placeholder="Enter your email address" required>
                     </div>
                   </div>
                 </div>

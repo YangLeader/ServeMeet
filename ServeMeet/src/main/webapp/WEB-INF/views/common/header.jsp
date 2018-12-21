@@ -22,6 +22,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Restaurant responsive website templates free download for personal and commerical. Download Free Website Template for your great projects.">
     <meta name="keywords" content="restaurant responsive website templates free download,online restaurant website templates,bootstrap restaurant templates free download,restaurant website templates free download html with css, catering website templates free download">
@@ -48,7 +49,7 @@
 	                		<span><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}" title="내정보보기">${member.userName}</a> 님, 안녕하세요</span>
 	                		&nbsp;
 							<span>
-								<a class = "btn-link" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">LOG OUT</a>
+								<a class = "btn-link" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberlogout.do'">LOG OUT</a>
 							</span>
 	                	</span>
 	                </c:if>
