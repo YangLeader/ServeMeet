@@ -63,8 +63,6 @@
 </head>
 <body>
 
-
-
 	<!-- preloader (화면 전환 효과) -->
 
 	<div class="preloader"></div>
@@ -85,16 +83,6 @@
 	<div id="wrapper">
 		<div class="container">
 
-			<!--
-		<div class="row">	
-			
-			<div class="leftBox col-md-3">
-				로그인 박스
-			</div>
-			
-
-			<div class="rightBox col-md-9">
-			-->
 			<!-- 게시판 목록 시작 { -->
 			<div id="bbs-list-wrap">
 
@@ -113,454 +101,434 @@
 
 				</div>
 
-				<form name="fboardlist" id="fboardlist"
-					action="./board_list_update.php"
+				<!-- <form name="fboardlist" id="fboardlist" action="./board_list_update.php"
 					onsubmit="return fboardlist_submit(this);" method="post">
-					<input type="hidden" name="bo_table" value="funny"> <input
-						type="hidden" name="sfl" value=""> <input type="hidden"
-						name="stx" value=""> <input type="hidden" name="spt"
-						value=""> <input type="hidden" name="sca" value="">
-					<input type="hidden" name="page" value="7"> <input
-						type="hidden" name="sw" value="">
+					<input type="hidden" name="bo_table" value="funny"> 
+					<input type="hidden" name="sfl" value=""> 
+					<input type="hidden" name="stx" value=""> 
+					<input type="hidden" name="spt" value=""> 
+					<input type="hidden" name="sca" value="">
+					<input type="hidden" name="page" value="7"> 
+					<input type="hidden" name="sw" value=""> -->
 
 					<div class="bbs-list">
 						<ul id="bbs-list-ul">
-							<li class="bbs_list_top"><span class="subject"> <span
-									class="subject_text"> <span
-										class="glyphicon glyphicon-tag"></span> 제목
+							<li class="bbs_list_top">
+								<span class="subject"> 
+									<span class="subject_text"> 
+										<span class="glyphicon glyphicon-tag"></span> 
+											제목
+									</span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+											글쓴이
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											날짜
+										</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											조회
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+											추천
+									</span>
 								</span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> 글쓴이
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 날짜
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 조회
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 추천
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
 								</span>
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=65&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=65&amp;page=7">
-										<b>코끼리 근황</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">감성흔녀</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 05-06
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 79
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=64&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=64&amp;page=7">
-										<b>초이스..1번?2번?</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">강나묘</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 05-04
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 71
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=63&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=63&amp;page=7">
-										<b>바늘에 실 꿰기.gif</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">강나묘</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 05-03
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 74
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=62&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=62&amp;page=7">
-										<b>언제까지 어깨춤을 추게 할거야.gif</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">감성흔녀</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 05-02
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 90
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=27&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=27&amp;page=7">
-										<b>유머게시판 테스트 테스트 유머게시판 테스트 테스트 유머게시판 테스트 테스트</b>
-								</a> <span class="cn"> (3) <!--
-						<span class="glyphicon glyphicon-comment"></span>3						-->
-								</span> <span class="w45 icon"> <img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_hot.gif"
-										alt="인기글"><img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_file.gif"
-										alt="첨부파일"><img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_img.gif"
-										alt="첨부 이미지"><img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_link.gif"
-										alt="관련링크">
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
 								</span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-10
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 153
-								</span> <!--
-					<span class="w45 wr_comment">
-						<span class="glyphicon glyphicon-comment"></span> 3					</span>
-					--> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-					<img src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_file.gif" alt="첨부파일"><img src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_link.gif" alt="관련링크">					</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=26&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=26&amp;page=7">
-										<b>유머게시판 테스트</b>
-								</a> <span class="w45 icon"> <img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_hot.gif"
-										alt="인기글"><img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_img.gif"
-										alt="첨부 이미지">
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
 								</span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-10
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 105
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=25&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=25&amp;page=7">
-										<b>유머게시판 테스트 테스트</b>
-								</a> <span class="w45 icon"> <img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_link.gif"
-										alt="관련링크">
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
 								</span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-10
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 79
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-					<img src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_link.gif" alt="관련링크">					</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=24&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=24&amp;page=7">
-										<b>유머게시판 테스트</b>
-								</a> <span class="cn"> (8) <!--
-						<span class="glyphicon glyphicon-comment"></span>8						-->
-								</span> <span class="w45 icon"> <img
-										src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_file.gif"
-										alt="첨부파일">
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
 								</span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-10
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 92
-								</span> <!--
-					<span class="w45 wr_comment">
-						<span class="glyphicon glyphicon-comment"></span> 8					</span>
-					--> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-					<img src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_file.gif" alt="첨부파일">					</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=23&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=23&amp;page=7">
-										<b>유머게시판 테스트 테스트</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-09
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 86
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=22&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=22&amp;page=7">
-										<b>유머게시판 테스트</b>
-								</a> <span class="cn"> (2) <!--
-						<span class="glyphicon glyphicon-comment"></span>2						-->
-								</span> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-09
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 79
-								</span> <!--
-					<span class="w45 wr_comment">
-						<span class="glyphicon glyphicon-comment"></span> 2					</span>
-					--> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=21&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=21&amp;page=7">
-										<b>유머게시판 테스트 테스트 유머게시판 테스트 테스트 유머게시판 테스트 테스트 유머게시판 테스트 테스트
-											유머게시…</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-08
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 80
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=20&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=20&amp;page=7">
-										<b>유머게시판 테스트</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-08
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 79
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=19&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=19&amp;page=7">
-										<b>유머게시판 테스트 테스트</b>
-								</a> <span class="cn"> (1) <!--
-						<span class="glyphicon glyphicon-comment"></span>1						-->
-								</span> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-07
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 79
-								</span> <!--
-					<span class="w45 wr_comment">
-						<span class="glyphicon glyphicon-comment"></span> 1					</span>
-					--> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=18&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=18&amp;page=7">
-										<b>유머게시판 테스트</b>
-								</a> <span class="cn"> (13) <!--
-						<span class="glyphicon glyphicon-comment"></span>13						-->
-								</span> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-07
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 86
-								</span> <!--
-					<span class="w45 wr_comment">
-						<span class="glyphicon glyphicon-comment"></span> 13					</span>
-					--> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
-							<li class="bbs_list_basic"><span class="subject"
-								onclick="view_link_type_m('http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=17&amp;page=7');">
-
-
-
-									<a class="subject_text"
-									href="http://aq23r1gt.iwinv.net/bbs/board.php?bo_table=funny&amp;wr_id=17&amp;page=7">
-										<b>유머게시판 테스트 테스트</b>
-								</a> <span class="w45 icon"> </span>
-							</span> <span class="dec"> <span class="w45 wr_name"> <span
-										class="glyphicon glyphicon-user"></span> <span
-										class="sv_member">최고관리자</span>
-								</span> <span class="w45 wr_date"> <span
-										class="glyphicon glyphicon-time"></span> 12-07
-								</span> <span class="w45 wr_hit"> <span
-										class="glyphicon glyphicon-eye-open"></span> 80
-								</span> <span class="w45 wr_good gdtxt"> <span
-										class="glyphicon glyphicon-thumbs-up"></span> 0
-								</span> <!--
-					<span class="w45">
-										</span>
-					-->
-							</span></li>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
+							<li class="bbs_list_basic">
+								<span class="subject">
+									<a class="subject_text" ><b>코끼리 근황</b></a> 
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+									<span class="w45 wr_name"> 
+										<span class="glyphicon glyphicon-user"></span> 
+										<span class="sv_member">감성흔녀</span>
+									</span> 
+									<span class="w45 wr_date"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											05-06
+									</span> 
+									<span class="w45 wr_hit"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											79
+									</span> 
+									<span class="w45 wr_good gdtxt"> 
+										<span class="glyphicon glyphicon-thumbs-up"></span> 
+									 		0
+									</span> 
+								</span>
+							</li>
 						</ul>
 					</div>
-
-
-				</form>
 
 				<div class="bbs_action_box">
 					<!-- 게시판 검색 시작 { -->
 					<fieldset id="bbs_sch">
 						<form id="sch_frm" name="fsearch" method="get">
-							<input type="hidden" name="bo_table" value="funny"> <input
-								type="hidden" name="sca" value=""> <input type="hidden"
-								name="sop" value="and">
-							<div class="bo_sch">
+							<input type="hidden" name="bo_table" value="funny"> 
+							<input type="hidden" name="sca" value=""> 
+							<input type="hidden" name="sop" value="and">
+								
+								<div class="bo_sch">
 
-								<select name="sfl" id="sfl" class="form-control">
-									<option value="wr_subject">제목</option>
-									<option value="wr_content">내용</option>
-									<option value="wr_subject||wr_content">제목+내용</option>
-									<option value="mb_id,1">회원아이디</option>
-									<option value="mb_id,0">회원아이디(코)</option>
-									<option value="wr_name,1">글쓴이</option>
-									<option value="wr_name,0">글쓴이(코)</option>
-								</select> <input type="text" name="stx" class="form-control value="
-									" required id="stx" size="15" maxlength="15">
+									<select name="sfl" id="sfl" class="form-control">
+										<option value="wr_subject">제목</option>
+										<option value="wr_content">내용</option>
+										<option value="wr_subject||wr_content">제목+내용</option>
+										<option value="mb_id,1">회원아이디</option>
+										<option value="mb_id,0">회원아이디(코)</option>
+										<option value="wr_name,1">글쓴이</option>
+										<option value="wr_name,0">글쓴이(코)</option>
+									</select> 
+									<input type="text" name="stx" class="form-control value="
+									 required id="stx" size="15" maxlength="15">
 
-								<button type="submit" id="searchsubmit">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
+									<button type="submit" id="searchsubmit">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
 
-							</div>
+								</div>
 						</form>
 					</fieldset>
 					<!-- } 게시판 검색 끝 -->
@@ -576,26 +544,27 @@
 
 
 				<div class="pager">
-					<!-- <nav class="pg_wrap"><span class="pg"><a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a>
-<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page">1<span class="sound_only">페이지</span></a>
-<a href="./board.php?bo_table=funny&amp;page=2" class="pg_page">2<span class="sound_only">페이지</span></a>
-<a href="./board.php?bo_table=funny&amp;page=3" class="pg_page">3<span class="sound_only">페이지</span></a>
-<a href="./board.php?bo_table=funny&amp;page=4" class="pg_page">4<span class="sound_only">페이지</span></a>
-<a href="./board.php?bo_table=funny&amp;page=5" class="pg_page">5<span class="sound_only">페이지</span></a>
-<a href="./board.php?bo_table=funny&amp;page=6" class="pg_page">6<span class="sound_only">페이지</span></a>
-<span class="sound_only">열린</span><strong class="pg_current">7</strong><span class="sound_only">페이지</span>
-<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page">8<span class="sound_only">페이지</span></a>
-<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a>
-</span></nav> -->
+					<nav class="pg_wrap">
+						<span class="pg">
+							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a> 
+							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page">1<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=2" class="pg_page">2<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=3" class="pg_page">3<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=4" class="pg_page">4<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=5" class="pg_page">5<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=6" class="pg_page">6<span class="sound_only">페이지</span></a> 
+								<span class="sound_only">열린</span><strong class="pg_current">7</strong>
+								<span class="sound_only">페이지</span>
+							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page">8<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a> 
+						</span>
+					</nav>
 					<div class="pg_wrap_m">
-						<a href="./board.php?bo_table=funny&amp;page=1"
-							class="pg_page pg_start"></a> <a
-							href="./board.php?bo_table=funny&amp;page=6"
-							class="pg_page pg_prev_m">이전페이지</a> <span class="pg_info_m">7
-							/ 8</span><a href="./board.php?bo_table=funny&amp;page=8"
-							class="pg_page pg_next_m">다음페이지</span></a> <a
-							href="./board.php?bo_table=funny&amp;page=8"
-							class="pg_page pg_end"></a>
+						<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a> 
+						<a href="./board.php?bo_table=funny&amp;page=6" class="pg_page pg_prev_m">이전페이지</a> 
+							<span class="pg_info_m">7 / 8</span>
+						<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_next_m">다음페이지</a> 
+						<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a>
 					</div>
 				</div>
 
@@ -692,5 +661,3 @@ $(function() {
 
 </body>
 </html>
-
-<!-- 사용스킨 : _basic -->
