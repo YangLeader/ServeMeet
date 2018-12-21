@@ -13,4 +13,6 @@ int insertMember(Member member);
 	int deleteMember(String userId);
 	
 	int checkIdDuplicate(String userId);
+	
+	int checkNameDuplicate(String userName);
 }
