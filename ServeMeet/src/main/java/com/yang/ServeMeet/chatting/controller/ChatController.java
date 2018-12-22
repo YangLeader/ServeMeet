@@ -36,5 +36,6 @@ public class ChatController {
 		return "chat/chatList";
 	}
 	
+	
 
 }

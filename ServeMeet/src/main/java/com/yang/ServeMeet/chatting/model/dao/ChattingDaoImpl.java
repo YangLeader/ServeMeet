@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
+import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 
 @Repository
 public class ChattingDaoImpl implements ChattingDao {
@@ -37,6 +38,11 @@ public class ChattingDaoImpl implements ChattingDao {
 	public int ChatDelete(Chatting chat) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int ChatLogInsert(ChattingLog chatLog) {
+		// TODO Auto-generated method stub
+		return sst.insert("chat.insertChatLog",chatLog);
 	}
 
 }

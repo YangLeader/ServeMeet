@@ -23,6 +23,16 @@ public class ChattingLog {
 		this.chDate = chDate;
 		this.chContent = chContent;
 	}
+	
+
+
+	public ChattingLog(int chattingId, String userName, String chContent, String chStatus) {
+		super();
+		this.chattingId = chattingId;
+		this.userName = userName;
+		this.chContent = chContent;
+		this.chStatus = chStatus;
+	}
 
 
 	public ChattingLog(int chattingId, String userName, Date chDate, String chContent, String chStatus) {

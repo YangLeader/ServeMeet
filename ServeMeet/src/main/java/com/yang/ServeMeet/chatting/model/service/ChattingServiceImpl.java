@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.yang.ServeMeet.chatting.model.dao.ChattingDao;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
+import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 
 @Service
 public class ChattingServiceImpl implements ChattingService {
@@ -35,6 +36,11 @@ public class ChattingServiceImpl implements ChattingService {
 	public int ChatDelete(Chatting chat) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int ChatLogInsert(ChattingLog chatLog) {
+		// TODO Auto-generated method stub
+		return cDao.ChatLogInsert(chatLog);
 	}
 
 }

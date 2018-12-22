@@ -7,5 +7,13 @@
 	<select id="selectCahtList" parameterType="String" resultType="Chatting">
 		select * from Chatting where username1 = #{userName} or username2=#{userName}
 	</select>
+	
+	<insert id="insertChatLog" parameterType="ChattingLog">
+		insert into ChattingLog values(#{chattingId},#{userName},default,#{chContent},#{chStatus})
+	</insert>
+
+
+
+
 
 </mapper>
