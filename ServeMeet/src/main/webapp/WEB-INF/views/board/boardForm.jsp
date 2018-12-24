@@ -114,7 +114,7 @@
 			<div class="rightBox col-md-9">
 			-->
 			<!-- skin : _basic -->
-			<form name="fwrite" id="fwrite" action="http://aq23r1gt.iwinv.net/bbs/write_update.php"
+			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/board/boardFormEnd.bo"
 					onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="uid" value="18122113471404"> 
 				<input type="hidden" name="w" value=""> 
@@ -130,7 +130,7 @@
 				<input type="hidden" value="html1" name="html"> -->
 				<div class="bbs_title_wrap">
 					<a class="bbs_title">게시글 작성 </a> 
-					<span class="btn btn-default" onclick="history.back();" style="margin-left: 5px;">취소</span>
+					<!-- <span class="btn btn-default" onclick="history.back();" style="margin-left: 5px;">취소</span> -->
 				</div>
 
 				<div class="bbs_write_content">
@@ -146,43 +146,18 @@
 
 					<div class="wr_option wr_subject">
 						<label>제목</label> 
-						<input type="text" name="wr_subject" id="wr_subject" class="form-control" value="" required maxlength="255" />
+						<input type="text" name="boardTitle" id="wr_subject" class="form-control" value="" required maxlength="255" />
+						<label>작성자</label>
+						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
 					</div>
 
 					<div class="wr_option wr_content">
 						<label>내용</label>
 						<div>
-							<span class="sound_only">웹에디터 시작</span>
-								<script src="http://aq23r1gt.iwinv.net/plugin/editor/smarteditor2/js/service/HuskyEZCreator.js"></script>
-								<script>
-									var g5_editor_url = "http://aq23r1gt.iwinv.net/plugin/editor/smarteditor2", oEditors = [], ed_nonce = "aXulrOm7Q5|1545371234|27609cc06afa20d7debce2afaf9485ea2626f86d";
-								</script>
-								<script src="http://aq23r1gt.iwinv.net/plugin/editor/smarteditor2/config.js"></script>
-								<script>
-									$(function() {
-										$(".btn_cke_sc").click(function() {
-											if ($(this).next("div.cke_sc_def").length) {
-													$(this).next("div.cke_sc_def").remove();
-														$(this).text("단축키 일람");
-											} else {
-												$(this).after("<div class='cke_sc_def' />")
-														.next("div.cke_sc_def")
-														.load("http://aq23r1gt.iwinv.net/plugin/editor/smarteditor2/shortcut.html");
-															$(this).text("단축키 일람 닫기");
-											}
-										});
-										$(document).on("click", ".btn_cke_sc_close", function() {
-											$(this).parent("div.cke_sc_def").remove();
-										});
-									});
-								</script>
+							<textarea id="wr_content" name="boardContent"
+							class="smarteditor2 form-control" maxlength="65536"
+							style="width: 100%; height: 300px"></textarea>
 								
-								<textarea id="wr_content" name="wr_content"
-									class="smarteditor2 form-control" maxlength="65536"
-									style="width: 100%; height: 300px"></textarea>
-								<span class="sound_only">웹 에디터 끝</span>
-							</div>
-
 						</div>
 
 						<div class="wr_option">
@@ -196,11 +171,11 @@
 						</div>
 
 						<div class="wr_option">
-							<label>첨부파일 1</label> <input type="file" name="bf_file[]"
+							<label>첨부파일 1</label> <input type="file" name="upFile"
 								title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능">
 						</div>
 						<div class="wr_option">
-							<label>첨부파일 2</label> <input type="file" name="bf_file[]"
+							<label>첨부파일 2</label> <input type="file" name="upFile"
 								title="파일첨부 2 : 용량 1,048,576 바이트 이하만 업로드 가능">
 						</div>
 
