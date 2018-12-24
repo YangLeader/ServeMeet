@@ -20,10 +20,6 @@ public class ChatController {
 	@Autowired
 	private ChattingService cs;
 	
-	@RequestMapping(value ="/chat/chat.do",method = RequestMethod.GET)
-	public String chat() {
-		return "chat/chat";
-	}
 	
 	@RequestMapping("/chat/chatList.do")
 	public String chatList(Model model, HttpSession session ) {
@@ -34,6 +30,16 @@ public class ChatController {
 		model.addAttribute("list",list);
 		
 		return "chat/chatList";
+	}
+	
+	@RequestMapping("/chat/memberList.do")
+	public String memberList(Model model,HttpSession session) {
+		
+		int userNo=((Member)session.getAttribute("member")).getUserNo();
+		List<Member> list = cs.memberList(userNo);
+		model.addAttribute("list",list);
+		
+		return "chat/memberList";
 	}
 	
 	
