@@ -1,6 +1,6 @@
 package com.yang.ServeMeet.board.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Board {
 
@@ -17,16 +17,19 @@ public class Board {
 	public Board() {
 		super();
 	}
+	
+	public Board(String boardTitle, String boardContent) {
+		super();
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+	}
 
-	
-	
 	public Board(String boardTitle, String boardContent, String userName) {
 		super();
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.userName = userName;
 	}
-
 
 	public Board(int boardNo, String boardTitle, String boardContent, String userName, int boardCount, Date boardDate,
 			String boardStatus) {

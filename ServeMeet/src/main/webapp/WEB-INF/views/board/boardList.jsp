@@ -77,6 +77,14 @@
 				$('.navbar-brand').width($('.navbar-brand > img').width());
 			});
 		});
+		
+		$(function(){
+			$("span.subject.text").on("click",function(){
+				var boardNo = $(this).children().attr("id");
+				console.log("bordNo="+boardNo);
+				location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo;
+			});
+		});
 	</script>
 
 
@@ -90,6 +98,7 @@
 					<!-- 게시판 타이틀 -->
 					<div class="bbs_title_wrap">
 						<a class="bbs_title" href="./board.php?bo_table=funny">자유 게시판</a>
+						<p>총 ${totalContents }건의 게시물이 있습니다.</p>
 					</div>
 
 					<div class="button_box">
@@ -114,7 +123,7 @@
 					<div class="bbs-list">
 						<ul id="bbs-list-ul">
 							<li class="bbs_list_top">
-								<span class="subject"> 
+								<span class="subject" > 
 									<span class="subject_text"> 
 										<span class="glyphicon glyphicon-tag"></span> 
 											제목
@@ -125,7 +134,7 @@
 										<span class="glyphicon glyphicon-user"></span> 
 											글쓴이
 									</span> 
-									<span class="w45 wr_date"> 
+									<span class="w45 wr_date" style="width:6.5em"> 
 										<span class="glyphicon glyphicon-time"></span> 
 											날짜
 										</span> 
@@ -133,36 +142,39 @@
 										<span class="glyphicon glyphicon-eye-open"></span> 
 											조회
 									</span> 
-									<span class="w45 wr_good gdtxt"> 
+									<!-- <span class="w45 wr_good gdtxt"> 
 										<span class="glyphicon glyphicon-thumbs-up"></span> 
 											추천
-									</span>
+									</span> -->
 								</span>
 							</li>
+							<c:forEach items="${list}" var="b">
 							<li class="bbs_list_basic">
-								<span class="subject">
-									<a class="subject_text" ><b>제목</b></a> 
+								<span class="subject text">
+									<a id="${b.boardNo }"><b>${b.boardTitle }</b></a> 
 									<span class="w45 icon"> </span>
 								</span> 
 								<span class="dec"> 
 									<span class="w45 wr_name"> 
 										<span class="glyphicon glyphicon-user"></span> 
-										<span class="sv_member">작성자</span>
+											${b.userName }
 									</span> 
-									<span class="w45 wr_date"> 
+									<span class="w45 wr_date" style="width:6.5em"> 
 										<span class="glyphicon glyphicon-time"></span> 
-											작성일자 
+											${b.boardDate }
 									</span> 
 									<span class="w45 wr_hit"> 
 										<span class="glyphicon glyphicon-eye-open"></span> 
-											조회수
+											${b.boardCount }
 									</span> 
-									<span class="w45 wr_good gdtxt"> 
+									<!-- <span class="w45 wr_good gdtxt"> 
 										<span class="glyphicon glyphicon-thumbs-up"></span> 
 									 		추천수
-									</span> 
+									</span> -->
 								</span>
+							
 							</li>
+							</c:forEach>
 						</ul>
 					</div>
 
@@ -208,7 +220,8 @@
 
 
 				<div class="pager">
-					<nav class="pg_wrap">
+					<c:out value="${pageBar}" escapeXml="false"/>
+					<!-- <nav class="pg_wrap">
 						<span class="pg">
 							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a> 
 							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page">1<span class="sound_only">페이지</span></a> 
@@ -229,7 +242,7 @@
 							<span class="pg_info_m">7 / 8</span>
 						<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_next_m">다음페이지</a> 
 						<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a>
-					</div>
+					</div> -->
 				</div>
 
 			</div>

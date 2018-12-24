@@ -14,7 +14,7 @@ form, h1 {margin:0;}
 
 #bbs-list-wrap {padding:0;}
 
-/* °Ô½ÃÆÇ Å¸ÀÌÆ², Ä«Å×°í¸® ¸ñ·Ï */
+/* ï¿½Ô½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½Æ², Ä«ï¿½×°ï¿½ ï¿½ï¿½ï¿½ */
 #bbs-list-top {
 	overflow:hidden;
 	width:100%;
@@ -76,7 +76,7 @@ form, h1 {margin:0;}
 
 #bbs-list-top .on span.glyphicon {display:inline;}
 
-/* ¸®½ºÆ® */
+/* ï¿½ï¿½ï¿½ï¿½Æ® */
 #fboardlist {padding:0 0 0.5em 0;}
 
 .bbs-list {}
@@ -239,8 +239,8 @@ form, h1 {margin:0;}
 	font-size: 9pt;
 }
 
-/* Å×ÀÌºíÇü °Ô½ÃÆÇ */
-/* ¸®½ºÆ®ÀÇ Á¦¸ñ ºÎºÐÀº list.skin.php ÇÏ´ÜÀÇ Á¦ÀÌÄõ¸®·Î width, max-width ¸¦ ÁöÁ¤ÇÕ´Ï´Ù. */
+/* ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ */
+/* ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ list.skin.php ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ width, max-width ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. */
 @media (min-width: 768px) {
 
 	#bbs-list-ul li label {
@@ -294,12 +294,12 @@ form, h1 {margin:0;}
 		*/
 	}
 	
-	#bbs-list-ul li .dec .wr_date {width:5.5em;}
+	#bbs-list-ul li .dec .wr_date {width:6.5em;}
 	#bbs-list-ul li .dec .wr_hit {width:5.5em;}
 	#bbs-list-ul li .dec .wr_comment {width:5.5em;}
 	#bbs-list-ul li .dec .wr_good {width:4.5em;}
 	
-	/* ¸®½ºÆ® »ó´Ü */
+	/* ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ */
 	.bbs_list_top {
 		display:block;
 		background:#f9f9f9;
@@ -377,7 +377,7 @@ form, h1 {margin:0;}
 
 }
 
-/* ¸®½ºÆ® Áß °øÁö»çÇ× */
+/* ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .bbs-list-notice {background:#f5f8fa;}
 
 .bbs-list-notice .subject .category_text,
@@ -386,7 +386,7 @@ form, h1 {margin:0;}
 	font-weight:700;
 }
 
-/* ¸®½ºÆ® Áß ¿­¶÷ÁßÀÎ ±Û */
+/* ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ */
 .bbs-list-current {*background:#f5f6fa;}
 
 .bbs_list_current_text {
@@ -403,19 +403,19 @@ form, h1 {margin:0;}
 	*color:#222 !important;
 }
 
-/* ±Û ¾øÀ» ¶§ */
+/* ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ */
 #bbs-list-ul .empty {
 	padding:3em 0;
 	text-align:center;
 }
 
-/* ±Û¾²±â ¹öÆ° µî */
+/* ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ */
 .bbs_action_box {
 	overflow:hidden;
 	padding:0.5em 0;
 }
 
-/* °Ô½ÃÆÇ °Ë»ö */
+/* ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ */
 #bbs_sch {
 	float:left; 
 	*padding:0.5em 0;
@@ -493,7 +493,7 @@ form, h1 {margin:0;}
     border-color: #269abc;
 }
 
-.button_box .btn_write .glyphicon-pencil {transition:all .3s;} /* ±Û¾²±â ¹öÆ° ¾ÆÀÌÄÜ */
+.button_box .btn_write .glyphicon-pencil {transition:all .3s;} /* ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /* .button_box .btn_write:hover .glyphicon-pencil {transform: rotate(-90deg); transition:all .3s;} */
 
 .button_box_top {float:left;}
@@ -507,7 +507,7 @@ form, h1 {margin:0;}
 	border-radius:0.375em;
 }
 
-/* ¼±ÅÃ, »èÁ¦, º¹»ç, ÀÌµ¿ ¹öÆ° (°ü¸®ÀÚ Àü¿ë) */
+/* ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½, ï¿½Ìµï¿½ ï¿½ï¿½Æ° (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) */
 .edit_button_box {
 	padding:0.5em 0;
 }
@@ -529,7 +529,7 @@ form, h1 {margin:0;}
 
 .edit_button_box .btn_adm:hover {color:#555 !important;}
 
-/* ¸®½ºÆ® Ã¼Å©¹Ú½º (°ü¸®ÀÚ Àü¿ë) */
+/* ï¿½ï¿½ï¿½ï¿½Æ® Ã¼Å©ï¿½Ú½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) */
 .bbs-list .ychk {
 	-webkit-appearance: checkbox !important;
     -moz-appearance: checkbox !important;
@@ -542,7 +542,7 @@ form, h1 {margin:0;}
 	cursor:auto;
 }
 
-/* ÆäÀÌÂ¡ */
+/* ï¿½ï¿½ï¿½ï¿½Â¡ */
 .pg_wrap {
 	padding:0.5em 0 0 0;
 	text-align:center;
@@ -693,7 +693,7 @@ form, h1 {margin:0;}
 
 .pg_wrap .mb_page{display:none}
 
-/* °Ô½ÃÆÇ ºä */
+/* ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ */
 #bbs-view {
 	position:relative;
 	padding-bottom:3em;
@@ -870,7 +870,7 @@ form, h1 {margin:0;}
 
 #cke_wr_content img {max-width:100%;}
 
-/* ÆùÆ® Å©±â Á¶Àý */
+/* ï¿½ï¿½Æ® Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 
 	
 #bo_v_file > span,
@@ -884,7 +884,7 @@ form, h1 {margin:0;}
 	padding:1em 0;
 }
 
-/* ´ñ±Û */
+/* ï¿½ï¿½ï¿½ */
 #bo_vc {border-top:1px solid #e0e0e0;}
 
 #bo_vc p {margin:0;}
@@ -944,7 +944,7 @@ form, h1 {margin:0;}
 	text-align:right;
 }
 
-/* ´ñ±Û ¾²±â */
+/* ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .cmt_wr_wrap {*padding:1em 0;}
 
 .cmt_wr_info {}
@@ -990,7 +990,7 @@ form, h1 {margin:0;}
 	width:12em;
 }
 
-/* È¸¿ø »çÀÌµå ºä */
+/* È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ */
 .sv_wrap {
 	display:inline-block;
 	position:relative;
@@ -1055,7 +1055,7 @@ form, h1 {margin:0;}
 
 .sv_nojs .sv {display:block;}
 
-/* ±Û¾²±â */
+/* ï¿½Û¾ï¿½ï¿½ï¿½ */
 #bo_w {
 	padding:2em 0 !important;
 	border-top:0 !important;
