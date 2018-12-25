@@ -7,34 +7,39 @@
 <html>
 <head>
 <title></title>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 
 </head>
 <body>
-<c:forEach items="${list}" var="c">
+<form id="chattingRoom" method="post">
+	<ul>
+		<c:forEach items="${list}" var="c">
+			<li>
+				<div class="chatName" style="border: solid 1px black">
+					<input name="chatNo" class="chatNo" value="${c.chattingId }" hidden>
+					<div class="chatUser">
+						<font class="userName">${c.userName2 }</font>
+					</div>
+				</div>
+			</li>
+		</c:forEach>
+	</ul>
+	</form>
+	<script type="text/javascript">
+		$(".chatName")
+				.click(
+						function() {
+							//var chatNo = $(this).attr("value");
+							var chatNo = $(this).children(".chatNo").val();
+							var url = "${pageContext.request.contextPath }/chat/chatting.do/"+ chatNo;
+							console.log(url);
+							
+							$("#chattingRoom").attr("action",url).submit();
+						
+							
 
-	<div class = "chatName" style="border: solid 1px black" >
-		<input  name="chatNo" class="chatNo" value="${c.chattingId }" hidden>
-		<label class = "chatUser">${c.userName2 }</label>
-	</div>
-	<br><br><br>
-</c:forEach>
-
-<script type="text/javascript">
-	$(".chatName").click(function() {
-		//var chatNo = $(this).attr("value");
-		var chatNo = $(this).children(".chatNo").val();
-		var userName = $(this).children(".chatUser").val();
-		console.log(chatNo);
-		console.log(userName);
-		//location.href="${pageContext.request.contextPath }/chat/chatting/do?chatNo2="+chatNo+"&userName2="+userName;
-		
-		
-		
-		
-	});
-	
-</script>
+						});
+	</script>
 </body>
 </html>

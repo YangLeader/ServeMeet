@@ -1,13 +1,15 @@
 package com.yang.ServeMeet.chatting.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
+import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
+import com.yang.ServeMeet.member.model.vo.Member;
 
 @Repository
 public class ChattingDaoImpl implements ChattingDao {
@@ -21,22 +23,27 @@ public class ChattingDaoImpl implements ChattingDao {
 		return sst.selectList("chat.selectCahtList",userName);
 	}
 
+
 	@Override
-	public int ChatInsert(Chatting chat) {
+	public int ChatLogInsert(ChattingLog chatLog) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sst.insert("chat.insertChatLog",chatLog);
 	}
 
 	@Override
-	public int ChatUpdate(Chatting chat) {
+	public List<Member> memberList(int userNo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return sst.selectList("chat.selectMember",userNo);
 	}
-
 	@Override
-	public int ChatDelete(Chatting chat) {
+	public Chatting isChat(Map<String, String> userNameMap) {
 		// TODO Auto-generated method stub
-		return 0;
+		System.out.println(userNameMap);
+		return sst.selectOne("chat.isChat",userNameMap);
 	}
-
+	@Override
+	public int insertChat(Map<String, String> userNameMap) {
+		// TODO Auto-generated method stub
+		return sst.insert("chat.insertChat",userNameMap);
+	}
 }

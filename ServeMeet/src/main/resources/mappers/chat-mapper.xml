@@ -5,7 +5,24 @@
 <mapper namespace="chat">
 
 	<select id="selectCahtList" parameterType="String" resultType="Chatting">
-		select * from Chatting where username1 = #{userName}
+		select * from Chatting where username1 = #{userName} or username2=#{userName}
+	</select>	
+	<select id="isChat" parameterType="Map" resultType="Chatting">
+		select * from Chatting where (Username1 = #{myName} or Username2 = #{myName}) and (Username1=#{userName} or Username2=#{userName})
 	</select>
+	<select id="selectMember" parameterType="int" resultType="Member">
+		select * from Member where userno != #{userName}
+	</select>
+
+	
+	<insert id="insertChatLog" parameterType="ChattingLog">
+		insert into ChattingLog values(#{chattingId},#{userName},default,#{chContent},#{chStatus})
+	</insert>
+	<insert id="insertChat" parameterType="HashMap">
+		 insert into Chatting values(seq_chat.nextval,#{myName},#{userName})
+	</insert>
+
+
+
 
 </mapper>
