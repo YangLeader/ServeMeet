@@ -15,4 +15,6 @@ public interface BattingDao {
 	int battingPick(Map<String, Object> hmap);
 	
 	int battingPickUser(BattingUser bUser);
+	
+	BattingUser battingPickCheck(BattingUser battingUser);
 }

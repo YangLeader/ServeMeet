@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -24,8 +23,8 @@
 	<br>
 	<br>
 	<div>
-		<input type="button" onclick="button1_click('A');" value="A팀" /> <input
-			type="button" value="b팀" onclick="button1_click('B');" />
+		<input type="button" onclick="button1_click('A');" value="A팀" /> 
+		<input type="button" onclick="button1_click('B');" value="b팀" />
 		<div class="progress">
 			<div class="progress-bar progress-bar-success" role="progressbar"
 				aria-valuenow="100" aria-valuemin="0" aria-valuemax="<10></10>0"
@@ -58,7 +57,7 @@
 			var result = confirm("한번 선택한 배팅은 취소나 변경이 불가능 합니다. 선택하신 팀이 맞습니까? ");
 			
 			if (result) {
-				location.href="${pageContext.request.contextPath}/batting/battingPick.do?battingId="+${batting.battingId}+"&battingType="+battingType+"&userName="+${sessionScope.member.userName};
+				location.href="${pageContext.request.contextPath}/batting/battingPick.ba?battingId="+${batting.battingId}+"&battingType="+battingType+"&userName=${member.userName}";
 				alert("선택되었습니다.");
 			} else {
 			}

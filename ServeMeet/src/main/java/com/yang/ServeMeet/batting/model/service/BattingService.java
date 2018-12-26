@@ -16,4 +16,6 @@ public interface BattingService {
 	int battingPick(int battingId, String battingSelect);
 	
 	int battingPickUser(BattingUser bUser);
+	
+	BattingUser battingPickCheck(int battingId, String userName);
 }
