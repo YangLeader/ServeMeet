@@ -31,6 +31,8 @@ public class BattingDaoImpl implements BattingDao {
 	@Override
 	public int battingPick(Map<String, Object> hmap) {
 		
+		System.out.println(hmap);
+		
 		return sqlSession.update("Batting_Mapper.battingPick", hmap);
 	}
 	
@@ -39,6 +41,12 @@ public class BattingDaoImpl implements BattingDao {
 		
 		
 		return sqlSession.insert("Batting_Mapper.battingPickUser",bUser);
+	}
+	
+	@Override
+	public BattingUser battingPickCheck(BattingUser bUser) {
+		
+		return sqlSession.selectOne("Batting_Mapper.battingPickCheck",bUser);
 	}
 	
 

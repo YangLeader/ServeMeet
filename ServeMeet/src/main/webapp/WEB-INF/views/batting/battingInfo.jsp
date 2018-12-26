@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -58,7 +57,7 @@
 			var result = confirm("한번 선택한 배팅은 취소나 변경이 불가능 합니다. 선택하신 팀이 맞습니까? ");
 			
 			if (result) {
-				location.href="${pageContext.request.contextPath}/batting/battingPick.ba?battingId="+${batting.battingId}+"&battingType="+battingType+"&userName="+${member.userName};
+				location.href="${pageContext.request.contextPath}/batting/battingPick.ba?battingId="+${batting.battingId}+"&battingType="+battingType+"&userName=${member.userName}";
 				alert("선택되었습니다.");
 			} else {
 			}

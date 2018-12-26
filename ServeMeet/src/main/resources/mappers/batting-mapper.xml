@@ -14,16 +14,20 @@
 	
 	<update id="battingPick" parameterType="map">
 		UPDATE BATTING SET 
-		<if test="battingSelect == 'A'">
+		<if test='battingSelect == "A"'>
 			BATTINGPNUMA = BATTINGPNUMA+1 
-		</if><if test="battingSelect != 'A'">
+		</if><if test='battingSelect == "B"'>
 			BATTINGPNUMB = BATTINGPNUMB+1 
 		</if>
 		WHERE BATTINGID = #{battingId}
 	</update>
 
 	<insert id="battingPickUser" parameterType="BattingUser">
-		INSERT INTO BATTINGUSER(#{battingId},#{userName},#{battingSelect})
+		INSERT INTO BATTINGUSER VALUES (#{battingId},#{userName},#{battingSelect})
 	</insert>
+	
+	<select id="battingPickCheck" parameterType="BattingUser" resultType="BattingUser">
+		SELECT * FROM BATTINGUSER WHERE BATTINGID = #{battingId} AND USERNAME = #{userName}
+	</select>
 
 </mapper>
