@@ -7,7 +7,7 @@ public class ChattingLog {
 	private static final long serialVersionUID = 3001L;
 	
 	private int chattingId;
-	private String userName;
+	private int userNo;
 	private Date chDate;
 	private String chContent;
 	private String chStatus;
@@ -17,28 +17,28 @@ public class ChattingLog {
 	}
 
 	
-	public ChattingLog(String userName, Date chDate, String chContent) {
+	public ChattingLog(int userNo, Date chDate, String chContent) {
 		super();
-		this.userName = userName;
+		this.userNo = userNo;
 		this.chDate = chDate;
 		this.chContent = chContent;
 	}
 	
 
 
-	public ChattingLog(int chattingId, String userName, String chContent, String chStatus) {
+	public ChattingLog(int chattingId, int userNo, String chContent, String chStatus) {
 		super();
 		this.chattingId = chattingId;
-		this.userName = userName;
+		this.userNo = userNo;
 		this.chContent = chContent;
 		this.chStatus = chStatus;
 	}
 
 
-	public ChattingLog(int chattingId, String userName, Date chDate, String chContent, String chStatus) {
+	public ChattingLog(int chattingId, int userNo, Date chDate, String chContent, String chStatus) {
 		super();
 		this.chattingId = chattingId;
-		this.userName = userName;
+		this.userNo = userNo;
 		this.chDate = chDate;
 		this.chContent = chContent;
 		this.chStatus = chStatus;
@@ -52,12 +52,12 @@ public class ChattingLog {
 		this.chattingId = chattingId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	public Date getChDate() {
@@ -86,7 +86,7 @@ public class ChattingLog {
 
 	@Override
 	public String toString() {
-		return "ChattingLog [chattingId=" + chattingId + ", userName=" + userName + ", chDate=" + chDate
+		return "ChattingLog [chattingId=" + chattingId + ", userNo=" + userNo + ", chDate=" + chDate
 				+ ", chContent=" + chContent + ", chStatus=" + chStatus + "]";
 	}
 	

@@ -17,9 +17,9 @@ public class ChattingServiceImpl implements ChattingService {
 	@Autowired
 	private ChattingDao cDao;
 	@Override
-	public List<Chatting> selectChatList(String userName) {
+	public List<Chatting> selectChatList(int userNo) {
 		
-		return cDao.selectChatList(userName);
+		return cDao.selectChatList(userNo);
 	}
 
 

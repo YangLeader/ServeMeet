@@ -14,6 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
+import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 import com.yang.ServeMeet.member.model.vo.Member;
 
@@ -33,9 +34,9 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// Websocket의 세션은 HttpSession과 다르다.
-		int chatNo = (Integer) (session.getAttributes().get("chatNo"));
+		int chatNo = ((Chatting)(session.getAttributes().get("chat"))).getChattingId();
 		// 사용자 연결 시에 sessionList라는 사용자 리스트에 접속한 사용자를 추가한다.
-
+System.out.println("==============chatNo : " + chatNo);
 		if (rMap.containsKey(chatNo)) {
 			(rMap.get(chatNo)).add(session);
 		} else {
@@ -55,16 +56,22 @@ public class EchoHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// session.sendMessage(new TextMessage(session.gadminetId() + "|" +
 		// message.getPayload()));
-		String userName = ((Member) session.getAttributes().get("member")).getUserName();
-		int chatNo = (Integer) (session.getAttributes().get("chatNo"));
+		
+		Member m = (Member) session.getAttributes().get("member");
+		Chatting chat = (Chatting)(session.getAttributes().get("chat"));
+
+		int chatNo = chat.getChattingId();
+		int userNo = m.getUserNo();
+		String userName = m.getUserName();
 
 		System.out.println("session주소 : " + session.getRemoteAddress());
 		System.out.println(userName);
 
 		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
 		rSessionList = rMap.get(chatNo);
+		System.out.println("rSessionList : "+rSessionList);
 
-		ChattingLog chatLog = new ChattingLog(chatNo, userName, message.getPayload(), "N");
+		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload(), "N");
 		
 		if (message.getPayload() != null) {
 			int result = cs.ChatLogInsert(chatLog);
