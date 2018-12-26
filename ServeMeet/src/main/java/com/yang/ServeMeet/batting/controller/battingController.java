@@ -20,7 +20,7 @@ public class battingController {
 	private BattingService battingService;	
 		
 	
-	@RequestMapping("/batting/battingInfo.do")
+	@RequestMapping("/batting/battingInfo.ba")
 	public String battingInfo(@RequestParam int no, Model model) {
 		
 		model.addAttribute("batting",battingService.battingSelect(no));
@@ -28,7 +28,7 @@ public class battingController {
 		return "batting/battingInfo";
 	}
 	
-	@RequestMapping("/batting/battingList.do")
+	@RequestMapping("/batting/battingList.ba")
 	public String battingList(Model model) {
 		
 		ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList());
@@ -39,8 +39,8 @@ public class battingController {
 		return "batting/battingList";
 	}
 	
-	@RequestMapping("/batting/battingPick.do")
-	public String battingPick(@RequestParam int battingId ,@RequestParam String battingSelect,@RequestParam String userName, Model model) {
+	@RequestMapping("/batting/battingPick.ba")
+	public String battingPick(@RequestParam int battingId ,@RequestParam("battingType") String battingSelect,@RequestParam String userName, Model model) {
 		
 		
 		int result = battingService.battingPick(battingId, battingSelect);
