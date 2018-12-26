@@ -81,9 +81,11 @@
                                 </li> -->
                                 <li><a href="${pageContext.request.contextPath }/chat/memberList.do" title="Blog">채팅</a></li>
 
-                                <li><a href="${pageContext.request.contextPath }/board/boardList.bo" title="Contact Us">게시판</a> </li>
+                                <li><a href="${pageContext.request.contextPath }/board/boardList.do" title="Contact Us">게시판</a> </li>
 
                                 <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="Styleguide">배팅</a> </li>
+                                
+                                <li><a href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a> </li>
                             </ul>
                         </div>
                     </div>
