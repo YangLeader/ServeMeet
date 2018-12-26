@@ -34,9 +34,14 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// Websocket의 세션은 HttpSession과 다르다.
-		int chatNo = ((Chatting)(session.getAttributes().get("chat"))).getChattingId();
+		int chatNo;
+		if (session.getAttributes().get("chat") == null) {
+			chatNo = (Integer) (session.getAttributes().get("chatNo"));
+		} else {
+			chatNo = ((Chatting) (session.getAttributes().get("chat"))).getChattingId();
+		}
 		// 사용자 연결 시에 sessionList라는 사용자 리스트에 접속한 사용자를 추가한다.
-System.out.println("==============chatNo : " + chatNo);
+		System.out.println("==============chatNo : " + chatNo);
 		if (rMap.containsKey(chatNo)) {
 			(rMap.get(chatNo)).add(session);
 		} else {
@@ -56,23 +61,30 @@ System.out.println("==============chatNo : " + chatNo);
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// session.sendMessage(new TextMessage(session.gadminetId() + "|" +
 		// message.getPayload()));
-		
-		Member m = (Member) session.getAttributes().get("member");
-		Chatting chat = (Chatting)(session.getAttributes().get("chat"));
 
-		int chatNo = chat.getChattingId();
+		Member m = (Member) session.getAttributes().get("member");
+	
+		
+		int chatNo;
 		int userNo = m.getUserNo();
 		String userName = m.getUserName();
+		if (session.getAttributes().get("chat") == null) {
+			chatNo = (Integer) (session.getAttributes().get("chatNo"));
+		} else {
+			Chatting chat = (Chatting) (session.getAttributes().get("chat"));
+			chatNo = chat.getChattingId();
+		}
+		
 
 		System.out.println("session주소 : " + session.getRemoteAddress());
 		System.out.println(userName);
 
 		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
 		rSessionList = rMap.get(chatNo);
-		System.out.println("rSessionList : "+rSessionList);
+		System.out.println("rSessionList : " + rSessionList);
 
 		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload(), "N");
-		
+
 		if (message.getPayload() != null) {
 			int result = cs.ChatLogInsert(chatLog);
 			System.out.println(result);
