@@ -17,4 +17,8 @@ int insertMember(Member member);
 	int checkIdDuplicate(HashMap<String, Object> hmap);
 
 	int checkNameDuplicate(HashMap<String, Object> hmap);
+
+	String searchIdConfirm(HashMap<String, String> hmap);
+
+	int searchPwdConfirm(HashMap<String, String> hmap);
 }

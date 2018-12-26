@@ -56,4 +56,26 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.checkNameDuplicate(hmap);
 	}
 
+	@Override
+	public String searchIdConfirm(String userName, String email) {
+		
+		HashMap<String,String> hmap =  new HashMap<String, String>();
+		
+		hmap.put("userName", userName);
+		hmap.put("email", email);
+		
+		
+		return memberDao.searchIdConfirm(hmap);
+	}
+
+	@Override
+	public int searchPwdConfirm(String userId, String userEmail) {
+		HashMap<String,String> hmap = new HashMap<String, String>();
+		
+		hmap.put("userId", userId);
+		hmap.put("userEmail", userEmail);
+		
+		return memberDao.searchPwdConfirm(hmap);
+	}
+
 }
