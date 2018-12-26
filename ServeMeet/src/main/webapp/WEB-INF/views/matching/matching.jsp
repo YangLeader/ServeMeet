@@ -51,27 +51,32 @@
 		width: 28%;
 		display: inline-block;
 		margin-left: 15px;
-		margin-top: 15px;
+		
 		
 	}
+	
+	
 	.itemframe{
 		width: 100%;
 		padding: 0px !important;
-		cursor: focus;
+		
+		font-size: 12px;
 	}
 	
 	.item{
 		padding-bottom: 20px;
-		width: 28%;
+		width: 30%;
 
 	}
 	
 	#midDiv{
 		width: 40%;
+		font-size: 11px;
 	}
 	
 	#smallDiv{
 		width: 45%;
+		font-size: 11px;
 	}
 	
 	#bottomDiv{
@@ -82,45 +87,64 @@
 	}
 	span{
 		width: 20px;
-		
+		cursor: pointer;
+	}
+	
+	label{
+		cursor: pointer;
 	}
 	
 	#sca{
 		border: 1px solid black;
 	}
+	
+	.btn-xs{
+		margin-left: 5px;
+		border: 1px solid red;
+	}
+	
+	.btn-default{
+		color: black;
+		background: white;
+	
+	}
+
+
 </style>
 </head>
 <body >
-
+<!-- 	<label for="ck1"><input type="checkbox" id="ck1" value="test">test</label>
+	<label for="ck2"><input type="checkbox" id="ck2" value="test2">test2</label> -->
+	
 	<div class="out">
 	<h1>조건 선택</h1>
 		<div class="in" >
 			<ul class="itemframe">
-				<li class="item" id="서울특별시">서울</li>
-				<li class="item" id="경기도">경기</li>
+				<span><li class="item" id="서울특별시">서울</li></span>
+				<span><li class="item" id="경기도">경기</li></span>
 				<br  />
-				<li class="item" id="인천광역시">인천</li>
-				<li class="item" id="대전광역시">대전</li>
+				<span><li class="item" id="인천광역시">인천</li></span>
+				<span><li class="item" id="대전광역시">대전</li></span>
 				<br  />
-				<li class="item" id="세종특별자치시">세종</li>
-				<li class="item" id="충청남도">충남</li>
+				<span><li class="item" id="세종특별자치시">세종</li></span>
+				<span><li class="item" id="충청남도">충남</li></span>
 				<br  />
-				<li class="item" id="충청북도">충북</li>
-				<li class="item" id="광주광역시">광주</li>
+				<span><li class="item" id="충청북도">충북</li></span>
+				<span><li class="item" id="광주광역시">광주</li></span>
 				<br  />
-				<li class="item" id="전라남도">전남</li>
-				<li class="item" id="전라북도">전북</li>
+				<span><li class="item" id="전라남도">전남</li></span>
+				<span><li class="item" id="전라북도">전북</li></span>
 				<br />
-				<li class="item" id="대구광역시">대구</li>
-				<li class="item" id="경상북도">경북</li>
-				<br class="item" />
-				<li class="item" id="부산광역시">부산</li>
-				<li class="item" id="울산광역시">울산</li>
+				<span><li class="item" id="대구광역시">대구</li></span>
+				<span><li class="item" id="경상북도">경북</li></span>
+				<br  />
+				<span><li class="item" id="부산광역시">부산</li></span>
+				<span><li class="item" id="울산광역시">울산</li></span>
 				<br />
-				<li class="item" id="경상남도">경남</li>
-				<li class="item" id="강원도">강원</li>
+				<span><li class="item" id="경상남도">경남</li></span>
+				<span><li class="item" id="강원도">강원</li></span>
 				<br />
-				<li class="item" id="제주특별자치도">제주</li>
+				<span><li class="item" id="제주특별자치도">제주</li></span>
 			</ul>   
 		</div>
 		<div class="in" id="midDiv" style=" background: yellow;">
@@ -151,12 +175,14 @@
 <script>
 	var arr = new Array();	
 	var cnt = 0;
-		var locName = "";
+	var locId = "";
+	var test = "";
 	$(function () {
 		
 		$(".item").click(function(){
 			$("div #smallDiv").children().remove();
 			var locId = $(this).attr('id');
+			
 			locName = $(this).text();
 			console.log(locId);
 				$.ajax({
@@ -168,6 +194,10 @@
 					success: function(data) {
 						console.log(data);
 						var html = "<ul class='itemframe'>";
+						html += "<li class='item'>";
+						html += "<span id='sca'>"+locName+" 전체</span>"; 
+						html += "</li>";
+						html += "<br>";
 						for(var i in data){
 							if(i % 3 == 0 && i != 0){
 								html += "<br>";
@@ -176,7 +206,8 @@
 								html += "</li>";
 							}else{								
 								html += "<li class='item'>";
-								html += "<span  id='sca'>"+data[i]+"</span>";
+								html += "<span  id='sca'>"+data[i]+"</span>"; 
+			
 								html += "</li>";
 							}
 						
@@ -185,31 +216,31 @@
 		
 						$("#midDiv").html(html);
 						
-						eventBind();
+						midSelect();
 						
 					}, error : function (data) {
 						console.log("에러");
 					}
 				})
-				$(this).css("font-weight","bold");
+				/* $(this).css("font-weight","bold");
 				console.log(cnt);
 				arr[cnt] = locName;
 				$("div #bottomDiv").append("&nbsp;<a class='btn-xs btn-default'>"+locName+"</a>");
 				for(var i=0; i<=cnt; i++){
 					console.log("cnt : " + i + ","+arr[i]);
 				}
-				cnt++;
+				cnt++; */
 		});
 		
 		
 			
 	});
 	
-	function eventBind(obj){
+	function midSelect(obj){
 		$("#midDiv").children("ul").children("li").click(function() {
-			var locId = $(this).text();
+			locId = $(this).text();
+			//console.log("마지막:"+locId);
 			console.log(locId);
-			
 			$.ajax({
 				url: "/location/smallLocaion.do",
 				type: "GET",
@@ -221,43 +252,86 @@
 					
 					if(data.length != 0){
 						var html = "<ul class='itemframe'>";
+						html += "<li class='item'>";
+						html += "<label for='locAll'><input type='checkbox' class='locCkbx' id='locAll' value='"+locId+"'>"+locId+" 전체</label>";
+						html += "</li>";
+						html += "<br>";
 						for(var i in data){
 							
 							if(i % 3 == 0 && i != 0){
 								html += "<br>";
 								html += "<li class='item'>";
-								html += "<span id='sca'>"+data[i]+"</span>";
+								html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
 								html += "</li>";
 							}else{								
 								html += "<li class='item'>";
-								html += "<span id='sca'>"+data[i]+"</span>";
+								html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
 								html += "</li>";
 							}
 						
 						}
 						html += "</ul>";
-						$("#smallDiv").html(html);						
+						$("#smallDiv").html(html);	
+						
+						
+						lastSelect();
+						
 					}
-					
-					
 				}, error: function (data) {
 					console.log("에러2");
 				}
 			})
-			console.log(":::" + locName);
-			/* var test = jQuery.inArray(locName, arr);
-			arr[test] += locId;
-			 */
-			var asd = locName + locId;
-			console.log(asd);
-			$("div #bottomDiv").append("&nbsp;<a class='btn-xs btn-default'>"+asd+"</a>");
-			for(var i=0; i<=cnt; i++){
-				console.log("cnt : " + i + ","+arr[i]);
-			}
 			
 			
 		});
 	}
 	
+	function lastSelect(obj) {
+		$(".locCkbx").change(function () {
+			if($(this).is(":checked")){
+				
+				if($(this).val() == locId){
+					
+					$('input[id^="locCk"]').prop('checked', false);
+					console.log(locId);
+					var arr2 = arr.filter(function (n) {
+						return n.match(locId);
+					});
+					
+					for(var i in arr2){
+						$("a").remove(":contains("+arr2[i]+")");
+					}
+					
+					for (var i = 0; i<arr2.length; i++) {
+					    var arrlen = arr.length;
+					    for (var j = 0; j<arrlen; j++) {
+					        if (arr2[i] == arr[j]) {
+					            arr = arr.slice(0, j).concat(arr.slice(j+1, arrlen));
+					        }
+					    }
+					}
+					
+					$("div #bottomDiv").append("<a class='btn-xs btn-default' id='"+locId+"'>"+locId+"전체</a>");
+				}else{
+					
+					$('input[id="locAll"]').prop('checked', false);
+					$("a[id='"+locId+"']").remove();
+					arr.push(locId+" "+$(this).val());
+					$("div #bottomDiv").append("<a class='btn-xs btn-default'>"+locId+" "+$(this).val()+"</a>");
+					
+				}
+				
+				
+			}else{
+				console.log(locId + " " +$(this).val());
+				var rmvLoc = arr.splice(arr.indexOf(locId + " " +$(this).val()), 1)
+				console.log("Ee : " + rmvLoc);
+				$("a").remove(":contains("+rmvLoc+")");
+			}
+			console.log(arr);
+			
+		});
+		
+	}
 </script>
 </html>
