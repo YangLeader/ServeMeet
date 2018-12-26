@@ -48,4 +48,23 @@ public class MemberDaoImpl implements MemberDao {
 		return (Integer)hmap.get("result");
 	}
 
+	@Override
+	public String searchIdConfirm(HashMap<String,String> hmap) {
+		String result = "";
+		result = sqlSession.selectOne("member.searchIdConfirm", hmap);
+		
+		System.out.println("result : " + result);
+		if(result == null) {
+			result ="";
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int searchPwdConfirm(HashMap<String, String> hmap) {
+		
+		return sqlSession.selectOne("member.searchPwdConfirm", hmap);
+	}
+
 }

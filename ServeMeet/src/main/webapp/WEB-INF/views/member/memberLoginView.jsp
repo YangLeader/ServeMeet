@@ -19,8 +19,8 @@
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="page-caption">
-          <h2 class="page-title">회원가입</h2>
-          <p> 사이트 이용을 위한 회원가입 페이지 입니다. </p>
+          <h2 class="page-title">로그인</h2>
+          <p> 사이트 이용을 위한 로그인 페이지 입니다. </p>
         </div>
       </div>
     </div>
@@ -67,16 +67,15 @@
                   <button type ="submit" id="sendbutton" name="sendbutton" class="btn-lg btn-default" onclick="sendBtn();"><b>Sign in</b></button>
                 </div>
               </div>
+              <hr>
+              <br>
+              <p align="center"><a href="${pageContext.request.contextPath}/member/searchId.do">아이디 찾기 </a> | <a href="${pageContext.request.contextPath}/member/searchPwd.do">비밀번호 찾기</a> | <a href="${pageContext.request.contextPath}/member/memberEnroll.do">회원가입</a></p> 
+              <p align = "center"><a href="${pageContext.request.contextPath}/point/point.do">포인트페이지 이동</a></p>
             </form>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 map" id="googleMap"></div>
   </div>
 </div>
 

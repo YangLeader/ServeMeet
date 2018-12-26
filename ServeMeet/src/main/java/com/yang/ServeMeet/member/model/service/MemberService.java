@@ -4,7 +4,7 @@ import com.yang.ServeMeet.member.model.vo.Member;
 
 public interface MemberService {
 	
-int insertMember(Member member);
+	int insertMember(Member member);
 	
 	Member selectOne(String userId);
 	
@@ -15,4 +15,8 @@ int insertMember(Member member);
 	int checkIdDuplicate(String userId);
 	
 	int checkNameDuplicate(String userName);
+
+	String searchIdConfirm(String userName, String email);
+	
+	int searchPwdConfirm(String userId, String userEmail);
 }

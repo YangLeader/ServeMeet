@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-md-9">
                       <input id="pwd" name="userPwd" type="password" class="form-control" placeholder="비밀번호를 입력하세요" required>
-                    	<span id = "pwdMsg" style="display:none; color:red">비밀번호는 5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+                    	<span id = "pwdMsg" style="display:none; color:red">비밀번호는 6~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
                     </div>
                   </div>
                 </div>
@@ -106,6 +106,7 @@
                     </div>
                     <div class="col-md-9">
                       <input id="email" name="email" type="email" class="form-control" placeholder="Enter your email address" required>
+                      <span id="emailMsg" style="display:none; color:red">이메일을 확인해줘</span>
                     </div>
                   </div>
                 </div>
@@ -120,6 +121,9 @@
                 </div>
               </div>
             </form>
+            <div>
+              <p align="center">이미 가입된 아이디가 있으신가요?&nbsp; <a href="${pageContext.request.contextPath}/member/memberLoginView.do" style="color:blue"> 로그인</a>하기</p>
+            </div>
           </div>
         </div>
       </div>
@@ -154,10 +158,13 @@
         
             checkName();
         
-            checkEmail();
+            
+            $("#email").on("keyup",function(){
+            	checkEmail();
+            });
         
 		
-	})
+	});
 	
 	function sendBtn(){
 		
@@ -169,8 +176,10 @@
 			alert("비밀번호 확인이 일치하지 않습니다.");
 		}else if(nameFlag==false){
 			alert("이름을 다시 확인해주세요.");
+			$("name").focus();
 		}else if(emailFlag==false){
 			alert("이메일을 다시 확인해주세요.");
+			$("#email").focus();
 		}else{
 			$("#enrollForm").submit();
 			location.href="${pageContext.request.contextPath}/member/memberEnrollEnd.do";
@@ -293,15 +302,18 @@
 	}
 	
 	function checkEmail(){
-		$("#email").on("keyUp",function(){
-			var email = $("#email").val();
 		
-			if(email ==""){
-				emailFlag="false";
-			}else{
-				emailFlag="true";
-			}
-		});
+		var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	     var isHan = /[ㄱ-ㅎ가-힣]/g;
+		var email = $("#email").val();
+		if(!isEmail.test(email) || isHan.test(email)){
+			$("#emailMsg").show();
+			emailFlag = false;
+		}else{
+			$("#emailMsg").hide();
+			emailFlag = true;
+		}
+		
 	}
 
     /* function initMap() {

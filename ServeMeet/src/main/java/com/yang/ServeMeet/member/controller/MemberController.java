@@ -228,5 +228,30 @@ public class MemberController {
 		
 		return map;
 	}
+	
+	@RequestMapping("/member/searchId.do")
+	public String searchId() {
+		if(logger.isDebugEnabled()) logger.debug("아이디 찾기 페이지 고");
+		return "member/searchId";
+	}
+	
+	@RequestMapping("/member/searchPwd.do")
+	public String searchPwd() {
+		if(logger.isDebugEnabled()) logger.debug("비밀번호 찾기 페이지 고");
+		return "member/searchPwd";
+	}
+	
+	@RequestMapping("/member/searchIdConfirm.do")
+	@ResponseBody
+	public String searchIdConfirm(@RequestParam String userName, @RequestParam String email){
+		
+		if(logger.isDebugEnabled()) logger.debug("아이디 일치 여부 확인!");
+		
+		String isSame = memberService.searchIdConfirm(userName,email);
+		
+		
+		
+		return isSame;
+	}
 
 }

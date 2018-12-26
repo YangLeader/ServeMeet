@@ -57,6 +57,11 @@
 			)
 		}
 	</select>
+	
+	<select id="searchIdConfirm" parameterType="hashmap" resultType="string">
+		select userId from member
+		where userName = #{userName} and email = #{email}
+	</select>
 <!--
 
 // 아이디 체크 프로시저
