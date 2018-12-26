@@ -72,23 +72,18 @@
                         <div id="navigation">
                             <ul>
                                 <li class="active"><a href="index.html" title="Home">Home</a></li>
-                                <li><a href="menu.html" title="Menu">Menu</a></li>
-                                <li class="has-sub"><a href="service-list.html" title="Service List">Service List</a>
+                                <li><a href="menu.html" title="Menu">매칭</a></li>
+                                <!-- <li class="has-sub"><a href="service-list.html" title="Service List">Service List</a>
                                     <ul>
                                         <li><a href="service-list.html" title="Service List">Service List</a></li>
                                         <li><a href="service-detail.html" title="Service Detail">Service Detail</a></li>
                                     </ul>
-                                </li>
-                                <li class="has-sub"><a href="blog-default.html" title="Blog">News</a>
-                                    <ul>
-                                        <li><a href="blog-default.html" title="Blog" >Blog Default</a></li>
-                                        <li><a href="blog-single.html" title="Blog Single" >Blog Single</a></li>
-                                    </ul>
-                                </li>
+                                </li> -->
+                                <li><a href="${pageContext.request.contextPath }/chat/memberList.do" title="Blog">채팅</a></li>
 
                                 <li><a href="${pageContext.request.contextPath }/board/boardList.bo" title="Contact Us">게시판</a> </li>
 
-                                <li><a href="styleguide.html" title="Styleguide">styleguide</a> </li>
+                                <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="Styleguide">배팅</a> </li>
                             </ul>
                         </div>
                     </div>
