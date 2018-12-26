@@ -9,7 +9,7 @@ import com.yang.ServeMeet.member.model.vo.Member;
 
 public interface ChattingService {
 	
-	List<Chatting> selectChatList(String userName);
+	List<Chatting> selectChatList(int userNo);
 
 	int ChatLogInsert(ChattingLog chatLog);
 

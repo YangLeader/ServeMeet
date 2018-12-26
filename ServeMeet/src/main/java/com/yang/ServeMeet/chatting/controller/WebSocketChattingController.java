@@ -23,23 +23,8 @@ public class WebSocketChattingController {
 	@Autowired
 	private ChattingService cs;
 	
-		
-	@RequestMapping(value = "/chat/chatting.do/{chatNo}", method = RequestMethod.POST)
-	public ModelAndView chattingMethod(@PathVariable("chatNo")int chatNo,HttpServletRequest req, HttpSession session) throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
-		req.setCharacterEncoding("utf-8");
-		
-		String ipAddr = req.getRemoteAddr();
-		session.setAttribute("chatNo", chatNo);
-		
-		mv.addObject("host", ipAddr);
-		mv.setViewName("chat/chattingView");
-		
-		return mv;
-	}
-	@RequestMapping(value = "/chat/createChat.do/{memName}", method=RequestMethod.POST)
-	public ModelAndView createChat(@PathVariable("memName")String userName,HttpServletRequest req, HttpSession session) {
+	@RequestMapping(value = "/chat/chattingRoom.do/{userName}", method=RequestMethod.POST)
+	public ModelAndView chattingRoom(@PathVariable("userName")String userName,HttpServletRequest req, HttpSession session) {
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -57,7 +42,8 @@ public class WebSocketChattingController {
 			cs.insertChat(userNameMap);
 			chat = cs.isChat(userNameMap);
 		}
-		session.setAttribute("chatNo", chat.getChattingId());		
+		System.out.println(chat);
+		session.setAttribute("chat", chat);		
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 		

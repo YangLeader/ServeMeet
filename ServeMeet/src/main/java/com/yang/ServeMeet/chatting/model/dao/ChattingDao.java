@@ -8,7 +8,7 @@ import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 import com.yang.ServeMeet.member.model.vo.Member;
 
 public interface ChattingDao {
-	List<Chatting> selectChatList(String userName);
+	List<Chatting> selectChatList(int userNo);
 
 	int ChatLogInsert(ChattingLog chatLog);
 

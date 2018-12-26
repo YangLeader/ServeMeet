@@ -18,9 +18,9 @@ public class ChattingDaoImpl implements ChattingDao {
 	private SqlSessionTemplate sst;
 	
 	@Override
-	public List<Chatting> selectChatList(String userName) {
+	public List<Chatting> selectChatList(int userNo) {
 		
-		return sst.selectList("chat.selectCahtList",userName);
+		return sst.selectList("chat.selectCahtList",userNo);
 	}
 
 

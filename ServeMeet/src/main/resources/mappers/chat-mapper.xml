@@ -4,11 +4,22 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
 
-	<select id="selectCahtList" parameterType="String" resultType="Chatting">
-		select * from Chatting where username1 = #{userName} or username2=#{userName}
+	<select id="selectCahtList" parameterType="int" resultType="Chatting">
+		select T.CHATTINGID CHATTINGID,T.CHATTINGNAME CHATTINGNAME from (select CHATTINGID,CHATTINGNAME,(select O.USERNO1 from CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID and  O.USERNO1=#{userNo}) no1,
+                  (select O.USERNO2 from CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID and  O.USERNO2=#{userNo}) no2,
+                  (select G.USERNO from CHATTING_GROUP G where L.chattingid = G.CHATTINGID and G.USERNO=#{userNo}) no3 
+		from CHATTINGLIST L
+		)T where no1=#{userNo} or no2=#{userNo} or no3=#{userNo}
 	</select>	
 	<select id="isChat" parameterType="Map" resultType="Chatting">
-		select * from Chatting where (Username1 = #{myName} or Username2 = #{myName}) and (Username1=#{userName} or Username2=#{userName})
+		select * from CHATTINGLIST 
+		where CHATTINGID=(select CHATTINGID from CHATTING_ONE 
+		                  where (userno1=(select userno from MEMBER where username=#{myName}) 
+		                                                            or userno2=(select userno from MEMBER where username=#{myName}))
+		                  and   (userno1=(select userno from MEMBER where username=#{userName}) 
+		                                                            or userno2=(select userno from MEMBER where username=#{userName}))
+		                  )
+		
 	</select>
 	<select id="selectMember" parameterType="int" resultType="Member">
 		select * from Member where userno != #{userName}
@@ -16,10 +27,14 @@
 
 	
 	<insert id="insertChatLog" parameterType="ChattingLog">
-		insert into ChattingLog values(#{chattingId},#{userName},default,#{chContent},#{chStatus})
+		insert into ChattingLog values(#{chattingId},#{userNo},default,#{chContent},#{chStatus})
 	</insert>
 	<insert id="insertChat" parameterType="HashMap">
-		 insert into Chatting values(seq_chat.nextval,#{myName},#{userName})
+		insert all
+ 			into CHATTINGLIST VALUES(seq_chat.nextval ,null)
+ 			into CHATTING_ONE VALUES(seq_chat.currval ,(select userno from MEMBER where username=#{myName}),(select userno from MEMBER where username=#{userName}))
+ 		select *
+		from dual
 	</insert>
 
 

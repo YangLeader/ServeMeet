@@ -24,8 +24,8 @@ public class ChatController {
 	@RequestMapping("/chat/chatList.do")
 	public String chatList(Model model, HttpSession session ) {
 	
-		String userName=((Member)session.getAttribute("member")).getUserName();
-		List<Chatting> list = cs.selectChatList(userName);
+		int userNo = ((Member)(session.getAttribute("member"))).getUserNo();
+		List<Chatting> list = cs.selectChatList(userNo);
 		
 		model.addAttribute("list",list);
 		
