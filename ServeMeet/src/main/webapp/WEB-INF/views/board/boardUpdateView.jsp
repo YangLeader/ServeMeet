@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <!doctype html>
 <html lang="ko">
 <head>
@@ -43,7 +42,7 @@
      });
 </script>
 -->
-<title>게시글 작성</title>
+<title>게시글 수정</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -112,7 +111,7 @@
 			<div class="rightBox col-md-9">
 			-->
 			<!-- skin : _basic -->
-			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/board/boardFormEnd.do"
+			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/board/boardUpdate.do"
 					onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="uid" value="18122113471404"> 
 				<input type="hidden" name="w" value=""> 
@@ -127,7 +126,7 @@
 				<input type="hidden" name="page" value="">
 				<input type="hidden" value="html1" name="html"> -->
 				<div class="bbs_title_wrap">
-					<a class="bbs_title">게시글 작성 </a> 
+					<a class="bbs_title">게시글 수정 </a> 
 					<!-- <span class="btn btn-default" onclick="history.back();" style="margin-left: 5px;">취소</span> -->
 				</div>
 
@@ -143,8 +142,9 @@
 					</script>
 
 					<div class="wr_option wr_subject">
+						<input type="hidden" class="form-control" name="boardNo" value="${board.boardNo}"/>
 						<label>제목</label> 
-						<input type="text" name="boardTitle" id="wr_subject" class="form-control" value="" required maxlength="255" />
+						<input type="text" name="boardTitle" id="wr_subject" class="form-control" value="${board.boardTitle }" required maxlength="255" />
 						<label>작성자</label>
 						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
 					</div>
@@ -154,7 +154,7 @@
 						<div>
 							<textarea id="wr_content" name="boardContent"
 							class="smarteditor2 form-control" maxlength="65536"
-							style="width: 100%; height: 300px"></textarea>
+							style="width: 100%; height: 300px">${board.boardContent }</textarea>
 								
 						</div>
 

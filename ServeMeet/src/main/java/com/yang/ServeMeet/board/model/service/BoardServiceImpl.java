@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yang.ServeMeet.board.model.exception.BoardException;
+import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.board.model.dao.BoardDao;
 import com.yang.ServeMeet.board.model.vo.Board;
-import com.yang.ServeMeet.board.model.vo.BoardFile;
+
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -40,6 +41,7 @@ public class BoardServiceImpl implements BoardService {
 			if(result == BOARD_SERVICE_ERROR) throw new BoardException();
 			
 			boardNo = board.getBoardNo(); //boardNo를 리턴함.
+			
 			//logger.debug("boardNo="+boardNo);
 			
 			//현재 Attachment객체의 boardNo는 값이 없다. 
@@ -67,26 +69,64 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardFile> selectBoardFileList(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectBoardFileList(boardNo);
 	}
 
 	@Override
 	public int updateBoard(Board board, List<BoardFile> fileList) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		List<BoardFile> originList = boardDao.selectBoardFileList(board.getBoardNo());
+		
+		try{
+			result = boardDao.updateBoard(board);
+			if(result == BOARD_SERVICE_ERROR) throw new BoardException();
+			
+			if(originList.size() > 0) {
+				result = boardDao.deleteBoardFile(board.getBoardNo());
+				if(result == BOARD_SERVICE_ERROR) throw new BoardException();
+			} 
+			
+			if(fileList.size()>0){
+				for(BoardFile bf : fileList){
+					result = boardDao.updateBoardFile(bf);
+					if(result == BOARD_SERVICE_ERROR) throw new BoardException();
+				}
+			}
+		} catch(Exception e){
+			//logger.debug("게시물등록 에러");
+//			throw new BoardException("게시물등록오류");
+			throw e;
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int deleteBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = boardDao.deleteBoard(boardNo);
+		
+		if(result > BOARD_SERVICE_ERROR && boardDao.selectBoardFileList(boardNo).size() > 0)
+			result = boardDao.deleteBoardFile(boardNo);
+		else if(result > BOARD_SERVICE_ERROR) result = 1;
+		else throw new BoardException("게시글 삭제 실패!");
+		
+		if(result < 1) throw new BoardException("게시글 삭제 실패!");
+		
+		return result;
 	}
 
 	@Override
 	public int deleteFile(int fileId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void updateViewCount(int no) {
+		
+		boardDao.updateViewCount(no);
+		
 	}
 
 }

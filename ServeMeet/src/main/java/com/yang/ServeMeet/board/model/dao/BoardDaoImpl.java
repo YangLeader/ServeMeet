@@ -49,14 +49,12 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public List<BoardFile> selectBoardFileList(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("board.selectBoardFileList", boardNo);
 	}
 
 	@Override
 	public int updateBoard(Board board) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("board.updateBoard", board);
 	}
 
 	@Override
@@ -67,8 +65,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int deleteBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("board.deleteBoard", boardNo);
 	}
 
 	@Override
@@ -81,6 +78,13 @@ public class BoardDaoImpl implements BoardDao {
 	public int deleteFile(int fileId) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void updateViewCount(int no) {
+		
+		sqlSession.update("board.updateViewCount", no);
+		
 	}
 
 }
