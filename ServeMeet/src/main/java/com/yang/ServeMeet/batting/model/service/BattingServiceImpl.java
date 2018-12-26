@@ -35,7 +35,9 @@ public class BattingServiceImpl implements BattingService {
 	public int battingPick(int battingId, String battingSelect) {
 		Map<String, Object> hmap = new HashMap<>();
 		hmap.put("battingId", battingId);
-		hmap.put("battingType", battingSelect);
+		hmap.put("battingSelect", battingSelect);
+		
+		System.out.println(hmap);
 		
 		return battingDao.battingPick(hmap);
 	}
@@ -44,6 +46,14 @@ public class BattingServiceImpl implements BattingService {
 	public int battingPickUser(BattingUser bUser) {
 		
 		return battingDao.battingPickUser(bUser);
+	}
+	
+	@Override
+	public BattingUser battingPickCheck(int battingId, String userName) {
+		
+		BattingUser bUser = new BattingUser(battingId , userName);
+		
+		return battingDao.battingPickCheck(bUser);
 	}
 
 }

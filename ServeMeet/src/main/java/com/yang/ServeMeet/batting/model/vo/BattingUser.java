@@ -12,8 +12,15 @@ public class BattingUser {
 		super();
 	}
 
+
 	
-	
+	public BattingUser(int battingId, String userName) {
+		super();
+		this.battingId = battingId;
+		this.userName = userName;
+	}
+
+
 	public BattingUser(String userName, String battingSelect) {
 		super();
 		this.userName = userName;
