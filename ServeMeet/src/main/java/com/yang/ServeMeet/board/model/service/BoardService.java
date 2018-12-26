@@ -25,4 +25,6 @@ public interface BoardService {
 	int deleteBoard(int boardNo);
 
 	int deleteFile(int fileId);
+
+	void updateViewCount(int no);
 }

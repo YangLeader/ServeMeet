@@ -8,7 +8,7 @@
 <html lang="ko">
 <head>
 <c:import url="../common/header.jsp" />
-<meta charset="utf-8">
+<meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <!--
@@ -64,10 +64,10 @@
 <body>
 
 	<!-- preloader (화면 전환 효과) -->
+	
+	<!-- <div class="preloader"></div>
 
-	<div class="preloader"></div>
-
-	<script>
+	
 		$(document).ready(function() {
 			// 화면 전환 효과
 			$('.preloader').fadeOut(150);
@@ -76,11 +76,11 @@
 			$(window).resize(function() {
 				$('.navbar-brand').width($('.navbar-brand > img').width());
 			});
-		});
-		
+		}); -->
+	<script>	
 		$(function(){
-			$("span.subject.text").on("click",function(){
-				var boardNo = $(this).children().attr("id");
+			$("a ${b.boardNo}").on("click",function(){
+				var boardNo = $(this).attr("id");
 				console.log("bordNo="+boardNo);
 				location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo;
 			});
@@ -97,12 +97,12 @@
 				<div id="bbs-list-top">
 					<!-- 게시판 타이틀 -->
 					<div class="bbs_title_wrap">
-						<a class="bbs_title" href="./board.php?bo_table=funny">자유 게시판</a>
+						<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">자유 게시판</a>
 						<p>총 ${totalContents }건의 게시물이 있습니다.</p>
 					</div>
 
 					<div class="button_box">
-						<a href="${pageContext.request.contextPath }/board/boardForm.bo" class="bbs_btn btn_write">
+						<a href="${pageContext.request.contextPath }/board/boardForm.do" class="bbs_btn btn_write">
 							<span class="glyphicon glyphicon-pencil"></span> 글쓰기
 						</a>
 					</div>
@@ -210,7 +210,7 @@
 					<!-- } 게시판 검색 끝 -->
 
 					<div class="button_box" style="float: unset;">
-						<a href="${pageContext.request.contextPath }/board/boardForm.bo" class="bbs_btn btn_write">
+						<a href="${pageContext.request.contextPath }/board/boardForm.do" class="bbs_btn btn_write">
 							<span class="glyphicon glyphicon-pencil"></span> 글쓰기
 						</a>
 					</div>

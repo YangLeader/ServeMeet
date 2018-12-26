@@ -17,6 +17,8 @@
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.Matching" alias="Matching"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingHistory" alias="MatchingHistory"/>
 		<typeAlias type="com.yang.ServeMeet.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.yang.ServeMeet.common.StringArrayTypeHandler"
+			alias ="strArrTypeHandler"/>
 		<typeAlias type="com.yang.ServeMeet.point.model.vo.Point" alias="Point"/>
 	</typeAliases>
 	

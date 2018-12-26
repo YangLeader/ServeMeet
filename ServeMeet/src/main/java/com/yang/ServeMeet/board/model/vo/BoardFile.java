@@ -90,8 +90,6 @@ public class BoardFile {
 				+ originName + ", changeName=" + changeName + ", fileLocation=" + fileLocation + ", userName="
 				+ userName + "]";
 	}
-
-	
 	
 	
 }

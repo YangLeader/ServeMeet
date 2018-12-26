@@ -29,4 +29,6 @@ public interface BoardDao {
 	int deleteBoardFile(int boardNo);
 
 	int deleteFile(int fileId);
+
+	void updateViewCount(int no);
 }
