@@ -17,4 +17,6 @@ public interface ChattingDao {
 	Chatting isChat(Map<String, String> userNameMap);
 
 	int insertChat(Map<String, String> userNameMap);
+
+	Chatting selectChat(int chatNo);
 }
