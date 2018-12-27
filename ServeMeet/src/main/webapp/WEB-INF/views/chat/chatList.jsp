@@ -19,7 +19,7 @@
 				<div class="chatName" style="border: solid 1px black">
 					<input name="chatNo" class="chatNo" value="${c.chattingId }" hidden>
 					<div class="chatUser">
-						<font class="userName">${c.userName2 }</font>
+						<font class="userName">${c.chattingName }</font>
 					</div>
 				</div>
 			</li>
