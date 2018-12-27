@@ -77,9 +77,14 @@ public class BattingServiceImpl implements BattingService {
 	}
 	
 	@Override
-	public List<Map<String,String>> battingAllocation(Batting batting){
+	public List<Map<String,String>> battingAllocation(int battingId, String battingType){
 		
-		return battingDao.battingAllocation(batting);
+		Map<String,Object> hmap = new HashMap<>();
+		
+		hmap.put("battingId", battingId);
+		hmap.put("battingType", battingType);
+		
+		return battingDao.battingAllocation(hmap);
 	}
 
 }

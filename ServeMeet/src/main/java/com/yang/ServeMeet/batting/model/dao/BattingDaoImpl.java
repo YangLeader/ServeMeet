@@ -68,9 +68,9 @@ public class BattingDaoImpl implements BattingDao {
 	}
 	
 	@Override
-	public List<Map<String,String>> battingAllocation(Batting batting){
+	public List<Map<String,String>> battingAllocation(Map<String,Object> hmap){
 		
-		return sqlSession.selectList("Batting_Mapper.battingWinner",batting);
+		return sqlSession.selectList("Batting_Mapper.battingWinner",hmap);
 	}
 	
 
