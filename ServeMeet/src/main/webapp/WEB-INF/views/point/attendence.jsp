@@ -5,15 +5,60 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="java.util.*, java.text.*"  %>
+<%
+
+ java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("dd");
+ String today = formatter.format(new java.util.Date());
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>회원가입</title>
+	<title>출석체크</title>
 	<c:import url="../common/header.jsp"/>
+	<style>
+		.title{
+		margin-top : 10px;
+		  height :200px;
+		 padding : 20px;
+		  width : 1000px;
+		}
+		.month{
+		height : 90px;
+		font-size : 50px;
+		}
+		.chkBtn{
+		height : 90px;
+		}
+		.cal{
+		height : 1200px;
+		width : 1600px;
+		margin-left : auto;
+		margin-right : auto;
+		}
+		table{
+		border : 1px solid #bcbcbc;
+		width : 1000px;
+		height : 800px; 
+		}
+		th{
+		border : 1px solid #bcbcbc;
+		width: 150px;
+		height:30px;
+		text-align : center;
+		}
+		
+		td {
+		border : 1px solid #bcbcbc;
+		width: 150px;
+		height:100px;
+		text-align : center;
+		}
+	</style>
 </head>
 <body>
-
 <div class="page-header">
   <div class="container">
     <div class="row">
@@ -26,27 +71,96 @@
     </div>
   </div>
 </div>
-<div class="space-medium">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="eveDiaryInner">
-        <style>
-        
-        </style>
-             <ul> 
-			<li class="date0"></li><li class="date0"></li><li class="date0"></li><li class="date0"></li><li class="date0"></li><li class="date0"></li><li class="reddate1" alt="1일"></li><li class="reddate2" alt="2일"></li><li class="date3" alt="3일"></li><li class="date4" alt="4일"></li><li class="date5" alt="5일"></li><li class="date6" alt="6일"></li><li class="date7" alt="7일"></li><li class="reddate8" alt="8일"></li><li class="reddate9" alt="9일"></li><li class="date10" alt="10일"></li><li class="date11" alt="11일"></li><li class="date12" alt="12일"></li><li class="date13" alt="13일"></li><li class="date14" alt="14일"></li><li class="reddate15" alt="15일"></li><li class="reddate16" alt="16일"></li><li class="date17" alt="17일"></li><li class="date18" alt="18일"></li><li class="date19" alt="19일"></li><li class="date20" alt="20일"></li><li class="date21" alt="21일"></li><li class="reddate22" alt="22일"></li><li class="reddate23" alt="23일"></li><li class="date24" alt="24일"></li><li class="date25" alt="25일"></li><li class="date26" id="liNowStamp" alt="26일"></li><li class="date27" alt="27일"></li><li class="date28" alt="28일"></li><li class="reddate29" alt="29일"></li><li class="reddate30" alt="30일"></li><li class="date31" alt="31일"></li> 
-			</ul> 
-
-			
-		</div>
+	<div class="cal" align = "center">
+	  <div class="title"> 
+      <div class = "month">
+      <span >1월 출석체크</span>
       </div>
-    </div>
-  </div>
-</div>
+      <div class = "chkBtn">
+      <button class="btn-lg btn-default" onclick="attend(<%=today%>);">출석하기</button>
+      </div>
+      </div>
+      <table>
+      <thead>
+        <tr>
+          <th>일</th>
+          <th>월</th>
+          <th>화</th>
+          <th>수</th>
+          <th>목</th>
+          <th>금</th>
+          <th>토</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td id="date01">1</td>
+          <td id="date02">2</td>
+          <td id="date03">3</td>
+          <td id="date04">4</td>
+          <td id="date05">5</td>
+        </tr>
+        <tr>
+          <td id="date06">6</td>
+          <td id="date07">7</td>
+          <td id="date08">8</td>
+          <td id="date09">9</td>
+          <td id="date10">10</td>
+          <td id="date11">11</td>
+          <td id="date12">12</td>
+        </tr>
+        <tr>
+          <td id="date13">13</td>
+          <td id="date14">14</td>
+          <td id="date15">15</td>
+          <td id="date16">16</td>
+          <td id="date17">17</td>
+          <td id="date18">18</td>
+          <td id="date19">19</td>
+        </tr>
+        <tr>
+          <td id="date20">20</td>
+          <td id="date21">21</td>
+          <td id="date22">22</td>
+          <td id="date23">23</td>
+          <td id="date24">24</td>
+          <td id="date25">25</td>
+          <td id="date26">26</td>
+        </tr>
+        <tr>
+          <td id="date27">27</td>
+          <td id="date28">28</td>
+          <td id="date29">29</td>
+          <td id="date30">30</td>
+          <td id="date31">31</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+      
+    </table>
+     </div>
 
 	<c:import url="../common/footer.jsp"/>
 	
+	<script>
+		var attFlag=false;
 	
+		function attend(today){
+			/* if(){
+				alert("로그인 후 이용해 주세요.");
+				location.href="${pageContext.request.contextPath}/member/memberLoginView.do";
+			}
+			else */ if(attFlag){
+				alert("이미 출석하셨습니다.");
+			}else{
+			$("#date"+today).html("<img src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
+			attFlag = true;
+			//location.href="${pageContext.request.contextPath}/point/pointAttend.do";
+			}
+		}
+	</script>
 </body>
 </html>
