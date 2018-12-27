@@ -624,14 +624,14 @@ form, h1 {margin:0;}
 	display:inline-block;
 	font-weight:normal;
 	margin:0;
-	width:1.8em;
+	width:2em;
 	height:1.8em;
 	line-height:1.8em;
 	text-align:center;
 	box-sizing:border-box;
-	font-size: 9pt;
+	font-size: 10pt;
 	vertical-align:middle;
-	border-radius:0.3em;
+	border-radius:0.7em;
 }
 
 .pg_wrap_m .pg_page {

@@ -157,25 +157,30 @@
 							style="width: 100%; height: 300px">${board.boardContent }</textarea>
 								
 						</div>
-
+						
+						<c:if test="${empty boardFileList }">
 						<div class="wr_option">
-							<label>링크 1</label> <input type="text" name="wr_link1"
-								class="form-control" id="wr_link1" value="" maxlength="100" />
-						</div>
-
-						<div class="wr_option">
-							<label>링크 2</label> <input type="text" name="wr_link2"
-								class="form-control" id="wr_link2" value="" maxlength="100" />
-						</div>
-
-						<div class="wr_option">
-							<label>첨부파일 1</label> <input type="file" name="upFile"
+							<label>첨부파일 1</label><input type="file" name="upFile"
 								title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능">
 						</div>
 						<div class="wr_option">
 							<label>첨부파일 2</label> <input type="file" name="upFile"
 								title="파일첨부 2 : 용량 1,048,576 바이트 이하만 업로드 가능">
 						</div>
+						<div class="wr_option">
+							<label>첨부파일 3</label> <input type="file" name="upFile"
+								title="파일첨부 3 : 용량 1,048,576 바이트 이하만 업로드 가능">
+						</div>
+						</c:if>
+						
+						<c:if test="${!empty boardFileList }">
+						<c:forEach items="${boardFileList}" var="bf" varStatus="vs">
+						<div class="wr_option">
+							<label>첨부파일 ${vs.count }</label> ${bf.originName }<input type="file" name="upFile"
+								title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능">
+						</div>
+						</c:forEach>
+						</c:if>
 
 				</div>
 				<div class="wr_submit">

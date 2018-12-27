@@ -15,9 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yang.ServeMeet.board.model.vo.Board;
+import com.yang.ServeMeet.board.model.vo.BoardComment;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
@@ -80,6 +82,8 @@ public class BoardController {
 				
 		// 3. 파일 업로드 시작 
 		for(MultipartFile f : upFile) {
+			
+			System.out.println("f 가 존재 하는가? " + f.getOriginalFilename());
 			if(!f.isEmpty()) {
 				// 원본 이름 가져오기
 				String originName = f.getOriginalFilename();
@@ -101,10 +105,14 @@ public class BoardController {
 				BoardFile bf = new BoardFile();
 				bf.setOriginName(originName);
 				bf.setChangeName(changeName);
+				
+				System.out.println("원본 이름 : " + bf.getOriginName());
+				System.out.println("바뀐 이름 : " + bf.getChangeName());
 						
 				boardFileList.add(bf);
 			}
 		}
+		
 				
 		int result;
 				
@@ -139,13 +147,18 @@ public class BoardController {
 	public String selectOneBoard(@RequestParam(value="cPage", required=false, defaultValue="1")
 	int cPage, @RequestParam int no, Model model) {
 		
+		int totalContents = boardService.selectBoardTotalContents();
+		
 		int numPerPage = 10; // 한 페이지당 게시글 수
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardList.do");
 		
 		boardService.updateViewCount(no);
 		
 		model.addAttribute("board", boardService.selectOneBoard(no))
 		.addAttribute("boardFileList", boardService.selectBoardFileList(no))
-		.addAttribute("list", boardService.selectBoardList(cPage, numPerPage));
+		.addAttribute("list", boardService.selectBoardList(cPage, numPerPage))
+		.addAttribute("pageBar", pageBar);
 		
 		return "board/boardView";
 		
@@ -153,8 +166,6 @@ public class BoardController {
 	
 	@RequestMapping("/board/boardUpdateView.do")
 	public void boardUpdateView(@RequestParam("no") int boardNo, Model model) {
-		
-		System.out.println("여기 도착함? " + boardNo);
 		
 		model.addAttribute("board",boardService.selectOneBoard(boardNo))
 		.addAttribute("boardFileList", boardService.selectBoardFileList(boardNo));
@@ -267,6 +278,56 @@ public class BoardController {
 		
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 		
+		return "common/msg";
+	}
+	
+	@RequestMapping("/board/fileDelete.do")
+	@ResponseBody
+	public boolean fileDelete(@RequestParam int attNo, @RequestParam String rName, HttpSession session){
+		String saveDir = session.getServletContext().getRealPath("/resources/upload/board");
+		
+		boolean check = boardService.deleteFile(attNo) != 0 ? true : false;
+		
+		if(check) new File(saveDir + "/" + rName).delete();
+		
+		return check;
+	}
+	
+	// ---------------- BoardComment 관련 ----------------- //
+	
+	@RequestMapping("/board/insertComment.do")
+	public String insertComment(BoardComment bComment, Model model) {
+		
+		// 성공
+		/*System.out.println(bComment.getBoardNo());
+		System.out.println(bComment.getUserName());
+		System.out.println(bComment.getCommentCon());*/
+		
+		int result;
+		
+		try {
+					
+			result = boardService.insertBoardComment(bComment);
+					
+		} catch(Exception e) {
+					
+			throw new BoardException("댓글글 등록 오류!");
+					
+		}
+				
+		String loc = "/board/boardList.do";
+		String msg = "";
+				
+		if(result > 0) {
+			msg = "게시글 등록 성공!";
+			loc = "/board/boardView.do?no="+bComment.getBoardNo();
+					
+		} else {
+			msg = "게시글 등록 실패!";
+		}
+			
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+				
 		return "common/msg";
 	}
 }

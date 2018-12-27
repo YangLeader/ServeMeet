@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yang.ServeMeet.board.model.vo.Board;
+import com.yang.ServeMeet.board.model.vo.BoardComment;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 
 @Repository
@@ -59,8 +60,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int updateBoardFile(BoardFile file) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("board.updateBoardFile", file);
 	}
 
 	@Override
@@ -70,21 +70,27 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int deleteBoardFile(int boardNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("board.deleteBoardFile", boardNo);
 	}
 
 	@Override
 	public int deleteFile(int fileId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("board.deleteBoardFileOne", fileId);
 	}
 
 	@Override
-	public void updateViewCount(int no) {
+	public void updateViewCount(int boardNo) {
 		
-		sqlSession.update("board.updateViewCount", no);
+		sqlSession.update("board.updateViewCount", boardNo);
 		
+	}
+	
+	// -------------------- BoardComment 관련 -------------------- //
+
+	@Override
+	public int insertBoardComment(BoardComment bComment) {
+		
+		return sqlSession.insert("boardComment.insertBoardComment", bComment);
 	}
 
 }
