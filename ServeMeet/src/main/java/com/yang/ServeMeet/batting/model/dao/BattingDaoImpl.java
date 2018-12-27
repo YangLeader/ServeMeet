@@ -49,5 +49,29 @@ public class BattingDaoImpl implements BattingDao {
 		return sqlSession.selectOne("Batting_Mapper.battingPickCheck",bUser);
 	}
 	
+	@Override
+	public List<Map<String,String>> battingHistory(){
+		
+		return sqlSession.selectList("Batting_Mapper.battingHistoryList");
+	}
+	
+	@Override
+	public int battingClose(int battingId) {
+				
+		return sqlSession.update("Batting_Mapper.battingClose",battingId);
+	}
+	
+	@Override
+	public int battingInsert() {
+		
+		return sqlSession.insert("Batting_Mapper.battingInsert");
+	}
+	
+	@Override
+	public List<Map<String,String>> battingAllocation(Batting batting){
+		
+		return sqlSession.selectList("Batting_Mapper.battingWinner",batting);
+	}
+	
 
 }

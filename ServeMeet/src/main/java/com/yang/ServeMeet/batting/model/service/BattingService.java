@@ -18,4 +18,12 @@ public interface BattingService {
 	int battingPickUser(BattingUser bUser);
 	
 	BattingUser battingPickCheck(int battingId, String userName);
+	
+	List<Map<String,String>> battingHistory();
+	
+	int battingClose(int battingId);
+	
+	int battingInsert();
+	
+	List<Map<String,String>> battingAllocation(Batting batting);
 }
