@@ -17,4 +17,12 @@ public interface BattingDao {
 	int battingPickUser(BattingUser bUser);
 	
 	BattingUser battingPickCheck(BattingUser battingUser);
+	
+	List<Map<String,String>> battingHistory();
+	
+	int battingClose(int battingId);
+	
+	int battingInsert();
+	
+	List<Map<String,String>> battingAllocation(Map<String,Object> hmap);
 }

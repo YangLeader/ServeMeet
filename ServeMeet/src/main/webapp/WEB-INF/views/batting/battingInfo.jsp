@@ -23,8 +23,10 @@
 	<br>
 	<br>
 	<div>
+	<c:if test='${batting.bStatus eq "N" }'>
 		<input type="button" onclick="button1_click('A');" value="A팀" /> 
 		<input type="button" onclick="button1_click('B');" value="b팀" />
+		</c:if>
 		<div class="progress">
 			<div class="progress-bar progress-bar-success" role="progressbar"
 				aria-valuenow="100" aria-valuemin="0" aria-valuemax="<10></10>0"
@@ -38,6 +40,16 @@
 				aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
 				style="width: ${(batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB))*100}%"><fmt:formatNumber value="${(batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB))*100}" pattern=".00"/>% Complete (info)</div>
 		</div>
+	</div>
+	
+	<div>
+		<c:if test='${batting.bStatus eq "N" }'>현재 배율</c:if><c:if test='${batting.bStatus eq "Y" }'>최종 배율</c:if> : A팀 : <fmt:formatNumber value="${(100-batting.battingPNumA/(batting.battingPNumA + batting.battingPNumB)*100)*15/1000 + 1}" pattern=".00"/>배 &nbsp;B팀 : <fmt:formatNumber value="${(100-batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB)*100)*15/1000 + 1}" pattern=".00"/>배
+	</div>
+	
+	<br><br><br>
+	
+	<div>
+		<input type="button" value="배팅 종료" onclick="location.href='${pageContext.request.contextPath}/batting/battingClose.ba?battingId=${batting.battingId}';" />
 	</div>
 
 	<!-- <div class="progress">

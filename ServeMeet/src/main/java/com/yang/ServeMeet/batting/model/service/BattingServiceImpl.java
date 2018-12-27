@@ -55,5 +55,36 @@ public class BattingServiceImpl implements BattingService {
 		
 		return battingDao.battingPickCheck(bUser);
 	}
+	
+	@Override
+	public List<Map<String,String>> battingHistory(){
+		
+		
+		return battingDao.battingHistory();
+		
+	}
+	
+	@Override
+	public int battingClose(int battingId) {
+		
+		return battingDao.battingClose(battingId);
+	}
+	
+	@Override
+	public int battingInsert() {
+		
+		return battingDao.battingInsert();
+	}
+	
+	@Override
+	public List<Map<String,String>> battingAllocation(int battingId, String battingType){
+		
+		Map<String,Object> hmap = new HashMap<>();
+		
+		hmap.put("battingId", battingId);
+		hmap.put("battingType", battingType);
+		
+		return battingDao.battingAllocation(hmap);
+	}
 
 }

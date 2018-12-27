@@ -29,5 +29,21 @@
 	<select id="battingPickCheck" parameterType="BattingUser" resultType="BattingUser">
 		SELECT * FROM BATTINGUSER WHERE BATTINGID = #{battingId} AND USERNAME = #{userName}
 	</select>
+	
+	<select id="battingHistoryList" resultType="Batting">
+		SELECT * FROM BATTING WHERE BSTATUS = 'Y'
+	</select>
+	
+	<update id="battingClose">
+		UPDATE BATTING SET BSTATUS = 'Y' WHERE BATTINGID = #{battingId}
+	</update>
+	
+	<insert id="battingInsert" parameterType="_int">
+		INSERT INTO BATTING VALUES(SEQ_BATTING.NEXTVAL,3,0,0,DEFAULT)
+	</insert>
+	
+	<select id="battingWinner" parameterType="Map" resultType="Map">
+		SELECT BATTINGID , USERNAME , BATTINGSELECT, BATTINGPNUMA , BATTINGPNUMB FROM BATTINGUSER JOIN MEMBER USING(USERNAME)JOIN BATTING USING(BATTINGID) WHERE BATTINGID = #{battingId} AND BATTINGSELECT = #{battingType} BSTATUS = 'N'
+	</select>
 
 </mapper>

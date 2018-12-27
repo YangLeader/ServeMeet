@@ -110,6 +110,7 @@ float: right;
 							<li class="active"><a href="index.html" title="Home">Home</a></li>
 							<li><a href="menu.html" title="Menu">매칭</a></li>
 							<!-- <li class="has-sub"><a href="service-list.html" title="Service List">Service List</a>
+
                                     <ul>
                                         <li><a href="service-list.html" title="Service List">Service List</a></li>
                                         <li><a href="service-detail.html" title="Service Detail">Service Detail</a></li>
@@ -127,16 +128,52 @@ float: right;
 								href="${pageContext.request.contextPath }/batting/battingList.ba"
 								title="Styleguide">배팅</a></li>
 
-							<li><a
-								href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+              
+              
+              
+              
+              
+              
+              
+              
+
+                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting">배팅</a>
+	                                <ul>
+                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="battingList">진행중인 배팅</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="battingHistory">종료된 배팅</a></li>
+	                                </ul>
+                                </li>
+                  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <li><a href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </head>
 
 <script type="text/javascript">
