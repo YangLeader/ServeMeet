@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Namespace 는 실제 마이바티스를 통해
+    SQL에 접근할 때 사용하는 매퍼 파일의 별칭이다. 
+    보통 서비스의 이름과 같게 설정하여
+    연결의 착오를 줄인다. -->
+<mapper namespace="point">
+
+	<insert id="insertPoint" parameterType="Point">
+		INSERT INTO POINT VALUES(
+		 #{userNo},#{increasePoint},#{pDate},#{pContent}
+		)
+	</insert>
+
+
+</mapper>
+
+
+
+
+
+
+
