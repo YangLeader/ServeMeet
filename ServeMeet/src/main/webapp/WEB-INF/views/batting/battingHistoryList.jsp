@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../common/header.jsp" />
-<title>배팅 목록</title>
+<title>종료된 배팅 목록</title>
 
 
 <script>
@@ -26,7 +26,8 @@ $(function(){
 
 <div id="container">
 			<section id="board-container" class="container">
-				<p>총 ${totalContents }건의 배팅이 있습니다.</p>
+				<p>총 ${totalContents }건의 배팅이 있습니다.</p><br>
+				<p> 종료된 배팅</p>
 				<table id="tbl-board" class="table table-striped table-hover">
 					<tr>
 						<th>번호</th>
@@ -45,10 +46,6 @@ $(function(){
 				</table>
 				<c:out value="${pageBar}" escapeXml="false"/>
 			</section> 
-	</div>
-	
-	<div>
-		<input type="button" value="배팅 생성" onclick="location.href='${pageContext.request.contextPath}/batting/battingInsert.ba';"/>
 	</div>
 
 </body>

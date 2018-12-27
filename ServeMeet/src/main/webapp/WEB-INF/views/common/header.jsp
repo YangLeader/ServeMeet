@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
                     <div class="logo">
-                        <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""></a>
+                       <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/resources/images/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
@@ -83,8 +83,12 @@
 
                                 <li><a href="${pageContext.request.contextPath }/board/boardList.do" title="Contact Us">게시판</a> </li>
 
-                                <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="Styleguide">배팅</a> </li>
-                                
+                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting">배팅</a>
+	                                <ul>
+                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="battingList">진행중인 배팅</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="battingHistory">종료된 배팅</a></li>
+	                                </ul>
+                                </li>
                                 <li><a href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a> </li>
                             </ul>
                         </div>
