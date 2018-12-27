@@ -311,7 +311,7 @@ public class BoardController {
 					
 		} catch(Exception e) {
 					
-			throw new BoardException("댓글글 등록 오류!");
+			throw new BoardException("댓글 등록 오류!");
 					
 		}
 				
