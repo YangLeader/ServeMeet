@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.batting.model.vo.Batting;
@@ -88,29 +89,31 @@ public class battingController {
 	}
 	
 	@RequestMapping("/batting/battingClose.ba")
-	public String battingClose(@RequestParam int battingId, Model model){
+	public String battingClose(@RequestParam int battingId, Model model, RedirectAttributes rat){
 		 
-		
-		int result = battingService.battingClose(battingId);
 		
 		Batting batting = battingService.battingSelect(battingId);
 		
-		String path= "";
-				
-		if(result >0 ) {
-			
-			model.addAttribute("batting",batting);
-			path = "redirect:/batting/battingAllocation.ba";
-			
-		}
-		else {
-			
-			model.addAttribute("loc","/batting/battinginfo.ba");
-			model.addAttribute("msg","배팅을 종료시키지 못하였습니다.");
-			path ="common/msg";
-		}
+		String battingType = batting.getBattingPNumA() > batting.getBattingPNumB() ? "A" : "B";
 		
-		return path;
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingAllocation(battingId,battingType));
+		
+		System.out.println(list);
+		
+		
+		
+		
+		int result = battingService.battingClose(battingId);
+		
+		boolean check = result >0;
+		
+		String msg = check ? "배팅을 종료 하였습니다." : "배팅을 종료하지 못했습니다.";
+		String loc = check ? "/batting/battingList.ba" : "/batting/battingInfo.ba";
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc",loc);
+		
+		return "common/msg";
 	}
 	
 	@RequestMapping("/batting/battingInsert.ba")
@@ -118,12 +121,9 @@ public class battingController {
 		
 		int result = battingService.battingInsert();
 		
-		if(result >0) {
-			model.addAttribute("msg","배팅 생성 성공!");
-		} else {
-			model.addAttribute("msg","배팅 생성 실패!");
-		}
+		String msg = result >0 ? "배팅 생성 성공!" : "배팅 생성 실패!";
 		
+		model.addAttribute("msg",msg);
 
 		model.addAttribute("loc","/batting/battingList.ba");
 		
@@ -134,9 +134,6 @@ public class battingController {
 	public String battingAllocation(@RequestParam int battingId, Model model) {
 		
 		
-//		List<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingAllocation(batting));
-		
-//		System.out.println(list);
 		
 		
 		return "/";
