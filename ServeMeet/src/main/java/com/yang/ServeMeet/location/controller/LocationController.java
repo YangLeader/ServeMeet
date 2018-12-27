@@ -18,7 +18,6 @@ public class LocationController {
 
 	@Autowired
 	LocationService locService;
-	
 	@RequestMapping("location/location.do")
 	public String location(Model model) {
 		List<Location> list = locService.selectLoc();

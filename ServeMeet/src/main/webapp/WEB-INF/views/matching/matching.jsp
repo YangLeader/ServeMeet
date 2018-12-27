@@ -51,7 +51,7 @@
 		width: 28%;
 		display: inline-block;
 		margin-left: 15px;
-		
+		border: 1px solid black;
 		
 	}
 	
@@ -94,13 +94,14 @@
 		cursor: pointer;
 	}
 	
-	#sca{
+	.sca{
 		border: 1px solid black;
 	}
 	
 	.btn-xs{
 		margin-left: 5px;
 		border: 1px solid red;
+		cursor: pointer;
 	}
 	
 	.btn-default{
@@ -120,31 +121,31 @@
 	<h1>조건 선택</h1>
 		<div class="in" >
 			<ul class="itemframe">
-				<span><li class="item" id="서울특별시">서울</li></span>
-				<span><li class="item" id="경기도">경기</li></span>
+				<li class="item" id="서울특별시"><span class="sca">서울</span></li>
+				<li class="item" id="경기도"><span class="sca">경기</span></li>
 				<br  />
-				<span><li class="item" id="인천광역시">인천</li></span>
-				<span><li class="item" id="대전광역시">대전</li></span>
+				<li class="item" id="인천광역시"><span class="sca">인천</span></li>
+				<li class="item" id="대전광역시"><span class="sca">대전</span></li>
 				<br  />
-				<span><li class="item" id="세종특별자치시">세종</li></span>
-				<span><li class="item" id="충청남도">충남</li></span>
+				<li class="item" id="세종특별자치시"><span class="sca">세종</span></li>
+				<li class="item" id="충청남도"><span class="sca">충남</span></li>
 				<br  />
-				<span><li class="item" id="충청북도">충북</li></span>
-				<span><li class="item" id="광주광역시">광주</li></span>
+				<li class="item" id="충청북도"><span class="sca">충북</span></li>
+				<li class="item" id="광주광역시"><span class="sca">광주</span></li>
 				<br  />
-				<span><li class="item" id="전라남도">전남</li></span>
-				<span><li class="item" id="전라북도">전북</li></span>
+				<li class="item" id="전라남도"><span class="sca">전남</span></li>
+				<li class="item" id="전라북도"><span class="sca">전북</span></li>
 				<br />
-				<span><li class="item" id="대구광역시">대구</li></span>
-				<span><li class="item" id="경상북도">경북</li></span>
+				<li class="item" id="대구광역시"><span class="sca">대구</span></li>
+				<li class="item" id="경상북도"><span class="sca">경북</span></li>
 				<br  />
-				<span><li class="item" id="부산광역시">부산</li></span>
-				<span><li class="item" id="울산광역시">울산</li></span>
+				<li class="item" id="부산광역시"><span class="sca">부산</span></li>
+				<li class="item" id="울산광역시"><span class="sca">울산</span></li>
 				<br />
-				<span><li class="item" id="경상남도">경남</li></span>
-				<span><li class="item" id="강원도">강원</li></span>
+				<li class="item" id="경상남도"><span class="sca">경남</span></li>
+				<li class="item" id="강원도"><span class="sca">강원</span></li>
 				<br />
-				<span><li class="item" id="제주특별자치도">제주</li></span>
+				<li class="item" id="제주특별자치도"><span class="sca">제주</span></li>
 			</ul>   
 		</div>
 		<div class="in" id="midDiv" style=" background: yellow;">
@@ -170,21 +171,22 @@
     <script src="${pageContext.request.contextPath }/resources/js/menumaker.js"></script>
     <!-- Back to top -->
     <script src="${pageContext.request.contextPath }/resources/js/back-to-top.js" type="text/javascript"></script>
-</body>
 
 <script>
-	var arr = new Array();	
+	var arr = new Array();
+	//var compareArr = new Array();
 	var cnt = 0;
 	var locId = "";
-	var test = "";
+	var fullName = "";
+	var locName = "";
 	$(function () {
 		
-		$(".item").click(function(){
+		$(".sca").click(function(){
 			$("div #smallDiv").children().remove();
-			var locId = $(this).attr('id');
+			var locId = $(this).parent().attr('id');
 			
 			locName = $(this).text();
-			console.log(locId);
+			console.log("지역명:"+locName);
 				$.ajax({
 					url : "/location/midLocation.do",
 					type : "GET",
@@ -195,18 +197,18 @@
 						console.log(data);
 						var html = "<ul class='itemframe'>";
 						html += "<li class='item'>";
-						html += "<span id='sca'>"+locName+" 전체</span>"; 
+						html += "<span class='sca'>"+locName+" 전체</span>"; 
 						html += "</li>";
 						html += "<br>";
 						for(var i in data){
 							if(i % 3 == 0 && i != 0){
 								html += "<br>";
 								html += "<li class='item'>";
-								html += "<span  id='sca'>"+data[i]+"</span>";
+								html += "<span  class='sca'>"+data[i]+"</span>";
 								html += "</li>";
 							}else{								
 								html += "<li class='item'>";
-								html += "<span  id='sca'>"+data[i]+"</span>"; 
+								html += "<span  class='sca'>"+data[i]+"</span>"; 
 			
 								html += "</li>";
 							}
@@ -222,83 +224,131 @@
 						console.log("에러");
 					}
 				})
-				/* $(this).css("font-weight","bold");
-				console.log(cnt);
-				arr[cnt] = locName;
-				$("div #bottomDiv").append("&nbsp;<a class='btn-xs btn-default'>"+locName+"</a>");
-				for(var i=0; i<=cnt; i++){
-					console.log("cnt : " + i + ","+arr[i]);
-				}
-				cnt++; */
+
 		});
 		
 		
-			
 	});
 	
 	function midSelect(obj){
-		$("#midDiv").children("ul").children("li").click(function() {
+		$("#midDiv").children("ul").children("li").children(".sca").click(function() {
 			locId = $(this).text();
-			//console.log("마지막:"+locId);
-			console.log(locId);
-			$.ajax({
-				url: "/location/smallLocaion.do",
-				type: "GET",
-				datatype: "JSON",
-				data: {sloc:locId},
-				async: false,
-				success: function(data) {
-					console.log(data);
-					
-					if(data.length != 0){
-						var html = "<ul class='itemframe'>";
-						html += "<li class='item'>";
-						html += "<label for='locAll'><input type='checkbox' class='locCkbx' id='locAll' value='"+locId+"'>"+locId+" 전체</label>";
-						html += "</li>";
-						html += "<br>";
-						for(var i in data){
-							
-							if(i % 3 == 0 && i != 0){
-								html += "<br>";
-								html += "<li class='item'>";
-								html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
-								html += "</li>";
-							}else{								
-								html += "<li class='item'>";
-								html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
-								html += "</li>";
-							}
-						
-						}
-						html += "</ul>";
-						$("#smallDiv").html(html);	
-						
-						
-						lastSelect();
-						
-					}
-				}, error: function (data) {
-					console.log("에러2");
+			console.log("midlocId : " + locId);
+			if(locId.match('전체')){
+				$('#smallDiv *').remove();
+			
+				$("a").remove(":contains("+locName+")");
+				
+				var arr2 = arr.filter(function (n) {
+					return n.match(locName);
+				});
+				
+				for(var i in arr2){
+					$("a").remove(":contains("+arr2[i]+")");
 				}
-			})
-			
-			
+				
+				for (var i = 0; i<arr2.length; i++) {
+				    var arrlen = arr.length;
+				    for (var j = 0; j<arrlen; j++) {
+				        if (arr2[i] == arr[j]) {
+				            arr = arr.slice(0, j).concat(arr.slice(j+1, arrlen));
+				        }
+				    }
+				}
+				
+				$("div #bottomDiv").append("<a class='btn-xs btn-default' id='"+locId+"' onclick='check(this);'>"+locId+"</a>");
+				arr.push(locId);
+				if(arr.indexOf())
+				console.log("arr : " + arr);
+				console.log("arr2 : " + arr2);
+				
+				//divClickEvent();
+				
+				
+			}else{
+				$.ajax({
+					url: "/location/smallLocaion.do",
+					type: "GET",
+					datatype: "JSON",
+					data: {sloc:locId},
+					async: false,
+					success: function(data) {
+						console.log(data);
+						
+						console.log("어레이 : " + arr);
+						
+						if(data.length != 0){
+							var html = "<ul class='itemframe'>";
+							html += "<li class='item'>";
+							html += "<label for='locAll'><input type='checkbox' class='locCkbx' id='locAll' value='"+locId+"'>"+locId+" 전체</label>";
+							html += "</li>";
+							html += "<br>";
+							for(var i in data){
+								
+								if(i % 3 == 0 && i != 0){
+									html += "<br>";
+									html += "<li class='item'>";
+									html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
+									html += "</li>";
+								}else{								
+									html += "<li class='item'>";
+									html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
+									html += "</li>";
+								}
+							
+							}
+							html += "</ul>";
+							$("#smallDiv").html(html);	
+							
+							
+							for(var j in arr){
+								//console.log(j + " : " + arr[j]);
+								var compareStr = arr[j].substr(arr[j].lastIndexOf(" ")+1,7);
+								console.log("compareStr : " + compareStr);
+						
+								var index = $.inArray(compareStr, data);
+								if( index != -1){
+					
+									$('#locCk'+index).prop('checked', true);
+								}else if($.inArray(locId, arr) != -1){
+									console.log("전체 체크여부 비교 arr :" + arr);
+									console.log("전체 체크여부 :" + locId);
+									$('#locAll').prop('checked', true);
+								}
+							}
+							
+							lastSelect();
+							
+						}
+					}, error: function (data) {
+						console.log("에러2");
+					}
+				})
+				
+			}
 		});
+		
 	}
 	
 	function lastSelect(obj) {
 		$(".locCkbx").change(function () {
+			fullName = locName +locId + $(this).val();
 			if($(this).is(":checked")){
 				
 				if($(this).val() == locId){
-					
+					console.log("전체선택");
+					console.log("1번 : " + $(this).val());
+					console.log("locName : " + locName);
 					$('input[id^="locCk"]').prop('checked', false);
-					console.log(locId);
+					console.log("locId : " + locId);
+					console.log("들어가는 값 : " + locName + " " + locId);
+					
 					var arr2 = arr.filter(function (n) {
-						return n.match(locId);
+						return n.match(locName + " " + locId);
 					});
 					
 					for(var i in arr2){
+						console.log("arr2[i]?"+arr2[i]);
 						$("a").remove(":contains("+arr2[i]+")");
 					}
 					
@@ -307,31 +357,78 @@
 					    for (var j = 0; j<arrlen; j++) {
 					        if (arr2[i] == arr[j]) {
 					            arr = arr.slice(0, j).concat(arr.slice(j+1, arrlen));
+					           
 					        }
 					    }
 					}
+					 arr.push(locName + " " + locId);
+					 /* if((locName + ' 전체')){
+						arr.splice(arr.indexOf(locName + ' 전체'), 1); 
+					 } */
+					 var test = locName + " 전체";
+					 console.log("Test : " + test);
+					 console.log(arr.indexOf(test));
+					 if(arr.indexOf(test) != -1){						 
+						arr.splice(arr.indexOf(test), 1);
+						$('a').remove(":contains("+test+")");
+					 }
+					 console.log("수정후 arr: " + arr);
 					
-					$("div #bottomDiv").append("<a class='btn-xs btn-default' id='"+locId+"'>"+locId+"전체</a>");
+					$("div #bottomDiv").append("<a class='btn-xs btn-default' onclick='check(this);' id='"+locId+"'>"+locName+" "+locId+" 전체</a>");
 				}else{
-					
+					console.log("2번");
+					console.log("2번 다음 :"+ locId);
 					$('input[id="locAll"]').prop('checked', false);
 					$("a[id='"+locId+"']").remove();
-					arr.push(locId+" "+$(this).val());
-					$("div #bottomDiv").append("<a class='btn-xs btn-default'>"+locId+" "+$(this).val()+"</a>");
+					console.log("locName : " + locName);
+					$("a[id='"+locName+" 전체']").remove();
+					arr.push(locName+" "+locId+" "+$(this).val());
+					
+					if($.inArray((locName + " " + locId) ,arr) != -1){
+						//console.log("강남구 있음 위치 : " + test);
+						arr.splice($.inArray((locName + " " + locId), arr),1);
+					}
+					
+					if($.inArray(locName + " 전체", arr) != -1){
+						arr.splice($.inArray(locName + " 전체", arr), 1);
+					}
+					//compareArr.push($(this).val());
+					$("div #bottomDiv").append("<a class='btn-xs btn-default' onclick='check(this);'>"+locName+" "+locId+" "+$(this).val()+"</a>");
 					
 				}
 				
 				
 			}else{
-				console.log(locId + " " +$(this).val());
-				var rmvLoc = arr.splice(arr.indexOf(locId + " " +$(this).val()), 1)
-				console.log("Ee : " + rmvLoc);
+				console.log("클릭해체한값 : " + locId + " " +$(this).val());
+				console.log("현재 arr : " + arr);
+				console.log("locName : " + locName);
+				//var rmvLoc = arr.splice(arr.indexOf(locName + " " + locId + " " +$(this).val()), 1);
+				
+				var rmvLoc = arr.splice(arr.indexOf($(this).val()), 1);
+				console.log("rmvLoc : " + rmvLoc);
 				$("a").remove(":contains("+rmvLoc+")");
+				
 			}
-			console.log(arr);
-			
-		});
-		
+			console.log("arr:" + arr);
+			console.log("arr2:" + arr2);
+
+			//divClickEvent();
+		});	
 	}
+	
+	// 내일 여기서부터 작업
+	function check(){
+		var test = $(this).text();
+		console.log(test);
+	}
+/* 	function divClickEvent(){
+		$('#bottomDiv').children('a').each(function(obj, index){
+			$(this).off('click');
+			$(this).click(function(){
+				console.log($(this)+"has clicked!");
+			});
+		});
+	} */
 </script>
+</body>
 </html>
