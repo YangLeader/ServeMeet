@@ -7,7 +7,7 @@ public class Utils {
 	
 	public static String getPageBar(int totalContents, int cPage, int numPerPage, String url ){
 		String pageBar = "";
-		int pageBarSize = 5;
+		int pageBarSize = 10;
 		cPage = cPage==0?1:cPage;
 		
 		//총페이지수 구하기
@@ -21,47 +21,47 @@ public class Utils {
 		System.out.println("totalPage : "+totalPage);
 		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
 		
-		pageBar += "<ul class='pagination justify-content-center pagination-sm'>";
+		pageBar += "<nav class='pg_wrap'>";
 		//[이전]section
 		if(pageNo == 1 ){
-			pageBar += "<li class='page-item disabled'>";
-			pageBar += "<a class='page-link' href='#' tabindex='-1'>이전</a>";
-			pageBar += "</li>";
+			pageBar += "<span class='pg'>";
+			pageBar += "<li class='pg_page pg_start' href='#' tabindex='-1'></li>";
+			pageBar += "</span>";
 		}
 		else {
-			pageBar += "<li class='page-item'>";
-			pageBar += "<a class='page-link' href='javascript:fn_paging("+(pageNo-1)+")'>이전</a>";
-			pageBar += "</li>";
+			pageBar += "<span class='pg'>";
+			pageBar += "<a class='pg_page pg_start' href='javascript:fn_paging("+(pageNo-1)+")'></a>";
+			pageBar += "</span>";
 		}
 		
 		// pageNo section
 		while(!(pageNo>pageEnd || pageNo > totalPage)){
 			if(cPage == pageNo ){
-				pageBar += "<li class='page-item active'>";
-				pageBar += "<a class='page-link'>"+pageNo+"</a>";
-				pageBar += "</li>";
+				pageBar += "<span class='pg'>";
+				pageBar += "<li class='pg_page'><strong class='pg_current'>"+pageNo+"</strong></li>";
+				pageBar += "</span>";
 			} 
 			else {
-				pageBar += "<li class='page-item'>";
-				pageBar += "<a class='page-link' href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
-				pageBar += "</li>";
+				pageBar += "<span class='pg'>";
+				pageBar += "<a class='pg_page' href='javascript:fn_paging("+pageNo+")'>"+pageNo+"</a>";
+				pageBar += "</span>";
 			}
 			pageNo++;
 		}
 		
 		//[다음] section
 		if(pageNo > totalPage){
-			pageBar += "<li class='page-item disabled'>";
-			pageBar += "<a class='page-link' href='#'>다음</a>";
-			pageBar += "</li>";
+			pageBar += "<span class='pg'>";
+			pageBar += "<li class='pg_page pg_end' href='#'></li>";
+			pageBar += "</span>";
 			
 		} else {
-			pageBar += "<li class='page-item'>";
-			pageBar += "<a class='page-link' href='javascript:fn_paging("+pageNo+")'>다음</a> ";
-			pageBar += "</li>";
+			pageBar += "<span class='pg'>";
+			pageBar += "<a class='pg_page pg_end' href='javascript:fn_paging("+pageNo+")'></a> ";
+			pageBar += "</span>";
 		}
 		
-		pageBar += "</ul>";
+		pageBar += "</nav>";
 		
 		//2.스크립트 태그 작성
 		//fn_paging함수

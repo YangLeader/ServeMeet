@@ -155,55 +155,62 @@ $(document).ready(function(){
 		</section>
 	</div>
 
+<%-- 		<c:forEach items="${attachmentList}" var="a" varStatus="vs">
+				<button type="button" 
+						class="btn btn-outline-success btn-block"
+						onclick="fileDownload('${a.originalFileName}','${a.renamedFileName }');">
+					첨부파일${vs.count} - ${a.originalFileName }
+				</button>
+			</c:forEach> --%>
     <!-- 첨부파일 시작 { -->
+    <c:forEach items="${boardFileList}" var="bf">
     <div id="bo_v_file">
-        		 <span>
-			<a href="http://aq23r1gt.iwinv.net/bbs/download.php?bo_table=funny&amp;wr_id=27&amp;no=0&amp;page=7" class="bo_v_ect">
+        <span>
+			<a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" class="bo_v_ect" download>
 				<span class="glyphicon glyphicon-save"></span>&nbsp;
-				test.txt				 (0byte)
-				<span class="cn"> &nbsp;&nbsp;3회</span>
+				${bf.originName }
 			</a>
 		</span>
-            </div>
+    </div>
+    </c:forEach>
     <!-- } 첨부파일 끝 -->
     
-         <!-- 관련링크 시작 { -->
-			<div id="bo_v_link">
-						<span>
-				<a class="bo_v_ect" href="http://aq23r1gt.iwinv.net/bbs/link.php?bo_table=funny&amp;wr_id=27&amp;no=1&amp;page=7" target="_blank">
-					<span class="glyphicon glyphicon-link"></span>&nbsp;
-					http://cvsusers.net					<span class="cn"> &nbsp;&nbsp;28회</span>
-				</a>
-			</span>
-					</div>
-	    <!-- } 관련링크 끝 -->
     
     <section id="bo_v_atc">
         <div id="bo_v_img">
 </div>
 		
         <!-- 본문 내용 시작 { -->
-        <div id="bo_v_con">${board.boardContent }</div>
+        <div id="bo_v_con">
+        	<c:forEach items="${boardFileList}" var="bf">
+        	<p>
+        		<a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" onclick="window.open(this.href,'_blank','width=700,height=700');return false;">
+        		<%-- <a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" target="_blank" class="view_image"> --%>
+        			<img src="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" alt="${bf.originName }" style="width: 50%;"/>
+        			<br />
+        		</a>
+        		<br style="clear:both;" />
+        	</p>
+        	</c:forEach>
+        	<p><br /></p>
+        	<pre><p>${board.boardContent }</p></pre>
+        	<p><br /></p>
+        </div>
                 <!-- } 본문 내용 끝 -->
 
         		
 		
 		<!-- 스크랩 추천 비추천 시작 { -->
 				<div id="bo_v_act">
-		
-						<a href="./good.php?bo_table=free&amp;wr_id=111&amp;good=good&amp;" id="good_button" class="btn_bg btn">
-				<span class="glyphicon glyphicon-thumbs-up"></span> 추천 
-				<span id="bo_v_act_good" class="wr_count wr_good_cnt">0</span>
-			</a>
-						
-						
-						<a href="./scrap_popin.php?bo_table=free&amp;wr_id=111" target="_blank" id="scrap" class="btn_bg btn btn-default" onclick="win_scrap(this.href); return false;" title="스크랩">
-				<span class="glyphicon glyphicon-book"></span> 스크랩
-			</a>
+					<a href="./good.php?bo_table=free&amp;wr_id=111&amp;good=good&amp;" id="good_button" class="btn_bg btn">
+						<span class="glyphicon glyphicon-thumbs-up"></span> 추천 지금은 안됨ㅋ
+						<span id="bo_v_act_good" class="wr_count wr_good_cnt">0</span>
+					</a>
+					
+					<a href="./scrap_popin.php?bo_table=free&amp;wr_id=111" target="_blank"  class="btn_bg" onclick="win_scrap(this.href); return false;" title="신고">
+					<span class="glyphicon glyphicon-bell"></span> 신고 지금은 안됨ㅋ
+					</a>
 			
-			<!--
-			<a href="./scrap_popin.php?bo_table=free&amp;wr_id=111" target="_blank"  class="btn_bg" onclick="win_scrap(this.href); return false;" title="신고"><span class="glyphicon glyphicon-bell"></span> 신고</a>
-			-->
 		</div>
 				<!-- } 스크랩 추천 비추천 끝 -->
 		
@@ -222,23 +229,106 @@ var char_max = parseInt(0); // 최대
 <div id="bo_vc">
 	<!--
     <div class="cmt_top">
-		<div class="cmt_top_title">댓글 <span><strong>2</strong></span></div>
+		<div class="cmt_top_title">댓글 <span><strong>4</strong></span></div>
 	</div>
 	-->
 	<div class="cmt_list" >
 		<ul class="cmt_list_ul">
-						<li id="c_112" >
+						<li id="c_28" >
+				<div class="cmt_inner_wrap">
+
+					<p style="z-index:5" class="cmt_mb_info">
+
+						
+						<font class="write_user">최고관리자</a></font>
+
+						
+						<span>
+							<span class="glyphicon glyphicon-time"></span> <time datetime="2017-12-09T18:14:00+09:00">
+							17-12-09 18:14</time>
+						</span>
+
+											</p>
+
+					<!-- 댓글 출력 -->
+					<p class="cmt_content">
+
+						
+						댓글 테스트 1					</p>
+
+					<div class="cmt_button_box">
+					
+												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=28&amp;w=c#bo_vc_w" onclick="comment_box('28', 'c'); return false;">
+							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
+						</a>
+						
+						
+						
+										</div>
+
+					<span id="edit_28" class="edit_cmt"></span><!-- 수정 -->
+					<span id="reply_28" class="edit_reply"></span><!-- 답변 -->
+
+					<input type="hidden" value="" id="secret_comment_28">
+
+					<textarea id="save_comment_28" style="display:none">댓글 테스트 1</textarea>
+
+				</div>
+			</li>
+						<li id="c_29" style="padding-left:15px" >
+				<div class="cmt_inner_wrap">
+
+					<p style="z-index:4" class="cmt_mb_info">
+
+												<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
+						
+						<font class="write_user">최고관리자</a></font>
+
+						
+						<span>
+							<span class="glyphicon glyphicon-time"></span> <time datetime="2017-12-09T18:14:00+09:00">
+							17-12-09 18:14</time>
+						</span>
+
+											</p>
+
+					<!-- 댓글 출력 -->
+					<p class="cmt_content">
+
+						
+						댓글의 답글 테스트 1					</p>
+
+					<div class="cmt_button_box">
+					
+												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=29&amp;w=c#bo_vc_w" onclick="comment_box('29', 'c'); return false;">
+							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
+						</a>
+						
+						
+						
+										</div>
+
+					<span id="edit_29" class="edit_cmt"></span><!-- 수정 -->
+					<span id="reply_29" class="edit_reply"></span><!-- 답변 -->
+
+					<input type="hidden" value="" id="secret_comment_29">
+
+					<textarea id="save_comment_29" style="display:none">댓글의 답글 테스트 1</textarea>
+
+				</div>
+			</li>
+						<li id="c_30" >
 				<div class="cmt_inner_wrap">
 
 					<p style="z-index:3" class="cmt_mb_info">
 
 						
-						<font class="write_user">me5758</a></font>
+						<font class="write_user">최고관리자</a></font>
 
 						
 						<span>
-							<span class="glyphicon glyphicon-time"></span> <time datetime="2018-12-24T14:28:00+09:00">
-							18-12-24 14:28</time>
+							<span class="glyphicon glyphicon-time"></span> <time datetime="2017-12-09T18:15:00+09:00">
+							17-12-09 18:15</time>
 						</span>
 
 											</p>
@@ -247,40 +337,39 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">
 
 						
-						123					</p>
+						댓글 테스트 2					</p>
 
 					<div class="cmt_button_box">
 					
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=free&amp;wr_id=111&amp;&amp;&amp;c_id=112&amp;w=c#bo_vc_w" onclick="comment_box('112', 'c'); return false;">
-							<span class="glyphicon glyphicon-comment"></span> 댓글쓰기
+												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=30&amp;w=c#bo_vc_w" onclick="comment_box('30', 'c'); return false;">
+							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
 						
 						
 						
 										</div>
 
-					<span id="edit_112" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_112" class="edit_reply"></span><!-- 답변 -->
+					<span id="edit_30" class="edit_cmt"></span><!-- 수정 -->
+					<span id="reply_30" class="edit_reply"></span><!-- 답변 -->
 
-					<input type="hidden" value="" id="secret_comment_112">
+					<input type="hidden" value="" id="secret_comment_30">
 
-					<textarea id="save_comment_112" style="display:none">123</textarea>
+					<textarea id="save_comment_30" style="display:none">댓글 테스트 2</textarea>
 
 				</div>
 			</li>
-						<li id="c_113" style="padding-left:15px" >
+						<li id="c_163" >
 				<div class="cmt_inner_wrap">
 
 					<p style="z-index:2" class="cmt_mb_info">
 
-												<img src="http://aq23r1gt.iwinv.net/skin/board/_basic/img/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
 						
-						<font class="write_user">me5758</a></font>
+						<font class="write_user">asd1713</a></font>
 
 						
 						<span>
-							<span class="glyphicon glyphicon-time"></span> <time datetime="2018-12-24T14:32:00+09:00">
-							18-12-24 14:32</time>
+							<span class="glyphicon glyphicon-time"></span> <time datetime="2018-12-27T14:16:00+09:00">
+							18-12-27 14:16</time>
 						</span>
 
 											</p>
@@ -289,29 +378,29 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">
 
 						
-						ㅎㅇ					</p>
+						댓글					</p>
 
 					<div class="cmt_button_box">
 					
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=free&amp;wr_id=111&amp;&amp;&amp;c_id=113&amp;w=c#bo_vc_w" onclick="comment_box('113', 'c'); return false;">
-							<span class="glyphicon glyphicon-comment"></span> 댓글쓰기
+												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=163&amp;w=c#bo_vc_w" onclick="comment_box('163', 'c'); return false;">
+							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
 						
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=free&amp;wr_id=111&amp;&amp;&amp;c_id=113&amp;w=cu#bo_vc_w" onclick="comment_box('113', 'cu'); return false;">
+												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=163&amp;w=cu#bo_vc_w" onclick="comment_box('163', 'cu'); return false;">
 							<span class="glyphicon glyphicon-edit"></span> 수정
 						</a>
 						
-												<a class="btn_cmt btn btn-default btn-xs" href="./delete_comment.php?bo_table=free&amp;comment_id=113&amp;token=15456295895c206f95f39e6&amp;page=" onclick="return comment_delete();">
+												<a class="btn_cmt btn btn-default btn-xs" href="./delete_comment.php?bo_table=funny&amp;comment_id=163&amp;token=15458877655c2460153b13f&amp;page=7&amp;page=7" onclick="return comment_delete();">
 							<span class="glyphicon glyphicon-trash"></span> 삭제</a>
 						
 										</div>
 
-					<span id="edit_113" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_113" class="edit_reply"></span><!-- 답변 -->
+					<span id="edit_163" class="edit_cmt"></span><!-- 수정 -->
+					<span id="reply_163" class="edit_reply"></span><!-- 답변 -->
 
-					<input type="hidden" value="" id="secret_comment_113">
+					<input type="hidden" value="" id="secret_comment_163">
 
-					<textarea id="save_comment_113" style="display:none">ㅎㅇ</textarea>
+					<textarea id="save_comment_163" style="display:none">댓글</textarea>
 
 				</div>
 			</li>
@@ -324,7 +413,7 @@ var char_max = parseInt(0); // 최대
 <!-- 댓글 쓰기 시작 { -->
 <div id="bo_vc_wrap">
 	<aside id="bo_vc_w">
-		<form name="fviewcomment" action="./write_comment_update.php" onsubmit="return fviewcomment_submit(this);" method="post" autocomplete="off">
+		<form name="fviewcomment" action="${pageContext.request.contextPath }/board/insertComment.do" method="post" autocomplete="off">
 		<input type="hidden" name="w" value="c" id="w">
 		<input type="hidden" name="bo_table" value="free">
 		<input type="hidden" name="wr_id" value="111">
@@ -335,18 +424,17 @@ var char_max = parseInt(0); // 최대
 		<input type="hidden" name="spt" value="">
 		<input type="hidden" name="page" value="">
 		<input type="hidden" name="is_good" value="">
+		<input type="hidden" name="boardNo" value="${board.boardNo }">
+		<input type="hidden" name="userName" value="${member.userName }">
 
 		<div class="cmt_wr_wrap">
 			
 			<div class="cmt_wr_info">
 
 				<div class="wr_option">
-								<div class="cmt_wr_secret">
-					<input type="checkbox" name="wr_secret" value="secret" id="wr_secret">
-					<label for="wr_secret">비밀글</label>
-				</div>
+					
 				
-				<textarea id="wr_content" name="wr_content" class="form-control" title="내용"  rows="3" maxlength="10000" required></textarea>
+				<textarea id="wr_content" name="commentCon" class="form-control" title="내용"  rows="3" maxlength="10000" required></textarea>
 
 								</div>
 
@@ -739,13 +827,23 @@ function excute_good(href, $el, $tx)
 			</div>
 
 	<div class="pager">
-		<nav class="pg_wrap"><span class="pg"><span class="sound_only">열린</span><strong class="pg_current">1</strong><span class="sound_only">페이지</span>
-<a href="./board.php?bo_table=free&amp;page=2" class="pg_page">2<span class="sound_only">페이지</span></a>
-<a href="./board.php?bo_table=free&amp;page=2" class="pg_page pg_end"></a>
-</span></nav>
-		<div class="pg_wrap_m"><span class="pg_info_m">1 / 2</span><a href="./board.php?bo_table=free&amp;page=2" class="pg_page pg_next_m">다음페이지</span></a>
-<a href="./board.php?bo_table=free&amp;page=2" class="pg_page pg_end"></a>
-</div>	</div>
+					<c:out value="${pageBar}" escapeXml="false"/>
+					<!-- <nav class="pg_wrap">
+						<span class="pg">
+							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a> 
+							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page">1<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=2" class="pg_page">2<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=3" class="pg_page">3<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=4" class="pg_page">4<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=5" class="pg_page">5<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=6" class="pg_page">6<span class="sound_only">페이지</span></a> 
+								<span class="sound_only">열린</span><strong class="pg_current">7</strong>
+								<span class="sound_only">페이지</span>
+							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page">8<span class="sound_only">페이지</span></a> 
+							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a> 
+						</span>
+					</nav> -->
+				</div>
 
 </div>
 

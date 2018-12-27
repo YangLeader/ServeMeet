@@ -10,6 +10,7 @@ import com.yang.ServeMeet.board.model.exception.BoardException;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.board.model.dao.BoardDao;
 import com.yang.ServeMeet.board.model.vo.Board;
+import com.yang.ServeMeet.board.model.vo.BoardComment;
 
 
 @Service
@@ -118,15 +119,22 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int deleteFile(int fileId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.deleteFile(fileId);
 	}
 
 	@Override
-	public void updateViewCount(int no) {
+	public void updateViewCount(int boardNo) {
 		
-		boardDao.updateViewCount(no);
+		boardDao.updateViewCount(boardNo);
 		
+	}
+	
+	// ------------------- BoardComment 관련 ------------------- //
+
+	@Override
+	public int insertBoardComment(BoardComment bComment) {
+		
+		return boardDao.insertBoardComment(bComment);
 	}
 
 }

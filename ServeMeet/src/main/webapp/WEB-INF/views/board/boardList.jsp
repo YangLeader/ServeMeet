@@ -235,14 +235,7 @@
 							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page">8<span class="sound_only">페이지</span></a> 
 							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a> 
 						</span>
-					</nav>
-					<div class="pg_wrap_m">
-						<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a> 
-						<a href="./board.php?bo_table=funny&amp;page=6" class="pg_page pg_prev_m">이전페이지</a> 
-							<span class="pg_info_m">7 / 8</span>
-						<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_next_m">다음페이지</a> 
-						<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a>
-					</div> -->
+					</nav> -->
 				</div>
 
 			</div>
@@ -270,12 +263,6 @@
 						bbs_list_width_fixed();
 					});
 
-					// 분류 변경시 페이지 이동
-					$('.bbs_cate_select').change(function() {
-						if ($(this).val() != "") {
-							location.href = $(this).val();
-						}
-					});
 				});
 
 				// 리스트 제목 부분 width 자동조절

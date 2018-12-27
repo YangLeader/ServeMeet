@@ -1,6 +1,6 @@
 package com.yang.ServeMeet.board.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BoardComment {
 

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.board.model.vo.Board;
+import com.yang.ServeMeet.board.model.vo.BoardComment;
 
 public interface BoardDao {
 
@@ -30,5 +31,7 @@ public interface BoardDao {
 
 	int deleteFile(int fileId);
 
-	void updateViewCount(int no);
+	void updateViewCount(int boardNo);
+
+	int insertBoardComment(BoardComment bComment);
 }

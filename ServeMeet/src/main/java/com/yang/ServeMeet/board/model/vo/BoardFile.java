@@ -10,21 +10,24 @@ public class BoardFile {
 	private int mhistoryId;
 	private String originName;
 	private String changeName;
-	private String fileLocation;
 	private String userName;
 
 	public BoardFile() {
 		super();
 	}
-
-	public BoardFile(int boardNo, int mhistoryId, String originName, String changeName, String fileLocation,
-			String userName) {
+	
+	public BoardFile(String originName, String changeName) {
+		super();
+		this.originName = originName;
+		this.changeName = changeName;
+	}
+	
+	public BoardFile(int boardNo, int mhistoryId, String originName, String changeName, String userName) {
 		super();
 		this.boardNo = boardNo;
 		this.mhistoryId = mhistoryId;
 		this.originName = originName;
 		this.changeName = changeName;
-		this.fileLocation = fileLocation;
 		this.userName = userName;
 	}
 
@@ -68,14 +71,6 @@ public class BoardFile {
 		this.changeName = changeName;
 	}
 
-	public String getFileLocation() {
-		return fileLocation;
-	}
-
-	public void setFileLocation(String fileLocation) {
-		this.fileLocation = fileLocation;
-	}
-
 	public String getUserName() {
 		return userName;
 	}
@@ -87,8 +82,7 @@ public class BoardFile {
 	@Override
 	public String toString() {
 		return "BoardFile [fileId=" + fileId + ", boardNo=" + boardNo + ", mhistoryId=" + mhistoryId + ", originName="
-				+ originName + ", changeName=" + changeName + ", fileLocation=" + fileLocation + ", userName="
-				+ userName + "]";
+				+ originName + ", changeName=" + changeName + ", userName=" + userName + "]";
 	}
 	
 	

@@ -34,13 +34,13 @@
 		</selectKey>
 	</insert>
 	<insert id="insertBoardFile" parameterType="BoardFile">
-		다른방식
+		<!-- 다른방식 -->
 		<selectKey keyProperty="boardNo" resultType="_int"
 			order="BEFORE">
 			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
 		</selectKey>
-		INSERT INTO BOARDFILE(FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME,FILELOCATION,USERNAME)
-		VALUES (SEQ_FILEID.NEXTVAL, SEQ_BOARDNO.CURRVAL, DEFAULT, #{originName}, #{changeName}, #{fileLocation}, #{userName})
+		INSERT INTO BOARDFILE(FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME)
+		VALUES (SEQ_FILEID.NEXTVAL, #{boardNo}, DEFAULT, #{originName}, #{changeName})
 	</insert>
 
 	<select id="selectBoardFileList" parameterType="_int"
@@ -51,22 +51,25 @@
 		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}
 		WHERE BOARDNO = #{boardNo}
 	</update>
-	<!-- <insert id="updateBoardFile" parameterType="BoardFile">
-		INSERT INTO ATTACHMENT(ATTACHMENTNO, BOARDNO, ORIGINALFILENAME,
-		RENAMEDFILENAME) VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo},
-		#{originalFileName}, #{renamedFileName})
-	</insert> -->
+	<insert id="updateBoardFile" parameterType="BoardFile">
+		INSERT INTO BOARDFILE(FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME)
+		VALUES (SEQ_FILEID.NEXTVAL, #{boardNo}, DEFAULT, #{originName}, #{changeName})
+	</insert>
 	<delete id="deleteBoard" parameterType="_int">
 		UPDATE BOARD SET BOARDSTATUS = 'N'
 		WHERE BOARDNO = #{boardNo} 
 	</delete>
-	<!-- <delete id="deleteAttachment" parameterType="_int"> DELETE FROM
-		ATTACHMENT WHERE BOARDNO = #{boardNo} </delete>
-	<delete id="deleteAttachmentOne" parameterType="_int">
-		DELETE FROM ATTACHMENT WHERE ATTACHMENTNO = #{attNo}
-	</delete> -->
+	
+	<delete id="deleteBoardFile" parameterType="_int"> 
+		DELETE FROM BOARDFILE WHERE BOARDNO = #{boardNo}
+	</delete>
+	
+	<delete id="deleteBoardFileOne" parameterType="_int"> 
+		DELETE FROM BOARDFILE WHERE FILEID = #{fileId}
+	</delete>
+	
 	<update id="updateViewCount" parameterType="_int">
 		UPDATE BOARD SET BOARDCOUNT = BOARDCOUNT + 1
-		WHERE BOARDNO = #{no}
+		WHERE BOARDNO = #{boardNo}
 	</update>
 </mapper>
