@@ -43,5 +43,10 @@ public class ChattingServiceImpl implements ChattingService {
 		// TODO Auto-generated method stub
 		return cDao.insertChat(userNameMap);
 	}
+	@Override
+	public Chatting selectChat(int chatNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectChat(chatNo);
+	}
 
 }

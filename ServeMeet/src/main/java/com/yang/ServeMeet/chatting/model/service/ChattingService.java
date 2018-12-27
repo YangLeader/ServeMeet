@@ -19,4 +19,6 @@ public interface ChattingService {
 
 	int insertChat(Map<String, String> userNameMap);
 
+	Chatting selectChat(int chatNo);
+
 }

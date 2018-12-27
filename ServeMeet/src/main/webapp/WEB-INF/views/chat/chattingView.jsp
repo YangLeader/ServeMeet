@@ -126,13 +126,14 @@ div{
 <div class='form-group'>
 	<label id='sessionuserid'><h3>${userName}님이 입장하셨습니다.</h3></label><br/>
 	<!-- 메세지 작성부분 -->
-	<textarea rows="2" cols="50" name='message' id='message'></textarea>
-	<button class='btn btn-primary'id='sendBtn'>전송</button>
-	<button class='btn btn-primary'id='exitBtn'>나가기</button>
 	<!-- 대화내용이 출력되는 부분 -->
 	<div class='panel panel-default'>
 		<div id='chatdata' class='panel-body'></div>
 	</div>
+	<textarea rows="2" cols="50" name='message' id='message'></textarea>
+	<button class='btn btn-primary'id='sendBtn'>전송</button>
+	<button class='btn btn-primary'id='exitBtn'>나가기</button>
+	
 </div>
 
 

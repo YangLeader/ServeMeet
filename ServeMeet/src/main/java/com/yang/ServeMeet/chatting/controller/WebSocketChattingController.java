@@ -30,7 +30,9 @@ public class WebSocketChattingController {
 		req.setCharacterEncoding("utf-8");
 
 		String ipAddr = req.getRemoteAddr();
-		session.setAttribute("chatNo", chatNo);
+		
+		Chatting chat = cs.selectChat(chatNo);
+		session.setAttribute("chat", chat);
 
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");

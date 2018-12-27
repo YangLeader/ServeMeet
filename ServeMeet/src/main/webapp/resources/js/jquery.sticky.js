@@ -44,6 +44,7 @@
         documentHeight = $document.height(),
         dwh = documentHeight - windowHeight,
         extra = (scrollTop > dwh) ? dwh - scrollTop : 0;
+  
 
       for (var i = 0, l = sticked.length; i < l; i++) {
         var s = sticked[i],
@@ -59,7 +60,8 @@
               .css({
                 'width': '',
                 'position': '',
-                'top': ''
+                'top': '',
+                'background-color':'#c11727'
               });
             s.stickyElement.parent().removeClass(s.className);
             s.stickyElement.trigger('sticky-end', [s]);
@@ -87,8 +89,7 @@
             s.stickyElement
               .css('width', newWidth)
               .css('position', 'fixed')
-              .css('top', newTop);
-
+              .css('top', newTop).css("background-color","#d41b2c");
             s.stickyElement.parent().addClass(s.className);
 
             if (s.currentTop === null) {

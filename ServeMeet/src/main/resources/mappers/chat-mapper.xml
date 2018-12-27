@@ -30,6 +30,9 @@
 		resultType="Member">
 		select * from Member where userno != #{userName}
 	</select>
+	<select id="selectChat" parameterType="int" resultType="Chatting">
+		select * from ChattingList where CHATTINGID=#{chattingId}
+	</select>
 
 
 	<insert id="insertChatLog" parameterType="ChattingLog">
