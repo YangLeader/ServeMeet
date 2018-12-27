@@ -77,13 +77,13 @@ float: right;
 							<li><a
 								href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 								title="내정보보기">${member.userName}</a></li>
-							<li id="chat">채팅목록</li>
+							<li id="chat" class= "carea">채팅목록</li>
 
 							<li><a class="btn-link" type="button"
 								onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">LOG
 									OUT</a></li>
-							<div id="chatList" hidden="hidden"
-								style="overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; margin-top: 25px;" >
+							<div class="chatList carea" 
+								style="display:none; overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; margin-top: 25px;" >
 								</div>
 						</ul>
 					</c:if>
@@ -127,15 +127,7 @@ float: right;
 							<li><a
 								href="${pageContext.request.contextPath }/batting/battingList.ba"
 								title="Styleguide">배팅</a></li>
-
-              
-              
-              
-              
-              
-              
-              
-              
+       
 
                                 <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting">배팅</a>
 	                                <ul>
@@ -143,30 +135,8 @@ float: right;
                                         <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="battingHistory">종료된 배팅</a></li>
 	                                </ul>
                                 </li>
-                  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <li><a href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a> </li>
+
+  								<li><a href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a> </li>
                             </ul>
                         </div>
                     </div>
@@ -179,28 +149,30 @@ float: right;
 <script type="text/javascript">
 	$(function() {
 		$("#chat").click(function() {
+				var display = $('.chatList').css("display");
+				console.log(display);
 
-			$('#chatList').toggle(function() {
+			$('.chatList').toggle();
+		
+				if(display=='none'){
 				$.ajax({
 					url : "chat/chatListMin.do/",
 					dataType : "json",
 					success : function(data) {
-						  console.log(data);
+						console.log(data);
 						  for(var i in data){
-							  console.log(data[i].chattingId);
-							  $('#chatList').append(
+							
+							  $('.chatList').append(
 									 
 								$('<div>').text(data[i].chattingName)
-										  .attr("class","chatBox")
+										  .attr("class","chatBox carea")
 										  .attr("onclick","chatting("+data[i].chattingId+");")
 										  .css({
 											  "width" : "400px",
 											  "height": "100px"
 											 
 										  })
-								
-									  
-							  
+				  
 							  );
 						  }
 					
@@ -210,12 +182,19 @@ float: right;
 					}
 
 				});
-			});
-			
-			
+				}
+				
+	
+		});
+		
+		$('html').click(function(e) {
+			if(!$(e.target).hasClass("carea")) { 
+				$(".chatList").hide();
+				}
 			
 
-		});
+			
+		})
 	});
 	
 	function chatting(chatId) {
