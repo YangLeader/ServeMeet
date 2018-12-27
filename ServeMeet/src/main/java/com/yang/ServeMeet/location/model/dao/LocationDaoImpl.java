@@ -22,11 +22,9 @@ public class LocationDaoImpl implements LocationDao {
 	@Override
 	public List<Location> selectBloc(String bloc){
 		System.out.println("dao:"+bloc);
-		if(bloc.equals("세종특별자치시")) {
-			return sqlsession.selectList("location.selectBloc2", bloc);
-		}else {
+	
 			return sqlsession.selectList("location.selectBloc", bloc);
-		}
+
 	}
 	
 	@Override
