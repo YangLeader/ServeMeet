@@ -3,6 +3,15 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
+<resultMap type="ChattingLog" id="chatLog">
+	<id property="chattingId" column="CHATTINGID"/>
+	<result property="userNo" column="USERNO"/>
+	<result property="chDate" column="CHDATE"/>
+	<result property="chContent" column="CHCONTENT"/>
+	<result property="chStatus" column="CHSTATUS"/>
+	<result property="chattingName" column="CHATTINGNAME"/>
+	
+</resultMap>
 
 	<select id="selectCahtList" parameterType="int"	resultType = "Chatting">
 		select CHATTINGID,CHATTINGNAME
@@ -32,6 +41,9 @@
 	</select>
 	<select id="selectChat" parameterType="int" resultType="Chatting">
 		select * from ChattingList where CHATTINGID=#{chattingId}
+	</select>
+	<select id="selectChatLog" parameterType="int" resultMap="chatLog">
+		select * from (select LG.CHATTINGID CHATTINGID,userNo,chDate,chContent,chstatus,(select CHATTINGNAME from CHATTINGLIST L where LG.chattingId=L.CHATTINGID) CHATTINGNAME from CHATTINGLOG LG where CHATTINGID=#{chattingId} and CHSTATUS='N' order by CHDATE desc)where rownum=1
 	</select>
 
 

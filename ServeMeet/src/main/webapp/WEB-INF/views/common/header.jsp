@@ -41,7 +41,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <style type="text/css">
-.login{
+.login {
 	display: inline-block;
 	list-style: none;
 }
@@ -49,10 +49,11 @@
 .login li {
 	float: left;
 	margin-right: .8em;
-	
 }
-.chatBox{
-float: right;
+
+.chatBox {
+	text-align: left;
+	color: black;
 }
 </style>
 
@@ -77,14 +78,14 @@ float: right;
 							<li><a
 								href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 								title="내정보보기">${member.userName}</a></li>
-							<li id="chat" class= "carea">채팅목록</li>
+							<li id="chat" class="carea">채팅목록</li>
 
 							<li><a class="btn-link" type="button"
 								onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">LOG
 									OUT</a></li>
-							<div class="chatList carea" 
-								style="display:none; overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; margin-top: 25px;" >
-								</div>
+							<div class="chatList carea"
+								style="display: none; overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; margin-top: 25px;">
+							</div>
 						</ul>
 					</c:if>
 				</div>
@@ -127,64 +128,69 @@ float: right;
 							<li><a
 								href="${pageContext.request.contextPath }/batting/battingList.ba"
 								title="Styleguide">배팅</a></li>
-       
 
-                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting">배팅</a>
-	                                <ul>
-                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="battingList">진행중인 배팅</a></li>
-                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="battingHistory">종료된 배팅</a></li>
-	                                </ul>
-                                </li>
 
-  								<li><a href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+							<li class="has-sub"><a
+								href="${pageContext.request.contextPath }/batting/battingList.ba"
+								title="batting">배팅</a>
+								<ul>
+									<li><a
+										href="${pageContext.request.contextPath }/batting/battingList.ba"
+										title="battingList">진행중인 배팅</a></li>
+									<li><a
+										href="${pageContext.request.contextPath }/batting/battingHistory.ba"
+										title="battingHistory">종료된 배팅</a></li>
+								</ul></li>
+
+							<li><a
+								href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </head>
 
 <script type="text/javascript">
+
 	$(function() {
 		$("#chat").click(function() {
 				var display = $('.chatList').css("display");
 				console.log(display);
 
 			$('.chatList').toggle();
-		
+			
 				if(display=='none'){
-				$.ajax({
-					url : "chat/chatListMin.do/",
-					dataType : "json",
-					success : function(data) {
-						console.log(data);
-						  for(var i in data){
-							
-							  $('.chatList').append(
-									 
-								$('<div>').text(data[i].chattingName)
-										  .attr("class","chatBox carea")
-										  .attr("onclick","chatting("+data[i].chattingId+");")
-										  .css({
-											  "width" : "400px",
-											  "height": "100px"
-											 
-										  })
-				  
-							  );
-						  }
-					
-					},
-					error : function(data){
-						 console.log(data);
-					}
-
-				});
-				}
-				
+					$.ajax({
+						url : "chat/chatListMin.do/",
+						dataType : "json",
+						success : function(data) {
+							console.log(data);
+							 $('.chatList').children().remove();
+							  for(var i in data){	
+								 
+								  
+								  $('.chatList').append(							 
+									$('<div>').text(data[i].chattingName)
+											  .attr("class","chatBox carea")
+											  .attr("onclick","chatting("+data[i].chattingId+");")
+											  .css({
+												  "width" : "380px",
+												  "height": "100px"
+											  })			  
+								  );
+							  }
+						
+						},
+						error : function(data){
+							 console.log(data);
+						}
 	
+					});
+				}
 		});
 		
 		$('html').click(function(e) {
@@ -201,6 +207,7 @@ float: right;
 		console.log(chatId);
 		
 	}
+	
 </script>
 
 </html>

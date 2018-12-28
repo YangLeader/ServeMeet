@@ -19,4 +19,6 @@ public interface ChattingDao {
 	int insertChat(Map<String, String> userNameMap);
 
 	Chatting selectChat(int chatNo);
+
+	ChattingLog selectChatLog(int chattingId);
 }
