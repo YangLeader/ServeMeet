@@ -19,4 +19,7 @@ public interface MemberService {
 	String searchIdConfirm(String userName, String email);
 	
 	int searchPwdConfirm(String userId, String userEmail);
+
+	int updatePoint(int userNo, int increasePoint);
+
 }

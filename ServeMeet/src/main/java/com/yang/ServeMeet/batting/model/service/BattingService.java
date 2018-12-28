@@ -25,5 +25,7 @@ public interface BattingService {
 	
 	int battingInsert();
 	
-	List<Map<String,String>> battingAllocation(int battingId, String battingType);
+	List<Map<String,Object>> battingAllocation(int battingId, String battingType);
+	
+	int battingPoint(List<Map<String,Object>> list);
 }

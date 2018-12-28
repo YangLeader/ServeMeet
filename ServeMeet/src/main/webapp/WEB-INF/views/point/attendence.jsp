@@ -59,6 +59,9 @@
 	</style>
 </head>
 <body>
+<form id = attendFrm method="post">
+
+
 <div class="page-header">
   <div class="container">
     <div class="row">
@@ -144,7 +147,7 @@
      </div>
 
 	<c:import url="../common/footer.jsp"/>
-	
+	</form>
 	<script>
 		var attFlag=false;
 	
@@ -153,14 +156,35 @@
 				alert("로그인 후 이용해 주세요.");
 				location.href="${pageContext.request.contextPath}/member/memberLoginView.do";
 			}
-			else */ if(attFlag){
-				alert("이미 출석하셨습니다.");
-			}else{
-			$("#date"+today).html("<img src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
-			attFlag = true;
-			//location.href="${pageContext.request.contextPath}/point/pointAttend.do";
+			
+			
+			/* var url = "${pageContext.request.contextPath}/point/pointAttend.do?increasePoint=1";
+			$("#attendFrm").attr("action",url).submit(); */
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/point/pointAttend.do",
+				data : {increasePoint : 1,
+						pContent : "출석체크 포인트"
+						},
+				success : function(data){
+					console.log("data : " +data);
+					if(data==1){
+					$("#date"+today).html("<img src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
+					attFlag = true;
+					}else{
+						alert("이미 출석하셨습니다.");
+					}
+	            }, error : function(jqxhr, textStatus, errorThrown){
+	                console.log("ajax 처리 실패");
+	                //에러로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
+			});
+			
 			}
-		}
+		
 	</script>
 </body>
 </html>

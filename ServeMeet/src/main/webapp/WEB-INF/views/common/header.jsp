@@ -130,28 +130,21 @@
 								title="Styleguide">배팅</a></li>
 
 
-							<li class="has-sub"><a
-								href="${pageContext.request.contextPath }/batting/battingList.ba"
-								title="batting">배팅</a>
-								<ul>
-									<li><a
-										href="${pageContext.request.contextPath }/batting/battingList.ba"
-										title="battingList">진행중인 배팅</a></li>
-									<li><a
-										href="${pageContext.request.contextPath }/batting/battingHistory.ba"
-										title="battingHistory">종료된 배팅</a></li>
-								</ul></li>
+                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting">배팅</a>
+	                                <ul>
+                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="battingList">진행중인 배팅</a></li>
+                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="battingHistory">종료된 배팅</a></li>
+	                                </ul>
+                                </li>
+  <li><a href="${pageContext.request.contextPath}/point/point.do">포인트</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-							<li><a
-								href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 </head>
 
 <script type="text/javascript">
