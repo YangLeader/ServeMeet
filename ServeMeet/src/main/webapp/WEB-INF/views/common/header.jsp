@@ -108,7 +108,7 @@ float: right;
 												in</span></a></li>
 									</c:if>
 									<c:if test="${!empty member}">
-										<li id="chat" class= "carea suvNav"><span class="mainNav">채팅목록</span></li>
+										<li id="chat" class= "suvNav"><span class="carea mainNav">채팅목록</span></li>
 										
 										<li class="suvNav has-sub"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 												title="내정보보기"><span class="mainNav">${member.userName}</span></a>
@@ -119,8 +119,6 @@ float: right;
 													OUT</a></li>
 											</ul>		
 										</li>
-				
-										
 										<div class="chatList carea" 
 											style="display:none; overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; margin-top: 25px;" >
 										</div>
@@ -137,54 +135,49 @@ float: right;
     </div>
 </div>
 
-
 <script type="text/javascript">
 	$(function() {
 		$("#chat").click(function() {
 				var display = $('.chatList').css("display");
 				console.log(display);
-
 			$('.chatList').toggle();
-		
+			
 				if(display=='none'){
-				$.ajax({
-					url : "chat/chatListMin.do/",
-					dataType : "json",
-					success : function(data) {
-						console.log(data);
-						  for(var i in data){
-							
-							  $('.chatList').append(
-									 
-								$('<div>').text(data[i].chattingName)
-										  .attr("class","chatBox carea")
-										  .attr("onclick","chatting("+data[i].chattingId+");")
-										  .css({
-											  "width" : "400px",
-											  "height": "100px"
-											 
-										  })
-				  
-							  );
-						  }
-					
-					},
-					error : function(data){
-						 console.log(data);
-					}
-
-				});
-				}
-				
+					$.ajax({
+						url : "chat/chatListMin.do/",
+						dataType : "json",
+						success : function(data) {
+							console.log(data);
+							 $('.chatList').children().remove();
+							  for(var i in data){	
+								 
+								  
+								  $('.chatList').append(							 
+									$('<div>').text(data[i].chattingName)
+											  .attr("class","chatBox carea")
+											  .attr("onclick","chatting("+data[i].chattingId+");")
+											  .css({
+												  "width" : "380px",
+												  "height": "100px"
+											  })			  
+								  );
+							  }
+						
+						},
+						error : function(data){
+							 console.log(data);
+						}
 	
+					});
+				}
 		});
 		
 		$('html').click(function(e) {
 			if(!$(e.target).hasClass("carea")) { 
+				console.log(e.target);
 				$(".chatList").hide();
 				}
 			
-
 			
 		})
 	});
