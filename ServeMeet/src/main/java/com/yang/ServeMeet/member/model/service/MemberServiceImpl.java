@@ -78,4 +78,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.searchPwdConfirm(hmap);
 	}
 
+	@Override
+	public int updatePoint(int userNo, int increasePoint) {
+		HashMap<String,Integer> hmap = new HashMap<String,Integer>();
+
+		hmap.put("userNo", userNo);
+		hmap.put("increasePoint", increasePoint);
+		
+		return memberDao.updatePoint(hmap);
+	}
+
 }

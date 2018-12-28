@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.point.model.dao;
 
+import com.yang.ServeMeet.point.model.vo.Attendence;
 import com.yang.ServeMeet.point.model.vo.Point;
 
 public interface PointDao {
@@ -11,4 +12,6 @@ public interface PointDao {
 	int updatePoint(Point point);
 	
 	int deletePoint(int userNo);
+
+	int inserAtt(Attendence a);
 }

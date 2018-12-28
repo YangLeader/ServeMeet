@@ -14,6 +14,8 @@ int insertMember(Member member);
 	
 	int deleteMember(String userId);
 	
+	int updatePoint(HashMap<String, Integer> hmap);
+	
 	int checkIdDuplicate(HashMap<String, Object> hmap);
 
 	int checkNameDuplicate(HashMap<String, Object> hmap);

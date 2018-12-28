@@ -30,6 +30,12 @@
 		WHERE USERID = #{userId}
 	</update>
 	
+	<update id="updatePoint" parameterType="hashmap">
+		UPDATE MEMBER
+		SET POINT = POINT+#{increasePoint}
+		WHERE USERNO = #{userNo}
+	</update>
+	
 	<delete id="deleteMember" parameterType="string">
 		DELETE FROM MEMBER WHERE USERID = #{userId}
 	</delete>

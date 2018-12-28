@@ -1,10 +1,15 @@
 package com.yang.ServeMeet.point.model.service;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.yang.ServeMeet.point.model.dao.PointDao;
+import com.yang.ServeMeet.point.model.vo.Attendence;
 import com.yang.ServeMeet.point.model.vo.Point;
 
+@Service
 public class PointServiceImpl implements PointService {
 
 	
@@ -32,6 +37,12 @@ public class PointServiceImpl implements PointService {
 	@Override
 	public int deletePoint(int userNo) {
 		return pointDao.deletePoint(userNo);
+	}
+
+
+	@Override
+	public int insertAtt(Attendence a) {
+		return pointDao.inserAtt(a);
 	}
 
 }

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,13 +26,13 @@ import com.yang.ServeMeet.point.model.vo.Point;
 public class PointController {
 	
 	private Logger logger = LoggerFactory.getLogger(PointController.class);
-	/*
+
 	@Autowired
 	private PointService pointService;
-	
+
 	@Autowired
-	private MemberService memberSerivce;
-	*/
+	private MemberService memberService;
+	
 	@RequestMapping("/point/point.do")
 	public String point() {
 		if(logger.isDebugEnabled()) logger.debug("포인트 페이지 고");
@@ -43,29 +45,45 @@ public class PointController {
 		return "point/attendence";
 	}
 	
-	/*@RequestMapping("point/pointAttend.do")
-	public String pointAttend(Point p, Model model, Attendence a, Member m) {
+	@RequestMapping(value="point/pointAttend.do", method= RequestMethod.GET)
+	public String pointAttend(Model model,Member m,@RequestParam int increasePoint,@RequestParam String pContent ) {
 		if(logger.isDebugEnabled()) logger.debug("출석체크");
 		
+		int userNo	= m.getUserNo();
 		
-		Date d = new Date();
-
+		Point p = new Point();
+		p.setUserNo(userNo);
+		p.setIncreasePoint(increasePoint);
+		p.setpContent(pContent);
 		
-		//p = new Point(m.getUserNo(),10,d,"출석에 의한 포인트");
+		Attendence a = new Attendence();
+		a.setAtt_point(increasePoint);
+		a.setUserNo(userNo);
 		
-		int result = pointService.insertPoint(p);
+		
+		int result1 = memberService.updatePoint(userNo,increasePoint);
+		int result2 = pointService.insertPoint(p);
+		int result3 = pointService.insertAtt(a);
 		
 		String loc="/";
 		String msg = "";
+		String msg2 ="";
+		String msg3 = "";
+		if(result1 > 0 ) msg = "멤버포인트 업뎃되었습니다.";
+		else msg = "멤포 업뎃 실패";
 		
-		if(result > 0 ) msg = "출석체크되었습니다.";
-		else msg = "실패";
+		if(result2 > 0) msg2 ="포인트 삽입";
+		else msg2 ="포인트db삽입 실패";
+		
+		if(result3 > 0) msg2 ="출석 삽입";
+		else msg3 ="출석db삽입 실패";
 		
 		model.addAttribute("loc",loc).addAttribute("msg",msg);
+		System.out.println(msg2);
+		System.out.println(msg3);
+		return "common/msg";
 		
-		return "common.msg";
-		
-	}*/
+	}
 	
 	
 	

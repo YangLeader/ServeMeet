@@ -9,7 +9,7 @@ public class Attendence {
 	private int att_id;
 	private int userNo;
 	private Date att_date;
-	private String att_point;
+	private int att_point;
 	
 	
 	public Attendence() {
@@ -18,7 +18,7 @@ public class Attendence {
 	}
 
 
-	public Attendence(int att_id, int userNo, Date att_date, String att_point) {
+	public Attendence(int att_id, int userNo, Date att_date, int att_point) {
 		super();
 		this.att_id = att_id;
 		this.userNo = userNo;
@@ -57,12 +57,12 @@ public class Attendence {
 	}
 
 
-	public String getAtt_point() {
+	public int getAtt_point() {
 		return att_point;
 	}
 
 
-	public void setAtt_point(String att_point) {
+	public void setAtt_point(int att_point) {
 		this.att_point = att_point;
 	}
 

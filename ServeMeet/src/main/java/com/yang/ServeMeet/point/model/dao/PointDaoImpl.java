@@ -2,9 +2,12 @@ package com.yang.ServeMeet.point.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import com.yang.ServeMeet.point.model.vo.Attendence;
 import com.yang.ServeMeet.point.model.vo.Point;
 
+@Repository
 public class PointDaoImpl implements PointDao {
 
 	@Autowired
@@ -29,6 +32,11 @@ public class PointDaoImpl implements PointDao {
 	@Override
 	public int deletePoint(int userNo) {
 		return sqlSession.delete("point.deletePoint",userNo);
+	}
+
+	@Override
+	public int inserAtt(Attendence a) {
+		return sqlSession.insert("point.inserAttendence",a);
 	}
 
 }
