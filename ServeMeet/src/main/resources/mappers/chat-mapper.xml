@@ -42,7 +42,7 @@
 	<select id="selectChat" parameterType="int" resultType="Chatting">
 		select * from ChattingList where CHATTINGID=#{chattingId}
 	</select>
-	<select id="selectChatLog" parameterType="int" resultMap="chatLog">
+	<select id="selectChatLastLog" parameterType="int" resultMap="chatLog">
 		select * from (select LG.CHATTINGID CHATTINGID,userNo,chDate,chContent,chstatus,(select CHATTINGNAME from CHATTINGLIST L where LG.chattingId=L.CHATTINGID) CHATTINGNAME from CHATTINGLOG LG where CHATTINGID=#{chattingId} and CHSTATUS='N' order by CHDATE desc)where rownum=1
 	</select>
 
