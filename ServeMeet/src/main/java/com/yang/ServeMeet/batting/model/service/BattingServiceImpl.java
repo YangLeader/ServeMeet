@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.batting.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +78,7 @@ public class BattingServiceImpl implements BattingService {
 	}
 	
 	@Override
-	public List<Map<String,String>> battingAllocation(int battingId, String battingType){
+	public List<Map<String,Object>> battingAllocation(int battingId, String battingType){
 		
 		Map<String,Object> hmap = new HashMap<>();
 		
@@ -85,6 +86,13 @@ public class BattingServiceImpl implements BattingService {
 		hmap.put("battingType", battingType);
 		
 		return battingDao.battingAllocation(hmap);
+	}
+	
+	@Override
+	public int battingPoint(List<Map<String,Object>> list) {
+		
+		
+		return battingDao.battingPoint(list);
 	}
 
 }

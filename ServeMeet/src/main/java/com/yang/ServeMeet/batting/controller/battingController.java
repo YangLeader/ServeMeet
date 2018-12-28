@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.batting.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,19 +93,9 @@ public class battingController {
 	public String battingClose(@RequestParam int battingId, Model model, RedirectAttributes rat){
 		 
 		
-		Batting batting = battingService.battingSelect(battingId);
-		
-		String battingType = batting.getBattingPNumA() > batting.getBattingPNumB() ? "A" : "B";
-		
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingAllocation(battingId,battingType));
-		
-		System.out.println(list);
-		
-		
-		
 		
 		int result = battingService.battingClose(battingId);
-		
+				
 		boolean check = result >0;
 		
 		String msg = check ? "배팅을 종료 하였습니다." : "배팅을 종료하지 못했습니다.";
@@ -133,9 +124,47 @@ public class battingController {
 	@RequestMapping("/batting/battingAllocation.ba")
 	public String battingAllocation(@RequestParam int battingId, Model model) {
 		
+		Batting batting = battingService.battingSelect(battingId);
 		
 		
+		// 임의값 지정, 종료 시 매칭후기에서 이긴팀을 받아 넘겨줄 예정.
+		String battingType = batting.getBattingPNumA() > batting.getBattingPNumB() ? "A" : "B";
 		
-		return "/";
+		// 배팅에서 이긴 사람의 목록을 불러오기
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(battingService.battingAllocation(battingId,battingType));
+		
+		System.out.println(list);
+		
+		float aNum = batting.getBattingPNumA();
+		float bNum = batting.getBattingPNumB();
+		
+		System.out.println("aNum : "+aNum+"\nbNum : "+bNum);
+		
+		System.out.println("battingType = "+battingType);
+		
+		float pct = battingType.equals("A") ? aNum/(aNum+bNum)*100 : bNum/(bNum+aNum)*100; // 인원수 퍼센트 계산식
+		
+		int alloc = Math.round(((100 - pct) *15/1000 + 1) * 100); // 배당계산식 중 반올림을 위해 100을 곱해 int형으로 저장
+		// 배당만을 보기 위해서는 float alloc = alloc/100 을 해줘야 배율이 나오지만, 포인트를 100점 걸었다는 가정 하에 int값만 보냄. 추후 배팅 포인트 선택 가능 시 추가요망.
+		
+		System.out.println("pct : "+pct+"\nac1 = "+alloc);
+		
+		Map<String,Object> hmap = new HashMap<String,Object>();
+		List<Map<String,Object>> userList= new ArrayList<Map<String,Object>>();
+		for(int i= 0 ; i < list.size() ; i++) {
+			hmap = list.get(i);			
+			hmap.put("alloc", alloc);
+			userList.add(hmap);
+		}
+		
+		int pointResult = battingService.battingPoint(userList);
+		
+		if(pointResult == list.size()) {
+			System.out.println("#포인트,#지급,#성공적");
+		} else {
+			System.out.println("포인트 지급 실패");
+		}
+		
+		return "redirect:/batting/battingClose.ba?battingId="+battingId;
 	}
 }
