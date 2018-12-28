@@ -295,7 +295,7 @@
 						if(data.length != 0){
 							var html = "<ul class='itemframe'>";
 							html += "<li class='item'>";
-							html += "<label for='locAll'><input type='checkbox' class='locCkbx' id='locAll' value='"+locId+"'>"+locId+" 전체</label>";
+							html += "<label for='locAll'><input type='checkbox' class='locCkbx' id='locAll' value='"+locId+" 전체'>"+locId+" 전체</label>";
 							html += "</li>";
 							html += "<br>";
 							for(var i in data){
@@ -335,7 +335,7 @@
 									//console.log($('.locCkbx[value="'+compareStr2+'"]'));
 									if(compareStr2.match('전체')){
 										console.log("전체선택되있음");
-										$('.locCkbx[value="'+compareStr3+'"]').prop('checked', true);
+										$('.locCkbx[value="'+compareStr3+' 전체"]').prop('checked', true);
 										//$('input:contains("'+compareStr2+'")').css('background-color','red');
 									}else{
 										console.log("전체선택안되있음");
@@ -361,9 +361,11 @@
 	function lastSelect(obj) {
 		$(".locCkbx").change(function () {
 			fullName = locName +locId + $(this).val();
+			console.log("디스:"+ $(this).val());
+			console.log("locId : " + locId);
 			if($(this).is(":checked")){
 				
-				if($(this).val() == locId){
+				if($(this).val() == (locId + " 전체")){
 					console.log("전체선택");
 					console.log("1번 : " + $(this).val());
 					console.log("locName : " + locName);
@@ -454,6 +456,12 @@
 		alert("현재 지역 배열 값 : " + arr + "\n" + "선택된 값 : " + delAtag);
 		$("a").remove(":contains("+delAtag+")");
 		arr.splice(arr.indexOf(delAtag), 1);
+		
+		var delCkbx = delAtag.substring(delAtag.indexOf(" ")+1);
+		console.log(delCkbx);
+		
+		$('.locCkbx[value="'+delCkbx+'"]').prop('checked', false);
+		
 		
 	}
 /* 	function divClickEvent(){
