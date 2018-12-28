@@ -14,4 +14,6 @@ public interface PointDao {
 	int deletePoint(int userNo);
 
 	int inserAtt(Attendence a);
+
+	Attendence selectAtt(int userNo);
 }

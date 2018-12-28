@@ -39,4 +39,9 @@ public class PointDaoImpl implements PointDao {
 		return sqlSession.insert("point.inserAttendence",a);
 	}
 
+	@Override
+	public Attendence selectAtt(int userNo) {
+		return sqlSession.selectOne("point.selectAttendence",userNo);
+	}
+
 }

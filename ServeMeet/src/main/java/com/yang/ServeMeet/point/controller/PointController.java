@@ -3,6 +3,8 @@ package com.yang.ServeMeet.point.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +42,21 @@ public class PointController {
 	}
 	
 	@RequestMapping("/point/attendence.do")
-	public String attendence() {
+	//@SessionAttribute()
+	public String attendence(Model model,HttpSession session) {
 		if(logger.isDebugEnabled()) logger.debug("출석체크 페이지 고");
+		
+		//Attendence a = pointService.selectOne(session.getAttribute("userNo"))
+		
 		return "point/attendence";
 	}
+	
+	
 	
 	@RequestMapping(value="point/pointAttend.do", method= RequestMethod.GET)
 	public String pointAttend(Model model,Member m,@RequestParam int increasePoint,@RequestParam String pContent ) {
 		if(logger.isDebugEnabled()) logger.debug("출석체크");
-		
+
 		int userNo	= m.getUserNo();
 		
 		Point p = new Point();

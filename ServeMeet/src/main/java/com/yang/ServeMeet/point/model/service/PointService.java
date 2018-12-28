@@ -9,6 +9,8 @@ public interface PointService {
 	
 	Point selectOne(int userNo);
 	
+	Attendence selectAtt(int userNo);
+	
 	int updatePoint(Point point);
 	
 	int deletePoint(int userNo);

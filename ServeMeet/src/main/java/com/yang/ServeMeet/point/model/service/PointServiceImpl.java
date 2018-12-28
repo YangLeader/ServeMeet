@@ -28,6 +28,7 @@ public class PointServiceImpl implements PointService {
 	public Point selectOne(int userNo) {
 		return pointDao.selectOne(userNo);
 	}
+	
 
 	@Override
 	public int updatePoint(Point point) {
@@ -43,6 +44,11 @@ public class PointServiceImpl implements PointService {
 	@Override
 	public int insertAtt(Attendence a) {
 		return pointDao.inserAtt(a);
+	}
+
+	@Override
+	public Attendence selectAtt(int userNo) {
+		return pointDao.selectAtt(userNo);
 	}
 
 }
