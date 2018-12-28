@@ -110,6 +110,18 @@
 	
 	}
 
+	.delTag{
+		margin-left: 3px;
+		margin-bottom: 2px;
+		display: inline-block;
+		background: url(/resources/images/close.png) no-repeat 0 0;
+		background-size: cover;
+		width: 10px;
+		height: 10px;
+		text-indent: -9999px;
+		vertical-align: middle;
+		
+	}
 
 </style>
 </head>
@@ -234,6 +246,8 @@
 		$("#midDiv").children("ul").children("li").children(".sca").click(function() {
 			locId = $(this).text();
 			console.log("midlocId : " + locId);
+			//repleId = locId.replace(/ /g, '');
+			//console.log("공백제거:"+ repleId);
 			if(locId.match('전체')){
 				$('#smallDiv *').remove();
 			
@@ -256,7 +270,8 @@
 				    }
 				}
 				
-				$("div #bottomDiv").append("<a class='btn-xs btn-default' id='"+locId+"' onclick='check(this);'>"+locId+"</a>");
+				$("div #bottomDiv").append("<a class='btn-xs btn-default' id='"+locId+"' onclick='check(this);'>"+locId+"<span class='delTag'></span></a>");
+				//$("div #bottomDiv").append("<button class='btn-xs btn-default' type='button' onclick='check(this);' id='"+locId+"'>"+locId+"</button>");
 				arr.push(locId);
 				if(arr.indexOf())
 				console.log("arr : " + arr);
@@ -275,7 +290,7 @@
 					success: function(data) {
 						console.log(data);
 						
-						console.log("어레이 : " + arr);
+						console.log("현재 arr에 들어있는 값 : " + arr);
 						
 						if(data.length != 0){
 							var html = "<ul class='itemframe'>";
@@ -288,11 +303,11 @@
 								if(i % 3 == 0 && i != 0){
 									html += "<br>";
 									html += "<li class='item'>";
-									html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
+									html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+locId+" "+data[i]+"'>"+data[i]+"</label>";
 									html += "</li>";
 								}else{								
 									html += "<li class='item'>";
-									html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+data[i]+"'>"+data[i]+"</label>";
+									html += "<label for='locCk"+i+"'><input type='checkbox' class='locCkbx' id='locCk"+i+"' value='"+locId+" "+data[i]+"'>"+data[i]+"</label>";
 									html += "</li>";
 								}
 							
@@ -304,16 +319,29 @@
 							for(var j in arr){
 								//console.log(j + " : " + arr[j]);
 								var compareStr = arr[j].substr(arr[j].lastIndexOf(" ")+1,7);
-								console.log("compareStr : " + compareStr);
-						
-								var index = $.inArray(compareStr, data);
-								if( index != -1){
-					
-									$('#locCk'+index).prop('checked', true);
-								}else if($.inArray(locId, arr) != -1){
-									console.log("전체 체크여부 비교 arr :" + arr);
-									console.log("전체 체크여부 :" + locId);
-									$('#locAll').prop('checked', true);
+								var compareStr2 = arr[j].substr(arr[j].indexOf(" ")+1, 15);
+								var compareStr3 = compareStr2.substring(0,compareStr2.lastIndexOf(" "));
+								//console.log("compareStr : " + compareStr);
+								var arrVal = arr[j];
+								console.log("compareStr2 전: " + arrVal);
+								console.log("compareStr2 후: " + compareStr2);
+								console.log("compareStr3 :" + compareStr3);
+								console.log("locId:" + locId);
+								//console.log("arrj" + arr[j]);
+								var compareCkbx = $.inArray(arr[j], arr);
+								
+								if( compareCkbx != -1){
+									console.log("이전에 체크된 적 있음 : " + compareStr2);
+									//console.log($('.locCkbx[value="'+compareStr2+'"]'));
+									if(compareStr2.match('전체')){
+										console.log("전체선택되있음");
+										$('.locCkbx[value="'+compareStr3+'"]').prop('checked', true);
+										//$('input:contains("'+compareStr2+'")').css('background-color','red');
+									}else{
+										console.log("전체선택안되있음");
+										$('.locCkbx[value="'+compareStr2+'"]').prop('checked', true);										
+									}
+									console.log("===============================")
 								}
 							}
 							
@@ -361,7 +389,7 @@
 					        }
 					    }
 					}
-					 arr.push(locName + " " + locId);
+					 arr.push(locName + " " + locId + " 전체");
 					 /* if((locName + ' 전체')){
 						arr.splice(arr.indexOf(locName + ' 전체'), 1); 
 					 } */
@@ -374,37 +402,41 @@
 					 }
 					 console.log("수정후 arr: " + arr);
 					
-					$("div #bottomDiv").append("<a class='btn-xs btn-default' onclick='check(this);' id='"+locId+"'>"+locName+" "+locId+" 전체</a>");
+					$("div #bottomDiv").append("<a  href='javascript:void(0);' class='btn-xs btn-default' onclick='check(this);' id='"+locId+"'>"+locName+" "+locId+" 전체<span class='delTag'></span></a>");
+					//$("div #bottomDiv").append("<button class='btn-xs btn-default' type='button' onclick='check(this);'  id='"+locId+"'>"+locName+" "+locId+" 전체</button>");
 				}else{
 					console.log("2번");
 					console.log("2번 다음 :"+ locId);
+					console.log("locName:" +locName);
+					console.log("$(this).val():" + $(this).val());
 					$('input[id="locAll"]').prop('checked', false);
 					$("a[id='"+locId+"']").remove();
 					console.log("locName : " + locName);
 					$("a[id='"+locName+" 전체']").remove();
-					arr.push(locName+" "+locId+" "+$(this).val());
-					
-					if($.inArray((locName + " " + locId) ,arr) != -1){
+					arr.push(locName+" "+$(this).val());
+					console.log(locName + " " + locId + " 전체");
+					if($.inArray((locName + " " + locId + " 전체") ,arr) != -1){
+						console.log(locName + " " + locId);
 						//console.log("강남구 있음 위치 : " + test);
-						arr.splice($.inArray((locName + " " + locId), arr),1);
+						arr.splice($.inArray((locName + " " + locId + " 전체"), arr),1);
 					}
 					
 					if($.inArray(locName + " 전체", arr) != -1){
 						arr.splice($.inArray(locName + " 전체", arr), 1);
 					}
 					//compareArr.push($(this).val());
-					$("div #bottomDiv").append("<a class='btn-xs btn-default' onclick='check(this);'>"+locName+" "+locId+" "+$(this).val()+"</a>");
-					
+					$("div #bottomDiv").append("<a class='btn-xs btn-default' onclick='check(this);'>"+locName+" "+$(this).val()+"<span class='delTag'></span></a>");
+					//$("div #bottomDiv").append("<button class='btn-xs btn-default' type='button' onclick='check(this);'>"+locName+" "+locId+" "+$(this).val()+ "</button>");
 				}
 				
 				
 			}else{
-				console.log("클릭해체한값 : " + locId + " " +$(this).val());
+				console.log("클릭해체한값 : " + $(this).val());
 				console.log("현재 arr : " + arr);
 				console.log("locName : " + locName);
 				//var rmvLoc = arr.splice(arr.indexOf(locName + " " + locId + " " +$(this).val()), 1);
-				
-				var rmvLoc = arr.splice(arr.indexOf($(this).val()), 1);
+				console.log(locName + $(this).val());
+				var rmvLoc = arr.splice(arr.indexOf(locName + " " + $(this).val()), 1);
 				console.log("rmvLoc : " + rmvLoc);
 				$("a").remove(":contains("+rmvLoc+")");
 				
@@ -417,9 +449,12 @@
 	}
 	
 	// 내일 여기서부터 작업
-	function check(){
-		var test = $(this).text();
-		console.log(test);
+	function check(obj){
+		var delAtag = $(obj).text();
+		alert("현재 지역 배열 값 : " + arr + "\n" + "선택된 값 : " + delAtag);
+		$("a").remove(":contains("+delAtag+")");
+		arr.splice(arr.indexOf(delAtag), 1);
+		
 	}
 /* 	function divClickEvent(){
 		$('#bottomDiv').children('a').each(function(obj, index){
