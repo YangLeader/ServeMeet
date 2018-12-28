@@ -20,6 +20,8 @@
 		<typeAlias type="com.yang.ServeMeet.common.StringArrayTypeHandler"
 			alias ="strArrTypeHandler"/>
 		<typeAlias type="com.yang.ServeMeet.point.model.vo.Point" alias="Point"/>
+		<typeAlias type="com.yang.ServeMeet.point.model.vo.Attendence" alias="Attendence"/>
+	
 	</typeAliases>
 	
 

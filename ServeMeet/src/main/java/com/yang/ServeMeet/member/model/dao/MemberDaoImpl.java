@@ -67,4 +67,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.searchPwdConfirm", hmap);
 	}
 
+	@Override
+	public int updatePoint(HashMap<String,Integer> hmap) {
+		
+		return sqlSession.update("member.updatePoint",hmap);
+	}
+
 }

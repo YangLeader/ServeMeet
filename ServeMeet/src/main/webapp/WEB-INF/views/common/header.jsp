@@ -166,7 +166,7 @@ float: right;
   
   
   
-  <li><a href="${pageContext.request.contextPath}/point/Pointinfo.po">포인트</a> </li>
+  <li><a href="${pageContext.request.contextPath}/point/point.do">포인트</a> </li>
                             </ul>
                         </div>
                     </div>

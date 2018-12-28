@@ -11,7 +11,13 @@
 
 	<insert id="insertPoint" parameterType="Point">
 		INSERT INTO POINT VALUES(
-		 #{userNo},#{increasePoint},#{pDate},#{pContent}
+		 #{userNo},#{increasePoint},DEFAULT,#{pContent}
+		)
+	</insert>
+	
+	<insert id="inserAttendence" parameterType="Attendence">
+		INSERT INTO ATTENDENCE VALUES(
+		SEQ_ATT.NEXTVAL,#{userNo},DEFAULT,#{att_point}
 		)
 	</insert>
 
