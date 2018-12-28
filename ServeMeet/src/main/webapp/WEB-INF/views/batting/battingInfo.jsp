@@ -49,7 +49,7 @@
 	<br><br><br>
 	
 	<div>
-		<input type="button" value="배팅 종료" onclick="location.href='${pageContext.request.contextPath}/batting/battingClose.ba?battingId=${batting.battingId}';" />
+		<input type="button" value="배팅 종료" onclick="location.href='${pageContext.request.contextPath}/batting/battingAllocation.ba?battingId=${batting.battingId}';" />
 	</div>
 
 	<!-- <div class="progress">
