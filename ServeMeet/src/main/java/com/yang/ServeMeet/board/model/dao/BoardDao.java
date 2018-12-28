@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.board.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,4 +35,8 @@ public interface BoardDao {
 	void updateViewCount(int boardNo);
 
 	int insertBoardComment(BoardComment bComment);
+
+	ArrayList<BoardComment> selectCommentList(int no);
+
+	int selectOrder();
 }
