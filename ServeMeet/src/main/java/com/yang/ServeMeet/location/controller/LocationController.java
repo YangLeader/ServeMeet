@@ -18,7 +18,7 @@ public class LocationController {
 
 	@Autowired
 	LocationService locService;
-	@RequestMapping("location/location.do")
+	@RequestMapping("/location/location.do")
 	public String location(Model model) {
 		List<Location> list = locService.selectLoc();
 		// System.out.println(list);
@@ -28,7 +28,7 @@ public class LocationController {
 		return "matching/matching";
 	}
 	
-	@RequestMapping("location/midLocation.do")
+	@RequestMapping("/location/midLocation.do")
 	@ResponseBody
 	public List<Location> midLoc(@RequestParam String bloc) {
 		/*System.out.println("con:"+bloc);
@@ -58,7 +58,7 @@ public class LocationController {
 		
 	}
 	
-	@RequestMapping("location/smallLocaion.do")
+	@RequestMapping("/location/smallLocaion.do")
 	@ResponseBody
 	public List<Location> smlLoc(@RequestParam String sloc){
 		System.out.println("sloc_con : " + sloc);

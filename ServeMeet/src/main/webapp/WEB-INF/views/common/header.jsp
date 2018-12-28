@@ -108,8 +108,9 @@
 				<div class="navigation">
 					<div id="navigation">
 						<ul>
-							<li class="active"><a href="index.html" title="Home">Home</a></li>
-							<li><a href="menu.html" title="Menu">매칭</a></li>
+							<li><a
+								href="${pageContext.request.contextPath }/location/location.do"
+								title="매칭">매칭</a></li>
 							<!-- <li class="has-sub"><a href="service-list.html" title="Service List">Service List</a>
 
                                     <ul>
@@ -125,10 +126,6 @@
 								href="${pageContext.request.contextPath }/board/boardList.do"
 								title="Contact Us">게시판</a></li>
 
-							<li><a
-								href="${pageContext.request.contextPath }/batting/battingList.ba"
-								title="Styleguide">배팅</a></li>
-
 
                                 <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting">배팅</a>
 	                                <ul>
@@ -136,7 +133,7 @@
                                         <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="battingHistory">종료된 배팅</a></li>
 	                                </ul>
                                 </li>
-  <li><a href="${pageContext.request.contextPath}/point/point.do">포인트</a> </li>
+  							<li><a href="${pageContext.request.contextPath}/point/point.do">포인트</a> </li>
                             </ul>
                         </div>
                     </div>

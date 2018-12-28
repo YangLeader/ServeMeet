@@ -114,7 +114,7 @@
 		margin-left: 3px;
 		margin-bottom: 2px;
 		display: inline-block;
-		background: url(/resources/images/close.png) no-repeat 0 0;
+		background: url(${pageContext.request.contextPath }/resources/images/close.png) no-repeat 0 0;
 		background-size: cover;
 		width: 10px;
 		height: 10px;
@@ -200,7 +200,7 @@
 			locName = $(this).text();
 			console.log("지역명:"+locName);
 				$.ajax({
-					url : "/location/midLocation.do",
+					url : "${pageContext.request.contextPath }/location/midLocation.do",
 					type : "GET",
 					datatype: "JSON",
 					data : {bloc:locId},
@@ -282,7 +282,7 @@
 				
 			}else{
 				$.ajax({
-					url: "/location/smallLocaion.do",
+					url: "${pageContext.request.contextPath }/location/smallLocaion.do",
 					type: "GET",
 					datatype: "JSON",
 					data: {sloc:locId},
