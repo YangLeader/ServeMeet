@@ -54,6 +54,6 @@ public class ChattingDaoImpl implements ChattingDao {
 	@Override
 	public ChattingLog selectChatLog(int chattingId) {
 		// TODO Auto-generated method stub
-		return sst.selectOne("chat.selectChatLog",chattingId);
+		return sst.selectOne("chat.selectChatLastLog",chattingId);
 	}
 }

@@ -3,7 +3,7 @@
   $(document).ready(function(){
   	"use strict";
 	 if( $( window ).width() >= "768" ) {
-		$(".top-header").sticky({topSpacing:0});	
+		$(".header").sticky({topSpacing:0});	
     }
 
   });

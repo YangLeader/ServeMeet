@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <footer>
 	<div class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="footer-widget mb30">
-                        <h2 class="footer-title">About restaurant</h2>
+                        <h2 class="footer-title">한글</h2>
                         <p>Lorem ipsum dolor sit amet lorem is consectetur adipiscing eti mteleisede urna id, aliquam dignsim liburabitur tortor vitaecus tepor suscipit.</p>
                         <div class="footer-social mb60">
                             <ul class="listnone">
@@ -83,4 +83,3 @@
     <!-- Back to top -->
     <script src="${pageContext.request.contextPath}/resources/js/back-to-top.js" type="text/javascript"></script>
    </footer>
-</html>
