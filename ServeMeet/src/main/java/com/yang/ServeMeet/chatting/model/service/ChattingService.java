@@ -21,4 +21,6 @@ public interface ChattingService {
 
 	Chatting selectChat(int chatNo);
 
+	ChattingLog selectChatLog(int chattingId);
+
 }

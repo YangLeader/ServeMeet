@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.chatting.model.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.sql.Date;
 
 public class ChattingLog {
 
@@ -8,16 +9,31 @@ public class ChattingLog {
 	
 	private int chattingId;
 	private int userNo;
-	private Date chDate;
+	private Timestamp chDate;
 	private String chContent;
 	private String chStatus;
+	private String chattingName;
+				   
 
 	public ChattingLog() {
 		super();
 	}
 
 	
-	public ChattingLog(int userNo, Date chDate, String chContent) {
+	public ChattingLog(int chattingId,int userNo, Timestamp chDate, String chContent, String chStatus, String chattingName) {
+		super();
+		this.chattingId = chattingId;
+		this.userNo = userNo;
+		this.chDate = chDate;
+		this.chContent = chContent;
+		this.chStatus = chStatus;
+		this.chattingName = chattingName;
+	}
+
+
+
+
+	public ChattingLog(int userNo, Timestamp chDate, String chContent) {
 		super();
 		this.userNo = userNo;
 		this.chDate = chDate;
@@ -35,7 +51,7 @@ public class ChattingLog {
 	}
 
 
-	public ChattingLog(int chattingId, int userNo, Date chDate, String chContent, String chStatus) {
+	public ChattingLog(int chattingId, int userNo, Timestamp chDate, String chContent, String chStatus) {
 		super();
 		this.chattingId = chattingId;
 		this.userNo = userNo;
@@ -60,11 +76,11 @@ public class ChattingLog {
 		this.userNo = userNo;
 	}
 
-	public Date getChDate() {
+	public Timestamp getChDate() {
 		return chDate;
 	}
 
-	public void setChDate(Date chDate) {
+	public void setChDate(Timestamp chDate) {
 		this.chDate = chDate;
 	}
 
@@ -84,10 +100,18 @@ public class ChattingLog {
 		this.chStatus = chStatus;
 	}
 
+	public String getChattingName() {
+		return chattingName;
+	}
+	
+	
+	public void setChattingName(String chattingName) {
+		this.chattingName = chattingName;
+	}
 	@Override
 	public String toString() {
 		return "ChattingLog [chattingId=" + chattingId + ", userNo=" + userNo + ", chDate=" + chDate
-				+ ", chContent=" + chContent + ", chStatus=" + chStatus + "]";
+				+ ", chContent=" + chContent + ", chStatus=" + chStatus + ", chattingName=" + chattingName +"]";
 	}
 	
 	
