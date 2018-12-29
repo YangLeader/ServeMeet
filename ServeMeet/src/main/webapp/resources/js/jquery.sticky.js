@@ -61,7 +61,7 @@
                 'width': '',
                 'position': '',
                 'top': '',
-                'background-color':'#c11727'
+                'background-color':'#fff'
               });
             s.stickyElement.parent().removeClass(s.className);
             s.stickyElement.trigger('sticky-end', [s]);
@@ -89,7 +89,7 @@
             s.stickyElement
               .css('width', newWidth)
               .css('position', 'fixed')
-              .css('top', newTop).css("background-color","#d41b2c");
+              .css('top', newTop).css("background-color","#fff");
             s.stickyElement.parent().addClass(s.className);
 
             if (s.currentTop === null) {
