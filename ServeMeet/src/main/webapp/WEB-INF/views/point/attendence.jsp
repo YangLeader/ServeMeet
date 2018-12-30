@@ -61,19 +61,8 @@
 <body>
 <form id = attendFrm method="post">
 
-
-<div class="page-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="page-caption">
-          <h2 class="page-title"> 출석체크</h2>
-          <p> 출석체크를 위한 페이지 입니다. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+	<br>
+	<br>
 	<div class="cal" align = "center">
 	  <div class="title"> 
       <div class = "month">
@@ -149,17 +138,42 @@
 	<c:import url="../common/footer.jsp"/>
 	</form>
 	<script>
-		var attFlag=false;
+	var attFlag=false;
+	
+	$(document).ready(function(){
+		var today = new Date();
+		var dd = (today.getDate());
+		$.ajax({
+			
+			url : "${pageContext.request.contextPath}/point/attStamp.do",
+			data : {},
+			success : function(data){
+				console.log("data :" + data);
+				console.log("today : " +dd);
+				for(var i = 1; i<=data[0]; i++){
+				$("#date"+data[i]).html("<img src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
+				if(data[i]==dd){attFlag = true;}
+
+				console.log("attFlag :" + attFlag);
+				}
+			}, error : function(jqxhr, textStatus, errorThrown){
+                console.log("ajax 이거실패임? 처리 실패");
+                //에러로그
+                console.log(jqxhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+			
+		});
+		
+	})
+	
+		
 	
 		function attend(today){
-			/* if(){
-				alert("로그인 후 이용해 주세요.");
-				location.href="${pageContext.request.contextPath}/member/memberLoginView.do";
-			}
-			
-			
-			/* var url = "${pageContext.request.contextPath}/point/pointAttend.do?increasePoint=1";
-			$("#attendFrm").attr("action",url).submit(); */
+			if(attFlag==true){
+				alert("이미 출석하셨습니다.");
+			}else{
 			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/point/pointAttend.do",
@@ -168,12 +182,9 @@
 						},
 				success : function(data){
 					console.log("data : " +data);
-					if(data==1){
 					$("#date"+today).html("<img src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
 					attFlag = true;
-					}else{
-						alert("이미 출석하셨습니다.");
-					}
+					alert("출석되었습니다.");
 	            }, error : function(jqxhr, textStatus, errorThrown){
 	                console.log("ajax 처리 실패");
 	                //에러로그
@@ -182,7 +193,7 @@
 	                console.log(errorThrown);
 	            }
 			});
-			
+			}
 			}
 		
 	</script>

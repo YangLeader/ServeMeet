@@ -1,5 +1,7 @@
 package com.yang.ServeMeet.point.model.dao;
 
+import java.util.List;
+
 import com.yang.ServeMeet.point.model.vo.Attendence;
 import com.yang.ServeMeet.point.model.vo.Point;
 
@@ -15,5 +17,7 @@ public interface PointDao {
 
 	int inserAtt(Attendence a);
 
-	Attendence selectAtt(int userNo);
+	List<Attendence> selectAtt(int userNo);
+
+	int selectAttCnt(int userNo);
 }
