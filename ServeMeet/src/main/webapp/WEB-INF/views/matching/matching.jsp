@@ -15,7 +15,7 @@
 		<div class="condition" id = "person"><span>인원</span></div>
 		<div class="condition" id = "cal"><span>날짜</span></div>	
 	</div>
-	<div class="in scrollbar-primary scrollbar">
+	<div class="in scrollbar-primary scrollbar carDiv">
 		<ul class="itemframe">
 			<li class="item" id="서울특별시"><span class="sca">서울</span></li>
 			<li class="item" id="경기도"><span class="sca">경기</span></li>
@@ -39,10 +39,10 @@
 			<li class="item" id="제주특별자치도"><span class="sca">제주</span></li>
 		</ul>
 	</div>
-	<div class="in scrollbar-primary scrollbar" id="midDiv">
+	<div class="in scrollbar-primary scrollbar carDiv" id="midDiv">
 		<br /> &nbsp; ← 지역을 선택해주세요.
 	</div>
-	<div class="in scrollbar-primary scrollbar" id="smallDiv"></div>
+	<div class="in scrollbar-primary scrollbar carDiv" id="smallDiv"></div>
 	<div class="in scrollbar-primary scrollbar" id="bottomDiv" style=""></div>
 </div>
 

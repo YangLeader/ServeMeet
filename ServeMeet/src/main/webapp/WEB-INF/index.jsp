@@ -16,9 +16,9 @@
 		<c:import url="views/common/header.jsp" />
 	</header>
 	<section style="margin-top: 50px; ">
-		<article class="titleAt" style="margin-bottom: 10px;">
+		<article class="titleAt">
 			<div class="mainTitle">
-				<h1>
+				<h1 style="color: #5e73de">
 					<b>어떤 만남을 </b>
 				</h1>&nbsp;
 				<h2> 찾고 싶으세요?</h2>
@@ -26,15 +26,68 @@
 			<c:import url="views/matching/matching.jsp" />
 		</article>
 		<article class="subArt" >
-			<div class="subContent" style="position: relative; ">
-				<div class="sContent" style="width: 595px; height: 800px; border: 1px black solid ; display: inline-block; margin-right: 10px">
-
-				</div><div style="width: 595px; height: 800px;  display: inline-block;">
-					<div class="sContent"  style="width: 100%; height: 395px; border: 1px black solid; margin-bottom: 10px;">
-					
+			<div class="subContent">
+				<div class="sContent matting col-lg-7 listSec">
+					<div>
+						<div class="midTitle">
+							<a>
+								<span class="midTitleName"><b>소개팅</b></span>
+								<span>+</span>
+							</a>
+						</div>
+						<div class="sList">
+						</div>
 					</div>
-					<div class="sContent" style="width: 100%; height: 395px; border: 1px black solid; ">
-					
+					<div>
+						<div class="midTitle">
+							<a>
+								<span class="midTitleName"><b>e-스포츠</b></span>
+								<span>+</span>
+							</a>
+						</div>
+						<div class="sList">
+						</div>
+					</div>
+					<div>
+						<div class="midTitle">
+							<a>
+								<span class="midTitleName"><b>소모임</b></span>
+								<span>+</span>
+							</a>
+						</div>
+						<div class="sList">
+						</div>
+					</div>
+					<div>
+						<div class="midTitle">
+							<a>
+								<span class="midTitleName"><b>스포츠</b></span>
+								<span>+</span>
+							</a>
+						</div>
+						<div class="sList">
+						</div>
+					</div>
+				</div><div class="col-lg-5 listSec contentList">
+					<div class="sContent conList">
+						<div class="midTitle">
+							<a>
+								<span class="midTitleName"><b>자유게시판</b></span>
+								<span>+</span>
+							</a>
+						</div>
+						<div class="sList">
+						</div>
+					</div>
+					<div class="sContent conList" >
+						<div class="midTitle">
+							<a>
+								<span class="midTitleName"><b>후기게시판</b></span>
+								<span>+</span>
+							</a>
+						</div>
+						<div class="sList">
+						</div>
 					</div>
 
 				</div>
