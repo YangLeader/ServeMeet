@@ -331,4 +331,35 @@ public class BoardController {
 				
 		return "common/msg";
 	}
+	
+	@RequestMapping("/board/updateComment.do")
+	public String updateComment(BoardComment bComment, Model model) {
+		
+		int result;
+		
+		try {
+					
+			result = boardService.updateBoardComment(bComment);
+					
+		} catch(Exception e) {
+					
+			throw new BoardException(e.getMessage());
+					
+		}
+				
+		String loc = "/board/boardList.do";
+		String msg = "";
+				
+		if(result > 0) {
+			msg = "댓글 수정 성공!";
+			loc = "/board/boardView.do?no="+bComment.getBoardNo();
+					
+		} else {
+			msg = "댓글 수정 실패!";
+		}
+			
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+				
+		return "common/msg";
+	}
 }

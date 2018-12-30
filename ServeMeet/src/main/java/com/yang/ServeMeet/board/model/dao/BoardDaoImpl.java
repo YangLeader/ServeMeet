@@ -106,4 +106,10 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("boardComment.selectOrder");
 	}
 
+	@Override
+	public int updateBoardComment(BoardComment bComment) {
+		
+		return sqlSession.update("boardComment.updateBoardComment", bComment);
+	}
+
 }
