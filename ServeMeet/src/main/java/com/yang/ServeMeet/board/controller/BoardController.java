@@ -101,7 +101,7 @@ public class BoardController {
 				} catch (IllegalStateException | IOException e) {
 					e.printStackTrace();
 				}
-						
+	
 				BoardFile bf = new BoardFile();
 				bf.setOriginName(originName);
 				bf.setChangeName(changeName);

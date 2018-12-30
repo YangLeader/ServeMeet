@@ -62,26 +62,17 @@
 <form id = attendFrm method="post">
 
 
-<div class="page-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="page-caption">
           <h2 class="page-title"> 출석체크</h2>
           <p> 출석체크를 위한 페이지 입니다. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 	<div class="cal" align = "center">
 	  <div class="title"> 
-      <div class = "month">
-      <span >1월 출석체크</span>
-      </div>
-      <div class = "chkBtn">
-      <button class="btn-lg btn-default" onclick="attend(<%=today%>);">출석하기</button>
-      </div>
+	      <div class = "month">
+		      <span >1월 출석체크</span>
+		  </div>
+		  <div class = "chkBtn">
+		      <button class="btn-lg btn-default" onclick="attend(<%=today%>);">출석하기</button>
+	      </div>
       </div>
       <table>
       <thead>

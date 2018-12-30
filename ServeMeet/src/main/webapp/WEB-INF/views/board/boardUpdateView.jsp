@@ -43,14 +43,7 @@
 </script>
 -->
 <title>게시글 수정</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/board_style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap_custom.css">
+
 <!--[if lte IE 8]>
 <script src="http://aq23r1gt.iwinv.net/js/html5.js"></script>
 <![endif]-->
@@ -64,19 +57,7 @@
 <!--
 <script src="http://aq23r1gt.iwinv.net/js/jquery-1.8.3.min.js"></script>
 -->
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery.menu.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/common.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/wrest.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/isotope.pkgd.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/imagesloaded.pkgd.min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
+
 
 </head>
 <body>
