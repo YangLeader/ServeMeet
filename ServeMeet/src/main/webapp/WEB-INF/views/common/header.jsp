@@ -8,7 +8,6 @@
 <head>
 <script
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.min.js"></script>
-
 <link
 	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -23,10 +22,20 @@
 <!-- Style Custom CSS -->
 <link href="${pageContext.request.contextPath}/resources/css/style.css"
 	rel="stylesheet">
+<!-- category -->
+<link href="${pageContext.request.contextPath}/resources/css/category.css"
+	rel="stylesheet">
+	<!-- scroll -->
+<link href="${pageContext.request.contextPath}/resources/css/scroll.css"
+	rel="stylesheet">
 <!-- Font CSS -->
+<link href="https://fonts.googleapis.com/css?family=Sunflower:300" rel="stylesheet">
 <link
 	href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i"
 	rel="stylesheet">
+	<!-- board style -->
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/board_style.css">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -58,15 +67,16 @@ float: right;
 						<a href="${pageContext.request.contextPath}/"><img
 							src="${pageContext.request.contextPath}/resources/images/logo.png"
 							alt=""></a>
-							<div id = "search">
-								<input type="text"  name="search"/>
-								
-							</div>
+						<div id = "search" style="position: relative;">
+							<input type="text"  name="search" id = "searchTxt"/><span id = "a"><button class="searchBtn"><img class="searchImg" src="${pageContext.request.contextPath}/resources/images/search.png"></button></span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	
 	<div class="header">
 		<div class="container">
 				
@@ -108,20 +118,24 @@ float: right;
 												in</span></a></li>
 									</c:if>
 									<c:if test="${!empty member}">
-										<li id="chat" class= "suvNav"><span class="carea mainNav">채팅목록</span></li>
+										<li id="chat" class= "suvNav"><span class="carea mainNav">채팅목록</span>
+										
+										<div class="chatList carea scrollbar scrollbar-primary" 
+											style="float:right; display:none; overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; " >
+										</div>
+							
+										</li>
 										
 										<li class="suvNav has-sub"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 												title="내정보보기"><span class="mainNav">${member.userName}</span></a>
 											<ul>
 												<li><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 												title="내정보보기">내정보보기</a></li>
-												<li ><a href ="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">LOG
+												<li ><a href ="${pageContext.request.contextPath}/member/memberLogout.do">LOG
 													OUT</a></li>
 											</ul>		
 										</li>
-										<div class="chatList carea" 
-											style="display:none; overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; margin-top: 25px;" >
-										</div>
+										
 									</c:if>
 		                         
 		                         </ul>

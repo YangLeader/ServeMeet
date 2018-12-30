@@ -14,18 +14,7 @@
 </head>
 <body>
 
-<div class="page-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="page-caption">
-          <h2 class="page-title">로그인</h2>
-          <p> 사이트 이용을 위한 로그인 페이지 입니다. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 <div class="space-medium">
   <div class="container">
     <div class="row">

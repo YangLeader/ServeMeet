@@ -1,0 +1,102 @@
+
+.condition{
+	display: inline-block;
+	padding-left: 15px;
+}
+#loc{
+	background-color: #333333;
+	color: #fff;
+}
+#loc{
+	width: 15%;
+}
+.out {
+	border: 1px solid black;
+	width: 1200px;
+	height: 500px;
+	margin: 0 auto;
+}
+.item:hover{
+	
+	color: #5e73de;
+	font-weight:bolder;
+	background-color: #e2f5fc;
+}
+
+.in {
+	border-top: 1px solid black;
+	float: left;
+	display: inline-block;
+	width: 15%;
+	height: 300px;
+	overflow: auto;
+	margin: auto;
+}
+
+.out li {
+	width: 28%;
+	display: inline-block;
+	margin-left: 15px;
+}
+
+.itemframe {
+	width: 100%;
+	padding: 0px !important;
+	font-size: 12px;
+}
+
+.item {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 30%;
+}
+
+#midDiv {
+	width: 40%;
+	font-size: 11px;
+}
+
+#smallDiv {
+	width: 45%;
+	font-size: 11px;
+}
+
+#bottomDiv {
+	width: 100%;
+	height: 34%;
+	padding: 20px;
+}
+
+span {
+	width: 20px;
+	cursor: pointer;
+}
+
+label {
+	cursor: pointer;
+}
+
+.btn-xs {
+	margin-left: 5px;
+	border: 1px solid #5e73de;
+	cursor: pointer;
+}
+
+.btn-default {
+	color: black;
+	background: white;
+}
+
+.delTag {
+	margin-left: 3px;
+	margin-bottom: 2px;
+	display: inline-block;
+	background:
+		url('/${pageContext.request.contextPath}/resources/images/close.png')
+		no-repeat 0 0;
+	background-size: cover;
+	width: 10px;
+	height: 10px;
+	text-indent: -9999px;
+	vertical-align: middle;
+}
