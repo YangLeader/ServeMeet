@@ -25,7 +25,7 @@
 			</li>
 		</c:forEach>
 	</ul>
-	</form>
+</form>
 	<script type="text/javascript">
 		$(".chatName")
 				.click(

@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.board.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +92,18 @@ public class BoardDaoImpl implements BoardDao {
 	public int insertBoardComment(BoardComment bComment) {
 		
 		return sqlSession.insert("boardComment.insertBoardComment", bComment);
+	}
+
+	@Override
+	public ArrayList<BoardComment> selectCommentList(int boardNo) {
+		
+		return (ArrayList)sqlSession.selectList("boardComment.selectCommentList", boardNo);
+	}
+
+	@Override
+	public int selectOrder() {
+		
+		return sqlSession.selectOne("boardComment.selectOrder");
 	}
 
 }

@@ -112,8 +112,8 @@ $(document).ready(function(){
 <!-- 게시물 읽기 시작 { -->
 <article id="bbs-view">
 
-	<div class="bbs_title_wrap" style="display:none;">
-		<a class="bbs_title" href="./board.php?bo_table=free">자유게시판</a>
+	<div class="bbs_title_wrap" style="">
+		<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">자유게시판</a>
 	</div>
 	
 	<!-- 게시물 상단 버튼 시작 { -->
@@ -232,200 +232,162 @@ var char_max = parseInt(0); // 최대
 		<div class="cmt_top_title">댓글 <span><strong>4</strong></span></div>
 	</div>
 	-->
+
+	<c:forEach items="${cList}" var="cl" varStatus="vs">
+	
+	<c:if test="${cl.refCid eq 0 }">
+	
+	<!-- 댓글 열고 닫고 위한 if -->
+	<c:if test="${vs.count ne 1 }">
+		</ul>
+		</div>
+	</c:if>
+	
 	<div class="cmt_list" >
 		<ul class="cmt_list_ul">
-						<li id="c_28" >
+			<li id="${ cl.commentId }" >
 				<div class="cmt_inner_wrap">
-
 					<p style="z-index:5" class="cmt_mb_info">
 
 						
-						<font class="write_user">최고관리자</a></font>
+						<font class="write_user"><a>${cl.userName }</a></font>
 
 						
 						<span>
-							<span class="glyphicon glyphicon-time"></span> <time datetime="2017-12-09T18:14:00+09:00">
-							17-12-09 18:14</time>
+							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
 						</span>
 
-											</p>
+					</p>
 
 					<!-- 댓글 출력 -->
-					<p class="cmt_content">
-
-						
-						댓글 테스트 1					</p>
+					<p class="cmt_content">${cl.commentCon }</p>
 
 					<div class="cmt_button_box">
-					
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=28&amp;w=c#bo_vc_w" onclick="comment_box('28', 'c'); return false;">
+						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
-						
-						
-						
-										</div>
+					</div>
 
-					<span id="edit_28" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_28" class="edit_reply"></span><!-- 답변 -->
+					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
+					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
 
-					<input type="hidden" value="" id="secret_comment_28">
-
-					<textarea id="save_comment_28" style="display:none">댓글 테스트 1</textarea>
 
 				</div>
 			</li>
-						<li id="c_29" style="padding-left:15px" >
+		<!-- </ul>
+	</div> -->
+	</c:if>
+	
+	<c:if test="${cl.refCid ne 0 }">
+			<li id="${ cl.refCid }" style="padding-left:15px" >
 				<div class="cmt_inner_wrap">
-
 					<p style="z-index:4" class="cmt_mb_info">
-
-												<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
+						<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
 						
-						<font class="write_user">최고관리자</a></font>
+						<font class="write_user"><a>${cl.userName }</a></font>
 
-						
 						<span>
-							<span class="glyphicon glyphicon-time"></span> <time datetime="2017-12-09T18:14:00+09:00">
-							17-12-09 18:14</time>
+							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
 						</span>
 
-											</p>
+					</p>
 
 					<!-- 댓글 출력 -->
-					<p class="cmt_content">
-
-						
-						댓글의 답글 테스트 1					</p>
+					<p class="cmt_content">${cl.commentCon }</p>
 
 					<div class="cmt_button_box">
-					
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=29&amp;w=c#bo_vc_w" onclick="comment_box('29', 'c'); return false;">
+						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
 						
+					</div>
+
+					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
+					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
+
+
+				</div>
+			</li>
+	</c:if>
+	
+	<!-- 원래 소스 -->
+	<%-- <div class="cmt_list" >
+		<ul class="cmt_list_ul">
+			<li id="${ cl.commentId }" >
+				<div class="cmt_inner_wrap">
+					<p style="z-index:5" class="cmt_mb_info">
+
 						
+						<font class="write_user"><a>${cl.userName }</a></font>
+
 						
-										</div>
+						<span>
+							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
+						</span>
+
+					</p>
+
+					<!-- 댓글 출력 -->
+					<p class="cmt_content">${cl.commentCon }</p>
+
+					<div class="cmt_button_box">
+						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c'); return false;">
+							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
+						</a>
+					</div>
+
+					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
+					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
+
+
+				</div>
+			</li>
+			<li id="${cl.refCid}" style="padding-left:15px" >
+				<div class="cmt_inner_wrap">
+					<p style="z-index:4" class="cmt_mb_info">
+						<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
+						
+						<font class="write_user"><a>${cl.userName }</a></font>
+
+						<span>
+							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
+						</span>
+
+					</p>
+
+					<!-- 댓글 출력 -->
+					<p class="cmt_content">${cl.commentCon }</p>
+
+					<div class="cmt_button_box">
+						<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=29&amp;w=c#bo_vc_w" onclick="comment_box('29', 'c'); return false;">
+							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
+						</a>
+						
+					</div>
 
 					<span id="edit_29" class="edit_cmt"></span><!-- 수정 -->
 					<span id="reply_29" class="edit_reply"></span><!-- 답변 -->
 
-					<input type="hidden" value="" id="secret_comment_29">
-
-					<textarea id="save_comment_29" style="display:none">댓글의 답글 테스트 1</textarea>
 
 				</div>
 			</li>
-						<li id="c_30" >
-				<div class="cmt_inner_wrap">
-
-					<p style="z-index:3" class="cmt_mb_info">
-
 						
-						<font class="write_user">최고관리자</a></font>
-
-						
-						<span>
-							<span class="glyphicon glyphicon-time"></span> <time datetime="2017-12-09T18:15:00+09:00">
-							17-12-09 18:15</time>
-						</span>
-
-											</p>
-
-					<!-- 댓글 출력 -->
-					<p class="cmt_content">
-
-						
-						댓글 테스트 2					</p>
-
-					<div class="cmt_button_box">
-					
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=30&amp;w=c#bo_vc_w" onclick="comment_box('30', 'c'); return false;">
-							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
-						</a>
-						
-						
-						
-										</div>
-
-					<span id="edit_30" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_30" class="edit_reply"></span><!-- 답변 -->
-
-					<input type="hidden" value="" id="secret_comment_30">
-
-					<textarea id="save_comment_30" style="display:none">댓글 테스트 2</textarea>
-
-				</div>
-			</li>
-						<li id="c_163" >
-				<div class="cmt_inner_wrap">
-
-					<p style="z-index:2" class="cmt_mb_info">
-
-						
-						<font class="write_user">asd1713</a></font>
-
-						
-						<span>
-							<span class="glyphicon glyphicon-time"></span> <time datetime="2018-12-27T14:16:00+09:00">
-							18-12-27 14:16</time>
-						</span>
-
-											</p>
-
-					<!-- 댓글 출력 -->
-					<p class="cmt_content">
-
-						
-						댓글					</p>
-
-					<div class="cmt_button_box">
-					
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=163&amp;w=c#bo_vc_w" onclick="comment_box('163', 'c'); return false;">
-							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
-						</a>
-						
-												<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=163&amp;w=cu#bo_vc_w" onclick="comment_box('163', 'cu'); return false;">
-							<span class="glyphicon glyphicon-edit"></span> 수정
-						</a>
-						
-												<a class="btn_cmt btn btn-default btn-xs" href="./delete_comment.php?bo_table=funny&amp;comment_id=163&amp;token=15458877655c2460153b13f&amp;page=7&amp;page=7" onclick="return comment_delete();">
-							<span class="glyphicon glyphicon-trash"></span> 삭제</a>
-						
-										</div>
-
-					<span id="edit_163" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_163" class="edit_reply"></span><!-- 답변 -->
-
-					<input type="hidden" value="" id="secret_comment_163">
-
-					<textarea id="save_comment_163" style="display:none">댓글</textarea>
-
-				</div>
-			</li>
-					</ul>
-	</div>
-
+		</ul>
+	</div> --%>
+	</c:forEach>
 </div>
 <!-- } 댓글 끝 -->
 
 <!-- 댓글 쓰기 시작 { -->
 <div id="bo_vc_wrap">
 	<aside id="bo_vc_w">
-		<form name="fviewcomment" action="${pageContext.request.contextPath }/board/insertComment.do" method="post" autocomplete="off">
+		<form id="frm_comment" name="fviewcomment" action="${pageContext.request.contextPath }/board/insertComment.do" method="post" autocomplete="off">
 		<input type="hidden" name="w" value="c" id="w">
-		<input type="hidden" name="bo_table" value="free">
-		<input type="hidden" name="wr_id" value="111">
-		<input type="hidden" name="comment_id" value="" id="comment_id">
-		<input type="hidden" name="sca" value="">
-		<input type="hidden" name="sfl" value="">
-		<input type="hidden" name="stx" value="">
-		<input type="hidden" name="spt" value="">
-		<input type="hidden" name="page" value="">
-		<input type="hidden" name="is_good" value="">
+		<input type="hidden" name="refCid" value="" id="commentId">
 		<input type="hidden" name="boardNo" value="${board.boardNo }">
 		<input type="hidden" name="userName" value="${member.userName }">
+		<input type="hidden" name="orderList" value="" id="orderList">
+		
 
 		<div class="cmt_wr_wrap">
 			
@@ -554,16 +516,16 @@ function fviewcomment_submit(f)
     return true;
 }
 
-function comment_box(comment_id, work)
+function comment_box(commentId, work, orderList)
 {
     var el_id;
     // 댓글 아이디가 넘어오면 답변, 수정
-    if (comment_id)
+    if (commentId)
     {
         if (work == 'c')
-            el_id = 'reply_' + comment_id;
+            el_id = 'reply_' + commentId;
         else
-            el_id = 'edit_' + comment_id;
+            el_id = 'edit_' + commentId;
     }
     else
         el_id = 'bo_vc_w';
@@ -575,16 +537,16 @@ function comment_box(comment_id, work)
             document.getElementById(save_before).style.display = 'none';
             document.getElementById(save_before).innerHTML = '';
         }
-
+        
         document.getElementById(el_id).style.display = '';
         document.getElementById(el_id).innerHTML = save_html;
         // 댓글 수정
         if (work == 'cu')
         {
-            document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
+            document.getElementById('wr_content').value = document.getElementById('save_comment_' + commentId).value;
             if (typeof char_count != 'undefined')
                 check_byte('wr_content', 'char_count');
-            if (document.getElementById('secret_comment_'+comment_id).value)
+            if (document.getElementById('secret_comment_'+commentId).value)
                 document.getElementById('wr_secret').checked = true;
             else
 				try
@@ -596,9 +558,28 @@ function comment_box(comment_id, work)
 
 				}
         }
-
-        document.getElementById('comment_id').value = comment_id;
-        document.getElementById('w').value = work;
+        
+        if(commentId == "" || commentId === 'undefined'  ||  isNaN(commentId) == true){
+        
+        	document.getElementById('commentId').value = 0;
+        	document.getElementById('w').value = work;
+        	
+        } else {
+        	
+        	document.getElementById('commentId').value = commentId;
+        	document.getElementById('w').value = work;
+        }
+        
+        if(orderList == "" || orderList === 'undefined'  ||  isNaN(orderList) == true){
+        	document.getElementById('orderList').value = 0;
+			document.getElementById('w').value = work;
+        } else {
+        	document.getElementById('orderList').value = orderList;
+        	document.getElementById('w').value = work;
+        }
+        
+        console.log('댓글의 코멘트 아이디 : '+commentId);
+        console.log('부모의 오더 넘버 : '+orderList);
 
         if(save_before)
             $("#captcha_reload").trigger("click");
@@ -684,9 +665,16 @@ $(function() {
         excute_good(this.href, $(this), $tx);
         return false;
     });
+    
+    $("#frm_comment").submit(function(){
+    	if($(".cmt_list").length == 0){
+    		$("#commentId").val(0);
+    		$("#orderList").val(0);
+    	}
+    });
 
     // 이미지 리사이즈
-    $("#bo_v_atc").viewimageresize();
+    //$("#bo_v_atc").viewimageresize();
 });
 
 function excute_good(href, $el, $tx)

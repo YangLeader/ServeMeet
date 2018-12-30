@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.board.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -134,7 +135,23 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertBoardComment(BoardComment bComment) {
 		
+		int lastOrder = boardDao.selectOrder();
+		
+		if(bComment.getRefCid() == 0) {
+			lastOrder++;
+		} else {
+			lastOrder = bComment.getOrderList();
+		}
+		
+		bComment.setOrderList(lastOrder);
+		
 		return boardDao.insertBoardComment(bComment);
+	}
+
+	@Override
+	public ArrayList<BoardComment> selectCommentList(int no) {
+		
+		return boardDao.selectCommentList(no); 
 	}
 
 }

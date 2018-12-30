@@ -49,4 +49,9 @@ public class ChattingServiceImpl implements ChattingService {
 		return cDao.selectChat(chatNo);
 	}
 
+	@Override
+	public ChattingLog selectChatLog(int chattingId) {
+		// TODO Auto-generated method stub
+		return cDao.selectChatLog(chattingId);
+	}
 }

@@ -158,7 +158,8 @@ public class BoardController {
 		model.addAttribute("board", boardService.selectOneBoard(no))
 		.addAttribute("boardFileList", boardService.selectBoardFileList(no))
 		.addAttribute("list", boardService.selectBoardList(cPage, numPerPage))
-		.addAttribute("pageBar", pageBar);
+		.addAttribute("pageBar", pageBar)
+		.addAttribute("cList", boardService.selectCommentList(no));
 		
 		return "board/boardView";
 		
@@ -311,7 +312,7 @@ public class BoardController {
 					
 		} catch(Exception e) {
 					
-			throw new BoardException("댓글 등록 오류!");
+			throw new BoardException(e.getMessage());
 					
 		}
 				
@@ -319,11 +320,11 @@ public class BoardController {
 		String msg = "";
 				
 		if(result > 0) {
-			msg = "게시글 등록 성공!";
+			msg = "댓글 등록 성공!";
 			loc = "/board/boardView.do?no="+bComment.getBoardNo();
 					
 		} else {
-			msg = "게시글 등록 실패!";
+			msg = "댓글 등록 실패!";
 		}
 			
 		model.addAttribute("loc", loc).addAttribute("msg", msg);

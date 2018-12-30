@@ -1,7 +1,5 @@
 package com.yang.ServeMeet.board.model.vo;
 
-import java.sql.Date;
-
 public class BoardComment {
 
 	
@@ -10,44 +8,33 @@ public class BoardComment {
 	private int commentId;
 	private int boardNo;
 	private String userName;
-	private Date commentDate;
+	private String commentDate;
 	private String commentCon;
+	private int refCid;
 	private String commentStatus;
+	private int orderList;
 	
 	public BoardComment() {
 		super();
 	}
-
 	
-	
-	public BoardComment(int boardNo, String userName, Date commentDate, String commentCon) {
-		super();
-		this.boardNo = boardNo;
-		this.userName = userName;
-		this.commentDate = commentDate;
-		this.commentCon = commentCon;
-	}
-
-
-
-	public BoardComment(int commentId, int boardNo, String userName, Date commentDate, String commentCon,
-			String commentStatus) {
+	public BoardComment(int commentId, int boardNo, String userName, String commentDate, String commentCon, int refCid,
+			String commentStatus, int orderList) {
 		super();
 		this.commentId = commentId;
 		this.boardNo = boardNo;
 		this.userName = userName;
 		this.commentDate = commentDate;
 		this.commentCon = commentCon;
+		this.refCid = refCid;
 		this.commentStatus = commentStatus;
+		this.orderList = orderList;
 	}
-
 
 
 	public int getCommentId() {
 		return commentId;
 	}
-
-
 
 	public void setCommentId(int commentId) {
 		this.commentId = commentId;
@@ -79,13 +66,13 @@ public class BoardComment {
 
 
 
-	public Date getCommentDate() {
+	public String getCommentDate() {
 		return commentDate;
 	}
 
 
 
-	public void setCommentDate(Date commentDate) {
+	public void setCommentDate(String commentDate) {
 		this.commentDate = commentDate;
 	}
 
@@ -102,6 +89,16 @@ public class BoardComment {
 	}
 
 
+	public int getRefCid() {
+		return refCid;
+	}
+
+
+
+	public void setRefCid(int refCid) {
+		this.refCid = refCid;
+	}
+
 
 	public String getCommentStatus() {
 		return commentStatus;
@@ -113,15 +110,20 @@ public class BoardComment {
 		this.commentStatus = commentStatus;
 	}
 
+	public int getOrderList() {
+		return orderList;
+	}
 
+	public void setOrderList(int orderList) {
+		this.orderList = orderList;
+	}
 
 	@Override
 	public String toString() {
 		return "BoardComment [commentId=" + commentId + ", boardNo=" + boardNo + ", userName=" + userName
-				+ ", commentDate=" + commentDate + ", commentCon=" + commentCon + ", commentStatus=" + commentStatus
-				+ "]";
+				+ ", commentDate=" + commentDate + ", commentCon=" + commentCon + ", refCid=" + refCid
+				+ ", commentStatus=" + commentStatus + ", orderList=" + orderList + "]";
 	}
-	
-	
+
 	
 }

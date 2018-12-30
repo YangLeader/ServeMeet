@@ -24,5 +24,7 @@ public interface BattingDao {
 	
 	int battingInsert();
 	
-	List<Map<String,String>> battingAllocation(Map<String,Object> hmap);
+	List<Map<String,Object>> battingAllocation(Map<String,Object> hmap);
+	
+	int battingPoint(List<Map<String,Object>> list);
 }
