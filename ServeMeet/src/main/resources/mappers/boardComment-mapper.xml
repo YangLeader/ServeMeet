@@ -3,6 +3,20 @@
 <mapper namespace="boardComment">
 	
 	<insert id="insertBoardComment" parameterType="BoardComment">
-	
+		INSERT INTO BOARD_COMMENT 
+		VALUES(SEQ_COMMENTID.NEXTVAL, #{boardNo}, #{userName}, DEFAULT, #{commentCon}, #{refCid}, DEFAULT, #{orderList})
 	</insert>
+	
+	<select id="selectCommentList" parameterType="_int" resultType="BoardComment">
+		SELECT * FROM BOARD_COMMENT WHERE BOARDNO = #{boardNo} AND COMMENTSTATUS = 'Y'
+		ORDER BY ORDERLIST, COMMENTID, COMMENTDATE ASC
+	</select>
+	
+	<select id="selectOrder" resultType="_int">
+		select nvl(max(orderlist), 0) from board_comment
+	</select>
+	
+	<update id="updateBoardComment" parameterType="BoardComment">
+		UPDATE BOARD_COMMENT SET COMMENTCON = #{commentCon} WHERE COMMENTID = #{commentId}
+	</update>
 </mapper>
