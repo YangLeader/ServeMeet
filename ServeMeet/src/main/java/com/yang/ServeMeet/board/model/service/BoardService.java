@@ -33,4 +33,6 @@ public interface BoardService {
 	int insertBoardComment(BoardComment bComment);
 
 	ArrayList<BoardComment> selectCommentList(int no);
+
+	int updateBoardComment(BoardComment bComment);
 }

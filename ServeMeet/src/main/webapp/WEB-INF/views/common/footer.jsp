@@ -68,6 +68,16 @@
             </div>
         </div>
     </div>
+<!-- board js -->
+<script
+	src="${pageContext.request.contextPath }/resources/js/jquery.menu.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/common.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/wrest.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/js/isotope.pkgd.min.js"></script>
+<script
+	src="${pageContext.request.contextPath }/resources/js/imagesloaded.pkgd.min.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
     
     <!-- back to top icon -->
     <a href="#0" class="cd-top" title="Go to top">Top</a>

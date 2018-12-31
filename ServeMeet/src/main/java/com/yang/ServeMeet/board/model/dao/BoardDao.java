@@ -39,4 +39,6 @@ public interface BoardDao {
 	ArrayList<BoardComment> selectCommentList(int no);
 
 	int selectOrder();
+
+	int updateBoardComment(BoardComment bComment);
 }

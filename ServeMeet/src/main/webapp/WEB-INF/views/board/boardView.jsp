@@ -40,16 +40,7 @@
 </script>
 -->
 <title>자유게시판</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/board_style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/style.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/bootstrap_custom.css">
+
 <!--[if lte IE 8]>
 <script src="http://aq23r1gt.iwinv.net/js/html5.js"></script>
 <![endif]-->
@@ -63,19 +54,7 @@
 <!--
 <script src="http://aq23r1gt.iwinv.net/js/jquery-1.8.3.min.js"></script>
 -->
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery.menu.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/common.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/wrest.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/isotope.pkgd.min.js"></script>
-<script
-	src="${pageContext.request.contextPath }/resources/js/imagesloaded.pkgd.min.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/custom.js"></script>
+
 </head>
 <body>
 
@@ -263,14 +242,23 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">${cl.commentCon }</p>
 
 					<div class="cmt_button_box">
-						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }); return false;">
+						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, 0); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
+						<a class="btn_cmt btn btn-default btn-xs"  onclick="comment_box(${cl.commentId}, 'cu', ${ cl.orderList }, 1); return false;">
+							<span class="glyphicon glyphicon-edit"></span> 수정
+						</a>
+						
+						<a class="btn_cmt btn btn-default btn-xs"  onclick="return comment_delete();">
+							<span class="glyphicon glyphicon-trash"></span> 삭제
+						</a>
+						
 					</div>
 
 					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
 					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
 
+					<textarea id="save_comment_${cl.commentId }" style="display:none"></textarea>
 
 				</div>
 			</li>
@@ -296,8 +284,16 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">${cl.commentCon }</p>
 
 					<div class="cmt_button_box">
-						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }); return false;">
+						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, 0); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
+						</a>
+						
+						<a class="btn_cmt btn btn-default btn-xs" onclick="comment_box(${cl.commentId}, 'cu', ${ cl.orderList }, 1); return false;">
+							<span class="glyphicon glyphicon-edit"></span> 수정
+						</a>
+						
+						<a class="btn_cmt btn btn-default btn-xs" onclick="return comment_delete();">
+							<span class="glyphicon glyphicon-trash"></span> 삭제
 						</a>
 						
 					</div>
@@ -305,7 +301,8 @@ var char_max = parseInt(0); // 최대
 					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
 					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
 
-
+					<textarea id="save_comment_${cl.commentId }" style="display:none"></textarea>
+					
 				</div>
 			</li>
 	</c:if>
@@ -383,7 +380,7 @@ var char_max = parseInt(0); // 최대
 	<aside id="bo_vc_w">
 		<form id="frm_comment" name="fviewcomment" action="${pageContext.request.contextPath }/board/insertComment.do" method="post" autocomplete="off">
 		<input type="hidden" name="w" value="c" id="w">
-		<input type="hidden" name="refCid" value="" id="commentId">
+		<input type="hidden" name="refCid" value="" id="refCid">
 		<input type="hidden" name="boardNo" value="${board.boardNo }">
 		<input type="hidden" name="userName" value="${member.userName }">
 		<input type="hidden" name="orderList" value="" id="orderList">
@@ -516,7 +513,7 @@ function fviewcomment_submit(f)
     return true;
 }
 
-function comment_box(commentId, work, orderList)
+function comment_box(commentId, work, orderList, isRecomment)
 {
     var el_id;
     // 댓글 아이디가 넘어오면 답변, 수정
@@ -540,33 +537,16 @@ function comment_box(commentId, work, orderList)
         
         document.getElementById(el_id).style.display = '';
         document.getElementById(el_id).innerHTML = save_html;
-        // 댓글 수정
-        if (work == 'cu')
-        {
-            document.getElementById('wr_content').value = document.getElementById('save_comment_' + commentId).value;
-            if (typeof char_count != 'undefined')
-                check_byte('wr_content', 'char_count');
-            if (document.getElementById('secret_comment_'+commentId).value)
-                document.getElementById('wr_secret').checked = true;
-            else
-				try
-				{
-                document.getElementById('wr_secret').checked = false;
-				}
-				catch (err)
-				{
-
-				}
-        }
+        
         
         if(commentId == "" || commentId === 'undefined'  ||  isNaN(commentId) == true){
         
-        	document.getElementById('commentId').value = 0;
+        	document.getElementById('refCid').value = 0;
         	document.getElementById('w').value = work;
         	
         } else {
         	
-        	document.getElementById('commentId').value = commentId;
+        	document.getElementById('refCid').value = commentId;
         	document.getElementById('w').value = work;
         }
         
@@ -578,15 +558,28 @@ function comment_box(commentId, work, orderList)
         	document.getElementById('w').value = work;
         }
         
-        console.log('댓글의 코멘트 아이디 : '+commentId);
-        console.log('부모의 오더 넘버 : '+orderList);
 
         if(save_before)
             $("#captcha_reload").trigger("click");
 
         save_before = el_id;
     }
+    
+	if(isRecomment === 1){
+    	
+    	$("#frm_comment").append('<input type="hidden" name="commentId" value="" id="commentId">');
+
+    	
+    	$("#frm_comment").attr("action", "updateComment.do");
+    	
+    	$("#frm_comment").submit(function(){
+    		document.getElementById('commentId').value = commentId;
+        });
+    	
+    }
 }
+
+
 
 function comment_delete()
 {
@@ -668,7 +661,7 @@ $(function() {
     
     $("#frm_comment").submit(function(){
     	if($(".cmt_list").length == 0){
-    		$("#commentId").val(0);
+    		$("#refCid").val(0);
     		$("#orderList").val(0);
     	}
     });
