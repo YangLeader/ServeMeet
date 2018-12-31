@@ -15,8 +15,6 @@
 <body>
 
 
-          <h2 class="page-title"> 포인트 </h2>
-          <p> 포인트를 얻을 수 있는 페이지 입니다. </p>
   
 <div class="space-medium">
   <div class="container">
@@ -29,8 +27,8 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="service-block mb40">
-          <div class="service-img"> <a href="${pageContext.request.contextPath}/point/attendence.do" class="imghover"><img src="${pageContext.request.contextPath}/resources/images/service-2.jpg" class="img-responsive" alt=""></a> </div>
-          <h2 class="service-title"> <a href="service-detail.html" class="title">catering service</a> </h2>
+          <div class="service-img"> <a href="${pageContext.request.contextPath}/point/scratch.do" class="imghover"><img src="${pageContext.request.contextPath}/resources/images/scratch.png" class="img-responsive" alt=""></a> </div>
+          <h2 class="service-title"> <a href="service-detail.html" class="title">스크래치 복권</a> </h2>
         </div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
