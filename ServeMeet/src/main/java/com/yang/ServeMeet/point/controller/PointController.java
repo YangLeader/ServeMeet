@@ -1,7 +1,11 @@
 package com.yang.ServeMeet.point.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,15 +46,43 @@ public class PointController {
 	}
 	
 	@RequestMapping("/point/attendence.do")
-	public String attendence() {
+	public String attendence(Model model,HttpSession session, Member m) {
 		if(logger.isDebugEnabled()) logger.debug("출석체크 페이지 고");
 		return "point/attendence";
 	}
 	
-	@RequestMapping(value="point/pointAttend.do", method= RequestMethod.GET)
-	public String pointAttend(Model model,Member m,@RequestParam int increasePoint,@RequestParam String pContent ) {
-		if(logger.isDebugEnabled()) logger.debug("출석체크");
+	@RequestMapping("/point/attStamp.do")
+	@ResponseBody
+	public ArrayList<Integer> attStamp(Member m) {
 		
+		List<Attendence> a = pointService.selectAtt(m.getUserNo());
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		int cnt = pointService.selectAttCnt(m.getUserNo());
+		
+		list.add(cnt);
+		
+		for(int i = 0 ; i<cnt ; i++) {
+			Date date = a.get(i).getAtt_date();
+			
+			SimpleDateFormat format = new SimpleDateFormat ("dd");
+
+			int day = Integer.parseInt(format.format(date));
+			
+			list.add(day);
+		}
+			
+		System.out.println("list :" + list);
+		
+		return list;
+	}
+	
+	
+	@RequestMapping(value="point/pointAttend.do", method= RequestMethod.GET)
+	public int pointAttend(Model model,Member m,@RequestParam int increasePoint,@RequestParam String pContent ) {
+		if(logger.isDebugEnabled()) logger.debug("출석체크");
+
 		int userNo	= m.getUserNo();
 		
 		Point p = new Point();
@@ -81,7 +115,7 @@ public class PointController {
 		model.addAttribute("loc",loc).addAttribute("msg",msg);
 		System.out.println(msg2);
 		System.out.println(msg3);
-		return "common/msg";
+		return 1;
 		
 	}
 	

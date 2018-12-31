@@ -1,5 +1,7 @@
 package com.yang.ServeMeet.point.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -37,6 +39,16 @@ public class PointDaoImpl implements PointDao {
 	@Override
 	public int inserAtt(Attendence a) {
 		return sqlSession.insert("point.inserAttendence",a);
+	}
+
+	@Override
+	public List<Attendence> selectAtt(int userNo) {
+		return sqlSession.selectList("point.selectAtt",userNo);
+	}
+
+	@Override
+	public int selectAttCnt(int userNo) {
+		return sqlSession.selectOne("point.selectAttCnt",userNo);
 	}
 
 }

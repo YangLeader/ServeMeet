@@ -20,6 +20,16 @@
 		SEQ_ATT.NEXTVAL,#{userNo},DEFAULT,#{att_point}
 		)
 	</insert>
+	
+	<select id="selectAtt" parameterType="int" resultType="Attendence">
+		SELECT * FROM ATTENDENCE
+		WHERE USERNO = #{userNo}
+	</select>
+	
+	<select id="selectAttCnt" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM ATTENDENCE
+		WHERE USERNO = #{userNo}
+	</select>
 
 
 </mapper>

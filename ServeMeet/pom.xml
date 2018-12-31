@@ -248,6 +248,13 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.6</version>
 		</dependency>
+		
+		<!-- 한글경로... -->
+		<dependency>
+		    <groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+		    <version>2.9.1</version>
+		</dependency>
 		      
 
 	</dependencies>
