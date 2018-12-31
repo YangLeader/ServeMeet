@@ -46,10 +46,17 @@ public class PointController {
 	}
 	
 	@RequestMapping("/point/attendence.do")
-	public String attendence(Model model,HttpSession session, Member m) {
+	public String attendence() {
 		if(logger.isDebugEnabled()) logger.debug("출석체크 페이지 고");
 		return "point/attendence";
 	}
+	
+	@RequestMapping("/point/scratch.do")
+	public String scratch() {
+		if(logger.isDebugEnabled()) logger.debug("스크래치 페이지 고");
+		return "point/scratch";
+	}
+	
 	
 	@RequestMapping("/point/attStamp.do")
 	@ResponseBody
@@ -117,6 +124,67 @@ public class PointController {
 		System.out.println(msg3);
 		return 1;
 		
+	}
+	
+	@RequestMapping("/point/minusPoint.do")
+	@ResponseBody
+	public int minusPoint(@RequestParam int increasePoint,@RequestParam String pContent,Member m) {
+		if(logger.isDebugEnabled()) logger.debug("포인트 차감");
+		int userNo = m.getUserNo();
+		
+		Point p = new Point();
+		p.setUserNo(userNo);
+		p.setIncreasePoint(increasePoint);
+		p.setpContent(pContent);
+		
+		int result1 = memberService.updatePoint(userNo,increasePoint);
+		int result2 = pointService.insertPoint(p);
+		
+		String msg = "";
+		String msg2 ="";
+		
+		if(result1 > 0 ) msg = "멤버포인트 업뎃되었습니다.";
+		else msg = "멤포 업뎃 실패";
+		
+		if(result2 > 0) msg2 ="포인트 삽입";
+		else msg2 ="포인트db삽입 실패";
+		
+		System.out.println(msg);
+		System.out.println(msg2);
+		
+		return 1;
+	
+	}
+	
+	@RequestMapping("/point/plusPoint.do")
+	@ResponseBody
+	public String pointScratch(@RequestParam int increasePoint,@RequestParam String pContent,Member m) {
+		if(logger.isDebugEnabled()) logger.debug("포인트 획득");
+		
+		int userNo = m.getUserNo();
+		
+		Point p = new Point();
+		p.setUserNo(userNo);
+		p.setIncreasePoint(increasePoint);
+		p.setpContent(pContent);
+		
+		int result1 = memberService.updatePoint(userNo,increasePoint);
+		int result2 = pointService.insertPoint(p);
+		
+		String msg = "";
+		String msg2 ="";
+		
+		if(result1 > 0 ) msg = "멤버포인트 업뎃되었습니다.";
+		else msg = "멤포 업뎃 실패";
+		
+		if(result2 > 0) msg2 ="포인트 삽입";
+		else msg2 ="포인트db삽입 실패";
+		
+		System.out.println(msg);
+		System.out.println(msg2);
+		
+		
+		return "point/scratch";
 	}
 	
 	

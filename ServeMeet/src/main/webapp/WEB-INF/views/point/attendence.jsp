@@ -42,6 +42,8 @@
 		border : 1px solid #bcbcbc;
 		width : 1000px;
 		height : 800px; 
+		border-top: 1px solid #444444;
+		border-collapse: collapse;
 		}
 		th{
 		border : 1px solid #bcbcbc;
@@ -55,7 +57,14 @@
 		width: 150px;
 		height:100px;
 		text-align : center;
+		background-color : white;
 		}
+		
+		.blank{
+		background-color : #F2F2F2;
+		}
+		
+		
 	</style>
 </head>
 <body>
@@ -66,7 +75,7 @@
 	<div class="cal" align = "center">
 	  <div class="title"> 
       <div class = "month">
-      <span >1월 출석체크</span>
+      <span>1월 출석체크</span>
       </div>
       <div class = "chkBtn">
       <button class="btn-lg btn-default" onclick="attend(<%=today%>);">출석하기</button>
@@ -86,8 +95,8 @@
       </thead>
       <tbody>
         <tr>
-          <td></td>
-          <td></td>
+          <td class="blank"></td>
+          <td class="blank"></td>
           <td id="date01">1</td>
           <td id="date02">2</td>
           <td id="date03">3</td>
@@ -127,8 +136,8 @@
           <td id="date29">29</td>
           <td id="date30">30</td>
           <td id="date31">31</td>
-          <td></td>
-          <td></td>
+          <td class ="blank"></td>
+          <td class ="blank"></td>
         </tr>
       </tbody>
       
@@ -177,7 +186,7 @@
 			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/point/pointAttend.do",
-				data : {increasePoint : 1,
+				data : {increasePoint : 10,
 						pContent : "출석체크 포인트"
 						},
 				success : function(data){
