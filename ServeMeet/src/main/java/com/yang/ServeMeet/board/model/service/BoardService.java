@@ -35,4 +35,7 @@ public interface BoardService {
 	ArrayList<BoardComment> selectCommentList(int no);
 
 	int updateBoardComment(BoardComment bComment);
+
+	int deleteBoardComment(BoardComment bComment);
+
 }

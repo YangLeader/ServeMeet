@@ -160,4 +160,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.updateBoardComment(bComment);
 	}
 
+	@Override
+	public int deleteBoardComment(BoardComment bComment) {
+		
+		return boardDao.deleteBoardComment(bComment);
+	}
+
+
 }

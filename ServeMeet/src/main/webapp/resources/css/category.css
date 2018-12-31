@@ -83,8 +83,13 @@
 }
 
 span {
-	width: 20px;
+	width: auto;
 	cursor: pointer;
+}
+
+span .subject_text, .dec, .w45, .glyphicon {
+	width: auto;
+	cursor: default;
 }
 
 label {

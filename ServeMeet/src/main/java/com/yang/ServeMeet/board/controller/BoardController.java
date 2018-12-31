@@ -31,7 +31,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-
+	
 	@RequestMapping("/board/boardList.do")
 	public String selectBoardList(
 			@RequestParam(value="cPage", required=false, defaultValue="1")
@@ -306,6 +306,7 @@ public class BoardController {
 		
 		int result;
 		
+		
 		try {
 					
 			result = boardService.insertBoardComment(bComment);
@@ -356,6 +357,37 @@ public class BoardController {
 					
 		} else {
 			msg = "댓글 수정 실패!";
+		}
+			
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+				
+		return "common/msg";
+	}
+	
+	@RequestMapping("/board/deleteComment.do")
+	public String deleteComment(BoardComment bComment, Model model) {
+		
+		int result;
+		
+		try {
+					
+			result = boardService.deleteBoardComment(bComment);
+					
+		} catch(Exception e) {
+					
+			throw new BoardException(e.getMessage());
+					
+		}
+				
+		String loc = "/board/boardList.do";
+		String msg = "";
+				
+		if(result > 0) {
+			msg = "댓글 삭제 성공!";
+			loc = "/board/boardView.do?no="+bComment.getBoardNo();
+					
+		} else {
+			msg = "댓글 삭제 실패!";
 		}
 			
 		model.addAttribute("loc", loc).addAttribute("msg", msg);

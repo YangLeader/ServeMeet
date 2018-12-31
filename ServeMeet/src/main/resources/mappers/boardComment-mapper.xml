@@ -4,7 +4,7 @@
 	
 	<insert id="insertBoardComment" parameterType="BoardComment">
 		INSERT INTO BOARD_COMMENT 
-		VALUES(SEQ_COMMENTID.NEXTVAL, #{boardNo}, #{userName}, DEFAULT, #{commentCon}, #{refCid}, DEFAULT, #{orderList})
+		VALUES(SEQ_COMMENTID.NEXTVAL, #{boardNo}, #{userName}, DEFAULT, #{commentCon}, #{refCid}, DEFAULT, #{orderList}, #{getName})
 	</insert>
 	
 	<select id="selectCommentList" parameterType="_int" resultType="BoardComment">
@@ -19,4 +19,9 @@
 	<update id="updateBoardComment" parameterType="BoardComment">
 		UPDATE BOARD_COMMENT SET COMMENTCON = #{commentCon} WHERE COMMENTID = #{commentId}
 	</update>
+	
+	<update id="deleteBoardComment" parameterType="BoardComment">
+		UPDATE BOARD_COMMENT SET COMMENTSTATUS = 'N' WHERE COMMENTID = #{commentId}
+	</update>
+
 </mapper>

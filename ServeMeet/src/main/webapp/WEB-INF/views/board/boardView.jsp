@@ -89,7 +89,7 @@ $(document).ready(function(){
 	<div class="container">
 
 <!-- 게시물 읽기 시작 { -->
-<article id="bbs-view">
+<article id="bbs-view" style="width:auto;">
 
 	<div class="bbs_title_wrap" style="">
 		<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">자유게시판</a>
@@ -103,6 +103,7 @@ $(document).ready(function(){
 				<span class="glyphicon glyphicon-list-alt"></span> 목록
 			</a>
 			
+			<c:if test="${board.userName eq member.userName}">
 			<div class="button_box_right">
 								<a href="${pageContext.request.contextPath }/board/boardUpdateView.do?no=${board.boardNo }" class="bbs_btn">
 					<span class="glyphicon glyphicon-edit" ></span> 수정
@@ -113,6 +114,7 @@ $(document).ready(function(){
 				</a>
 			
 			</div>
+			</c:if>
 		</div>
 	</div>
 	<!-- } 게시물 상단 버튼 끝 -->
@@ -165,7 +167,7 @@ $(document).ready(function(){
         	<p>
         		<a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" onclick="window.open(this.href,'_blank','width=700,height=700');return false;">
         		<%-- <a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" target="_blank" class="view_image"> --%>
-        			<img src="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" alt="${bf.originName }" style="width: 50%;"/>
+        			<img src="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" alt="${bf.originName }" style="width: 70%;"/>
         			<br />
         		</a>
         		<br style="clear:both;" />
@@ -242,21 +244,23 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">${cl.commentCon }</p>
 
 					<div class="cmt_button_box">
-						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, 0); return false;">
+						<a class="btn_cmt btn btn-default btn-xs"  onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, '${cl.userName }'); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
+						
+						<c:if test="${cl.userName eq member.userName}">
 						<a class="btn_cmt btn btn-default btn-xs"  onclick="comment_box(${cl.commentId}, 'cu', ${ cl.orderList }, 1); return false;">
 							<span class="glyphicon glyphicon-edit"></span> 수정
 						</a>
 						
-						<a class="btn_cmt btn btn-default btn-xs"  onclick="return comment_delete();">
+						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/deleteComment.do?boardNo=${board.boardNo}&commentId=${cl.commentId}" onclick="return comment_delete();">
 							<span class="glyphicon glyphicon-trash"></span> 삭제
 						</a>
-						
+						</c:if>
 					</div>
 
-					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
+					<span id="edit_${cl.commentId }" class="edit_cmt" style="display:none"></span><!-- 수정 -->
+					<span id="reply_${cl.commentId }" class="edit_reply" style="display:none"></span><!-- 답변 -->
 
 					<textarea id="save_comment_${cl.commentId }" style="display:none"></textarea>
 
@@ -267,12 +271,12 @@ var char_max = parseInt(0); // 최대
 	</c:if>
 	
 	<c:if test="${cl.refCid ne 0 }">
-			<li id="${ cl.refCid }" style="padding-left:15px" >
+			<li id="${cl.commentId }" style="padding-left:15px" >
 				<div class="cmt_inner_wrap">
 					<p style="z-index:4" class="cmt_mb_info">
 						<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
 						
-						<font class="write_user"><a>${cl.userName }</a></font>
+						<font class="write_user"><a>${cl.userName } ▶ <b style="color:red;">${cl.getName }</b></a></font>
 
 						<span>
 							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
@@ -284,93 +288,29 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">${cl.commentCon }</p>
 
 					<div class="cmt_button_box">
-						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, 0); return false;">
+						<a class="btn_cmt btn btn-default btn-xs"  onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, '${cl.userName }'); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
 						
+						<c:if test="${cl.userName eq member.userName}">
 						<a class="btn_cmt btn btn-default btn-xs" onclick="comment_box(${cl.commentId}, 'cu', ${ cl.orderList }, 1); return false;">
 							<span class="glyphicon glyphicon-edit"></span> 수정
 						</a>
 						
-						<a class="btn_cmt btn btn-default btn-xs" onclick="return comment_delete();">
+						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/deleteComment.do?boardNo=${board.boardNo}&commentId=${cl.commentId}" onclick="return comment_delete();">
 							<span class="glyphicon glyphicon-trash"></span> 삭제
 						</a>
-						
+						</c:if>
 					</div>
 
-					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
+					<span id="edit_${cl.commentId }" class="edit_cmt" style="display:none"></span><!-- 수정 -->
+					<span id="reply_${cl.commentId }" class="edit_reply" style="display:none"></span><!-- 답변 -->
 
 					<textarea id="save_comment_${cl.commentId }" style="display:none"></textarea>
 					
 				</div>
 			</li>
 	</c:if>
-	
-	<!-- 원래 소스 -->
-	<%-- <div class="cmt_list" >
-		<ul class="cmt_list_ul">
-			<li id="${ cl.commentId }" >
-				<div class="cmt_inner_wrap">
-					<p style="z-index:5" class="cmt_mb_info">
-
-						
-						<font class="write_user"><a>${cl.userName }</a></font>
-
-						
-						<span>
-							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
-						</span>
-
-					</p>
-
-					<!-- 댓글 출력 -->
-					<p class="cmt_content">${cl.commentCon }</p>
-
-					<div class="cmt_button_box">
-						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/boardView.do?no=${board.boardNo }" onclick="comment_box(${cl.commentId}, 'c'); return false;">
-							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
-						</a>
-					</div>
-
-					<span id="edit_${cl.commentId }" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_${cl.commentId }" class="edit_reply"></span><!-- 답변 -->
-
-
-				</div>
-			</li>
-			<li id="${cl.refCid}" style="padding-left:15px" >
-				<div class="cmt_inner_wrap">
-					<p style="z-index:4" class="cmt_mb_info">
-						<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
-						
-						<font class="write_user"><a>${cl.userName }</a></font>
-
-						<span>
-							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
-						</span>
-
-					</p>
-
-					<!-- 댓글 출력 -->
-					<p class="cmt_content">${cl.commentCon }</p>
-
-					<div class="cmt_button_box">
-						<a class="btn_cmt btn btn-default btn-xs" href="./board.php?bo_table=funny&amp;wr_id=27&amp;&amp;page=7&amp;&amp;c_id=29&amp;w=c#bo_vc_w" onclick="comment_box('29', 'c'); return false;">
-							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
-						</a>
-						
-					</div>
-
-					<span id="edit_29" class="edit_cmt"></span><!-- 수정 -->
-					<span id="reply_29" class="edit_reply"></span><!-- 답변 -->
-
-
-				</div>
-			</li>
-						
-		</ul>
-	</div> --%>
 	</c:forEach>
 </div>
 <!-- } 댓글 끝 -->
@@ -565,6 +505,7 @@ function comment_box(commentId, work, orderList, isRecomment)
         save_before = el_id;
     }
     
+    // 수정일때
 	if(isRecomment === 1){
     	
     	$("#frm_comment").append('<input type="hidden" name="commentId" value="" id="commentId">');
@@ -576,7 +517,17 @@ function comment_box(commentId, work, orderList, isRecomment)
     		document.getElementById('commentId').value = commentId;
         });
     	
+    } else {
+    	
+    	console.log(isRecomment);
+    	
+    	$("#frm_comment").append('<input type="hidden" name="getName" value="" id="getName">');
+    	
+    	document.getElementById('getName').value = isRecomment;
     }
+		
+	
+	
 }
 
 
