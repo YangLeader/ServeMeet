@@ -5,14 +5,34 @@
 	display: inline-block;
 	padding-left: 15px;
 	padding-top: 5px;
+	
 	height: 100%;
+	float: left;
+	border: 1px solid #DDE7EB;
 }
-#loc{
-	background-color: #333333;
-	color: #fff;
-}
+
 #loc{
 	width: 15%;
+}
+
+#cate{
+
+	width: 16%;
+}
+
+#person{
+
+	width: 16%;
+}
+#cal{
+	
+	width: 15%;
+}
+
+.on{
+	background-color: #333333;
+	color: #fff;
+	border: 1px solid black;
 }
 .out {
 	border: 1px solid #e4e4e4;
@@ -23,17 +43,36 @@
 .item:hover{
 	
 	color: #5e73de;
-	font-weight:bolder;
+	font-weight: 700;
 	background-color: #e2f5fc;
 	border-radius: 3px;
+	cursor: pointer;	
+}
+.item2:hover{
+	
+	color: #5e73de;
+	font-weight: 700;
+	background-color: #e2f5fc;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.item3:hover{
+	
+	color: #5e73de;
+	font-weight: 700;
+	background-color: #e2f5fc;
+	border-radius: 3px;
+	cursor: pointer;
 }
 /* .carDiv{
 	border: 1px solid black!important;
 } */
 .in {
 	border-top: 1px solid black;
+	border:1px solid #DDE7EB;
 	float: left;
 	display: inline-block;
+	background: white;
 	width: 15%;
 	height: 300px;
 	overflow: auto;
@@ -46,6 +85,13 @@
 	margin-left: 10px;
 	padding-left: 5px;
 }
+.itemframe2 li {
+	width: 80%;
+	display: inline-block;
+	margin-left: 10px;
+	padding-left: 5px;
+}
+
 #midDiv li ,#smallDiv li {
 	width: 28%;
 	display: inline-block;
@@ -58,12 +104,41 @@
 	font-size: 12px;
 }
 
+.itemframe2 {
+	width: 100%;
+	padding: 0px !important;
+	font-size: 12px;
+}
+
+.itemframe3 {
+	width: 100%;
+	padding: 0px !important;
+	font-size: 12px;
+}
+
 .item {
 	margin-top: 5px;
 	margin-bottom: 5px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	width: 30%;
+	
+}
+
+.item2{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+}
+
+.item3{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
 }
 
 #midDiv {
@@ -82,6 +157,21 @@
 	padding: 20px;
 }
 
+#kindsDiv{
+	width: 16%;
+	float: left;
+}
+
+#personDiv{
+	width: 16%;
+	float: left;
+}
+
+#dateDiv{
+	width: 53%;
+	float: left;
+}
+
 span {
 	width: 20px;
 	cursor: pointer;
@@ -89,6 +179,7 @@ span {
 
 label {
 	cursor: pointer;
+	font-weight: 500;
 }
 
 .btn-xs {
@@ -107,7 +198,7 @@ label {
 	margin-bottom: 2px;
 	display: inline-block;
 	background:
-		url('/${pageContext.request.contextPath}/resources/images/close.png')
+		url('/resources/images/close.png')
 		no-repeat 0 0;
 	background-size: cover;
 	width: 10px;
@@ -115,3 +206,4 @@ label {
 	text-indent: -9999px;
 	vertical-align: middle;
 }
+

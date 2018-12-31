@@ -116,6 +116,10 @@ article{
 .locCkbx{
 	display: none!important;
 }
+
+.kd{
+	display: none!important;
+}
 .listSec{
 	padding: 0px!important;
 }
