@@ -112,4 +112,10 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.update("boardComment.updateBoardComment", bComment);
 	}
 
+	@Override
+	public int deleteBoardComment(BoardComment bComment) {
+		
+		return sqlSession.update("boardComment.deleteBoardComment", bComment);
+	}
+
 }

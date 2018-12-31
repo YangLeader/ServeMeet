@@ -13,13 +13,14 @@ public class BoardComment {
 	private int refCid;
 	private String commentStatus;
 	private int orderList;
+	private String getName;
 	
 	public BoardComment() {
 		super();
 	}
 	
 	public BoardComment(int commentId, int boardNo, String userName, String commentDate, String commentCon, int refCid,
-			String commentStatus, int orderList) {
+			String commentStatus, int orderList, String getName) {
 		super();
 		this.commentId = commentId;
 		this.boardNo = boardNo;
@@ -29,8 +30,8 @@ public class BoardComment {
 		this.refCid = refCid;
 		this.commentStatus = commentStatus;
 		this.orderList = orderList;
+		this.getName = getName;
 	}
-
 
 	public int getCommentId() {
 		return commentId;
@@ -117,12 +118,20 @@ public class BoardComment {
 	public void setOrderList(int orderList) {
 		this.orderList = orderList;
 	}
+	
+	public String getGetName() {
+		return getName;
+	}
+
+	public void setGetName(String getName) {
+		this.getName = getName;
+	}
 
 	@Override
 	public String toString() {
 		return "BoardComment [commentId=" + commentId + ", boardNo=" + boardNo + ", userName=" + userName
 				+ ", commentDate=" + commentDate + ", commentCon=" + commentCon + ", refCid=" + refCid
-				+ ", commentStatus=" + commentStatus + ", orderList=" + orderList + "]";
+				+ ", commentStatus=" + commentStatus + ", orderList=" + orderList + ", getName=" + getName + "]";
 	}
 
 	

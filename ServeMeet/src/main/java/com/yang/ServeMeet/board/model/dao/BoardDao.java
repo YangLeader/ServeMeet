@@ -41,4 +41,7 @@ public interface BoardDao {
 	int selectOrder();
 
 	int updateBoardComment(BoardComment bComment);
+
+	int deleteBoardComment(BoardComment bComment);
+
 }
