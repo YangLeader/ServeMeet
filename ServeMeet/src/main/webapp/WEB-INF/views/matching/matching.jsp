@@ -10,8 +10,8 @@
 
 <div class="out">
 	<div class="category">
-		<div class="condition" id ="loc"><span>지역</span></div>
-		<div class="condition" id = "cate"><span>모임</span></div>
+		<div class="condition" id ="loc" onclick="selectlocCategory()"><span>지역</span></div>
+		<div class="condition" id = "cate" onclick="selectdetailCategory()"><span>세부조건</span></div>
 		<div class="condition" id = "person"><span>인원</span></div>
 		<div class="condition" id = "cal"><span>날짜</span></div>	
 	</div>
@@ -43,6 +43,7 @@
 		<br /> &nbsp; ← 지역을 선택해주세요.
 	</div>
 	<div class="in scrollbar-primary scrollbar carDiv" id="smallDiv"></div>
+	<div class="in scrollbar-primary scrollbar carDiv" id="detailDiv" style="display: none">디테일</div>
 	<div class="in scrollbar-primary scrollbar" id="bottomDiv" style=""></div>
 </div>
 
@@ -431,6 +432,19 @@
 
 		$('.locCkbx[value="' + delCkbx + '"]').prop('checked', false);
 
+	}
+	
+	function selectlocCategory() {
+		$('#midDiv').show();
+		$('#smallDiv').show();
+		$('#detailDiv').hide();
+	}
+	 
+	function selectdetailCategory() {
+		$('#midDiv').hide();
+		$('#smallDiv').hide();
+		$('#detailDiv').show();
+		
 	}
 	/* 	function divClickEvent(){
 	 $('#bottomDiv').children('a').each(function(obj, index){
