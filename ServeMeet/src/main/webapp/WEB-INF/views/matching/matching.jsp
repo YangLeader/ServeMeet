@@ -5,9 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<link rel="stylesheet" href="/resources/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" type="text/css">
 
-<script type="text/javascript" src="/resources/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
 <!-- 	<label for="ck1"><input type="checkbox" id="ck1" value="test">test</label>
 	<label for="ck2"><input type="checkbox" id="ck2" value="test2">test2</label> -->
 
@@ -26,7 +26,7 @@
 			<span>날짜</span>
 		</div>
 	</div>
-	<div class="in">
+	<div class="in scrollbar-primary scrollbar">
 		<ul class="itemframe">
 			<li class="item" id="서울특별시"><span class="sca">서울</span></li>
 			<li class="item" id="경기도"><span class="sca">경기</span></li>
@@ -50,10 +50,10 @@
 			<li class="item" id="제주특별자치도"><span class="sca">제주</span></li>
 		</ul>
 	</div>
-	<div class="in" id="midDiv">
+	<div class="in scrollbar-primary scrollbar" id="midDiv">
 		<br /> &nbsp; ← 지역을 선택해주세요.
 	</div>
-	<div class="in" id="smallDiv"></div>
+	<div class="in scrollbar-primary scrollbar" id="smallDiv"></div>
 	<div class="in" id="kindsDiv" style="display: none">
 		<ul class="itemframe2">
 			<li class="item2"><label for='kd1'><input type="radio" name="kdra" class="kd" id="kd1" value="소모임" />소모임</label></li>
@@ -62,7 +62,7 @@
 			<li class="item2"><label for='kd4'><input type="radio" name="kdra" class="kd" id="kd4" value="소개팅" />소개팅</label></li>
 		</ul>
 	</div>
-	<div class="in" id="personDiv" style="display: none">
+	<div class="in scrollbar-primary scrollbar" id="personDiv" style="display: none">
 		<ul class="itemframe2">
 			<li class="item3"><span class="ps">1~3명</span></li>
 			<li class="item3"><span class="ps">4~6명</span></li>
@@ -71,11 +71,11 @@
 			<li class="item3"><span class="ps">인원수 무관</span></li>
 		</ul>
 	</div>
-	<div class="in" id="dateDiv" style="display: none">
+	<div class="in scrollbar-primary scrollbar" id="dateDiv" style="display: none">
 		<!-- <div id="mydate"></div> -->
 		<div id="mydate"></div>
 	</div>
-	<div class="in" id="bottomDiv" style=""></div>
+	<div class="in scrollbar-primary scrollbar" id="bottomDiv" style=""></div>
 </div>
 
 

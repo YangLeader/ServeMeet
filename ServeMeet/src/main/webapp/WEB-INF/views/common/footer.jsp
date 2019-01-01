@@ -69,6 +69,12 @@
         </div>
     </div>
 <!-- board js -->
+<!-- cnd방식으로 sockjs불러오기 -->
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 <script
 	src="${pageContext.request.contextPath }/resources/js/jquery.menu.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/common.js"></script>
@@ -84,7 +90,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+
     <!-- Sticky Header -->
     <script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/sticky-header.js"></script>

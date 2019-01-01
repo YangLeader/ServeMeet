@@ -20,5 +20,5 @@ public interface ChattingDao {
 
 	Chatting selectChat(int chatNo);
 
-	ChattingLog selectChatLog(int chattingId);
+	List<ChattingLog> selectChatLog(int chattingId);
 }

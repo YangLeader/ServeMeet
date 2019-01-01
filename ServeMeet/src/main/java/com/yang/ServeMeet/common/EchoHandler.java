@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +71,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		int userNo = m.getUserNo();
 		String userName = m.getUserName();
 		if (session.getAttributes().get("chat") == null) {
+			
 			chatNo = (Integer) (session.getAttributes().get("chatNo"));
 		} else {
 			Chatting chat = (Chatting) (session.getAttributes().get("chat"));
@@ -103,7 +106,14 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 사용자가 채팅방, 접속을 종료할 때 실행 되는 메소드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		int chatNo = (Integer) (session.getAttributes().get("chatNo"));
+		int chatNo;
+		if (session.getAttributes().get("chat") == null) {
+			
+			chatNo = (Integer) (session.getAttributes().get("chatNo"));
+		} else {
+			Chatting chat = (Chatting) (session.getAttributes().get("chat"));
+			chatNo = chat.getChattingId();
+		}
 		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
 		rSessionList = rMap.get(chatNo);
 
