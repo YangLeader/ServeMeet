@@ -10,13 +10,6 @@
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <!-- 부트스트랩적용 -->
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>실시간 채팅</title>
 <script>
@@ -26,10 +19,12 @@
 	sock.onclose=onClose;
 	var today=null;
 	$(function(){
+		chatList();
 		$("#sendBtn").click(function(){
 			console.log("send message.....");
 			/* 채팅창에 작성한 메세지 전송 */
 			sendMessage();
+			chatList();
 			/* 전송 후 작성창 초기화 */
 			$("#message").val('');
 		});
@@ -114,28 +109,75 @@
 	function onClose(evt){
 		location.href='${pageContext.request.contextPath};';
 	};
+	
+	function chatList() {
+		$.ajax({
+			url : "${pageContext.request.contextPath}/chat/chatListMin.do/",
+			
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				 $('.chattingList').children().remove();
+				  for(var i in data){	
+					 
+					  
+					  $('.chattingList').append(							 
+						$('<div>').text(data[i].chattingName)
+								  .attr("class","chattingBox carea")
+								  .attr("onclick","chatting("+data[i].chattingId+");")
+								  .css({
+									  "width" : "100%",
+									  "height": "80px",
+									  "border-bottom": "1px #64646429 solid"
+								  }).append(
+											$('<div>').text(data[i].chContent)
+													  .attr("class","carea")
+													  .css({
+														  "padding":"15px 10px"
+													  })
+									
+								   )
+					  
+					  );
+				  }
+			
+			},
+			error : function(data){
+				 console.log(data);
+			}
+		});
+	}
 </script>
 <style>
-div{
-	padding:5%;
-}
+
 </style>
 </head>
 <body>
-<h2>채팅만들기!</h2>
-<div class='form-group'>
-	<label id='sessionuserid'><h3>${userName}님이 입장하셨습니다.</h3></label><br/>
-	<!-- 메세지 작성부분 -->
-	<!-- 대화내용이 출력되는 부분 -->
-	<div class='panel panel-default'>
-		<div id='chatdata' class='panel-body'></div>
+<header>
+		<c:import url="../common/header.jsp" />
+	</header>
+<div style="width: 1200px; height:800px; margin: 0 auto;">
+	<div style="width: 100%;height: 70px;">
+		<div class="col-lg-4"></div>
+		<div  class= 'col-lg-8'></div>
 	</div>
-	<textarea rows="2" cols="50" name='message' id='message'></textarea>
-	<button class='btn btn-primary'id='sendBtn'>전송</button>
-	<button class='btn btn-primary'id='exitBtn'>나가기</button>
-	
+	<div class="col-lg-4 chattingList" style="height: 100%">
+	</div>
+	<div class= 'col-lg-8 form-group' style="height: 100%">
+		
+		<!-- 메세지 작성부분 -->
+		<!-- 대화내용이 출력되는 부분 -->
+		<div class='panel panel-default' style="overflow: scroll; height: 600px;">
+			<div id='chatdata' class='panel-body'></div>
+		</div>
+		<textarea rows="2" cols="50" name='message' id='message'></textarea>
+		<button class='btn btn-primary'id='sendBtn'>전송</button>
+		<button class='btn btn-primary'id='exitBtn'>나가기</button>
+		
+	</div>
 </div>
-
-
+	<footer>
+		<c:import url="../common/footer.jsp" />
+	</footer>
 </body>
 </html>

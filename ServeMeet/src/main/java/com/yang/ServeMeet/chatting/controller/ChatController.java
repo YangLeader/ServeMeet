@@ -37,12 +37,12 @@ public class ChatController {
 	public List<ChattingLog> chatListMin(HttpSession session) {
 		
 		int userNo = ((Member)(session.getAttribute("member"))).getUserNo();
-		List<Chatting> list  = cs.selectChatList(userNo);
 		List<ChattingLog> chatList = new ArrayList<ChattingLog>();
-		for(Chatting c : list) {
-			chatList.add( cs.selectChatLog(c.getChattingId()));
-			System.out.println("chatList:::::::::::::"+chatList.toString());
+		chatList=cs.selectChatLog(userNo);
+		for(ChattingLog c :chatList) {
+			System.out.println(c);
 		}
+		
 		return chatList;
 	}
 	

@@ -123,6 +123,29 @@ article{
 .listSec{
 	padding: 0px!important;
 }
+.chatList{
+	float:right; 
+	display:none; 
+	overflow-y: scroll; 
+	border: 1px #64646466 solid; 
+	color: #1d2129;
+	height: 550px; 
+	width: 400px; 
+	
+	background-color: white; 
+	position: absolute; 
+	border-radius: 0 0 2px 2px;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+	z-index: 9998; 
+	
+}
+.chatList .chatBox {
+	padding: 15px 10px;
+	z-index:9999; 
+}
+.chatList .chatBox:hover {
+	background-color: #eceefb
+}
 	
 /*-----------------------------------
     1. Body / Typography 

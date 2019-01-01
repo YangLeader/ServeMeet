@@ -4,13 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html>
+
 <head>
-<script
-	src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.min.js"></script>
-<link
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+
+	
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
+<!-- 부트스트랩적용 -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+
 <!-- Style Custom CSS -->
 <link
 	href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"
@@ -64,7 +72,7 @@ float: right;
 	<div class="mid-header">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-10 col-md-5 col-sm-5 col-xs-5">
+				<div class="col-lg-10">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/"><img
 							src="${pageContext.request.contextPath}/resources/images/logo.png"
@@ -82,7 +90,7 @@ float: right;
 	<div class="header">
 		<div class="container">
 				
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-12">
 					<!-- navigation -->
 						<div class="navigation">
 							<div id="navigation">						
@@ -121,11 +129,13 @@ float: right;
 									</c:if>
 									<c:if test="${!empty member}">
 										<li id="chat" class= "suvNav"><span class="carea mainNav">채팅목록</span>
-										
-										<div class="chatList carea scrollbar scrollbar-primary" 
-											style="float:right; display:none; overflow-y: scroll; border: 1px #acacac solid; height: 550px; width: 400px; background-color: white; position: absolute; z-index: 9999; " >
+										<div>
+											<div style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTop.png');height: 10px;width: 20px;"></div>
 										</div>
-							
+										<form id="chatGo" method="post">
+											<div class="chatList carea scrollbar scrollbar-primary">
+											</div>
+										</form>
 										</li>
 										
 										<li class="suvNav has-sub"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
@@ -156,7 +166,7 @@ float: right;
 		$("#chat").click(function() {
 				var display = $('.chatList').css("display");
 				console.log(display);
-			$('.chatList').toggle();
+			$('.chatList').show();
 			
 				if(display=='none'){
 					$.ajax({
@@ -173,9 +183,18 @@ float: right;
 											  .attr("class","chatBox carea")
 											  .attr("onclick","chatting("+data[i].chattingId+");")
 											  .css({
-												  "width" : "380px",
-												  "height": "100px"
-											  })			  
+												  "width" : "100%",
+												  "height": "80px",
+												  "border-bottom": "1px #64646429 solid"
+											  }).append(
+														$('<div>').text(data[i].chContent)
+																  .attr("class","carea")
+																  .css({
+																	  "padding":"15px 10px"
+																  })
+												
+											   )
+								  
 								  );
 							  }
 						
@@ -199,9 +218,12 @@ float: right;
 	});
 	
 	function chatting(chatId) {
-		console.log(chatId);
 		
+		var url = "${pageContext.request.contextPath }/chat/chatting.do/"+ chatId;
+		console.log(url);
+		
+		$("#chatGo").attr("action",url).submit();
+
 	}
 </script>
 
-</html>
