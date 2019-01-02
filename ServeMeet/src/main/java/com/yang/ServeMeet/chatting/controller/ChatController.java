@@ -40,6 +40,11 @@ public class ChatController {
 		List<ChattingLog> chatList = new ArrayList<ChattingLog>();
 		chatList=cs.selectChatLog(userNo);
 		for(ChattingLog c :chatList) {
+			String tmp=c.getChContent();
+			if(tmp.length()>30) {
+				tmp=tmp.substring(0, 30)+"...";
+				c.setChContent(tmp);
+			}
 			System.out.println(c);
 		}
 		
