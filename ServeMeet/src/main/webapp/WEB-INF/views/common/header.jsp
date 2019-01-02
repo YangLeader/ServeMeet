@@ -96,14 +96,16 @@ float: right;
 							<div id="navigation">						
 								<ul>
 									<li class="active"><a href="${pageContext.request.contextPath}/" title="Home"><span class="mainNav">Home</span></a></li>
-									<li><a href="${pageContext.request.contextPath }/location/location.do" title="Menu"><span  class="mainNav">매칭</a></li>
-									<!-- <li class="has-sub"><a href="service-list.html" title="Service List">Service List</a>
-		
-		                                    <ul>
-		                                        <li><a href="service-list.html" title="Service List">Service List</a></li>
-		                                        <li><a href="service-detail.html" title="Service Detail">Service Detail</a></li>
-		                                    </ul>
-		                                </li> -->
+									<li class="has-sub"><a title="매칭"><span  class="mainNav">매칭</a>
+										<ul>
+	                                        <li><a href="${pageContext.request.contextPath }/matching/matching.ma" title="소개팅">소개팅</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="소모임">소모임</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="스포츠">스포츠</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="E-스포츠">E-스포츠</a></li>
+		                                </ul>
+									</li>
+
+
 									<li><a
 										href="${pageContext.request.contextPath }/chat/memberList.do"
 										title="Blog"><span class="mainNav">채팅</a></li>
@@ -112,6 +114,7 @@ float: right;
 										title="Contact Us"><span class="mainNav">게시판</a>
 									</li>
 		  							<li><a href="${pageContext.request.contextPath}/point/point.do"><span class="mainNav">포인트<span></a> </li>
+		  							
 	                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting"><span class="mainNav">배팅<span></a>
 		                                <ul>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="battingList">진행중인 배팅</a></li>
@@ -170,7 +173,7 @@ float: right;
 			
 				if(display=='none'){
 					$.ajax({
-						url : "chat/chatListMin.do/",
+						url : "${pageContext.request.contextPath}/chat/chatListMin.do/",
 						dataType : "json",
 						success : function(data) {
 							console.log(data);
