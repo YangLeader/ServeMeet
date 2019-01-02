@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -164,6 +165,19 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoardComment(BoardComment bComment) {
 		
 		return boardDao.deleteBoardComment(bComment);
+	}
+
+	@Override
+	public ArrayList<Map<String, String>> searchBoard(String condition, String keyword) {
+		
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		
+		hmap.put("condition", condition);
+		hmap.put("keyword", keyword);
+		
+		ArrayList<Map<String, String>> list = boardDao.searchBoard(hmap);
+		
+		return list;
 	}
 
 

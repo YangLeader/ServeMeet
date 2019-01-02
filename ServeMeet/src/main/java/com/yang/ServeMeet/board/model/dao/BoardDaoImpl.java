@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.board.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -116,6 +117,12 @@ public class BoardDaoImpl implements BoardDao {
 	public int deleteBoardComment(BoardComment bComment) {
 		
 		return sqlSession.update("boardComment.deleteBoardComment", bComment);
+	}
+
+	@Override
+	public ArrayList<Map<String, String>> searchBoard(HashMap<String, String> hmap) {
+
+		return new ArrayList<Map<String, String>>(sqlSession.selectList("board.searchBoard", hmap));
 	}
 
 }

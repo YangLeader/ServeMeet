@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.board.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,5 +44,7 @@ public interface BoardDao {
 	int updateBoardComment(BoardComment bComment);
 
 	int deleteBoardComment(BoardComment bComment);
+
+	ArrayList<Map<String, String>> searchBoard(HashMap<String, String> hmap);
 
 }
