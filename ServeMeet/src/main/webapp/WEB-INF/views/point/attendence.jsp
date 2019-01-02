@@ -97,17 +97,17 @@
         <tr>
           <td class="blank"></td>
           <td class="blank"></td>
-          <td id="date01">1</td>
-          <td id="date02">2</td>
-          <td id="date03">3</td>
-          <td id="date04">4</td>
-          <td id="date05">5</td>
+          <td id="date1">1</td>
+          <td id="date2">2</td>
+          <td id="date3">3</td>
+          <td id="date4">4</td>
+          <td id="date5">5</td>
         </tr>
         <tr>
-          <td id="date06">6</td>
-          <td id="date07">7</td>
-          <td id="date08">8</td>
-          <td id="date09">9</td>
+          <td id="date6">6</td>
+          <td id="date7">7</td>
+          <td id="date8">8</td>
+          <td id="date9">9</td>
           <td id="date10">10</td>
           <td id="date11">11</td>
           <td id="date12">12</td>

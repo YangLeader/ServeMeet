@@ -23,12 +23,14 @@
 	
 	<select id="selectAtt" parameterType="int" resultType="Attendence">
 		SELECT * FROM ATTENDENCE
-		WHERE USERNO = #{userNo}
+		WHERE USERNO = #{userNo} 
+		and extract(month from att_date) = (SELECT extract(month from sysdate) FROM dual)
 	</select>
 	
 	<select id="selectAttCnt" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM ATTENDENCE
 		WHERE USERNO = #{userNo}
+		and extract(month from att_date) = (SELECT extract(month from sysdate) FROM dual)
 	</select>
 
 
