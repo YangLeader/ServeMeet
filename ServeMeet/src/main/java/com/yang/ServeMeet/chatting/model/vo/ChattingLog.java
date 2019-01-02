@@ -1,7 +1,8 @@
 package com.yang.ServeMeet.chatting.model.vo;
 
 import java.sql.Timestamp;
-import java.sql.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ChattingLog {
 
@@ -9,6 +10,7 @@ public class ChattingLog {
 	
 	private int chattingId;
 	private int userNo;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.m")
 	private Timestamp chDate;
 	private String chContent;
 	private String chStatus;

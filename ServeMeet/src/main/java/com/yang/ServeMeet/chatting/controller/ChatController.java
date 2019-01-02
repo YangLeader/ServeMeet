@@ -50,6 +50,19 @@ public class ChatController {
 		
 		return chatList;
 	}
+	@RequestMapping("/chat/chatLogList.do")
+	@ResponseBody
+	public List<ChattingLog> chatLogList(HttpSession session) {
+		
+		//int userNo = ((Member)(session.getAttribute("member"))).getUserNo();
+		List<ChattingLog> chatLogList = new ArrayList<ChattingLog>();
+		int chatNo = ((Chatting)(session.getAttribute("chat"))).getChattingId();
+		chatLogList=cs.selectChatLogList(chatNo);
+		System.out.println("==============================="+chatLogList);
+	
+		
+		return chatLogList;
+	}
 	
 	@RequestMapping("/chat/memberList.do")
 	public String memberList(Model model,HttpSession session) {

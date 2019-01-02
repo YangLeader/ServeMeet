@@ -7,6 +7,7 @@ overflow-y: scroll;
 
 .scrollbar-primary::-webkit-scrollbar {
 width: 12px;
+oveflow-x:hidden
 }
 
 .scrollbar-primary::-webkit-scrollbar-thumb {
