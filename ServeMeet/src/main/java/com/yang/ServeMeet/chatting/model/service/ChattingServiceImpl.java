@@ -54,4 +54,9 @@ public class ChattingServiceImpl implements ChattingService {
 		// TODO Auto-generated method stub
 		return cDao.selectChatLog(chattingId);
 	}
+	@Override
+	public List<ChattingLog> selectChatLogList(int chatNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectChatLogList(chatNo);
+	}
 }

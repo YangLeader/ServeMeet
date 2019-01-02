@@ -67,6 +67,7 @@ float: right;
 }
 </style>
 </head>
+<body>
 <div class = "hd">
 	
 	<div class="mid-header">
@@ -162,9 +163,9 @@ float: right;
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
 
-<script type="text/javascript">
+<script>
 	$(function() {
 		$("#chat").click(function() {
 				var display = $('.chatListBox').css("display");
@@ -231,3 +232,4 @@ float: right;
 	}
 </script>
 
+</body>

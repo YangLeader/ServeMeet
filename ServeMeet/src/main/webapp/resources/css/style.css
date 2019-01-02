@@ -475,7 +475,7 @@ height:50px;
 	padding: 0px!important;
 	margin: 0px!important;
 	border: 0px!important;
-	background-image: url('${pageContext.request.contextPath}/resources/images/search.png')!important;
+
 	
 
 	-webkit-transition: all 400ms ease-out 0s;	

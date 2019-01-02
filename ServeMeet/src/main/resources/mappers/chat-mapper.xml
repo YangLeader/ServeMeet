@@ -62,6 +62,9 @@
 		                    )T where no1=#{userNo} or no2=#{userNo} or no3=#{userNo})
 		 order by chDate desc
 	</select>
+	<select id="selectChatLogList" parameterType="_int" resultType="ChattingLog">
+		select *from ChattingLog where chattingId=#{chatNo} order by chdate
+	</select>
 
 
 	<insert id="insertChatLog" parameterType="ChattingLog">

@@ -20,6 +20,7 @@
 	var today=null;
 	$(function(){
 		chatList();
+		chatLog();
 		$("#sendBtn").click(function(){
 			console.log("send message.....");
 			/* 채팅창에 작성한 메세지 전송 */
@@ -111,6 +112,7 @@
 	};
 	
 	function chatList() {
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath}/chat/chatListMin.do/",
 			
@@ -147,6 +149,20 @@
 			}
 		});
 	}
+	function chatLog() {
+		$.ajax({
+			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
+		 	datatype:"json",
+		 	success : function(data) {
+				console.log(data);
+			},
+			error : function() {
+				condole.log("chatLog 에러");
+			}
+		 	
+			
+		});
+	}
 </script>
 <style>
 
@@ -167,7 +183,7 @@
 		
 		<!-- 메세지 작성부분 -->
 		<!-- 대화내용이 출력되는 부분 -->
-		<div class='panel panel-default' style="overflow: scroll; height: 600px;">
+		<div class='panel panel-default scrollbar-primary'  style="overflow: scroll;height: 600px;">
 			<div id='chatdata' class='panel-body'></div>
 		</div>
 		<textarea rows="2" cols="50" name='message' id='message'></textarea>
