@@ -33,8 +33,8 @@
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="service-block mb40">
-          <div class="service-img"> <a href="service-detail.html" class="imghover"><img src="${pageContext.request.contextPath}/resources/images/service-3.jpg" class="img-responsive" alt=""></a> </div>
-          <h2 class="service-title"> <a href="service-detail.html" class="title">wedding day</a> </h2>
+          <div class="service-img"> <a href="${pageContext.request.contextPath}/point/roulette.do" class="imghover"><img src="${pageContext.request.contextPath}/resources/images/roulette.png" class="img-responsive" alt=""></a> </div>
+          <h2 class="service-title"> <a href="service-detail.html" class="title">포인트 룰렛</a> </h2>
         </div>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">

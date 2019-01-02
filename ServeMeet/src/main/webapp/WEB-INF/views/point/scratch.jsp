@@ -80,7 +80,7 @@
 </div>
 <br>
 <div align="center">
-<button class="btn-lg btn-default" id="scratchBtn" onclick="buyScratch('${member.point}')">복권 구매하기</button>
+<button class="btn-lg btn-default" id="scratchBtn" onclick="buyScratch()">복권 구매하기</button>
 <br><br>
 <div class="ready_container" id="ready-container" style="display:">
 	<img src="${pageContext.request.contextPath}/resources/images/Lucky_Scratch.jpeg">
@@ -222,7 +222,7 @@ var image = new Image();
 	      }else if(isWin == true) {
 	    	  alert("축하합니다! 100포인트에 당첨되었습니다!");
 	    	  $.ajax({
-					url : "${pageContext.request.contextPath}/point/plusPoint.do",
+					url : "${pageContext.request.contextPath}/point/updatePoint.do",
 					data : {increasePoint : 100,
 							pContent : "스크래치 포인트 획득"
 							},
@@ -244,7 +244,7 @@ var image = new Image();
 	      }else if(is1000Win == true){
 	    	  alert("축하합니다! 1000포인트에 당첨되었습니다!");
 	    	  $.ajax({
-					url : "${pageContext.request.contextPath}/point/plusPoint.do",
+					url : "${pageContext.request.contextPath}/point/updatePoint.do",
 					data : {increasePoint : 1000,
 							pContent : "스크래치 포인트 획득"
 							},
@@ -299,27 +299,44 @@ var image = new Image();
 	  
 	})();
 	
-	function buyScratch(point){
+	function buyScratch(){
 		
 		 if (confirm("10포인트가 차감됩니다. 구매하시겠습니까?") == true){    //확인
-			 console.log("point: "+point);
-			 if(point <10){
-				 alert("포인트가 모자랍니다.");
-				 location.reload(true);
-			 }else{
-				 $("#scratchBtn").attr("style","display:none");
 			 $.ajax({
-					url : "${pageContext.request.contextPath}/point/minusPoint.do",
-					data : {increasePoint : -10,
-							pContent : "스크래치 포인트 차감"
-							},
-					success : function(){
-						 $("#ready-container").attr("style","display:none");
-							$("#js-container").attr("style","display:");
+					url : "${pageContext.request.contextPath}/point/getPoint.do",
+					point : {},
+					success : function(point){
+						console.log("point : "+point);
+						if(point <10){
+							 alert("포인트가 모자랍니다.");
+							 location.reload(true);
+						 }else{
+							 $("#scratchBtn").attr("style","display:none");
+						 $.ajax({
+								url : "${pageContext.request.contextPath}/point/updatePoint.do",
+								data : {increasePoint : -10,
+										pContent : "스크래치 포인트 차감"
+										},
+								success : function(){
+									 $("#ready-container").attr("style","display:none");
+										$("#js-container").attr("style","display:");
+
+									
+					            }, error : function(jqxhr, textStatus, errorThrown){
+					                console.log("차감 ajax 처리 실패");
+					                //에러로그
+					                console.log(jqxhr);
+					                console.log(textStatus);
+					                console.log(errorThrown);
+					            }
+							});
+						 
+							 
+						 }
 
 						
 		            }, error : function(jqxhr, textStatus, errorThrown){
-		                console.log("ajax 처리 실패");
+		                console.log("포인트 얻기ajax 처리 실패");
 		                //에러로그
 		                console.log(jqxhr);
 		                console.log(textStatus);
@@ -327,8 +344,6 @@ var image = new Image();
 		            }
 				});
 			 
-				 
-			 }
 
 		 }else{   //취소
 

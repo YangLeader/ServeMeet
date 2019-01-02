@@ -73,4 +73,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.update("member.updatePoint",hmap);
 	}
 
+	@Override
+	public int getPoint(int userNo) {
+		return sqlSession.selectOne("member.getPoint",userNo);
+	}
+
 }

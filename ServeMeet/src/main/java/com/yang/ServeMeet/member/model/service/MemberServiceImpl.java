@@ -88,4 +88,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.updatePoint(hmap);
 	}
 
+	@Override
+	public int getPoint(int userNo) {
+		return memberDao.getPoint(userNo);
+	}
+
 }

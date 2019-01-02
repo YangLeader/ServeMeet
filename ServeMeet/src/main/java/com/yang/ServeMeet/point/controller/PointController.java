@@ -56,6 +56,11 @@ public class PointController {
 		if(logger.isDebugEnabled()) logger.debug("스크래치 페이지 고");
 		return "point/scratch";
 	}
+	@RequestMapping("/point/roulette.do")
+	public String roulette() {
+		if(logger.isDebugEnabled()) logger.debug("룰렛 페이지 고");
+		return "point/roulette";
+	}
 	
 	
 	@RequestMapping("/point/attStamp.do")
@@ -126,40 +131,11 @@ public class PointController {
 		
 	}
 	
-	@RequestMapping("/point/minusPoint.do")
-	@ResponseBody
-	public int minusPoint(@RequestParam int increasePoint,@RequestParam String pContent,Member m) {
-		if(logger.isDebugEnabled()) logger.debug("포인트 차감");
-		int userNo = m.getUserNo();
-		
-		Point p = new Point();
-		p.setUserNo(userNo);
-		p.setIncreasePoint(increasePoint);
-		p.setpContent(pContent);
-		
-		int result1 = memberService.updatePoint(userNo,increasePoint);
-		int result2 = pointService.insertPoint(p);
-		
-		String msg = "";
-		String msg2 ="";
-		
-		if(result1 > 0 ) msg = "멤버포인트 업뎃되었습니다.";
-		else msg = "멤포 업뎃 실패";
-		
-		if(result2 > 0) msg2 ="포인트 삽입";
-		else msg2 ="포인트db삽입 실패";
-		
-		System.out.println(msg);
-		System.out.println(msg2);
-		
-		return 1;
 	
-	}
-	
-	@RequestMapping("/point/plusPoint.do")
+	@RequestMapping("/point/updatePoint.do")
 	@ResponseBody
 	public String pointScratch(@RequestParam int increasePoint,@RequestParam String pContent,Member m) {
-		if(logger.isDebugEnabled()) logger.debug("포인트 획득");
+		if(logger.isDebugEnabled()) logger.debug("포인트 업데이트");
 		
 		int userNo = m.getUserNo();
 		
@@ -185,6 +161,18 @@ public class PointController {
 		
 		
 		return "point/scratch";
+	}
+	
+	@RequestMapping("/point/getPoint.do")
+	@ResponseBody
+	public int getPoint(Member m) {
+		if(logger.isDebugEnabled()) logger.debug("포인트 가져오기");
+		
+		int userNo = m.getUserNo();
+		
+		int result = memberService.getPoint(userNo);
+		
+		return result;
 	}
 	
 	

@@ -22,4 +22,6 @@ public interface MemberService {
 
 	int updatePoint(int userNo, int increasePoint);
 
+	int getPoint(int userNo);
+
 }
