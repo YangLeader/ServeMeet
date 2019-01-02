@@ -72,4 +72,14 @@
 		UPDATE BOARD SET BOARDCOUNT = BOARDCOUNT + 1
 		WHERE BOARDNO = #{boardNo}
 	</update>
+	
+	<select id="searchBoard" parameterType="hashMap" resultType="board">
+		SELECT * FROM BOARD
+		<bind name="myPattern" value="'%'+keyword+'%'" />
+		<where>
+			<if test="condition == 'writer'"> USERNAME LIKE #{myPattern} AND BOARDSTATUS = 'Y'</if>
+			<if test="condition == 'title'"> BOARDTITLE LIKE #{myPattern} AND BOARDSTATUS = 'Y'</if>
+			<if test="condition == 'content'"> BOARDCONTENT LIKE #{myPattern} AND BOARDSTATUS = 'Y'</if>
+		</where>
+	</select>
 </mapper>

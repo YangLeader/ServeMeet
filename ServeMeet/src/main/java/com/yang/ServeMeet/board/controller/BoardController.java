@@ -394,4 +394,17 @@ public class BoardController {
 				
 		return "common/msg";
 	}
+	
+	@RequestMapping("/board/searchBoard.do")
+	public String searchBoard(@RequestParam("con") String condition, @RequestParam("keyword") String keyword, Model model) {
+		
+		ArrayList<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		
+		list = boardService.searchBoard(condition, keyword);
+		
+		model.addAttribute("list", list);
+		
+		return "board/boardList";
+		
+	}
 }

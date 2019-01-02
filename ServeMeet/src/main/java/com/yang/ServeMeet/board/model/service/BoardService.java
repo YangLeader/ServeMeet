@@ -38,4 +38,6 @@ public interface BoardService {
 
 	int deleteBoardComment(BoardComment bComment);
 
+	ArrayList<Map<String, String>> searchBoard(String condition, String keyword);
+
 }

@@ -67,7 +67,7 @@
 		});
 	</script>
 
-
+	<br /><br />
 	<div id="wrapper">
 		<div class="container">
 
@@ -78,7 +78,9 @@
 					<!-- 게시판 타이틀 -->
 					<div class="bbs_title_wrap">
 						<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">자유 게시판</a>
+						<c:if test="${!empty totalContents }">
 						<p>총 ${totalContents }건의 게시물이 있습니다.</p>
+						</c:if>
 					</div>
 
 					<div class="button_box">
@@ -158,35 +160,26 @@
 						</ul>
 					</div>
 
-				<div class="bbs_action_box">
+					<div class="bbs_action_box">
 					<!-- 게시판 검색 시작 { -->
-					<fieldset id="bbs_sch">
-						<form id="sch_frm" name="fsearch" method="get">
-							<input type="hidden" name="bo_table" value="funny"> 
-							<input type="hidden" name="sca" value=""> 
-							<input type="hidden" name="sop" value="and">
+						<fieldset id="bbs_sch">
+							<div class="bo_sch">
+
+								<select name="sfl" id="sfl" class="form-control">
+									<option value="title">제목</option>
+									<option value="content">내용</option>
+									<option value="writer">글쓴이</option>					
+								</select>
 								
-								<div class="bo_sch">
+								<input type="text" name="stx" class="form-control value=" required id="stx" size="15" maxlength="15">
 
-									<select name="sfl" id="sfl" class="form-control">
-										<option value="wr_subject">제목</option>
-										<option value="wr_content">내용</option>
-										<option value="wr_subject||wr_content">제목+내용</option>
-										<option value="mb_id,1">회원아이디</option>
-										<option value="mb_id,0">회원아이디(코)</option>
-										<option value="wr_name,1">글쓴이</option>
-										<option value="wr_name,0">글쓴이(코)</option>
-									</select> 
-									<input type="text" name="stx" class="form-control value="
-									 required id="stx" size="15" maxlength="15">
+								<button type="button" id="searchsubmit" onclick="search();">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
 
-									<button type="submit" id="searchsubmit">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
+							</div>
 
-								</div>
-						</form>
-					</fieldset>
+						</fieldset>
 					<!-- } 게시판 검색 끝 -->
 
 					<div class="button_box" style="float: unset;">
@@ -222,6 +215,11 @@
 
 
 			<script>
+			
+			function search(){
+				location.href="searchBoard.do?con="+$('#sfl').val()+"&keyword="+$('#stx').val();
+			}
+			
 				function put_tags(a) {
 					$("#stx").val(a).focus();
 					$("#sfl").val("wr_1");
