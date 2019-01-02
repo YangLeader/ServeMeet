@@ -43,13 +43,21 @@
 		select * from ChattingList where CHATTINGID=#{chattingId}
 	</select>
 	<select id="selectChatLastLog" parameterType="int" resultMap="chatLog">
-		select LG.CHATTINGID CHATTINGID,userNo,chDate,chContent,chstatus,(select CHATTINGNAME from CHATTINGLIST L where LG.chattingId=L.CHATTINGID) CHATTINGNAME 
+		select LG.CHATTINGID CHATTINGID,userNo,chDate,chContent,chstatus,(select NVL(CHATTINGNAME,
+                                                                                       (select (select M.USERNAME from MEMBER M where M.USERNO= case when T.USERNO1=#{userNo} then USERNO2 
+                                                                                                                                                                  else USERNO1 end) username
+                                                                                        from (select * from CHATTING_ONE where USERNO1=#{userNo} or USERNO2 = #{userNo})T
+                                                                                        where T.CHATTINGID=L.CHATTINGID
+                                                                                         )
+                                                                               )  
+                                                                  from CHATTINGLIST L 
+                                                                  where LG.chattingId=L.CHATTINGID) CHATTINGNAME
 		from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog) Lg 
 		where Chdate=mindate
 		and Chattingid in(  select CHATTINGID
-		                    from (select CHATTINGID,CHATTINGNAME,(select O.USERNO1 from	CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID and	O.USERNO1=#{userNo}) no1,
-		                                                         (select O.USERNO2 from CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID	and O.USERNO2=#{userNo}) no2,
-		                                                         (select G.USERNO from CHATTING_GROUP G where L.chattingid = G.CHATTINGID and G.USERNO=#{userNo}) no3
+		                    from (select CHATTINGID,(select O.USERNO1 from	CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID and	O.USERNO1=#{userNo}) no1,
+		                                            (select O.USERNO2 from CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID	and O.USERNO2=#{userNo}) no2,
+		                                            (select G.USERNO from CHATTING_GROUP G where L.chattingid = G.CHATTINGID and G.USERNO=#{userNo}) no3
 		                        from CHATTINGLIST L
 		                    )T where no1=#{userNo} or no2=#{userNo} or no3=#{userNo})
 		 order by chDate desc

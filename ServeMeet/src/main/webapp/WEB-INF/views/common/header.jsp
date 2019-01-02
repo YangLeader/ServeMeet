@@ -132,12 +132,12 @@ float: right;
 									</c:if>
 									<c:if test="${!empty member}">
 										<li id="chat" class= "suvNav"><span class="carea mainNav">채팅목록</span>
-										<div>
-											<div style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTop.png');height: 10px;width: 20px;"></div>
-										</div>
+										
 										<form id="chatGo" method="post">
-											<div class="chatList carea scrollbar scrollbar-primary">
-											</div>
+											<div class="chatListBox">
+												<div class="topImg" style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTop.png');"></div>
+												<div class="chatList carea scrollbar scrollbar-primary"/>
+											</div>	
 										</form>
 										</li>
 										
@@ -167,9 +167,9 @@ float: right;
 <script type="text/javascript">
 	$(function() {
 		$("#chat").click(function() {
-				var display = $('.chatList').css("display");
+				var display = $('.chatListBox').css("display");
 				console.log(display);
-			$('.chatList').show();
+			$('.chatListBox').toggle();
 			
 				if(display=='none'){
 					$.ajax({
@@ -193,6 +193,7 @@ float: right;
 														$('<div>').text(data[i].chContent)
 																  .attr("class","carea")
 																  .css({
+																	  "width" : "100%",
 																	  "padding":"15px 10px"
 																  })
 												
@@ -213,7 +214,7 @@ float: right;
 		$('html').click(function(e) {
 			if(!$(e.target).hasClass("carea")) { 
 				console.log(e.target);
-				$(".chatList").hide();
+				$(".chatListBox").hide();
 				}
 			
 			
