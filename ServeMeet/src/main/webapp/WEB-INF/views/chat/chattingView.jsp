@@ -25,7 +25,7 @@
 			console.log("send message.....");
 			/* 채팅창에 작성한 메세지 전송 */
 			sendMessage();
-			chatList();
+			
 			/* 전송 후 작성창 초기화 */
 			$("#message").val('');
 		});
@@ -105,6 +105,7 @@
 			$('#chatdata').append(printHTML);	
 			
 		}
+		chatList();
 	};
 
 	function onClose(evt){

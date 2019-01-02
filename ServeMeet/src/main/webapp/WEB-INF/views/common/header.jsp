@@ -132,12 +132,14 @@ float: right;
 												in</span></a></li>
 									</c:if>
 									<c:if test="${!empty member}">
-										<li id="chat" class= "suvNav"><span class="carea mainNav">채팅목록</span>
+										<li  class= "suvNav"><span class="mainNav" id="chat">채팅목록</span>
 										
 										<form id="chatGo" method="post">
 											<div class="chatListBox">
 												<div class="topImg" style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTop.png');"></div>
-												<div class="chatList carea scrollbar scrollbar-primary"/>
+												<div class="chatList carea scrollbar scrollbar-primary">
+												
+												</div>
 											</div>	
 										</form>
 										</li>
@@ -152,6 +154,7 @@ float: right;
 											</ul>		
 										</li>
 										
+										
 									</c:if>
 		                         
 		                         </ul>
@@ -164,9 +167,16 @@ float: right;
         </div>
     </div>
 <!-- </div> -->
-
+<!-- cnd방식으로 sockjs불러오기 -->
+<script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script>
 	$(function() {
+		var member="${member.userId}";
+		if(member!=""){
+			console.log(member);
+			//var sock=new SockJS("<c:url value='/echo'/>");
+		}
+		
 		$("#chat").click(function() {
 				var display = $('.chatListBox').css("display");
 				console.log(display);
@@ -183,25 +193,28 @@ float: right;
 								 
 								  
 								  $('.chatList').append(							 
-									$('<div>').text(data[i].chattingName)
+									$('<div/>').text(data[i].chattingName)
 											  .attr("class","chatBox carea")
-											  .attr("onclick","chatting("+data[i].chattingId+");")
+											  .attr("class","chatBox carea")
+											  .attr("onclick","chatting("+data[i].chattingId+")")
 											  .css({
 												  "width" : "100%",
 												  "height": "80px",
 												  "border-bottom": "1px #64646429 solid"
 											  }).append(
-														$('<div>').text(data[i].chContent)
-																  .attr("class","carea")
+														$('<div/>').text(data[i].chContent)
+																  .attr("class","chatBox carea")
+																  .attr("value",data[i].chattingId)
 																  .css({
-																	  "width" : "100%",
-																	  "padding":"15px 10px"
+																	  "width" : "100%"
+																	 
 																  })
 												
 											   )
 								  
 								  );
 							  }
+							
 						
 						},
 						error : function(data){
@@ -212,11 +225,13 @@ float: right;
 				}
 		});
 		
+	
 		$('html').click(function(e) {
-			if(!$(e.target).hasClass("carea")) { 
-				console.log(e.target);
-				$(".chatListBox").hide();
-				}
+			
+			//if(!$(e.target).hasClass("carea")) { 
+			//	console.log((e.target) );
+			//	$(".chatListBox").hide();
+			//	}
 			
 			
 		})

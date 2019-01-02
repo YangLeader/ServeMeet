@@ -10,7 +10,7 @@ public class ChattingLog {
 	
 	private int chattingId;
 	private int userNo;
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.m")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.m", timezone = "Asia/Seoul")
 	private Timestamp chDate;
 	private String chContent;
 	private String chStatus;
