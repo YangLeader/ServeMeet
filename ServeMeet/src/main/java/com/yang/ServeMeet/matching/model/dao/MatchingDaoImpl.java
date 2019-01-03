@@ -15,8 +15,6 @@ public class MatchingDaoImpl implements MatchingDao {
 	@Override
 	public int insertMatching(Matching matching) {
 		
-		
-		
 		return session.insert("matching.insertMatching",matching);
 	}
 

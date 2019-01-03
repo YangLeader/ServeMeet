@@ -17,12 +17,12 @@ public class MatchingController {
 	private MatchingService matchingService;
 	
 	@RequestMapping("matching/matchingInsertView.ma")
-	public void matchingInsertView(){}
+	public String matchingInsertView(){
+		return "matching/matchingInsert";
+	}
 	
 	@RequestMapping("matching/matchingInsert.ma")
 	public String matchingInsert(Matching matching , Model model , HttpSession session) {
-		
-		
 		int result = matchingService.matchingInsert(matching);
 		
 		String msg = result >0 ? "매칭 생성 성공!" : "매칭 생성 실패!";
