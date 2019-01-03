@@ -175,6 +175,22 @@ public class PointController {
 		return result;
 	}
 	
+	@RequestMapping("/point/getCount.do")
+	@ResponseBody
+	public int getCount(Member m,@RequestParam String pContent) {
+		if(logger.isDebugEnabled()) logger.debug("포인트 횟수 가져오기");
+		
+		int userNo = m.getUserNo();
+		
+		Point p = new Point();
+		p.setUserNo(userNo);
+		p.setpContent(pContent);
+		
+		int result = pointService.getCount(p);
+		
+		return result;
+	}
+	
 	
 	
 }

@@ -20,5 +20,7 @@ public interface PointService {
 	int insertAtt(Attendence a);
 	
 	int selectAttCnt(int userNo);
+	
+	int getCount(Point point);
 
 }
