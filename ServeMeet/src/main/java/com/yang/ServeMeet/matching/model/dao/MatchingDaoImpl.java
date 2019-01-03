@@ -19,7 +19,7 @@ public class MatchingDaoImpl implements MatchingDao {
 	@Override
 	public int matchingHistoryInsert(MatchingHistory mHistory) {
 		
-		return session.insert("matching_Mapper.matchingInsert",mHistory);
+		return session.insert("matching.insertMatching",matching);
 	}
 	
 	@Override

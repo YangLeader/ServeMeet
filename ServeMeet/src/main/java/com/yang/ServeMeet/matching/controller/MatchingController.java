@@ -19,7 +19,15 @@ public class MatchingController {
 	@Autowired
 	private MatchingService matchingService;
 	
+	@RequestMapping("matching/matchingInsertView.ma")
+	public String matchingInsertView(){
+		return "matching/matchingInsert";
+	}
 	
+	@RequestMapping("matching/matchingInsert.ma")
+	public String matchingInsert(Matching matching , Model model , HttpSession session) {
+		int result = matchingService.matchingInsert(matching);
+
 	@RequestMapping("matching/matchingHistoryForm.ma")
 	public void matchingHistoryForm() {}
 	
@@ -31,7 +39,7 @@ public class MatchingController {
 	
 	@RequestMapping("matching/myMatchingList.ma")
 	public String myMatchingList(@RequestParam String userName, @RequestParam String type, Model model) {
-		
+
 		
 //		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 //		
