@@ -99,7 +99,7 @@ float: right;
 									<li class="active"><a href="${pageContext.request.contextPath}/" title="Home"><span class="mainNav">Home</span></a></li>
 									<li class="has-sub"><a title="매칭"><span  class="mainNav">매칭</a>
 										<ul>
-	                                        <li><a href="${pageContext.request.contextPath }/matching/matching.ma" title="소개팅">소개팅</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/matching/matchingInsertView.ma" title="소개팅">소개팅</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="소모임">소모임</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="스포츠">스포츠</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="E-스포츠">E-스포츠</a></li>
