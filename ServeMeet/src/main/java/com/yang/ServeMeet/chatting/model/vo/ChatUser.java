@@ -2,13 +2,15 @@ package com.yang.ServeMeet.chatting.model.vo;
 
 public class ChatUser {
 	private int chattingId;
-	private int userNo1;
-	private int userNo2;
-	public ChatUser(int chattingId, int userNo1, int userNo2) {
+	private String userName;
+	@Override
+	public String toString() {
+		return "ChatUser [chattingId=" + chattingId + ", userName=" + userName + "]";
+	}
+	public ChatUser(int chattingId, String userName) {
 		super();
 		this.chattingId = chattingId;
-		this.userNo1 = userNo1;
-		this.userNo2 = userNo2;
+		this.userName = userName;
 	}
 	public ChatUser() {
 		super();
@@ -16,25 +18,16 @@ public class ChatUser {
 	public int getChattingId() {
 		return chattingId;
 	}
-	public void setChattingId(int chatNo) {
-		this.chattingId = chatNo;
+	public void setChattingId(int chattingId) {
+		this.chattingId = chattingId;
 	}
-	public int getUserNo1() {
-		return userNo1;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserNo1(int userNo1) {
-		this.userNo1 = userNo1;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public int getUserNo2() {
-		return userNo2;
-	}
-	public void setUserNo2(int userNo2) {
-		this.userNo2 = userNo2;
-	}
-	@Override
-	public String toString() {
-		return "ChatUser [chattingId=" + chattingId + ", userNo1=" + userNo1 + ", userNo2=" + userNo2 + "]";
-	}
+
 	
 	
 

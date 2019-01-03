@@ -61,8 +61,12 @@ public class ChattingServiceImpl implements ChattingService {
 		return cDao.selectChatLogList(chatNo);
 	}
 	@Override
-	public ChatUser selectChatMember(int chatNo) {
+	public List<ChatUser> selectChatMember(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
-		return cDao.selectChatMember(chatNo);
+		return cDao.selectChatMember(map);
+	}
+	public List<ChatUser> selectChatMembers(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return cDao.selectChatMembers(map);
 	}
 }

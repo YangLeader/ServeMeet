@@ -45,18 +45,34 @@ public class EchoHandler extends TextWebSocketHandler {
 		// 사용자 연결 시에 sessionList라는 사용자 리스트에 접속한 사용자를 추가한다.
 		System.out.println("==============chatNo : " + chatNo);
 		
-		String userId = ((Member)(session.getAttributes().get("member"))).getUserId();
-		ChatUser chatUser= new ChatUser();
+		String userName = ((Member)(session.getAttributes().get("member"))).getUserName();
+		int userNo=((Member)(session.getAttributes().get("member"))).getUserNo();
+		List<ChatUser> chatUser= new ArrayList<ChatUser>();
 		List<String> users=new ArrayList<String>();
-		mSessionMap.put(userId, session);
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		map.put("chatNo", chatNo);
+		map.put("userNo", userNo);
+		
+		mSessionMap.put(userName, session);
 		
 		System.out.println(mSessionMap);
 	
-		chatUser=cs.selectChatMember(chatNo);
-		if(chatUser!=null) {
-			//users.add(e)
+		chatUser=cs.selectChatMember(map);
+		
+		if(chatUser.isEmpty()) {
+			chatUser=cs.selectChatMembers(map);
 		}
+		System.out.println(chatUser);
+		users.add(userName);
+		for(ChatUser c:chatUser) {
+			users.add(c.getUserName());
+		}
+		
+		rMap.put(chatNo, users);
+		
 		System.out.println("users : "+users);
+		System.out.println("rMap : "+rMap);
 		
 //		if (rMap.containsKey(chatNo)) {
 //			if(!(rMap.get(chatNo)).contains(userId))
@@ -89,8 +105,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		// message.getPayload()));
 
 		Member m = (Member) session.getAttributes().get("member");
-	
-		
 		int chatNo;
 		int userNo = m.getUserNo();
 		String userName = m.getUserName();
@@ -119,9 +133,11 @@ public class EchoHandler extends TextWebSocketHandler {
 			if (result > 0) {
 				// 사용자 모두에게 데이터를 전달하는 반복문
 				for (String userId : list) {
-					System.out.println("mSessionMap.get(userId) : "+mSessionMap.get(userId));
-					(mSessionMap.get(userId)).sendMessage(new TextMessage(session.getId() + " | " + message.getPayload() + "|"
-							+ session.getRemoteAddress() + "|" + userName));
+					if(mSessionMap.get(userId)!=null) {
+						System.out.println("mSessionMap.get(userId) : "+mSessionMap.get(userId));
+						(mSessionMap.get(userId)).sendMessage(new TextMessage(session.getId() + " | " + message.getPayload() + "|"
+								+ session.getRemoteAddress() + "|" + userName));
+					}
 				}
 				
 			}

@@ -68,10 +68,16 @@
 	<select id="selectChatAlam" parameterType="Map" resultType="_int">
 		 SELECT COUNT(*) FROM CHATTINGLOG WHERE CHSTATUS='N' AND CHATTINGID = #{chatId} AND USERNO!=#{userNo}
 	</select>
-	<select id="selectChatMember" parameterType="_int" resultType="ChatUser">
-		select * from CHATTING_ONE where CHATTINGID=#{chatId} <!-- 수정중 -->
+	<select id="selectChatMember" parameterType="Map" resultType="ChatUser">
+		select Chattingid,case when userno1=#{userNo} 
+						  then (select M.Username from Member M where M.Userno=O.Userno2)else
+                               (select M.Username from Member M where M.Userno=O.Userno1)
+                  end username
+		from CHATTING_ONE O where CHATTINGID=#{chatNo}
 	</select>
-	
+	<select id="selectChatMembers" parameterType="Map" resultType="ChatUser">
+		select Chattingid,(select M.Username from Member M where M.Userno=G.Userno)username from Chatting_Group G where Chattingid=#{chatNo} and Userno!=#{userNo}
+	</select>
 
 
 	<insert id="insertChatLog" parameterType="ChattingLog">

@@ -26,6 +26,8 @@ public interface ChattingService {
 
 	List<ChattingLog> selectChatLogList(int chatNo);
 
-	ChatUser selectChatMember(int chatNo);
+	List<ChatUser> selectChatMember(Map<String, Integer> map);
+
+	List<ChatUser> selectChatMembers(Map<String, Integer> map);
 
 }
