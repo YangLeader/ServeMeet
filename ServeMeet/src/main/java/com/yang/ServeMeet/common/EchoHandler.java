@@ -1,12 +1,10 @@
 package com.yang.ServeMeet.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
+import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 import com.yang.ServeMeet.member.model.vo.Member;
@@ -27,8 +26,9 @@ public class EchoHandler extends TextWebSocketHandler {
 //웹 소켓에서 특정 사용자가 센션을 연결하여 주고받는 데이터를 처리하는 객체
 	// 접속 사용자 리스트
 	private List<WebSocketSession> sessionList = new ArrayList();
-
-	private Map<Integer, List> rMap = new HashedMap();
+	private Map<String,WebSocketSession> mSessionMap= new HashMap<String,WebSocketSession>();
+	//private Map<Integer, List> rMap = new HashedMap();
+	private Map<Integer, List> rMap = new HashMap<Integer, List>();
 	// 에러가 났을 때 로거
 	private Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 
@@ -44,13 +44,37 @@ public class EchoHandler extends TextWebSocketHandler {
 		}
 		// 사용자 연결 시에 sessionList라는 사용자 리스트에 접속한 사용자를 추가한다.
 		System.out.println("==============chatNo : " + chatNo);
-		if (rMap.containsKey(chatNo)) {
-			(rMap.get(chatNo)).add(session);
-		} else {
-			sessionList.add(session);
-			rMap.put(chatNo, sessionList);
+		
+		String userId = ((Member)(session.getAttributes().get("member"))).getUserId();
+		ChatUser chatUser= new ChatUser();
+		List<String> users=new ArrayList<String>();
+		mSessionMap.put(userId, session);
+		
+		System.out.println(mSessionMap);
+	
+		chatUser=cs.selectChatMember(chatNo);
+		if(chatUser!=null) {
+			//users.add(e)
 		}
-		sessionList = new ArrayList();
+		System.out.println("users : "+users);
+		
+//		if (rMap.containsKey(chatNo)) {
+//			if(!(rMap.get(chatNo)).contains(userId))
+//				(rMap.get(chatNo)).add(userId);
+//		} else {
+//			users.add(userId);
+//			rMap.put(chatNo, users);
+//		}
+//		System.out.println("rMap : "+rMap);
+//		System.out.println("users : "+users);
+		
+//		if (rMap.containsKey(chatNo)) {
+//			(rMap.get(chatNo)).add(session);
+//		} else {
+//			sessionList.add(session);
+//			rMap.put(chatNo, sessionList);
+//		}
+//		sessionList = new ArrayList();
 
 //		logger.info("{}연결됨", session.getId());
 //		
@@ -71,7 +95,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		int userNo = m.getUserNo();
 		String userName = m.getUserName();
 		if (session.getAttributes().get("chat") == null) {
-			
 			chatNo = (Integer) (session.getAttributes().get("chatNo"));
 		} else {
 			Chatting chat = (Chatting) (session.getAttributes().get("chat"));
@@ -81,22 +104,26 @@ public class EchoHandler extends TextWebSocketHandler {
 
 		System.out.println("session주소 : " + session.getRemoteAddress());
 		System.out.println(userName);
-
-		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
-		rSessionList = rMap.get(chatNo);
-		System.out.println("rSessionList : " + rSessionList);
+		List<String> list = new ArrayList<String>();
+		list=rMap.get(chatNo);
+		System.out.println(list);
+	
+//		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
+//		rSessionList = rMap.get(chatNo);
+//		System.out.println("rSessionList : " + rSessionList);
 
 		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload(), "N");
 
 		if (message.getPayload() != null) {
 			int result = cs.ChatLogInsert(chatLog);
-			System.out.println(result);
 			if (result > 0) {
 				// 사용자 모두에게 데이터를 전달하는 반복문
-				for (WebSocketSession one : rSessionList) {
-					one.sendMessage(new TextMessage(session.getId() + " | " + message.getPayload() + "|"
+				for (String userId : list) {
+					System.out.println("mSessionMap.get(userId) : "+mSessionMap.get(userId));
+					(mSessionMap.get(userId)).sendMessage(new TextMessage(session.getId() + " | " + message.getPayload() + "|"
 							+ session.getRemoteAddress() + "|" + userName));
 				}
+				
 			}
 		}
 
@@ -117,7 +144,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
 		rSessionList = rMap.get(chatNo);
 
-		rSessionList.remove(session);
+		//rSessionList.remove(session);
 		rMap.put(chatNo, rSessionList);
 		logger.info("{}연결끊김", session.getId());
 

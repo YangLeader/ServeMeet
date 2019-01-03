@@ -158,7 +158,7 @@
 				console.log(data);
 			},
 			error : function() {
-				condole.log("chatLog 에러");
+				console.log("chatLog 에러");
 			}
 		 	
 			

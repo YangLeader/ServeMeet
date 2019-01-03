@@ -65,6 +65,13 @@
 	<select id="selectChatLogList" parameterType="_int" resultType="ChattingLog">
 		select *from ChattingLog where chattingId=#{chatNo} order by chdate
 	</select>
+	<select id="selectChatAlam" parameterType="Map" resultType="_int">
+		 SELECT COUNT(*) FROM CHATTINGLOG WHERE CHSTATUS='N' AND CHATTINGID = #{chatId} AND USERNO!=#{userNo}
+	</select>
+	<select id="selectChatMember" parameterType="_int" resultType="ChatUser">
+		select * from CHATTING_ONE where CHATTINGID=#{chatId} <!-- 수정중 -->
+	</select>
+	
 
 
 	<insert id="insertChatLog" parameterType="ChattingLog">

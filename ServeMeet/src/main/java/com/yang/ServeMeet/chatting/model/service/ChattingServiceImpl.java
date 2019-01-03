@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yang.ServeMeet.chatting.model.dao.ChattingDao;
+import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 import com.yang.ServeMeet.member.model.vo.Member;
@@ -58,5 +59,10 @@ public class ChattingServiceImpl implements ChattingService {
 	public List<ChattingLog> selectChatLogList(int chatNo) {
 		// TODO Auto-generated method stub
 		return cDao.selectChatLogList(chatNo);
+	}
+	@Override
+	public ChatUser selectChatMember(int chatNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectChatMember(chatNo);
 	}
 }
