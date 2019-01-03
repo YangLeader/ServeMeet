@@ -102,6 +102,7 @@ float: right;
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="소모임">소모임</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="스포츠">스포츠</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="E-스포츠">E-스포츠</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma" title="매칭후기">매칭후기</a></li>
 		                                </ul>
 									</li>
 
@@ -146,6 +147,8 @@ float: right;
 											<ul>
 												<li><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 												title="내정보보기">내정보보기</a></li>
+												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}+&type=P" title="등록중인 매칭">등록중인 매칭</a></li>
+												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}+&type=E" title="종료된 매칭">종료된 매칭</a>
 												<li ><a href ="${pageContext.request.contextPath}/member/memberLogout.do">LOG
 													OUT</a></li>
 											</ul>		

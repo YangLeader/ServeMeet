@@ -5,4 +5,11 @@
 <mapper namespace="Matching">
 
 
+	<select id="myMatchingList" resultType="Map">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'BEFORE'
+	</select>
+
+	<select id="myMatchingEndList" resultType="Map">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER'
+	</select>
 </mapper>
