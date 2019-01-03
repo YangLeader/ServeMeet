@@ -73,6 +73,7 @@
 		<!-- <div id="mydate"></div> -->
 		<input type="text" id="mydate" style="display: none"/>
 		
+
 	</div>
 	<div class="in scrollbar-primary scrollbar" id="bottomDiv" style=""></div>
 </div>
@@ -80,7 +81,7 @@
 
 
 <script>
-/* 	$("#mydate").datepicker({
+
 
 			dateFormat: "yy-mm-dd",
 			monthNames : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],

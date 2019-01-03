@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Matching">
+
+
+	<select id="myMatchingList" resultType="Map">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'BEFORE'
+	</select>
+
+	<select id="myMatchingEndList" resultType="Map">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER'
+	</select>
+</mapper>
