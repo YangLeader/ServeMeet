@@ -28,6 +28,28 @@ public class LocationController {
 		return "matching/matching";
 	}
 	
+	@RequestMapping("/location/bigLocation.do")
+	@ResponseBody
+	public List<Location> bigLoc(){
+		
+		List<Location> list = locService.selectLoc();
+		System.out.println("list : "+ list);
+		List result = new ArrayList();
+		
+		for(Location loc : list) {
+			if(loc!=null) {
+				if(loc.getBigloCation() == null) {
+					result.add(loc.getMidloCation());
+				} else {
+					result.add(loc.getBigloCation());
+				}
+			}
+		}
+		
+		return result;
+		
+	}
+	
 	@RequestMapping("/location/midLocation.do")
 	@ResponseBody
 	public List<Location> midLoc(@RequestParam String bloc) {
