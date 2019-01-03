@@ -73,7 +73,8 @@
 	</div>
 	<div class="in" id="dateDiv" style="display: none">
 		<!-- <div id="mydate"></div> -->
-		<div id="mydate"></div>
+		<input type="text" id="mydate" />
+		<input type="text" id="mydate2" />
 	</div>
 	<div class="in" id="bottomDiv" style=""></div>
 </div>
@@ -81,26 +82,30 @@
 
 
 <script>
-
+/* 
 		$("#mydate").datepicker({
-		    onSelect: function(date) {
-		    	selectdateCategory()
 
-				$("#bottomDiv").find('a').each(function () {
-					if($(this).find('#ckdt')){
-						$('#ckdt').remove()
-					}
-				});
-		    	$('div #bottomDiv').append("<a class='btn-xs btn-default' id='ckdt' onclick='check(this);'>"+ date + "<span class='delTag'></span></a>");
-			},
 			dateFormat: "yy-mm-dd",
 			monthNames : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             dayNamesMin : ['일', '월', '화', '수', '목', '금', '토'],
-            yearRange : "c-70:c+70",
-            showMonthAfterYear : true
+            showMonthAfterYear : true,
             
+            onSelect: function (selected) {
+				$('#mydate2').datepicker("option", "minDate", selected)
+			}
         
 		});		
+		
+		$("#mydate2").datepicker({
+			dateFormat: "yy-mm-dd",
+			monthNames : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNamesMin : ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear : true,
+            
+            onSelect: function (selected) {
+				$("mydate").datepicker("option","maxDate",selected)
+			}
+		}); */
 	
 	var arr = new Array();
 	//var compareArr = new Array();
