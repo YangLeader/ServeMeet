@@ -32,6 +32,12 @@
 		WHERE USERNO = #{userNo}
 		and extract(month from att_date) = (SELECT extract(month from sysdate) FROM dual)
 	</select>
+	
+	<select id="getCount" parameterType="Point" resultType="_int">
+		select count(*) from point 
+		where userNo = #{userNo} and pContent = #{pContent} 
+		and TO_CHAR(to_date(pdate,'YY-MM-DD'), 'yyyy/mm/dd') = (SELECT TO_CHAR(to_date(sysdate,'YY-MM-DD'), 'yyyy/mm/dd') FROM dual)
+	</select>
 
 
 </mapper>

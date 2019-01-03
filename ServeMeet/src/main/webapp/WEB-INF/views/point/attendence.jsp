@@ -19,11 +19,17 @@
 	<title>출석체크</title>
 	<c:import url="../common/header.jsp"/>
 	<style>
+		.frame{
+        	background-color : white;
+        	margin-left : 15%;
+        	margin-right : 15%;
+        	height : 1200px;
+        }
 		.title{
 		margin-top : 10px;
 		  height :200px;
 		 padding : 20px;
-		  width : 1000px;
+		  width : 100%;
 		}
 		.month{
 		height : 90px;
@@ -33,17 +39,20 @@
 		height : 90px;
 		}
 		.cal{
-		height : 1200px;
-		width : 1600px;
+		height : 750px;
+		width : 100%;
 		margin-left : auto;
 		margin-right : auto;
 		}
+		#checkImg{
+		height : 80%;
+		width : 80%;
+		}
 		table{
 		border : 1px solid #bcbcbc;
-		width : 1000px;
-		height : 800px; 
+		width : 70%;
+		height : 100%; 
 		border-top: 1px solid #444444;
-		border-collapse: collapse;
 		}
 		th{
 		border : 1px solid #bcbcbc;
@@ -64,11 +73,16 @@
 		background-color : #F2F2F2;
 		}
 		
+		.btn-primary{
+		font-size : 25px;
+		}
+		
 		
 	</style>
 </head>
 <body>
-<form id = attendFrm method="post">
+<div class="frame" >
+<!-- <form id = attendFrm method="post" > -->
 
 	<br>
 	<br>
@@ -78,7 +92,7 @@
       <span>1월 출석체크</span>
       </div>
       <div class = "chkBtn">
-      <button class="btn-lg btn-default" onclick="attend(<%=today%>);">출석하기</button>
+      <a class="btn btn-primary" onclick="attend(<%=today%>);">출석하기</a>
       </div>
       </div>
       <table>
@@ -143,9 +157,11 @@
       
     </table>
      </div>
-
+<br><br>
+	
+<!-- 	</form> -->
+	</div>
 	<c:import url="../common/footer.jsp"/>
-	</form>
 	<script>
 	var attFlag=false;
 	
@@ -160,7 +176,7 @@
 				console.log("data :" + data);
 				console.log("today : " +dd);
 				for(var i = 1; i<=data[0]; i++){
-				$("#date"+data[i]).html("<img src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
+				$("#date"+data[i]).html("<img id='checkImg' src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
 				if(data[i]==dd){attFlag = true;}
 
 				console.log("attFlag :" + attFlag);
@@ -191,7 +207,7 @@
 						},
 				success : function(data){
 					console.log("data : " +data);
-					$("#date"+today).html("<img src='${pageContext.request.contextPath}/resources/images/date-check.png'>");
+					$("#date"+today).html("<img id='checkImg' src='${pageContext.request.contextPath}/resources/images/date-check.png'> ");
 					attFlag = true;
 					alert("출석되었습니다.");
 	            }, error : function(jqxhr, textStatus, errorThrown){

@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.point.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.yang.ServeMeet.point.model.vo.Attendence;
@@ -20,4 +21,6 @@ public interface PointDao {
 	List<Attendence> selectAtt(int userNo);
 
 	int selectAttCnt(int userNo);
+
+	int getCount(Point point);
 }

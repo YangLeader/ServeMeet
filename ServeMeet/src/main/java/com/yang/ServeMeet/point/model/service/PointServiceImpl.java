@@ -57,4 +57,10 @@ public class PointServiceImpl implements PointService {
 		return pointDao.selectAttCnt(userNo);
 	}
 
+	@Override
+	public int getCount(Point point) {
+	
+		return pointDao.getCount(point);
+	}
+
 }

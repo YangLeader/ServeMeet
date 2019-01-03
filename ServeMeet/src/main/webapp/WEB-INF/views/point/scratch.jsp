@@ -65,15 +65,19 @@
 		
 		}
 		
-		.largeContainer{
-		/* background-color:white; */
-		}
+		.frame{
+        	background-color : white;
+        	margin-left : 300px;
+        	margin-right : 300px;
+        }
 	</style>
 </head>
 <body>
-<br>
-<div class="largeContainer" >
+
+<div class="frame" >
 <div  align="center" >
+<br><br>
+<br><br>
 <h1>스크래치 복권</h1>
 <br>
 <h3>최대 1000포인트 증정!</h3>
@@ -117,8 +121,9 @@
   </form>
     
 </div>
-    <br>
-    <br>
+    <br><br>
+    <br><br>
+    <br><br>
 </div>
 <c:import url="../common/footer.jsp"/>
 

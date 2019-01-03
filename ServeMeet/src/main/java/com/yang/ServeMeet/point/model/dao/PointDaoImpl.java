@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.point.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,5 +51,13 @@ public class PointDaoImpl implements PointDao {
 	public int selectAttCnt(int userNo) {
 		return sqlSession.selectOne("point.selectAttCnt",userNo);
 	}
+
+	@Override
+	public int getCount(Point point) {
+		
+		return sqlSession.selectOne("point.getCount",point);
+	}
+
+	
 
 }
