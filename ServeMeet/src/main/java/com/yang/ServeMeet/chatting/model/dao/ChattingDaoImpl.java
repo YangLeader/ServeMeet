@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 import com.yang.ServeMeet.member.model.vo.Member;
@@ -60,5 +61,15 @@ public class ChattingDaoImpl implements ChattingDao {
 	public List<ChattingLog> selectChatLogList(int chatNo) {
 		// TODO Auto-generated method stub
 		return sst.selectList("chat.selectChatLogList",chatNo);
+	}
+	@Override
+	public List<ChatUser> selectChatMember(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sst.selectList("chat.selectChatMember",map);
+	}
+	@Override
+	public List<ChatUser> selectChatMembers(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sst.selectList("chat.selectChatMembers",map);
 	}
 }

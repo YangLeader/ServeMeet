@@ -41,11 +41,11 @@ public class ChatController {
 		chatList=cs.selectChatLog(userNo);
 		for(ChattingLog c :chatList) {
 			String tmp=c.getChContent();
-			if(tmp.length()>30) {
+			if(tmp!=null&&tmp.length()>30) {
 				tmp=tmp.substring(0, 30)+"...";
 				c.setChContent(tmp);
 			}
-			System.out.println(c);
+		
 		}
 		
 		return chatList;
@@ -58,8 +58,7 @@ public class ChatController {
 		List<ChattingLog> chatLogList = new ArrayList<ChattingLog>();
 		int chatNo = ((Chatting)(session.getAttribute("chat"))).getChattingId();
 		chatLogList=cs.selectChatLogList(chatNo);
-		System.out.println("==============================="+chatLogList);
-	
+		
 		
 		return chatLogList;
 	}

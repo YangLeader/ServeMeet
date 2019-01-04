@@ -3,6 +3,7 @@ package com.yang.ServeMeet.chatting.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 import com.yang.ServeMeet.member.model.vo.Member;
@@ -23,4 +24,8 @@ public interface ChattingDao {
 	List<ChattingLog> selectChatLog(int chattingId);
 
 	List<ChattingLog> selectChatLogList(int chatNo);
+
+	List<ChatUser> selectChatMember(Map<String, Integer> map);
+
+	List<ChatUser> selectChatMembers(Map<String, Integer> map);
 }

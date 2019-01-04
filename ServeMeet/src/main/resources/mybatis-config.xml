@@ -12,6 +12,7 @@
 		<typeAlias type="com.yang.ServeMeet.board.model.vo.BoardFile" alias="BoardFile"/>
 		<typeAlias type="com.yang.ServeMeet.category.model.vo.Category" alias="Category"/>
 		<typeAlias type="com.yang.ServeMeet.location.model.vo.Location" alias="Location"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChatUser" alias="ChatUser"/>
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.Chatting" alias="Chatting"/>
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingLog" alias="ChattingLog"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.Matching" alias="Matching"/>
