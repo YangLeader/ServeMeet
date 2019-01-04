@@ -112,7 +112,7 @@ float: right;
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="소모임">소모임</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="스포츠">스포츠</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="E-스포츠">E-스포츠</a></li>
-	                                        <li><a href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma" title="매칭후기">매칭후기</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=1" title="매칭후기">매칭후기</a></li>
 		                                </ul>
 									</li>
 

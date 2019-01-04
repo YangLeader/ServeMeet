@@ -20,7 +20,7 @@ $(function(){
 	$("tr[id]").on("click",function(){
 		var matchingId = $(this).attr("id");
 		console.log("matchingId="+matchingId);
-		location.href = "${pageContext.request.contextPath}/matching/matchingSelectOne.ma?no="+matchingId;
+		location.href = "${pageContext.request.contextPath}/matching/mHistorySelectOne.ma?no="+matchingId;
 	});
 });
 </script>

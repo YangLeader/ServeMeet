@@ -12,4 +12,27 @@
 	<select id="myMatchingEndList" resultType="Map">
 		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER'
 	</select>
+	
+	<select id="mHistorySelectOne" resultType="MatchingHistory">
+		SELECT * FROM MATCHINGHISTORY WHERE MHISTORYID = #{mHistoryId}
+	</select>
+	
+	<select id="matchingSelectOne" resultType="Matching">
+		SELECT * FROM MATCHING WHERE MATCHINGID = #{matchingId}
+	</select>
+	
+	<insert id="mHistoryInsert">
+		INSERT INTO MATCHINGHISTORY VALUES(SEQ_MHISTORYID.NEXTVAL , #{matchingId} ,#{userName} ,#{mhContent}, DEFAULT , DEFAULT)
+	</insert>
+	
+		<insert id="insertmHistoryFile" parameterType="BoardFile">
+		<!-- 다른방식 -->
+		<selectKey keyProperty="mhistoryId" resultType="_int"
+			order="BEFORE">
+			SELECT SEQ_MHISTORYID.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO BOARDFILE(FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME)
+		VALUES (SEQ_FILEID.NEXTVAL, DEFAULT, #{mhistoryId}, #{originName}, #{changeName})
+	</insert>
+	
 </mapper>
