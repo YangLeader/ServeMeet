@@ -18,9 +18,6 @@
 	var chatNo = ${chatNo};
 	console.log("chatNo : "+chatNo);
 	
-	
-	
-	
 	function chatLog() {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",

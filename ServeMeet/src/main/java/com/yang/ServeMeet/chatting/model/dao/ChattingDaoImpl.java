@@ -48,11 +48,7 @@ public class ChattingDaoImpl implements ChattingDao {
 		// TODO Auto-generated method stub
 		return sst.insert("chat.insertChat",userNameMap);
 	}
-	@Override
-	public Chatting selectChat(int chatNo) {
-		// TODO Auto-generated method stub
-		return sst.selectOne("chat.selectChat",chatNo);
-	}
+	
 	@Override
 	public List<ChattingRoom> selectChattingList(int chattingId) {
 		// TODO Auto-generated method stub
@@ -74,8 +70,13 @@ public class ChattingDaoImpl implements ChattingDao {
 		return sst.selectList("chat.selectChatMembers",map);
 	}
 	@Override
-	public String getChatName(Map<String, Integer> map) {
+	public Chatting getChatName(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sst.selectOne("chat.getChatName",map);
+	}
+	@Override
+	public void updateStatus(Map<String, Integer> map) {
+		sst.update("chat.updateStatus",map);
+		
 	}
 }

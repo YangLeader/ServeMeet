@@ -20,7 +20,7 @@ public interface ChattingDao {
 
 	int insertChat(Map<String, String> userNameMap);
 
-	Chatting selectChat(int chatNo);
+	
 
 	List<ChattingRoom> selectChattingList(int chattingId);
 
@@ -30,5 +30,7 @@ public interface ChattingDao {
 
 	List<ChatUser> selectChatMembers(Map<String, Integer> map);
 
-	String getChatName(Map<String, Integer> map);
+	Chatting getChatName(Map<String, Integer> map);
+
+	void updateStatus(Map<String, Integer> map);
 }

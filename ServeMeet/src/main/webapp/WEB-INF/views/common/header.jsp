@@ -284,8 +284,9 @@ float: right;
 						$('#chatdata').append(printHTML);	
 						
 					}
+					updateStatus(chatNo);
 				}
-				chatListMin();
+				
 			};
 
 			function onClose(evt){
@@ -326,6 +327,15 @@ float: right;
 		
 		$("#chatGo").attr("action",url).submit();
 
+	}
+	function updateStatus(chatNo) {
+		$.ajax({
+			url:"${pageContext.request.contextPath}/chat/upStatus.do/"+chatNo,
+			success: function() {
+				chatListMin();
+				console.log("업데이트 확인");
+			} 
+		});
 	}
 	function chatListMin() {
 		var nCount=0;

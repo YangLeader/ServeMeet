@@ -45,11 +45,7 @@ public class ChattingServiceImpl implements ChattingService {
 		// TODO Auto-generated method stub
 		return cDao.insertChat(userNameMap);
 	}
-	@Override
-	public Chatting selectChat(int chatNo) {
-		// TODO Auto-generated method stub
-		return cDao.selectChat(chatNo);
-	}
+
 
 	@Override
 	public List<ChattingRoom> selectChattingList(int chattingId) {
@@ -71,8 +67,12 @@ public class ChattingServiceImpl implements ChattingService {
 		return cDao.selectChatMembers(map);
 	}
 	@Override
-	public String getChatName(Map<String, Integer> map) {
+	public Chatting getChatName(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return cDao.getChatName(map);
+	}
+	@Override
+	public void updateStatus(Map<String, Integer> map) {
+		cDao.updateStatus(map);		
 	}
 }

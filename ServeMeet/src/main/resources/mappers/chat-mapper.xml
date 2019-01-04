@@ -14,9 +14,12 @@
 		)T where no1=#{userNo} or no2=#{userNo} or no3=#{userNo}
 	</select>
 	<select id="isChat" parameterType="Map" resultType="Chatting">
-		select * from
-		CHATTINGLIST
-		where CHATTINGID=(select CHATTINGID from CHATTING_ONE
+			select L.Chattingid,nvl(L.CHATTINGNAME,case when(select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO1) USERName from CHATTING_ONE O where o.chattingid = L.CHATTINGID)=#{myName} 
+                                             then (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO2) userName from CHATTING_ONE O where o.chattingid = L.CHATTINGID) else
+                                                (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO1) userName  from CHATTING_ONE O where o.chattingid = L.CHATTINGID) 
+                                             end) chatname
+        from CHATTINGLIST L
+		where L.CHATTINGID=(select CHATTINGID from CHATTING_ONE
 		where (userno1=(select userno from MEMBER where username=#{myName})
 		or
 		userno2=(select userno from MEMBER where username=#{myName}))
@@ -71,8 +74,8 @@
 	<select id="selectChatMembers" parameterType="Map" resultType="ChatUser">
 		select Chattingid,(select M.Username from Member M where M.Userno=G.Userno)username from Chatting_Group G where Chattingid=#{chatNo} and Userno!=#{userNo}
 	</select>
-	<select id="getChatName" parameterType="Map" resultType="String">
-	select nvl(L.CHATTINGNAME,case when(select O.USERNO1 from CHATTING_ONE O where o.chattingid = L.CHATTINGID)=#{userNo} 
+	<select id="getChatName" parameterType="Map" resultType="Chatting">
+	select Chattingid,nvl(L.CHATTINGNAME,case when(select O.USERNO1 from CHATTING_ONE O where o.chattingid = L.CHATTINGID)=#{userNo} 
                                              then (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO2) userName from CHATTING_ONE O where o.chattingid = L.CHATTINGID) else
                                                 (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO1) userName  from CHATTING_ONE O where o.chattingid = L.CHATTINGID) 
                                              end) chatname 
@@ -97,6 +100,11 @@
 		select *
 		from dual
 	</insert>
+	
+	<update id="updateStatus" parameterType="HashMap">
+		update Chattinglog set Chstatus=Chstatus-1
+		where Chattingid=#{chatNo} and Userno!=#{userNo} 
+	</update>
 
 
 
