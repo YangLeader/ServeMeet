@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.yang.ServeMeet.category.model.vo.Category;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
+import com.yang.ServeMeet.matching.model.vo.Matching;
 
 @Controller
 public class MatchingController {
@@ -24,9 +26,10 @@ public class MatchingController {
 		return "matching/matchingInsert";
 	}
 	
-	@RequestMapping("matching/matchingInsert.ma")
-	public String matchingInsert(Matching matching , Model model , HttpSession session) {
-		int result = matchingService.matchingInsert(matching);
+//	@RequestMapping("matching/matchingInsert.ma")
+//	public String matchingInsert(Matching matching , Model model , HttpSession session) {
+//		int result = matchingService.matchingInsert(matching);
+//	}
 
 	@RequestMapping("matching/matchingHistoryForm.ma")
 	public void matchingHistoryForm() {}
