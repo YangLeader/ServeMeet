@@ -27,6 +27,7 @@ public class WebSocketChattingController {
 	public ModelAndView chattingMethod(@PathVariable("chatNo")int chatNo,HttpServletRequest req, HttpSession session) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
+		Map<String,Integer> map = new HashMap<String,Integer>();
 		req.setCharacterEncoding("utf-8");
 
 		String ipAddr = req.getRemoteAddr();
@@ -34,6 +35,11 @@ public class WebSocketChattingController {
 		Chatting chat = cs.selectChat(chatNo);
 		session.setAttribute("chat", chat);
 
+		map.put("chatNo", chat.getChattingId());
+		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
+		String chatName=cs.getChatName(map);
+		
+		mv.addObject("chatName", chatName);
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 
@@ -44,7 +50,7 @@ public class WebSocketChattingController {
 	public ModelAndView chattingRoom(@PathVariable("userName")String userName,HttpServletRequest req, HttpSession session) {
 		
 		ModelAndView mv = new ModelAndView();
-		
+		Map<String,Integer> map = new HashMap<String,Integer>();
 		String myName = ((Member)session.getAttribute("member")).getUserName();
 		String ipAddr = req.getRemoteAddr();
 	
@@ -59,8 +65,13 @@ public class WebSocketChattingController {
 			cs.insertChat(userNameMap);
 			chat = cs.isChat(userNameMap);
 		}
+		map.put("chatNo", chat.getChattingId());
+		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
+		String chatName=cs.getChatName(map);
 		System.out.println(chat);
-		session.setAttribute("chat", chat);		
+		session.setAttribute("chat", chat);	
+		
+		mv.addObject("chatName", chatName);
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 		

@@ -69,4 +69,9 @@ public class ChattingServiceImpl implements ChattingService {
 		// TODO Auto-generated method stub
 		return cDao.selectChatMembers(map);
 	}
+	@Override
+	public String getChatName(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return cDao.getChatName(map);
+	}
 }
