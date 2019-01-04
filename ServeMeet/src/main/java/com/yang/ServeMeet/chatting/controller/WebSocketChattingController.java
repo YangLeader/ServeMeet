@@ -40,6 +40,7 @@ public class WebSocketChattingController {
 		String chatName=cs.getChatName(map);
 		
 		mv.addObject("chatName", chatName);
+		mv.addObject("chatNo", chat.getChattingId());
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 
@@ -72,6 +73,7 @@ public class WebSocketChattingController {
 		session.setAttribute("chat", chat);	
 		
 		mv.addObject("chatName", chatName);
+		mv.addObject("chatNo", chat.getChattingId());
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 		

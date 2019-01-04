@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
+import com.yang.ServeMeet.chatting.model.vo.ChattingRoom;
 import com.yang.ServeMeet.member.model.vo.Member;
 
 @Repository
@@ -53,9 +54,9 @@ public class ChattingDaoImpl implements ChattingDao {
 		return sst.selectOne("chat.selectChat",chatNo);
 	}
 	@Override
-	public List<ChattingLog> selectChatLog(int chattingId) {
+	public List<ChattingRoom> selectChattingList(int chattingId) {
 		// TODO Auto-generated method stub
-		return sst.selectList("chat.selectChatLastLog",chattingId);
+		return sst.selectList("chat.selectChattingList",chattingId);
 	}
 	@Override
 	public List<ChattingLog> selectChatLogList(int chatNo) {

@@ -32,7 +32,7 @@
 		</article>
 		<article class="subArt" >
 			<div class="subContent">
-				<div class="sContent matting col-lg-7 listSec">
+				<div class="sContent matting col-lg-7 col-md-7 col-sm-12 col-xs-12 listSec">
 					<div>
 						<div class="midTitle">
 							<a>
@@ -73,7 +73,7 @@
 						<div class="sList">
 						</div>
 					</div>
-				</div><div class="col-lg-5 listSec contentList">
+				</div><div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 listSec contentList">
 					<div class="sContent conList">
 						<div class="midTitle">
 							<a>

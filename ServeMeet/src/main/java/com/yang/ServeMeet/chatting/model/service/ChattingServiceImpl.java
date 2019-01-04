@@ -10,6 +10,7 @@ import com.yang.ServeMeet.chatting.model.dao.ChattingDao;
 import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
+import com.yang.ServeMeet.chatting.model.vo.ChattingRoom;
 import com.yang.ServeMeet.member.model.vo.Member;
 
 @Service
@@ -51,9 +52,9 @@ public class ChattingServiceImpl implements ChattingService {
 	}
 
 	@Override
-	public List<ChattingLog> selectChatLog(int chattingId) {
+	public List<ChattingRoom> selectChattingList(int chattingId) {
 		// TODO Auto-generated method stub
-		return cDao.selectChatLog(chattingId);
+		return cDao.selectChattingList(chattingId);
 	}
 	@Override
 	public List<ChattingLog> selectChatLogList(int chatNo) {

@@ -142,7 +142,7 @@ float: right;
 												in</span></a></li>
 									</c:if>
 									<c:if test="${!empty member}">
-										<li  class= "suvNav"><span class="mainNav carea" id="chat">채팅목록</span>
+										<li  class= "suvNav"><span class="mainNav carea" id="chat">채팅목록<span id="alamCount">0</span></span>
 										
 										<form id="chatGo" method="post">
 											<div class="chatListBox">
@@ -221,7 +221,9 @@ float: right;
 				var host=null;//메세지를 보낸 사용자 ip저장
 				var strArray=data.split("|");//데이터 파싱처리하기
 				var userName=null;//대화명 저장
-				chatListMin();
+				
+				var nCount = chatListMin();
+				
 
 				//전송된 데이터 출력해보기
 				for(var i=0;i<strArray.length;i++)
@@ -326,18 +328,21 @@ float: right;
 
 	}
 	function chatListMin() {
-		
+		var nCount=0;
 		$.ajax({
 			url : "${pageContext.request.contextPath}/chat/chatListMin.do/",
 			dataType : "json",
+			async:false,
 			success : function(data) {
 				console.log(data);
 				 $('.chatList').children().remove();
 				  for(var i in data){	
 					 
-					  
+					  nCount=nCount+data[i].nCount
 					  $('.chatList').append(							 
-						$('<div/>').text(data[i].chattingName)
+						$('<div/>').append($("<span>").text(data[i].chattingName))
+								   .append($("<span>").text(data[i].nCount)
+										   			  .attr("class","nCount"))  
 								   .append($("<input>").attr("value",data[i].chattingName)
 										  			  .attr("name","title")
 										  			  .attr("hidden","hidden")
@@ -369,7 +374,11 @@ float: right;
 			}
 
 		});
-		
+		console.log("nCount : "+nCount);
+		$("#alamCount").remove();
+		$("#chat").append($("<span>").text(nCount)
+									 .attr("id","alamCount"))
+		return nCount;
 	}
 </script>
 
