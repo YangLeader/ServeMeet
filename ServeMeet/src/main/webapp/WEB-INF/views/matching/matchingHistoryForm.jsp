@@ -8,7 +8,6 @@
 <html lang="ko">
 <head>
 <c:import url="../common/header.jsp" />
-<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async
 	src="https://www.googletagmanager.com/gtag/js?id=UA-109178580-1"></script>
 <script>
@@ -21,95 +20,24 @@
 	gtag('config', 'UA-109178580-1');
 </script>
 
-<!--
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-2755471938797797",
-    enable_page_level_ads: true
-  });
-</script>
--->
 
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<!--
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-2755471938797797",
-          enable_page_level_ads: true
-     });
-</script>
--->
 <title>게시글 작성</title>
-
-<!--[if lte IE 8]>
-<script src="http://aq23r1gt.iwinv.net/js/html5.js"></script>
-<![endif]-->
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-<script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-<!--
-<script src="http://aq23r1gt.iwinv.net/js/jquery-1.8.3.min.js"></script>
--->
-
 
 </head>
 <body>
 
-	<!-- preloader (화면 전환 효과) -->
-
-	<!-- <div class="preloader"></div>
-
-	<script>
-		$(document).ready(function() {
-			// 화면 전환 효과
-			$('.preloader').fadeOut(150);
-
-			$('.navbar-brand').width($('.navbar-brand > img').width());
-			$(window).resize(function() {
-				$('.navbar-brand').width($('.navbar-brand > img').width());
-			});
-		});
-	</script> -->
 
 	<div id="wrapper">
 		<div class="container">
 
-			<!--
-		<div class="row">	
+			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/matching/matcingHistoryInsert.ma"
+					method="post" enctype="multipart/form-data">
 			
-			<div class="leftBox col-md-3">
-				로그인 박스
-			</div>
-			
-
-			<div class="rightBox col-md-9">
-			-->
-			<!-- skin : _basic -->
-			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/board/boardFormEnd.do"
-					onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data">
-				<!-- <input type="hidden" name="uid" value="18122113471404"> 
-				<input type="hidden" name="w" value=""> 
-				<input type="hidden" name="bo_table" value="funny"> 
-				<input type="hidden" name="wr_id" value="0"> 
-				<input type="hidden" name="sca" value=""> 
-				<input type="hidden" name="sfl" value="">
-				<input type="hidden" name="stx" value=""> 
-				<input type="hidden" name="spt" value=""> 
-				<input type="hidden" name="sst" value=""> 
-				<input type="hidden" name="sod" value=""> 
-				<input type="hidden" name="page" value="">
-				<input type="hidden" value="html1" name="html"> -->
 				<div class="bbs_title_wrap">
 					<a class="bbs_title">게시글 작성 </a> 
-					<!-- <span class="btn btn-default" onclick="history.back();" style="margin-left: 5px;">취소</span> -->
 				</div>
 
 				<div class="bbs_write_content">
@@ -124,8 +52,9 @@
 					</script>
 
 					<div class="wr_option wr_subject">
+						<input type="hidden" name="matchingId" value="${matching.matchingId}"/>
 						<label>제목</label> 
-						<input type="text" name="boardTitle" id="wr_subject" class="form-control" value="" required maxlength="255" />
+						<input type="text" name="mTitle" id="wr_subject" class="form-control" value="${matching.mTitle}" readonly required maxlength="255" />
 						<label>작성자</label>
 						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
 					</div>
@@ -133,7 +62,7 @@
 					<div class="wr_option wr_content">
 						<label>내용</label>
 						<div>
-							<textarea id="wr_content" name="boardContent"
+							<textarea id="wr_content" name="mhContent"
 							class="smarteditor2 form-control" maxlength="65536"
 							style="width: 100%; height: 300px"></textarea>
 								
@@ -141,7 +70,7 @@
 
 						<div class="wr_option">
 							<label>첨부파일 1</label> <input type="file" name="upFile"
-								title="파일첨부 1 : 용량 10MB 이하만 업로드 가능">
+								title="파일첨부 1 : 용량 10MB 이하만 업로드 가능"> 
 						</div>
 						<div class="wr_option">
 							<label>첨부파일 2</label> <input type="file" name="upFile"
@@ -155,7 +84,7 @@
 				</div>
 				<div class="wr_submit">
 					<input type="submit" class="btn btn-info" value="확인" />
-					<a href="${pageContext.request.contextPath }/board/boardList.do" class="btn btn-default">취소</a>
+					<%-- <a href="${pageContext.request.contextPath }/board/boardList.do" class="btn btn-default">취소</a> --%>
 				</div>
 				<br /><br /><br /><br /><br /><br />
 			</form>
@@ -246,34 +175,7 @@
 						return true;
 					}
 
-					/*
-					$(document).ready(function(){
-						
-						// 모바일에서 스마트에디터2 width 자동조절
-						var get_SE_innerElement = "";
-						var chk_SE_count = 0;
-						var chk_SE_innerElement = setInterval(function(){
-							
-							get_SE_innerElement = document.getElementsByTagName("iframe")[0].contentWindow.document.getElementById("smart_editor2");
-
-							chk_SE_count++;
-
-							if (get_SE_innerElement == null) {
-								if (chk_SE_count == 100) {
-									// 10초가 지나도 자동조절 안되면 새로고침 유도
-									alert("자바스크립트 오류입니다. 새로고침 해주세요.");
-								}
-							}
-							else {
-								clearInterval(chk_SE_innerElement);
-								// console.log("로딩완료");
-								get_SE_innerElement.style.minWidth = "100%";
-								// console.log(get_SE_innerElement);
-							}
-						}, 100);
-
-					});
-					 */
+					
 				</script>
 				<!--</div>-->
 				<!-- .rightBox -->

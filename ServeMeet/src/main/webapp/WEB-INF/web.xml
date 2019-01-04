@@ -58,6 +58,8 @@
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.ba</url-pattern>
+		<url-pattern>*.ma</url-pattern>
 	</filter-mapping>
 	
 	<error-page>
