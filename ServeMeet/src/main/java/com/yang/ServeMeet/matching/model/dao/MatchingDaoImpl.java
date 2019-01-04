@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.yang.ServeMeet.category.model.vo.Category;
+import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
 
 @Repository
@@ -19,7 +19,7 @@ public class MatchingDaoImpl implements MatchingDao {
 	@Override
 	public int matchingHistoryInsert(MatchingHistory mHistory) {
 		
-		return session.insert("matching.insertMatching",matching);
+		return 0;
 	}
 	
 	@Override
@@ -28,6 +28,12 @@ public class MatchingDaoImpl implements MatchingDao {
 		String mapperPath = type.equals("P") ? "Matching.myMatchingList" : "Matching.myMatchingEndList";
 		
 		return session.selectList(mapperPath,userName);
+	}
+
+	@Override
+	public int matchingInsert(Matching matching) {
+
+		return session.insert("Matching.insertMatching",matching);
 	}
 
 }

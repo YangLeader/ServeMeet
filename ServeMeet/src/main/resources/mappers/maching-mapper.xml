@@ -12,4 +12,12 @@
 	<select id="myMatchingEndList" resultType="Map">
 		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER'
 	</select>
+	
+	<insert id="insertMatching" parameterType="Matching">
+		INSERT INTO MATCHING VALUES(
+			SEQ_MATCHINGID.NEXTVAL, #{mTitle}, 
+			#{mContent}, #{mPeoplenum}, #{locationId}, 
+			#{categoryId}, #{mWriter}, 'NONE', #{mtime}, DEFAULT 
+			)
+	</insert>
 </mapper>

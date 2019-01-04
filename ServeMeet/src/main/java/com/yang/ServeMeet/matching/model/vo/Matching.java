@@ -1,5 +1,7 @@
 package com.yang.ServeMeet.matching.model.vo;
 
+import java.sql.Date;
+
 public class Matching {
 
 	
@@ -9,10 +11,11 @@ public class Matching {
 	private String mTitle;
 	private String mContent;
 	private int mPeoplenum;
-	private int locationId;
+	private String locationId;
 	private int categoryId;
-	private String userName1;
-	private String userName2;
+	private String mWriter;
+	private String mGuest;
+	private String mtime;
 	private String mStatus;
 	
 	public Matching() {
@@ -21,20 +24,8 @@ public class Matching {
 	
 	
 
-	public Matching(String mTitle, String mContent, int mPeoplenum, int locationId, int categoryId, String userName1) {
-		super();
-		this.mTitle = mTitle;
-		this.mContent = mContent;
-		this.mPeoplenum = mPeoplenum;
-		this.locationId = locationId;
-		this.categoryId = categoryId;
-		this.userName1 = userName1;
-	}
-
-
-
-	public Matching(int matchingId, String mTitle, String mContent, int mPeoplenum, int locationId, int categoryId,
-			String userName1, String userName2, String mStatus) {
+	public Matching(int matchingId, String mTitle, String mContent, int mPeoplenum, String locationId, int categoryId,
+			String mWriter, String mGuest, String mtime, String mStatus) {
 		super();
 		this.matchingId = matchingId;
 		this.mTitle = mTitle;
@@ -42,8 +33,37 @@ public class Matching {
 		this.mPeoplenum = mPeoplenum;
 		this.locationId = locationId;
 		this.categoryId = categoryId;
-		this.userName1 = userName1;
-		this.userName2 = userName2;
+		this.mWriter = mWriter;
+		this.mGuest = mGuest;
+		this.mtime = mtime;
+		this.mStatus = mStatus;
+	}
+
+
+
+	public Matching(String mTitle, String mContent, int mPeoplenum, String locationId, int categoryId, String mWriter) {
+		super();
+		this.mTitle = mTitle;
+		this.mContent = mContent;
+		this.mPeoplenum = mPeoplenum;
+		this.locationId = locationId;
+		this.categoryId = categoryId;
+		this.mWriter = mWriter;
+	}
+
+
+
+	public Matching(int matchingId, String mTitle, String mContent, int mPeoplenum, String locationId, int categoryId,
+			String mWriter, String mGuest, String mStatus) {
+		super();
+		this.matchingId = matchingId;
+		this.mTitle = mTitle;
+		this.mContent = mContent;
+		this.mPeoplenum = mPeoplenum;
+		this.locationId = locationId;
+		this.categoryId = categoryId;
+		this.mWriter = mWriter;
+		this.mGuest = mGuest;
 		this.mStatus = mStatus;
 	}
 
@@ -79,11 +99,11 @@ public class Matching {
 		this.mPeoplenum = mPeoplenum;
 	}
 
-	public int getLocationId() {
+	public String getLocationId() {
 		return locationId;
 	}
 
-	public void setLocationId(int locationId) {
+	public void setLocationId(String locationId) {
 		this.locationId = locationId;
 	}
 
@@ -95,21 +115,44 @@ public class Matching {
 		this.categoryId = categoryId;
 	}
 
-	public String getUserName1() {
-		return userName1;
+		
+
+	public String getmWriter() {
+		return mWriter;
 	}
 
-	public void setUserName1(String userName1) {
-		this.userName1 = userName1;
+
+
+	public void setmWriter(String mWriter) {
+		this.mWriter = mWriter;
 	}
 
-	public String getUserName2() {
-		return userName2;
+
+
+	public String getmGuest() {
+		return mGuest;
 	}
 
-	public void setUserName2(String userName2) {
-		this.userName2 = userName2;
+
+
+	public void setmGuest(String mGuest) {
+		this.mGuest = mGuest;
 	}
+
+	
+
+
+	public String getMtime() {
+		return mtime;
+	}
+
+
+
+	public void setMtime(String mtime) {
+		this.mtime = mtime;
+	}
+
+
 
 	public String getmStatus() {
 		return mStatus;
@@ -119,12 +162,16 @@ public class Matching {
 		this.mStatus = mStatus;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Matching [matchingId=" + matchingId + ", mTitle=" + mTitle + ", mContent=" + mContent + ", mPeoplenum="
-				+ mPeoplenum + ", locationId=" + locationId + ", categoryId=" + categoryId + ", userName1=" + userName1
-				+ ", userName2=" + userName2 + ", mStatus=" + mStatus + "]";
+				+ mPeoplenum + ", locationId=" + locationId + ", categoryId=" + categoryId + ", mWriter=" + mWriter
+				+ ", mGuest=" + mGuest + ", mtime=" + mtime + ", mStatus=" + mStatus + "]";
 	}
+
+
 	
 	
 	

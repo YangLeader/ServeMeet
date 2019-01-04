@@ -2,6 +2,7 @@ package com.yang.ServeMeet.location.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.yang.ServeMeet.location.model.service.LocationService;
 import com.yang.ServeMeet.location.model.vo.Location;
 
@@ -95,5 +97,37 @@ public class LocationController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping("/location/locationcheck.lc")
+	@ResponseBody
+	public String checkLoc(@RequestParam String chkloc) {
+		
+	/*	String bigLoc = chkloc[0];
+		String midLoc = chkloc[1];
+		String smallLoc = chkloc[2];
+		
+		System.out.println("bigLoc : " + bigLoc);
+		System.out.println("midLoc : " + midLoc);
+		System.out.println("smallLoc : " + smallLoc);
+		*/
+		System.out.println("JSON형식으로 받은 맵객체" + chkloc);
+		
+		Location paramLoc = new Gson().fromJson(chkloc, Location.class);
+		
+		String bigLoc = paramLoc.getBigloCation();
+		String midLoc = paramLoc.getMidloCation();
+		String smallLoc = paramLoc.getSmallCategory();
+		System.out.println(paramLoc.getBigloCation());
+		System.out.println(paramLoc.getMidloCation());
+		System.out.println(paramLoc.getSmallCategory());
+		/*System.out.println(chkloc.get("bigloCation"));
+		System.out.println(chkloc.get("midloCation"));
+		System.out.println(chkloc.get("smallCategory"));*/
+		String result = locService.locationCheck(bigLoc, midLoc, smallLoc);
+		
+		System.out.println("result:" +result);
+		return result;
+		
 	}
 }

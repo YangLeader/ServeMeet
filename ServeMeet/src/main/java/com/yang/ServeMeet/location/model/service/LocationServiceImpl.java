@@ -31,4 +31,10 @@ public class LocationServiceImpl implements LocationService {
 		return locDao.selectSloc(sloc);
 	}
 
+	@Override
+	public String locationCheck(String bigLoc,String midLoc,String smallLoc) {
+		
+		return locDao.locationCheck(bigLoc, midLoc, smallLoc);
+	}
+
 }
