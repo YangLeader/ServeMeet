@@ -59,7 +59,7 @@
 		}); -->
 	<script>	
 		$(function(){
-			$("a ${b.boardNo}").on("click",function(){
+			$('[data-mytext=getNo]').on("click",function(){
 				var boardNo = $(this).attr("id");
 				console.log("bordNo="+boardNo);
 				location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo;
@@ -67,10 +67,10 @@
 		});
 	</script>
 
-	<br /><br />
 	<div id="wrapper">
-		<div class="container">
-
+	
+		<div class="container" style="background-color:white; border-radius: 20px;">
+		<br />
 			<!-- 게시판 목록 시작 { -->
 			<div id="bbs-list-wrap">
 
@@ -133,14 +133,25 @@
 							<c:forEach items="${list}" var="b">
 							<li class="bbs_list_basic">
 								<span class="subject text">
-									<a id="${b.boardNo }"><b>${b.boardTitle }</b></a> 
+									<a data-mytext="getNo" id="${b.boardNo }">
+										<b>${b.boardTitle }</b>
+										<c:if test="${b.commentCount ne 0 }">&nbsp;&nbsp;[${b.commentCount  }]</c:if>
+									</a>  
 									<span class="w45 icon"> </span>
 								</span> 
 								<span class="dec"> 
-									<span class="w45 wr_name"> 
+									<span class="w45 wr_name" id="dropdownlist"> 
 										<span class="glyphicon glyphicon-user"></span> 
-											${b.userName }
-									</span> 
+											<ul style="padding-inline-start: 0px;">
+												<li class="dropdown"><a class="drop">${b.userName }</a>
+										        	<ul style="width: auto; dispaly:none;" id="downlist">
+										         	<form id="chatting" action="/ServeMeet/chat/chattingRoom.do/${b.userName }" method="post">
+										            	<li><input type="button" value="1:1 채팅" onclick="chatting();"></li>
+										            </form>
+										         	</ul>
+										    	</li>
+										    </ul>
+		         					</span> 
 									<span class="w45 wr_date" style="width:6.5em"> 
 										<span class="glyphicon glyphicon-time"></span> 
 											${b.boardDate }
@@ -171,7 +182,8 @@
 									<option value="writer">글쓴이</option>					
 								</select>
 								
-								<input type="text" name="stx" class="form-control value=" required id="stx" size="15" maxlength="15">
+								<input type="text" name="stx" class="form-control value=" required id="stx" size="15" maxlength="15" 
+										onkeypress="if(event.keyCode==13) {search(); return false;}">
 
 								<button type="button" id="searchsubmit" onclick="search();">
 									<span class="glyphicon glyphicon-search"></span>
@@ -216,8 +228,29 @@
 
 			<script>
 			
+			$('.dropdown').click(function(){
+									
+					/* $(this).children('#downlist').css('display', 'block'); */
+					$(this).children('#downlist').toggle('fast');										
+					
+				$('html').click(function(e) {
+					
+					if(!$(e.target).hasClass("drop")) { 
+							
+						$('.dropdown').children('#downlist').css('display', 'none');
+					}
+												
+				})
+														
+			});
+			
 			function search(){
 				location.href="searchBoard.do?con="+$('#sfl').val()+"&keyword="+$('#stx').val();
+			}
+			
+			function chatting(){
+				
+				$('#chatting').submit();
 			}
 			
 				function put_tags(a) {
@@ -301,7 +334,7 @@ $(function() {
 </script>
 <![endif]-->
 
-<c:import url="../common/footer.jsp" />
+<c:import url="../common/footer.jsp"/>
 
 </body>
 </html>

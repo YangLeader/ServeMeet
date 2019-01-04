@@ -179,7 +179,7 @@ p:last-child { margin-bottom: 0px; }
 ul, ol { margin: 0;}
 ul li, ol li {   }
 a { color: #7a8080; text-decoration: none; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
-a:focus, a:hover { text-decoration: none; color: #7a8080; }
+a:focus, a:hover { text-decoration: none; color: #00ffff; }
 strong { }
 .listnone { list-style: none; padding: 0px; }
 .lead { font-size: 21px; }
