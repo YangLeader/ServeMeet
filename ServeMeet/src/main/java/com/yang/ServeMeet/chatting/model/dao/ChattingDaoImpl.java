@@ -72,4 +72,9 @@ public class ChattingDaoImpl implements ChattingDao {
 		// TODO Auto-generated method stub
 		return sst.selectList("chat.selectChatMembers",map);
 	}
+	@Override
+	public String getChatName(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("chat.getChatName",map);
+	}
 }

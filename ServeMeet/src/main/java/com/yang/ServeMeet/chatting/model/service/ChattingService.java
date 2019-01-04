@@ -30,4 +30,6 @@ public interface ChattingService {
 
 	List<ChatUser> selectChatMembers(Map<String, Integer> map);
 
+	String getChatName(Map<String, Integer> map);
+
 }
