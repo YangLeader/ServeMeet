@@ -79,8 +79,9 @@
 	</script> -->
 
 	<div id="wrapper">
-		<div class="container">
-
+		
+		<div class="container" style="background-color:white; border-radius: 20px;">
+		<br />
 			<!--
 		<div class="row">	
 			

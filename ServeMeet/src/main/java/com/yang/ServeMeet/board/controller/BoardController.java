@@ -407,4 +407,36 @@ public class BoardController {
 		return "board/boardList";
 		
 	}
+	
+	/*@RequestMapping("/board/reportBoard.do")
+	public String reportBoard(@RequestParam("no") int boardNo, @RequestParam("name") String userName, Model model) {
+		
+		int result;
+		
+		
+		try {
+					
+			result = boardService.reportBoard(boardNo, userName);
+					
+		} catch(Exception e) {
+					
+			throw new BoardException(e.getMessage());
+					
+		}
+				
+		String loc = "/board/boardList.do";
+		String msg = "";
+				
+		if(result > 0) {
+			msg = "댓글 삭제 성공!";
+			loc = "/board/boardView.do?no="+ boardNo;
+					
+		} else {
+			msg = "댓글 삭제 실패!";
+		}
+			
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
+				
+		return "common/msg";
+	}*/
 }
