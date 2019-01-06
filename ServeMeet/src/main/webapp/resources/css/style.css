@@ -56,6 +56,12 @@ License:            Creative Commons Attribution 3.0 Unported
 
 13. Media Queries
 ------------------------------------------------------------------*/
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+	padding: 0px;
+}
+
+/* -------------------------------------------------------------- */
 .titleAt h1,
 .titleAt h2{
 	display: inline-block;
@@ -130,50 +136,126 @@ article{
 .chatListBox .chatList{
 	float:right; 
 	overflow-y: scroll; 
-	border: 1px #64646466 solid; 
+	position:relative;
 	color: #1d2129;
-	height: 100%; 
+	max-height: 500px;
 	width: 100%; 
 	padding-left:10px;
 	background-color: white; 
-	position: absolute; 
 	border-radius: 0 0 2px 2px;
 	box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
 	z-index: 9998; 
+
 	
 }
-.chattingRoom{
-	width: 1200px; height:800px; margin: 10px auto;
-}
-.chattingRoom .chatList {
-	background-color : #fff;
-	height:730px;
-	padding: 15px 10px;
-}
-.chattingRoom .chatList .chatBox{
-	padding: 4px 10px;
-}
+
 .chatListBox .chatList .chatBox {
 	padding: 15px 10px;
 	z-index:9999; 
 }
 .chatListBox{
-	
+	border: 1px #64646466 solid; 
 	width: 400px; 
-	height: 550px; 
-	position: absolute;
+	
+	position: absolute; 
+	left: -20px;
+	top:46px;
 	display: none;
 }
 .chatList .chatBox:hover {
 	background-color: #eceefb
 }
+#chat{
+	padding: 0px;
+	height: 49px;
+	width: 46px;
+}
+#alamCount{
+	position: absolute;
+	z-index: 9999;
+	top:5px;
+	left:24px;
+}
 .topImg{
 	height: 10px;width: 20px;
 	position: absolute;
 	z-index:9999; 
-	top: -9px;left: 20px;
+	top: -10px;
+	left: 30px;
 }
+/*----------------------------------------------------------------------------------  */
+
+.chattingRoom {
 	
+}
+
+.chattingRoom .chattingTop{
+	width: 100%;height: 70px; background-color: #5e73de
+}
+.chattingRoom .chattingTop .chatName{
+	padding: 9px 15px;
+}
+.chattingRoom .chattingTop .chatName h2{
+	color: #fff;
+	margin-top: 10px;
+	display: inline-block;
+}
+.chattingRoom .chattingTop .chatName span{
+	float: right;
+	margin: 0px 5px;
+}
+.chattingRoom .chattingTop .chatName img{
+	width: 27px;
+	height: 27px;
+	margin: 10px 2px;
+}
+.chattingRoom{
+	width: 1200px; height:800px; margin: 10px auto;
+}
+.chattingRoom .chatList {
+	border:1px #ddd solid;
+	background-color : #fff;
+	height:640px;
+	padding: 15px 10px;
+}
+.chattingRoom .chatList .chatBox{
+	padding: 4px 10px;
+}
+.chattingRoom .form-group{
+	height:650px;
+}
+.chattingRoom .form-group .panel{
+	margin: 0px;
+	overflow: scroll;height: 600px;
+}
+.chattingRoom .form-group .panel .myChatLog{
+	min-width:100px;
+	border:2px #5e72de solid;
+	display: inline-block;
+	border-radius: 5px; 
+	padding: 5px;
+
+}
+.chattingRoom #chatSend{
+	border:1px #ddd  solid;
+	width: 100%;
+	height: 40px;
+	display: inline-block;
+	background-color: #fff;
+}
+.chattingRoom #chatSend #chatTxt{
+	margin-left:10px;
+	width:740px;
+	height: 36px;
+	border: none;
+	background: 0px;
+	
+}	
+.chattingRoom #chatSend .chatSendBtn{
+	border: 0px;
+	background-color: #fff;
+	height: 100%;
+}
 /*-----------------------------------
     1. Body / Typography 
 -----------------------------------*/
@@ -188,7 +270,7 @@ h2 { font-size: 35px; line-height: 32px; }
 h3 { font-size: 18px; }
 h4 { font-size: 16px; }
 h5 { font-size: 14px; }
-h6 { font-size: 12px; }
+h6 { font-size: 11px; }
 p { margin: 0 0 30px;   }
 p:last-child { margin-bottom: 0px; }
 ul, ol { margin: 0;}
@@ -479,12 +561,12 @@ height:50px;
 	background: 0px;
 	
 }
-.mid-header #search #a{
+.mid-header #search .a, .mainNav .a{
 	display: inline-block;
 	width: 46px;
 	height: 100%;
 }
-.mid-header #search #a .searchBtn{
+.mid-header #search .a .searchBtn, .mainNav .a .chatBtn{
 	width: 46px; height: 100%; 
 	background-color: #fff;
 	padding: 0px!important;
@@ -504,22 +586,8 @@ height:50px;
 		 -o-transform: rotateY(0deg);
 			transform: rotateY(0deg);		
 }
-.mid-header #search #a .searchBtn #b{
-		opacity: 0.3;
-	filter: alpha(opacity=30);
-	
-	-webkit-transition: all 400ms ease-out 0s;	
-	   -moz-transition: all 400ms ease-out 0s;
-		 -o-transition: all 400ms ease-out 0s;
-		    transition: all 400ms ease-out 0s;
-		  
-	-webkit-transform: rotateY(0deg);
-	   -moz-transform: rotateY(0deg);
-		-ms-transform: rotateY(0deg);
-		 -o-transform: rotateY(0deg);
-			transform: rotateY(0deg);	
-}
-.mid-header #search  #a:hover .searchBtn{
+
+.mid-header #search  .a:hover .searchBtn, .mainNav:hover .a .chatBtn{
 	
 	background-color: #5e73de ;	
 	
@@ -529,7 +597,7 @@ height:50px;
 		 -o-transform: rotateY(180deg);
 		    transform: rotateY(180deg);
 }
-.mid-header #search #a:hover .searchImg{
+.mid-header #search .a:hover .searchImg , .mainNav:hover .a .chatImg{
 
 	color: #000;
 
@@ -539,7 +607,7 @@ height:50px;
 		 -o-transform: rotateY(180deg);
 			transform: rotateY(180deg);
 }
-.mid-header #search .searchImg{
+.mid-header #search .searchImg, .mainNav .searchImg{
 	width: 25px;
 	height: 27px;
 }
@@ -569,6 +637,9 @@ body{
 }
 input:focus {
   outline: none;
+}
+button:focus{
+	 outline: none;
 }
 
 
@@ -643,7 +714,7 @@ text-transform: uppercase;background-color: #fff; }
 #navigation ul ul ul { margin-left: 100%; top: 0; }
 #navigation.align-right ul ul ul { margin-left: 0; margin-right: 100%; }
 #navigation ul ul li a {  padding: 16px; width: 170px; font-size: 14px;
- text-decoration: none; color: #000000; font-weight: 600; background: #fff ; text-transform: uppercase; }
+ text-decoration: none; color: #000000; font-weight: 600; background: #fff ; text-transform: uppercase;     border: 1px #fff solid;}
 #navigation ul ul li:last-child > a, #navigation ul ul li.last-item > a { border-bottom: 0; }
 #navigation ul ul li:hover > a, #navigation ul ul li a:hover { color: #ffffff!important; background-color:#5e73de ; }
 #navigation ul ul li.has-sub > a:after { position: absolute; top: 16px; right: 11px; width: 8px; height: 2px; display: block;
