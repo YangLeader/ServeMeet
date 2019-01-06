@@ -92,6 +92,7 @@ public class PointController {
 	
 	
 	@RequestMapping(value="point/pointAttend.do", method= RequestMethod.GET)
+	@ResponseBody
 	public int pointAttend(Model model,Member m,@RequestParam int increasePoint,@RequestParam String pContent ) {
 		if(logger.isDebugEnabled()) logger.debug("출석체크");
 

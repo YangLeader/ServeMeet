@@ -19,8 +19,8 @@
         <style>
         .frame{
         	background-color : white;
-        	margin-left : 300px;
-        	margin-right : 300px;
+        	margin-left : 15%;
+        	margin-right : 15%;
         }
          #canvas{
          	position : relative;
@@ -40,6 +40,15 @@
          	width : 80px;
          	height : 80px;
          }
+         .msgBox{
+         	width : 70%;
+         	height : 190px;
+         	border-radius:10px;
+         	border : 1px solid #265a88;
+         	padding :10px;
+         	text-align : left;
+         	background-color : #E0ECF8;
+         }
         </style>	
     </head>
     <body>
@@ -48,34 +57,10 @@
         	<br>
             <h1>행운의 룰렛</h1>
             <br>
-            <p>최대 500포인특 획득!</p>
+            <p>하루 세번, 최대 <b>500</b>포인트 획득!</p>
             <br />
             <table cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                   <%--  <td>
-                        <div class="power_controls">
-                            <br />
-                            <br />
-                            <table class="power" cellpadding="10" cellspacing="0" style="visibility:hidden">
-                                <tr>
-                                    <th align="center">회전 속도</th>
-                                </tr>
-                                <tr>
-                                    <td width="78" align="center" id="pw3" onClick="powerSelected(3);">강</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" id="pw2" onClick="powerSelected(2);">중</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" id="pw1" onClick="powerSelected(1);">약</td>
-                                </tr>
-                            </table>
-                            <br />
-                            <img id="spin_button" src="${pageContext.request.contextPath}/resources/images/spin_off.png" alt="Spin" onClick="startSpin();" />
-                            <br /><br />
-                            &nbsp;&nbsp;<a href="#" onClick="resetWheel(); return false;">다시하기</a><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(reset)
-                        </div>
-                    </td> --%>
+            	<tr>
                     <td width="451" height="584" class="the_wheel" align="center" valign="center">
                         <canvas id="canvas" width="434" height="434">
                             <p style="{color: white}" align="center">Sorry, your browser doesn't support canvas. Please try another.</p>
@@ -86,27 +71,33 @@
                     </td>
                 </tr>
             </table>
+            <div class ="msgBox">
+            	<h3><b>&nbsp;꼭 확인하세요!</b></h3>
+            	<ul>
+            		<li>1일 3회 참여 가능합니다.</li>
+            		<li>참여시 10포인트가 차감됩니다.</li>
+            		<li>당첨 여부는 즉시 확인하실 수 있습니다.</li>
+            		<li>당첨 포인트는 실시간으로 적립됩니다.</li>
+            		<li>포인트 적립은 마이페이지에서 확인하실 수 있습니다.</li>
+            	</ul>
+            </div>
             <br>
         </div>
     <c:import url="../common/footer.jsp"/>
         <script>
             // Create new wheel object specifying the parameters at creation time.
             var theWheel = new Winwheel({
-                'numSegments'  : 10,     // Specify number of segments.
+                'numSegments'  : 6,     // Specify number of segments.
                 'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
                 'textFontSize' : 28,    // Set font size as desired.
                 'segments'     :        // Define segments including colour and text.
                 [
-                   {'fillStyle' : '#eae56f', 'text' : '꽝','data' : 'fail'},
-                   {'fillStyle' : '#00BFFF', 'text' : '1포인트','data' : '1'},
-                   {'fillStyle' : '#7de6ef', 'text' : '100포인트','data' : '100'},
-                   {'fillStyle' : '#e7706f', 'text' : '꽝','data' : 'fail'},
-                   {'fillStyle' : '#FAAC58', 'text' : '50포인트','data' : '50'},
-                   {'fillStyle' : '#eae56f', 'text' : '꽝','data' : 'fail'},
-                   {'fillStyle' : '#F5A9D0', 'text' : '1포인트','data' : '1'},
-                   {'fillStyle' : '#89f26e', 'text' : '꽝','data' : 'fail'},
-                   {'fillStyle' : '#7de6ef', 'text' : '10포인트','data' : '10'},
-                   {'fillStyle' : '#e7706f', 'text' : '500포인트','data' : '500'}
+                   {'fillStyle' : '#E6E6E6', 'text' : '꽝','data' : 'fail'},
+                   {'fillStyle' : '#afc0f1', 'text' : '1p','data' : '1'},
+                   {'fillStyle' : '#E6E6E6', 'text' : '100p','data' : '100'},
+                   {'fillStyle' : '#afc0f1', 'text' : '50p','data' : '50'},
+                   {'fillStyle' : '#E6E6E6', 'text' : '10p','data' : '10'},
+                   {'fillStyle' : '#afc0f1', 'text' : '★★\n500p','data' : '500'}
                 ],
                 'animation' :           // Specify the animation to use.
                 {
@@ -118,46 +109,9 @@
             });
 
             // Vars used by the code in this page to do power controls.
-            var wheelPower    = 0;
             var wheelSpinning = false;
 
-            // -------------------------------------------------------
-            // Function to handle the onClick on the power buttons.
-            // -------------------------------------------------------
-            function powerSelected(powerLevel)
-            {
-                // Ensure that power can't be changed while wheel is spinning.
-                if (wheelSpinning == false)
-                {
-                    // Reset all to grey incase this is not the first time the user has selected the power.
-                    document.getElementById('pw1').className = "";
-                    document.getElementById('pw2').className = "";
-                    document.getElementById('pw3').className = "";
-
-                    // Now light up all cells below-and-including the one selected by changing the class.
-                    if (powerLevel >= 1)
-                    {
-                        document.getElementById('pw1').className = "pw1";
-                    }
-
-                    if (powerLevel >= 2)
-                    {
-                        document.getElementById('pw2').className = "pw2";
-                    }
-
-                    if (powerLevel >= 3)
-                    {
-                        document.getElementById('pw3').className = "pw3";
-                    }
-
-                    // Set wheelPower var used when spin button is clicked.
-                    wheelPower = powerLevel;
-
-                    // Light up the spin button by changing it's source image and adding a clickable class to it.
-                    document.getElementById('spin_button').src = "${pageContext.request.contextPath}/resources/images/spin_on.png";
-                    document.getElementById('spin_button').className = "clickable";
-                }
-            }
+           
 
             // -------------------------------------------------------
             // Click handler for spin button.
@@ -172,7 +126,7 @@
                 		data : {pContent : "룰렛 포인트 차감"},
                 		success : function(data){
                 			console.log("count : " +data )
-                			if(data>=3){
+                			if(data>=100){
                 				alert("룰렛은 하루에 3번만 참여하실 수 있습니다.");
                 			}else{
                 				if (confirm("10포인트가 차감됩니다. 구매하시겠습니까?") == true){    //확인
@@ -191,30 +145,32 @@
                           										pContent : "룰렛 포인트 차감"
                           										},
                           								success : function(){
-                          								// Based on the power level selected adjust the number of spins for the wheel, the more times is has
-                                  		                    // to rotate with the duration of the animation the quicker the wheel spins.
-                                  		                	 if (wheelPower == 1)
-                                  		                     {
-                                  		                         theWheel.animation.spins = 3;
-                                  		                     }
-                                  		                     else if (wheelPower == 2)
-                                  		                     {
-                                  		                         theWheel.animation.spins = 8;
-                                  		                     }
-                                  		                     else if (wheelPower == 3)
-                                  		                     {
-                                  		                         theWheel.animation.spins = 15;
-                                  		                     }
-
-                                  		                     // Disable the spin button so can't click again while wheel is spinning.
-                                  		                     document.getElementById('spin_button').src       = "${pageContext.request.contextPath}/resources/images/spin_off.png";
-                                  		                     document.getElementById('spin_button').className = "";
-
+                          								//확률 조작 코드
+                          									var rand = Math.random();
+                          									let stopAt = 0;
+                          									
+                          									if(rand>0.6){
+                          										stopAt = (1 + Math.floor((Math.random() * 59)))
+                          									}else if(rand>0.3&&rand<=0.6){
+                          										stopAt = (61 + Math.floor((Math.random() * 59)))
+                          									}else if(rand>0.1&&rand<=0.3){
+                          										stopAt = (241 + Math.floor((Math.random() * 59)))
+                          									}else if(rand>0.05&&rand<=0.1){
+                          										stopAt = (181 + Math.floor((Math.random() * 59)))
+                          									}else if(rand>0.01&&rand<=0.05){
+                          										stopAt = (121 + Math.floor((Math.random() * 59)))
+                          									}else{
+                          										stopAt = (300 + Math.floor((Math.random() * 59)))
+                          									}
+ 															 
+ 															
+														 
+														     // 휠이 돌아가기전에 멈추는 각 지정
+														     theWheel.animation.stopAngle = stopAt;
                                   		                     // Begin the spin animation by calling startAnimation on the wheel object.
                                   		                     theWheel.startAnimation();
 
-                                  		                     // Set to true so that power can't be changed and spin button re-enabled during
-                                  		                     // the current animation. The user will have to reset before spinning again.
+                                  		                     // 휠이 돌아가는동안은 시작버튼 누를 수 없음
                                   		                     wheelSpinning = true;
                           									
                           					            }, error : function(jqxhr, textStatus, errorThrown){
@@ -257,36 +213,15 @@
       		            }
                 	})
                 	
-                    /* // Based on the power level selected adjust the number of spins for the wheel, the more times is has
-                    // to rotate with the duration of the animation the quicker the wheel spins.
-                	 if (wheelPower == 1)
-                     {
-                         theWheel.animation.spins = 3;
-                     }
-                     else if (wheelPower == 2)
-                     {
-                         theWheel.animation.spins = 8;
-                     }
-                     else if (wheelPower == 3)
-                     {
-                         theWheel.animation.spins = 15;
-                     }
-
-                     // Disable the spin button so can't click again while wheel is spinning.
-                     document.getElementById('spin_button').src       = "${pageContext.request.contextPath}/resources/images/spin_off.png";
-                     document.getElementById('spin_button').className = "";
-
-                     // Begin the spin animation by calling startAnimation on the wheel object.
-                     theWheel.startAnimation();
-
-                     // Set to true so that power can't be changed and spin button re-enabled during
-                     // the current animation. The user will have to reset before spinning again.
-                     wheelSpinning = true; */
                 }
+            }
+            
+            function controlRandom(){
+            	
             }
 
             // -------------------------------------------------------
-            // Function for reset button.
+            // 리셋함수
             // -------------------------------------------------------
             function resetWheel()
             {
@@ -294,9 +229,6 @@
                 theWheel.rotationAngle = 0;     // Re-set the wheel angle to 0 degrees.
                 theWheel.draw();                // Call draw to render changes to the wheel.
 
-                document.getElementById('pw1').className = "";  // Remove all colours from the power level indicators.
-                document.getElementById('pw2').className = "";
-                document.getElementById('pw3').className = "";
 
                 wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
             }
