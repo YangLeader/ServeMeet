@@ -17,6 +17,8 @@
 <script>
 	var chatNo = ${chatNo};
 	console.log("chatNo : "+chatNo);
+	var chatName= ${chatName}
+	console.log("chatName : "+chatName);
 	
 	function chatLog() {
 		$.ajax({
@@ -43,22 +45,25 @@
 		<c:import url="../common/header.jsp" />
 	</header>
 <div class="chattingRoom">
-	<div style="width: 100%;height: 70px;">
-		<div class="col-lg-4"></div><input hidden="hidden">
-		<div  class= 'col-lg-8'>${chatName} </div>
+	<div class = "chattingTop">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
+		<div  class= 'col-lg-8 col-md-8 col-sm-8 col-xs-8 chatName'>
+			<h2>${chatName}</h2>
+			<span><img class="outBtn" alt="채팅방 나가기" src="${pageContext.request.contextPath}/resources/images/out.png"></span> 
+			<span><img class="plusBtn" alt="채팅방 만들기" src="${pageContext.request.contextPath}/resources/images/plus.png"></span>
+		</div>
 	</div>
-	<div class="col-lg-4 chatList scrollbar-primary" >
+	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 chatList scrollbar-primary" >
 	</div>
-	<div class= 'col-lg-8 form-group' style="height:730px;">
-		
+	<div class= 'col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group' style="">
 		<!-- 메세지 작성부분 -->
 		<!-- 대화내용이 출력되는 부분 -->
-		<div class='panel panel-default scrollbar-primary'  style="overflow: scroll;height: 600px;">
+		<div class='panel panel-default scrollbar-primary'>
 			<div id='chatdata' class='panel-body'></div>
 		</div>
-		<textarea rows="2" cols="50" name='message' id='message'></textarea>
-		<button class='btn btn-primary'id='sendBtn'>전송</button>
-		<button class='btn btn-primary'id='exitBtn'>나가기</button>
+		<div id = "chatSend" >
+			<input type="text"  name="chatTxt" id = "chatTxt"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/search2.png"></button></span>
+		</div>
 		
 	</div>
 </div>
