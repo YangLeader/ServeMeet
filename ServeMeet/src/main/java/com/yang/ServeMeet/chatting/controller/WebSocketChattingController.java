@@ -31,19 +31,27 @@ public class WebSocketChattingController {
 		req.setCharacterEncoding("utf-8");
 
 		String ipAddr = req.getRemoteAddr();
-		
-		Chatting chat = cs.selectChat(chatNo);
-		session.setAttribute("chat", chat);
 
-		map.put("chatNo", chat.getChattingId());
+		map.put("chatNo", chatNo);
 		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
-		String chatName=cs.getChatName(map);
+		Chatting chat=cs.getChatName(map);
+		session.setAttribute("chat", chat);
+		cs.updateStatus(map);
 		
-		mv.addObject("chatName", chatName);
+		mv.addObject("chatName", chat.getChattingName());
+		mv.addObject("chatNo", chat.getChattingId());
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 
 		return mv;
+	}
+	@RequestMapping(value="/chat/upStatus.do/{chatNo}")
+	public void upStatus(@PathVariable("chatNo")int chatNo, HttpSession session) {
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		map.put("chatNo", chatNo);
+		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
+		cs.updateStatus(map);
+		System.out.println("1111111111111111111111확인1111111111111111111111111");
 	}
 	
 	@RequestMapping(value = "/chat/chattingRoom.do/{userName}", method=RequestMethod.POST)
@@ -67,11 +75,12 @@ public class WebSocketChattingController {
 		}
 		map.put("chatNo", chat.getChattingId());
 		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
-		String chatName=cs.getChatName(map);
-		System.out.println(chat);
+
 		session.setAttribute("chat", chat);	
+		cs.updateStatus(map);
 		
-		mv.addObject("chatName", chatName);
+		mv.addObject("chatName", chat.getChattingName());
+		mv.addObject("chatNo", chat.getChattingId());
 		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 		

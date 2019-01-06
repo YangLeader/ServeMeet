@@ -125,7 +125,7 @@ public class EchoHandler extends TextWebSocketHandler {
 //		rSessionList = rMap.get(chatNo);
 //		System.out.println("rSessionList : " + rSessionList);
 
-		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload(), "N");
+		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload());
 
 		if (message.getPayload() != null) {
 			int result = cs.ChatLogInsert(chatLog);

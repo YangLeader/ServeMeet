@@ -92,8 +92,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 
     <!-- Sticky Header -->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/js/sticky-header.js"></script>
+   <%--  <script src="${pageContext.request.contextPath}/resources/js/jquery.sticky.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/sticky-header.js"></script> --%>
     <!-- Menu Maker - Navigations -->
     <script src="${pageContext.request.contextPath}/resources/js/menumaker.js"></script>
     <!-- Back to top -->

@@ -15,12 +15,8 @@
 <meta charset="UTF-8">
 <title>실시간 채팅</title>
 <script>
-	var url = (window.location.href).split("/");
-	var chatNo = url[url.length - 1];
+	var chatNo = ${chatNo};
 	console.log("chatNo : "+chatNo);
-	
-	
-	
 	
 	function chatLog() {
 		$.ajax({

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
+import com.yang.ServeMeet.chatting.model.vo.ChattingRoom;
 import com.yang.ServeMeet.member.model.vo.Member;
 
 public interface ChattingDao {
@@ -19,9 +20,9 @@ public interface ChattingDao {
 
 	int insertChat(Map<String, String> userNameMap);
 
-	Chatting selectChat(int chatNo);
+	
 
-	List<ChattingLog> selectChatLog(int chattingId);
+	List<ChattingRoom> selectChattingList(int chattingId);
 
 	List<ChattingLog> selectChatLogList(int chatNo);
 
@@ -29,5 +30,7 @@ public interface ChattingDao {
 
 	List<ChatUser> selectChatMembers(Map<String, Integer> map);
 
-	String getChatName(Map<String, Integer> map);
+	Chatting getChatName(Map<String, Integer> map);
+
+	void updateStatus(Map<String, Integer> map);
 }

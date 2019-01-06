@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class ChattingLog {
+public class ChattingRoom {
 
 	private static final long serialVersionUID = 3001L;
 	
@@ -13,30 +13,21 @@ public class ChattingLog {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.m", timezone = "Asia/Seoul")
 	private Timestamp chDate;
 	private String chContent;
-	private int chStatus;
+	private int nCount;
 	private String chattingName;
-	public ChattingLog(int chattingId, int userNo, Timestamp chDate, String chContent, int chStatus,
+	public ChattingRoom(int chattingId, int userNo, Timestamp chDate, String chContent, int nCount,
 			String chattingName) {
 		super();
 		this.chattingId = chattingId;
 		this.userNo = userNo;
 		this.chDate = chDate;
 		this.chContent = chContent;
-		this.chStatus = chStatus;
+		this.nCount = nCount;
 		this.chattingName = chattingName;
 	}
-	
-	public ChattingLog(int chattingId, int userNo, String chContent) {
-		super();
-		this.chattingId = chattingId;
-		this.userNo = userNo;
-		this.chContent = chContent;
-	}
-
-	public ChattingLog() {
+	public ChattingRoom() {
 		super();
 	}
-	
 	public int getChattingId() {
 		return chattingId;
 	}
@@ -61,25 +52,22 @@ public class ChattingLog {
 	public void setChContent(String chContent) {
 		this.chContent = chContent;
 	}
-	public int getChStatus() {
-		return chStatus;
+	public int getnCount() {
+		return nCount;
 	}
-	public void setChStatus(int chStatus) {
-		this.chStatus = chStatus;
+	public void setnCount(int nCount) {
+		this.nCount = nCount;
 	}
 	public String getChattingName() {
 		return chattingName;
 	}
-	public void setChattingName(String chattingName) {
-		this.chattingName = chattingName;
-	}
+	
 	@Override
 	public String toString() {
-		return "ChattingLog [chattingId=" + chattingId + ", userNo=" + userNo + ", chDate=" + chDate + ", chContent="
-				+ chContent + ", chStatus=" + chStatus + ", chattingName=" + chattingName + "]";
+		return "ChattingRoom [chattingId=" + chattingId + ", userNo=" + userNo + ", chDate=" + chDate + ", chContent="
+				+ chContent + ", nCount=" + nCount + ", chattingName=" + chattingName + "]";
 	}
-				   
-
+	
 	
 	
 	
