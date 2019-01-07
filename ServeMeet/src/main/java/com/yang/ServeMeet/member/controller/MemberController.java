@@ -87,22 +87,16 @@ public class MemberController {
 		
 		Member m = memberService.selectOne(userId);
 		
-		String loc = "/";
+		String loc = "/member/memberLoginView.do";
 		String msg = "";
 		
 		if( m == null) {
 			msg = "존재하지 않는 회원입니다.";
 		} else {
 			
-			/*if(userPwd.equals(m.getUserPwd())) {
-				msg="로그인 성공";
-				mv.addObject("member",m);
-			}else {
-				msg = "비밀번호가 틀렸습니다.";
-			}*/
 			if(bcryptPasswordEncoder.matches(userPwd, m.getUserPwd())) {
 				
-				msg="로그인 성공!";
+				msg="login";
 				
 				// Model 객체는 일반적으로 데이터 저장 시 Request영역을 사용한다.
 				// 하지만 @SessionAttribute 어노테이션을 활용하면
@@ -116,8 +110,12 @@ public class MemberController {
 		
 		mv.addObject("loc", loc).addObject("msg", msg);
 		
-		mv.setViewName("common/msg");
 		
+		/*if(m == null) {*/
+			mv.setViewName("common/msg");
+		/*}else {
+			mv.setViewName("common/msg2");
+		}*/
 		return mv;
 		
 	}
@@ -134,7 +132,7 @@ public class MemberController {
 		// session.invalidate();
 		
 		String loc = "/";
-		String msg= "로그아웃 성공";
+		String msg= "로그아웃 되었습니다.";
 		
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
