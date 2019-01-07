@@ -43,7 +43,7 @@
 	</insert>
 	
 	<select id="battingWinner" parameterType="map" resultType="map">
-		SELECT USERNAME FROM BATTINGUSER JOIN MEMBER USING(USERNAME)JOIN BATTING USING(BATTINGID) WHERE BATTINGID = #{battingId} AND BATTINGSELECT = #{battingType} AND BSTATUS = 'N'
+		SELECT USERNAME, USERNO FROM BATTINGUSER JOIN MEMBER USING(USERNAME)JOIN BATTING USING(BATTINGID) WHERE BATTINGID = #{battingId} AND BATTINGSELECT = #{battingType} AND BSTATUS = 'N'
 	</select>
 	
 	<update id="battingPoint" parameterType="map">
