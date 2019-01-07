@@ -39,12 +39,11 @@
 		and TO_CHAR(to_date(pdate,'YY-MM-DD'), 'yyyy/mm/dd') = (SELECT TO_CHAR(to_date(sysdate,'YY-MM-DD'), 'yyyy/mm/dd') FROM dual)
 	</select>
 
-
+	<insert id="insertBattingPoint" parameterType="Map">
+		INSERT INTO POINT VALUES(
+			#{USERNO},#{alloc},DEFAULT,#{pContent}
+		)
+		
+	</insert>
 </mapper>
-
-
-
-
-
-
 

@@ -2,6 +2,7 @@ package com.yang.ServeMeet.point.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,9 @@ import com.yang.ServeMeet.point.model.vo.Point;
 @Service
 public class PointServiceImpl implements PointService {
 
-	
 	@Autowired
 	private PointDao pointDao;
-	
-	
-	
+		
 	@Override
 	public int insertPoint(Point point) {
 		
@@ -61,6 +59,13 @@ public class PointServiceImpl implements PointService {
 	public int getCount(Point point) {
 	
 		return pointDao.getCount(point);
+	}
+	
+	@Override
+	public int insertBattingPoint(List<Map<String,Object>> list) {
+		
+		System.out.println("포인트 service " + list);
+		return pointDao.insertBattingPoint(list);
 	}
 
 }
