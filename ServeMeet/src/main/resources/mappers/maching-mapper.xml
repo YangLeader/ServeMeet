@@ -13,6 +13,14 @@
 		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER'
 	</select>
 	
+
+	<insert id="insertMatching" parameterType="Matching">
+		INSERT INTO MATCHING VALUES(
+			SEQ_MATCHINGID.NEXTVAL, #{mTitle}, 
+			#{mContent}, #{mPeoplenum}, #{locationId}, 
+			#{categoryId}, #{mWriter}, 'NONE', #{mtime}, DEFAULT 
+			)
+	</insert>
 	<select id="mHistorySelectOne" resultType="MatchingHistory">
 		SELECT * FROM MATCHINGHISTORY WHERE MHISTORYID = #{mHistoryId}
 	</select>

@@ -34,10 +34,25 @@ public class MatchingController {
 		return "matching/matchingInsert";
 	}
 	
-//	@RequestMapping("matching/matchingInsert.ma")
-//	public String matchingInsert(Matching matching , Model model , HttpSession session) {
-//		int result = matchingService.matchingInsert(matching);
-//	}
+	@RequestMapping("matching/matchingInsert.ma")
+	public String matchingInsert(Matching matching , Model model , HttpSession session) {
+		//int result = matchingService.matchingInsert(matching);
+		System.out.println(matching.toString());
+		
+		int result = matchingService.matchingInsert(matching);
+		String home = "/";
+		String msg = "";
+		if(result > 0) {
+			msg = "매칭이 등록 되었습니다.";
+		}else {
+			msg = "매칭 등록에 실패하였습니다.";
+		}
+		
+		model.addAttribute("home", home);
+		model.addAttribute("msg", msg);
+		
+		return "common/msg";
+	}
 
 	@RequestMapping("matching/matchingHistoryForm.ma")
 	public String matchingHistoryForm(@RequestParam int matchingId, Model model) {

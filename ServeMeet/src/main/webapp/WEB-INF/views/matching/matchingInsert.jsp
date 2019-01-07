@@ -34,14 +34,14 @@
 	.detailDiv{
 		margin: auto;
 		width: 95%;
-		/* border:1px solid black; */
+	
 		text-align: left;
 	}
 	
 	.mtTb{
 		/* border: 1px solid black; */
 		width: 100%;
-		border-top: 3px solid black;
+		margin-top: 30px;
 	}
 	
 	.mtH{
@@ -68,7 +68,7 @@
 		height: 2.5em;
 		font-size: 12px;
 		color: black;
-		width: 20%;
+		width: 30%;
 		float: left;
 	}
 	#timePic{
@@ -93,13 +93,43 @@
 	}
 	
 	td{
+		width: 35%;
 		vertical-align: top;
 	}
 	
 	hr{
 		border: 1px solid black;
 	}
+	
+	.sb_btn{
+		margin-top: 20px;
+		width: 21%;
+		color: #fff;
+	    background: #5e73de;
+	    font-size: 13pt;
+	    font-weight:400;
+	    margin-left: 0.3em;
+	    padding: 0 8px;
+	    height: 50px;
+	    line-height: 34px;
+	    border-radius: 0.3em;
+	    border: 0;
+	    text-align: center;
+	}
+	
+	.footer{
+		margin-top: 200px;
+	}
+	
+	#content{
+		margin-top: 30px;
+		resize: none;
+		width: 100%;
+		height: 400px;
+		padding: 30px;
+	}
 </style>
+	
 </head>
 <body>
 	<header>
@@ -108,17 +138,22 @@
 	<br><br>
 	<h1>매칭등록</h1>
 	<br /><br />
+	<form name="mwrite" id="mwrite" action="${pageContext.request.contextPath}/matching/matchingInsert.ma" method="post" onsubmit="return arrCheck(this);" >
 	<div class="insertDiv">
 		<div class="titleDiv">
 			<h2>매칭 제목</h2>
+			<input type="text" name="mWriter" value="${member.userName}" />
+			
 			<br />
-			<input type="text" class="form-control" name="mathingTitle" id="wr_subject" placeholder="매칭 제목을 작성해주세요."/>
+			<input type="text" class="form-control" name="mTitle" id="wr_subject" placeholder="매칭 제목을 작성해주세요."/>
 		</div>
 		<br /><br />
 		<div class="detailDiv">
 			<h2 style="float: left;">매칭 조건</h2>
 			<span style=" margin-left: 20px">원하시는 조건을 입력해주세요</span>
 			<br />
+			<div style="border-top: 3px solid black; margin-top: 30px;">
+			
 			<table class="mtTb">
 				<tbody>
 					<tr>
@@ -129,9 +164,8 @@
 								<option value="스포츠">스포츠</option>
 								<option value="E스포츠">E-스포츠</option>
 							</select>
+
 						</td>
-					</tr>
-					<tr>
 						<th class="mtH">분류</th>
 						<td>
 							<select name="mathingEvent" id="event">
@@ -149,7 +183,7 @@
 					<tr>
 						<th class="mtH">모집 인원</th>
 						<td>
-							<select name="mathingPerson" >
+							<select name="mPeoplenum" >
 								<option value="1">1명</option>
 								<option value="2">2명</option>
 								<option value="3">3명</option>
@@ -217,41 +251,40 @@
 					</tr>
 					<tr>
 						<th class="mtH">날짜</th>
-						<td><input type="text" class="form-control" id="datePic" placeholder="년-월-일"/>
-							<input type="text" class="form-control" id="timePic" placeholder="시간">
+						<td><input type="text" class="form-control"  id="datePic" placeholder="년 - 월 - 일"/>
+							<input type="text" class="form-control"  id="timePic" placeholder="시간">
 						</td>
 						
 					</tr>
-					<tr>
-						<th class="mtH">세부 내용</th>
-						<td>
-							<textarea class="form-control" id="mtContent" placeholder="추가 내용을 입력해주세요."></textarea>
-						</td>
-					</tr>
+					
 				</tbody>
 			</table>
+			<h2>세부내용</h2>
+			<div style="border-top: 3px solid black; margin-top: 30px;">
+				<textarea id="content" name="mContent" placeholder="세부내용을 작성해주세요."></textarea>
+			</div>
+			</div>
+			<center><input type="submit" class="sb_btn" value="작성 완료"></button></center>
+			<input type="number" name="categoryId" style="display: none;">
+			<input type="text" name="locationId" style="display: none;" />
+			<input type="text" name="mtime" style="display: none;" />
 		</div>
 	</div>
-	
+	</form>
 	<c:import url="../common/footer.jsp" />
-	<!-- flat -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	
+<!-- flat -->
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+	<!-- include summernote css/js -->
+	
+	<!-- <script src="lang/summernote-ko-KR.js"></script> -->
 <script>
-/* $("#datePic").datepicker({
+$(function(){
 
-	dateFormat: "yy-mm-dd",
-	monthNames : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-    dayNamesMin : ['일', '월', '화', '수', '목', '금', '토'],
-    showMonthAfterYear : true,
-    
-   	onSelect: function (selected) {
-		console.log(selected);
-	}
-
-});	 */
-
-
+	// --------- flatpicker -------- //
 	$("#datePic").flatpickr({
 		  dateFormat: "Y-m-d",
 		  minDate: "today"
@@ -263,11 +296,29 @@
 	    dateFormat: "H:i",
 	    
 	});
-$(function () {	
 	
+/* 	// --------- summernute -------- //
+	$('#summernote').summernote({
+		placeholder: '추가 내용을 입력해주세요.',
+		height: '300px',
+		lang: 'ko-KR',
+			  toolbar: [
+				    // [groupName, [list of button]]
+				    ['style', ['bold', 'italic', 'underline', 'clear']],
+				    ['font', ['strikethrough', 'superscript', 'subscript']],
+				    ['fontsize', ['fontsize']],
+				    ['color', ['color']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				  
+				  ]
+	}); */
+
+	// --------- etc -------- //
 	$('#mtName').change(function () {
 		var mtN = $('#mtName option:selected').val();
 		console.log(mtN);
+		
+		
 		if(mtN == '소모임'){
 			circleSelBox();
 		}else if(mtN == '스포츠'){
@@ -308,10 +359,6 @@ $(function () {
 		}
 	});
 	
-	
-});
-
-$(function () {
 	$('#midLoc').change(function () {
 		var midLoc = $('#midLoc option:selected').val();
 		console.log(midLoc);
@@ -366,6 +413,105 @@ function eSportsSelBox() {
 		$('#event').append("<option value='"+eSports[i]+"'>"+eSports[i]+"</option>");
 	}
 }
+
+function arrCheck() {
+	var bigCat = $('#mtName').val();
+	var midCat = $('#event').val();
+	var categoryId = 0;
+	
+	var locCheck = new Object();
+	
+	locCheck.bigloCation = $('#bigLoc').val();
+	locCheck.midloCation = $('#midLoc').val();
+	locCheck.smallCategory = $('#smallLoc').val();
+	
+	var jsonData = JSON.stringify(locCheck);
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/location/locationcheck.lc",
+		type : "GET",
+		traditional : true,
+		async: false,
+		data : {chkloc:jsonData},
+		success : function (data) {
+			$('input[name=locationId]').val(data);
+			alert("data : " + data);
+		},error : function (data) {
+			alert("에러발생!");
+		}
+	})
+	
+	if(bigCat == '소모임'){
+		categoryId = 100;
+		if(midCat == '여행'){
+			categoryId += 1;
+		}else if(midCat == '공연'){
+			categoryId += 2;
+		}else if(midCat == '음악'){
+			categoryId += 3;
+		}else if(midCat == '영화'){
+			categoryId += 4;
+		}else if(midCat == '전시회'){
+			categoryId += 5;
+		}else if(midCat == '미팅'){
+			categoryId += 6;
+		}else if(midCat == '미술'){
+			categoryId += 7;
+		}else{
+			categoryId += 0;
+		}
+	}else if(bigCat == '스포츠'){
+		categoryId = 200;
+		if(midCat == '농구'){
+			categoryId += 1;
+		}else if(midCat == '축구'){
+			categoryId += 2;
+		}else if(midCat == '풋살'){
+			categoryId += 3;
+		}else if(midCat == '야구'){
+			categoryId += 4;
+		}else if(midCat == '배구'){
+			categoryId += 5;
+		}else if(midCat == '탁구'){
+			categoryId += 6;
+		}else if(midCat == '배드민턴'){
+			categoryId += 7;
+		}else if(midCat == '볼링'){
+			categoryId += 8;
+		}else if(midCat == '당구'){
+			categoryId += 9;
+		}else if(midCat == '테니스'){
+			categoryId += 10;
+		}else{
+			categoryId += 0;
+		}
+	}else{
+		categoryId = 300;
+		if(midCat == '리그오브레전드'){
+			categoryId += 1;
+		}else if(midCat == '피파온라인'){
+			categoryId += 2;
+		}else if(midCat == '배틀그라운드'){
+			categoryId += 3;
+		}else if(midCat == '오버워치'){
+			categoryId += 4;
+		}else if(midCat == '스타크래프트'){
+			categoryId += 5;
+		}else{
+			categoryId += 0;
+		}
+	}
+
+	$('input[name=categoryId]').val(categoryId);
+	
+	
+	$('input[name=mtime]').val($('#datePic').val() + " " +  $('#timePic').val());
+
+	
+	return true;
+	
+}
+
 </script>
 </body>
 </html>

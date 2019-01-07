@@ -21,6 +21,7 @@ public class MatchingDaoImpl implements MatchingDao {
 	public int matchingHistoryInsert(MatchingHistory mHistory) {
 		
 		return session.insert("Matching.insertMatchingHistory",mHistory);
+
 	}
 	
 	@Override
@@ -38,6 +39,13 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 
 	@Override
+
+	public int matchingInsert(Matching matching) {
+
+		return session.insert("Matching.insertMatching",matching);
+	}
+
+
 	public Matching matchingSelectOne(int matchingId) {
 		
 		return session.selectOne("Matching.matchingSelectOne",matchingId);

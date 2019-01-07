@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.yang.ServeMeet.board.model.exception.BoardException;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.dao.MatchingDao;
+
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
@@ -30,6 +31,12 @@ public class MatchingServiceImpl implements MatchingService {
 	public List<Map<String,String>> myMatchingList(String userName,String type){
 		
 		return matchingDao.myMatchingList(userName,type);
+	}
+
+	@Override
+	public int matchingInsert(Matching matching) {
+		// TODO Auto-generated method stub
+		return matchingDao.matchingInsert(matching);
 	}
 	
 	@Override

@@ -31,4 +31,20 @@ public class LocationDaoImpl implements LocationDao {
 	public List<Location> selectSloc(String sloc){
 		return sqlsession.selectList("location.selectCloc", sloc);
 	}
+
+	@Override
+	public String locationCheck(String bigLoc,String midLoc,String smallLoc) {
+		
+		System.out.println("bigLoc : " + bigLoc);
+		System.out.println("midLoc : " + midLoc);
+		System.out.println("smallLoc : " + smallLoc);		
+		
+		Location loc = new Location();
+		loc.setBigloCation(bigLoc);
+		loc.setMidloCation(midLoc);
+		loc.setSmallCategory(smallLoc);
+		
+		return sqlsession.selectOne("location.locationChk", loc);
+	
+	}
 }
