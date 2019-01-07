@@ -17,11 +17,13 @@
 		}
 		
 		.scratch_container {
-		  border: 3px solid skyblue;
+		  border: 3px solid #265a88;
 		  position: relative;
-		  width: 456px;
-		  height: 256px;
+		  width: 460px;
+		  height: 262px;
 		  margin: 0 auto;
+		  padding : 2px; 
+		  border-radius : 10px;
 		  -webkit-user-select: none;
 		  -moz-user-select: none;
 		  -ms-user-select: none; 
@@ -47,7 +49,10 @@
 		
 		.canvas {
 		  position: absolute;
-		  top: 0;
+		  right:0px;
+		  margin: -2px;
+    	  margin-top: 2px;
+    	  margin-left : 1px;
 		}
 		
 		.form {
@@ -108,7 +113,7 @@
 </div>
 
 <div class="scratch_container" id="js-container" style="display:none">
-  <canvas class="canvas" id="js-canvas" width="456" height="256"></canvas>
+  <canvas class="canvas" id="js-canvas" width="456" height="256" align="center"></canvas>
   <form class="form-fail" style="display: none;" >
   	<div class="failDiv" align = "center" >
   	<br><br>
@@ -248,51 +253,57 @@ var image = new Image();
 	      canvas.parentNode.removeChild(canvas);
 	      
 	      if(isFail == true){
-	    	  alert("아쉽지만 당첨되지 않으셨습니다.");  
-	    	  location.reload(true);
+	    	  swal("아쉽지만 당첨되지 않으셨습니다.").then((fail) => {
+	    		  location.reload(true);
+	    	  });
+	    	  
 	      }else if(isWin == true) {
-	    	  alert("축하합니다! 100포인트에 당첨되었습니다!");
-	    	  $.ajax({
-					url : "${pageContext.request.contextPath}/point/updatePoint.do",
-					data : {increasePoint : 100,
-							pContent : "스크래치 포인트 획득"
-							},
-					success : function(){
-						
-						$("#js-container").attr("style","display:");
-					     $("#ready-container").attr("style","display:none")
-						
-		            }, error : function(jqxhr, textStatus, errorThrown){
-		                console.log("ajax 처리 실패");
-		                //에러로그
-		                console.log(jqxhr);
-		                console.log(textStatus);
-		                console.log(errorThrown);
-		            }
-				});
-	    	  location.reload(true);
+	    	  swal("축하합니다! 100포인트에 당첨되었습니다!").then((win100) => {
+	    		  $.ajax({
+						url : "${pageContext.request.contextPath}/point/updatePoint.do",
+						data : {increasePoint : 100,
+								pContent : "스크래치 포인트 획득"
+								},
+						success : function(){
+							
+							$("#js-container").attr("style","display:");
+						     $("#ready-container").attr("style","display:none")
+							
+			            }, error : function(jqxhr, textStatus, errorThrown){
+			                console.log("ajax 처리 실패");
+			                //에러로그
+			                console.log(jqxhr);
+			                console.log(textStatus);
+			                console.log(errorThrown);
+			            }
+					});
+		    	  location.reload(true);
+	    	  });
+	    	  
 	    	  
 	      }else if(is1000Win == true){
-	    	  alert("축하합니다! 1000포인트에 당첨되었습니다!");
-	    	  $.ajax({
-					url : "${pageContext.request.contextPath}/point/updatePoint.do",
-					data : {increasePoint : 1000,
-							pContent : "스크래치 포인트 획득"
-							},
-					success : function(){
-						
-						$("#js-container").attr("style","display:");
-					     $("#ready-container").attr("style","display:none")
-						
-		            }, error : function(jqxhr, textStatus, errorThrown){
-		                console.log("ajax 처리 실패");
-		                //에러로그
-		                console.log(jqxhr);
-		                console.log(textStatus);
-		                console.log(errorThrown);
-		            }
-				});
-	    	  location.reload(true);
+	    	  swal("축하합니다! 1000포인트에 당첨되었습니다!").then((win1000) => {
+	    		  $.ajax({
+						url : "${pageContext.request.contextPath}/point/updatePoint.do",
+						data : {increasePoint : 1000,
+								pContent : "스크래치 포인트 획득"
+								},
+						success : function(){
+							
+							$("#js-container").attr("style","display:");
+						     $("#ready-container").attr("style","display:none")
+							
+			            }, error : function(jqxhr, textStatus, errorThrown){
+			                console.log("ajax 처리 실패");
+			                //에러로그
+			                console.log(jqxhr);
+			                console.log(textStatus);
+			                console.log(errorThrown);
+			            }
+					});
+		    	  location.reload(true);
+	    	  });
+	    	  
 	      }
 	      
 	    }
@@ -331,8 +342,59 @@ var image = new Image();
 	})();
 	
 	function buyScratch(){
-		
-		 if (confirm("10포인트가 차감됩니다. 구매하시겠습니까?") == true){    //확인
+		swal({
+			  title: "10포인트가 차감됩니다.",
+			  text: "그래도 계속하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			}).then((willDelete) => {
+				  if (willDelete) {
+					  $.ajax({
+      					url : "${pageContext.request.contextPath}/point/getPoint.do",
+      					success : function(point){
+      						console.log("point : "+point);
+    						if(point <10){
+    							 alert("포인트가 모자랍니다.");
+    							 location.reload(true);
+    						 }else{
+    							 $("#scratchBtn").attr("style","display:none");
+    						 $.ajax({
+    								url : "${pageContext.request.contextPath}/point/updatePoint.do",
+    								data : {increasePoint : -10,
+    										pContent : "스크래치 포인트 차감"
+    										},
+    								success : function(){
+    									 $("#ready-container").attr("style","display:none");
+    										$("#js-container").attr("style","display:");
+
+    									
+    					            }, error : function(jqxhr, textStatus, errorThrown){
+    					                console.log("차감 ajax 처리 실패");
+    					                //에러로그
+    					                console.log(jqxhr);
+    					                console.log(textStatus);
+    					                console.log(errorThrown);
+    					            }
+    							});
+    						 
+    							 
+    						 }
+
+      						
+      		            }, error : function(jqxhr, textStatus, errorThrown){
+      		                console.log("포인트 얻기ajax 처리 실패");
+      		                //에러로그
+      		                console.log(jqxhr);
+      		                console.log(textStatus);
+      		                console.log(errorThrown);
+      		            }
+      				});
+					  } else {
+					    return false;
+					  }
+					});
+		 /* if (confirm("10포인트가 차감됩니다. 구매하시겠습니까?") == true){    //확인
 			 $.ajax({
 					url : "${pageContext.request.contextPath}/point/getPoint.do",
 					point : {},
@@ -380,7 +442,7 @@ var image = new Image();
 
 		     return false;
 
-		 }
+		 } */
 		
 	}
 </script>

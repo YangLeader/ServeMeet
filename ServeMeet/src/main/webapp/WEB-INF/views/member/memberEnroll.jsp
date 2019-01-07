@@ -93,8 +93,8 @@
                       <label class=" control-label" for="email">E-mail :</label>
                     </div>
                     <div class="col-md-9">
-                      <input id="email" name="email" type="email" class="form-control" placeholder="Enter your email address" required>
-                      <span id="emailMsg" style="display:none; color:red">이메일을 확인해줘</span>
+                      <input id="email" name="email" type="email" class="form-control" placeholder="이메일 주소를 입력해주세요." required>
+                      <span id="emailMsg" style="display:none; color:red">이메일을 정확히 입력해주세요.</span>
                     </div>
                   </div>
                 </div>
@@ -157,16 +157,16 @@
 	function sendBtn(){
 		
 		if(idFlag==false){
-			alert("아이디를 다시 확인해주세요.");
+			swal("아이디를 다시 확인해주세요.");
 		}else if(pwdFlag==false){
-			alert("비밀번호를 다시 확인해주세요.");
+			swal("비밀번호를 다시 확인해주세요.");
 		}else if(pwdFlag2==false){
-			alert("비밀번호 확인이 일치하지 않습니다.");
+			swal("비밀번호 확인이 일치하지 않습니다.");
 		}else if(nameFlag==false){
-			alert("이름을 다시 확인해주세요.");
+			swal("이름을 다시 확인해주세요.");
 			$("name").focus();
 		}else if(emailFlag==false){
-			alert("이메일을 다시 확인해주세요.");
+			swal("이메일을 다시 확인해주세요.");
 			$("#email").focus();
 		}else{
 			$("#enrollForm").submit();

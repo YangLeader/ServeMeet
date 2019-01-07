@@ -27,7 +27,7 @@ public class LogincheckInterceptor extends HandlerInterceptorAdapter{
 		if (m == null) {
 			logger.info("비 로그인 상태에서 ["+request.getRequestURI()+"]로 접근하였습니다!");
 			
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/member/memberLoginView.do");
 			request.setAttribute("msg", "로그인 후 이용 가능한 서비스입니다!");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 			.forward(request, response);
