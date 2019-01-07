@@ -10,6 +10,7 @@ import com.yang.ServeMeet.chatting.model.dao.ChattingDao;
 import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
+import com.yang.ServeMeet.chatting.model.vo.ChattingRoom;
 import com.yang.ServeMeet.member.model.vo.Member;
 
 @Service
@@ -44,16 +45,12 @@ public class ChattingServiceImpl implements ChattingService {
 		// TODO Auto-generated method stub
 		return cDao.insertChat(userNameMap);
 	}
-	@Override
-	public Chatting selectChat(int chatNo) {
-		// TODO Auto-generated method stub
-		return cDao.selectChat(chatNo);
-	}
+
 
 	@Override
-	public List<ChattingLog> selectChatLog(int chattingId) {
+	public List<ChattingRoom> selectChattingList(int chattingId) {
 		// TODO Auto-generated method stub
-		return cDao.selectChatLog(chattingId);
+		return cDao.selectChattingList(chattingId);
 	}
 	@Override
 	public List<ChattingLog> selectChatLogList(int chatNo) {
@@ -70,8 +67,12 @@ public class ChattingServiceImpl implements ChattingService {
 		return cDao.selectChatMembers(map);
 	}
 	@Override
-	public String getChatName(Map<String, Integer> map) {
+	public Chatting getChatName(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return cDao.getChatName(map);
+	}
+	@Override
+	public void updateStatus(Map<String, Integer> map) {
+		cDao.updateStatus(map);		
 	}
 }

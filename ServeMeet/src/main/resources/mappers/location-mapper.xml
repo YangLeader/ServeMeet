@@ -24,4 +24,8 @@
 	<select id="selectCloc" parameterType="String" resultMap="locList">
 		SELECT DISTINCT SMALLCATEGORY FROM LOCATION WHERE MIDLOCATION = #{midloCation} ORDER BY 1
 	</select>
+	
+	<select id="locationChk" parameterType="Location" resultType="string">
+		SELECT LOCATIONID FROM LOCATION WHERE BIGLOCATION = #{bigloCation} AND MIDLOCATION = #{midloCation} AND SMALLCATEGORY = #{smallCategory}
+	</select>
 </mapper>

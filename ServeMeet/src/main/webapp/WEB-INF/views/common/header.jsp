@@ -26,6 +26,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
 
 
 <!-- Style Custom CSS -->
@@ -87,15 +92,41 @@ float: right;
 						<a href="${pageContext.request.contextPath}/"><img
 							src="${pageContext.request.contextPath}/resources/images/logo.png"
 							alt=""></a>
-						<div id = "search" style="position: relative;">
-							<input type="text"  name="search" id = "searchTxt"/><span id = "a"><button class="searchBtn"><img class="searchImg" src="${pageContext.request.contextPath}/resources/images/search.png"></button></span>
+						<div id = "search" >
+							<input type="text"  name="search" id = "searchTxt"/><span class = "a"><button class="searchBtn"><img class="searchImg" src="${pageContext.request.contextPath}/resources/images/search2.png"></button></span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+<script type="text/javascript">
+$(function() {
+	$(".searchBtn").hover(function() {
+			$(".searchImg").attr("src","${pageContext.request.contextPath}/resources/images/search_hover.png");
+		},
+		function() {
+			$(".searchImg").attr("src","${pageContext.request.contextPath}/resources/images/search2.png");
+		}
+	)
+	$("#chat").hover(function() {
+			$(".chatImg").attr("src","${pageContext.request.contextPath}/resources/images/chat_hover.png");
+			$("#chat .badge").css({
+			    "background-color": "#fff",
+			    "color":"#777"
+			});
+			
+		},
+		function() {
+			$(".chatImg").attr("src","${pageContext.request.contextPath}/resources/images/chat.png");
+			$(".badge").css({
+			    "background-color": "#777",
+			    "color":"#fff"
+			})
+		}
+	)
+});
+</script>
 	
 	<div class="header">
 		<div class="container">
@@ -142,17 +173,7 @@ float: right;
 												in</span></a></li>
 									</c:if>
 									<c:if test="${!empty member}">
-										<li  class= "suvNav"><span class="mainNav carea" id="chat">채팅목록</span>
 										
-										<form id="chatGo" method="post">
-											<div class="chatListBox">
-												<div class="topImg" style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTop.png');"></div>
-												<div class="chatList carea scrollbar scrollbar-primary">
-												
-												</div>
-											</div>	
-										</form>
-										</li>
 										
 										<li class="suvNav has-sub"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 												title="내정보보기"><span class="mainNav">${member.userName}</span></a>
@@ -165,7 +186,32 @@ float: right;
 													OUT</a></li>
 											</ul>		
 										</li>
+										<li  class= "suvNav">
+											<span class="mainNav carea" id="chat">
+												<span class = "a">
+													<button class="chatBtn carea">
+														<img class="chatImg carea" src="${pageContext.request.contextPath}/resources/images/chat.png">
+													</button>
+													
+												</span>
+												
+											
+											</span>
 										
+										<form id="chatGo" method="post">
+											<div class="chatListBox">
+												<div class="topImg" style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTopTry.png');"></div>
+												<div class="carea" style="width: 100%; height: 20px; background-color: #5e73de;padding: 5px 10px; ">
+													<span style="font-size: 11px;float:left;color: #fff;">모두보기</span>
+													<span style="font-size: 11px;float:right; color: #fff;">채팅방 만들기</span>
+												</div>
+												<div class="chatList carea scrollbar scrollbar-primary">
+													
+												</div>
+												
+											</div>	
+										</form>
+										</li>
 										
 									</c:if>
 		                         
@@ -196,13 +242,13 @@ float: right;
 			$(function(){
 				chatListMin();
 				//chatLog();
-				$("#sendBtn").click(function(){
+				$(".chatSendBtn").click(function(){
 					console.log("send message.....");
 					/* 채팅창에 작성한 메세지 전송 */
 					sendMessage();
 					
 					/* 전송 후 작성창 초기화 */
-					$("#message").val('');
+					$("#chatTxt").val('');
 				});
 				$("#exitBtn").click(function(){
 					console.log("exit message.....");
@@ -212,7 +258,7 @@ float: right;
 			});
 			function sendMessage(){
 				/* 맵핑된 핸들러 객채의 handleTextMessage메소드가 실행 */
-				sock.send($("#message").val());
+				sock.send($("#chatTxt").val());
 			
 			};
 			function onMessage(evt){
@@ -221,7 +267,9 @@ float: right;
 				var host=null;//메세지를 보낸 사용자 ip저장
 				var strArray=data.split("|");//데이터 파싱처리하기
 				var userName=null;//대화명 저장
-				chatListMin();
+				
+				var nCount = chatListMin();
+				
 
 				//전송된 데이터 출력해보기
 				for(var i=0;i<strArray.length;i++)
@@ -248,19 +296,19 @@ float: right;
 						/* 서버에서 데이터를 전송할경우 분기 처리 */
 						if(host==ck_host||(host==0&&ck_host.includes('0:0:')))
 						{
-							var printHTML="<div class='well' style='margin-left: 30%;'>";
-							printHTML+="<div class='alert alert-info'>";
-							printHTML+="<sub>"+printDate+"</sub><br/>";
-							printHTML+="<strong>["+userName+"] : "+message+"</strong>";
+							var printHTML="<div style='margin-left: 30%;margin-bottom: 10px;word-break:break-all;text-align: right;'>";
+							printHTML+="<div >";
+							printHTML+="<div class='myChatLog'>"+message+"</div><br/>";
+							printHTML+="<sub>"+printDate+"</sub>";
 							printHTML+="</div>";
 							printHTML+="</div>";
 							$('#chatdata').append(printHTML);
 						}
 						else{
-							var printHTML="<div class='well'  style='margin-left: -5%;margin-right:30%;'>";
-							printHTML+="<div class='alert alert-warning'>";
-							printHTML+="<sub>"+printDate+"</sub><br/>";
-							printHTML+="<strong>["+userName+"] : "+message+"</strong>";
+							var printHTML="<div style='margin-left: -5%;margin-right:25%;word-break:break-all;'>";
+							printHTML+="<div class='otherChatLog'>";
+							printHTML+=message+"<br/>";
+							printHTML+="<sub>"+printDate+"</sub>";
 							printHTML+="</div>";
 							printHTML+="</div>";
 							$('#chatdata').append(printHTML);
@@ -273,17 +321,18 @@ float: right;
 						today=new Date();
 						printDate=today.getFullYear()+"/"+today.getMonth()+"/"+today.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 						message=strArray[0];
-						var printHTML="<div class='well'  style='margin-left30%:'>";
-						printHTML+="<div class='alert alert-danger'>";
-						printHTML+="<sub>"+printDate+"</sub><br/>";
-						printHTML+="<strong>[서버관리자] : "+message+"</strong>";
+						var printHTML="<div>";
+						printHTML+="<div class='dangerLog'>";
+						printHTML+=message+"<br/>";
+						printHTML+="<sub>"+printDate+"</sub>";
 						printHTML+="</div>";
 						printHTML+="</div>";
 						$('#chatdata').append(printHTML);	
 						
 					}
+					updateStatus(chatNo);
 				}
-				chatListMin();
+				
 			};
 
 			function onClose(evt){
@@ -325,41 +374,55 @@ float: right;
 		$("#chatGo").attr("action",url).submit();
 
 	}
+	function updateStatus(chatNo) {
+		$.ajax({
+			url:"${pageContext.request.contextPath}/chat/upStatus.do/"+chatNo,
+			success: function() {
+				chatListMin();
+				console.log("업데이트 확인");
+			} 
+		});
+	}
 	function chatListMin() {
-		
+		var nCount=0;
 		$.ajax({
 			url : "${pageContext.request.contextPath}/chat/chatListMin.do/",
 			dataType : "json",
+			async:false,
 			success : function(data) {
 				console.log(data);
-				 $('.chatList').children().remove();
+				 $('.chatList').children(".chatBox").remove();
 				  for(var i in data){	
+					  nCount=nCount+data[i].nCount
+												 
+					var chatBox=$('<div/>').append($("<span>").text(data[i].chattingName))
+							   .append($("<input>").attr("value",data[i].chattingName)
+									  			  .attr("name","title")
+									  			  .attr("hidden","hidden")
+									  			)	  		
+							  .attr("class","chatBox carea")
+							  .attr("onclick","chatting("+data[i].chattingId+")")
+							  .css({
+								  "width" : "100%",
+								  "height": "80px",
+								  "border-bottom": "1px #64646429 solid"
+							  }).append(
+										$('<div/>').text(data[i].chContent)
+												  .attr("class","chatBox carea")
+												  .attr("value",data[i].chattingId)
+												  .css({
+													  "width" : "100%"
+													 
+												  })
+								
+							   );
+								   
+					  if(data[i].nCount>0){
+						  chatBox.append($("<span>").text(data[i].nCount)
+				   			  .attr("class","nCount badge"))  
+				   		}
+					   $('.chatList').append(chatBox);
 					 
-					  
-					  $('.chatList').append(							 
-						$('<div/>').text(data[i].chattingName)
-								   .append($("<input>").attr("value",data[i].chattingName)
-										  			  .attr("name","title")
-										  			  .attr("hidden","hidden")
-										  			)	  		
-								  .attr("class","chatBox carea")
-								  .attr("onclick","chatting("+data[i].chattingId+")")
-								  .css({
-									  "width" : "100%",
-									  "height": "80px",
-									  "border-bottom": "1px #64646429 solid"
-								  }).append(
-											$('<div/>').text(data[i].chContent)
-													  .attr("class","chatBox carea")
-													  .attr("value",data[i].chattingId)
-													  .css({
-														  "width" : "100%"
-														 
-													  })
-									
-								   )
-					  
-					  );
 				  }
 				
 			
@@ -369,7 +432,15 @@ float: right;
 			}
 
 		});
+		console.log("nCount : "+nCount);
+		$("#alamCount").remove();		
 		
+		if(nCount>0){
+		$("#chat").append($("<span>").text(nCount)
+									 .attr("id","alamCount")
+									 .attr("class","badge"))
+		}
+		return nCount;
 	}
 </script>
 
