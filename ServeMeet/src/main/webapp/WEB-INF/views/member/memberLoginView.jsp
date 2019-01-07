@@ -64,6 +64,11 @@
           </div>
         </div>
       </div>
+      <div class="col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4 col-sm-6 col-xs-12">
+        		<div class="contact-block">
+          			<img width="500" height="500" src="${pageContext.request.contextPath}/resources/images/AllRight_AD.png">
+        		</div>
+      </div>
     </div>
   </div>
 </div>

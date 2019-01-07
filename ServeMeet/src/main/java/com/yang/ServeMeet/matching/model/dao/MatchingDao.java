@@ -16,12 +16,15 @@ public interface MatchingDao {
 	
 	List<Map<String,String>> myMatchingList(String userName,String type);
 
-	MatchingHistory mHistorySelectOne(int mHistoryId);
+
+	Map<String,String> mHistorySelectOne(int mHistoryId);
 	
 	Matching matchingSelectOne(int matchingId);
 	
 	int insertMHistory(MatchingHistory mHistory);
 	
 	int insertMHistoryFile(BoardFile boardFile);
+
+	List<Map<String,String>> mHistoryList();
 	
 }

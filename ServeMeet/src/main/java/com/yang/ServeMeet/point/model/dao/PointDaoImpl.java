@@ -2,6 +2,7 @@ package com.yang.ServeMeet.point.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,16 @@ public class PointDaoImpl implements PointDao {
 		return sqlSession.selectOne("point.getCount",point);
 	}
 
+	@Override
+	public int insertBattingPoint(List<Map<String,Object>> list) {
+		
+		System.out.println("Point Dao : "+ list);
+		int result = 0;
+		
+		for(int i = 0 ; i <list.size() ; i++) sqlSession.insert("point.insertBattingPoint",list.get(i));
+		
+		return result;
+	}
 	
 
 }

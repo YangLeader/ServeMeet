@@ -15,14 +15,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.batting.model.vo.Batting;
 import com.yang.ServeMeet.batting.model.vo.BattingUser;
+import com.yang.ServeMeet.point.model.service.PointService;
+import com.yang.ServeMeet.point.model.service.PointServiceImpl;
 
 @Controller
 public class battingController {
 
 	
 	@Autowired
-	private BattingService battingService;	
-		
+	private BattingService battingService;
+	
+	@Autowired
+	private PointService pointService;	
 	
 	@RequestMapping("/batting/battingInfo.ba")
 	public String battingInfo(@RequestParam int no, Model model) {
@@ -154,6 +158,7 @@ public class battingController {
 		for(int i= 0 ; i < list.size() ; i++) {
 			hmap = list.get(i);			
 			hmap.put("alloc", alloc);
+			hmap.put("pContent", "배팅 성공 포인트");
 			userList.add(hmap);
 		}
 		
@@ -161,10 +166,25 @@ public class battingController {
 		
 		if(pointResult == list.size()) {
 			System.out.println("#포인트,#지급,#성공적");
+			int pointDate = pointService.insertBattingPoint(userList);
+			
+			if(pointDate == pointResult) System.out.println("포인트 기록 성공.");
+			
 		} else {
 			System.out.println("포인트 지급 실패");
 		}
 		
 		return "redirect:/batting/battingClose.ba?battingId="+battingId;
+	}
+	
+	@RequestMapping("batting/myBattingList.ba")
+	public String myBattingList(@RequestParam String userName , Model model) {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(battingService.myBattingList(userName));
+		
+		model.addAttribute("list",list);
+		
+		
+		return "batting/myBattingList";
 	}
 }

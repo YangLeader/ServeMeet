@@ -6,11 +6,16 @@
 
 
 	<select id="myMatchingList" resultType="Map">
-		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'BEFORE'
+
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'BEFORE' AND USERNAME1 = #{userName}
 	</select>
 
 	<select id="myMatchingEndList" resultType="Map">
-		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER'
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER' AND USERNAME1 = #{userName}
+	</select>
+	
+	<select id="mHistoryList" resultType="Map">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID)
 	</select>
 	
 
@@ -21,8 +26,9 @@
 			#{categoryId}, #{mWriter}, 'NONE', #{mtime}, DEFAULT 
 			)
 	</insert>
-	<select id="mHistorySelectOne" resultType="MatchingHistory">
-		SELECT * FROM MATCHINGHISTORY WHERE MHISTORYID = #{mHistoryId}
+
+	<select id="mHistorySelectOne" resultType="Map">
+		SELECT * FROM MATCHINGHISTORY JOIN MATCHING USING(MATCHINGID) WHERE MHISTORYID =#{mHistoryId}
 	</select>
 	
 	<select id="matchingSelectOne" resultType="Matching">

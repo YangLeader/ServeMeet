@@ -230,7 +230,7 @@
 	
 		function attend(today){
 			if(attFlag==true){
-				alert("이미 출석하셨습니다.");
+				swal("이미 출석하셨습니다.");
 			}else{
 			
 			$.ajax({
@@ -242,7 +242,7 @@
 					console.log("data : " +data);
 					$("#date"+today).html("<img id='checkImg' src='${pageContext.request.contextPath}/resources/images/date-check.png'> ");
 					attFlag = true;
-					alert("출석되었습니다.");
+					swal("출석되었습니다.","내일도 출석해주세요!","success");
 	            }, error : function(jqxhr, textStatus, errorThrown){
 	                console.log("ajax 처리 실패");
 	                //에러로그

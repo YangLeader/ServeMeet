@@ -127,82 +127,89 @@
                 		success : function(data){
                 			console.log("count : " +data )
                 			if(data>=100){
-                				alert("룰렛은 하루에 3번만 참여하실 수 있습니다.");
+
+                				swal("룰렛은 하루에 3번만 참여하실 수 있습니다.","내일 또 참여해주세요");
                 			}else{
-                				if (confirm("10포인트가 차감됩니다. 구매하시겠습니까?") == true){    //확인
-                          			 $.ajax({
-                          					url : "${pageContext.request.contextPath}/point/getPoint.do",
-                          					success : function(point){
-                          						console.log("point : "+point);
-                          						if(point < 10){
-                          							 alert("포인트가 모자랍니다.");
-                          							 location.reload(true);
-                          						 }else{
-                          						
-                          						 $.ajax({
-                          								url : "${pageContext.request.contextPath}/point/updatePoint.do",
-                          								data : {increasePoint : -10,
-                          										pContent : "룰렛 포인트 차감"
-                          										},
-                          								success : function(){
-                          								//확률 조작 코드
-                          									var rand = Math.random();
-                          									let stopAt = 0;
-                          									
-                          									if(rand>0.6){
-                          										stopAt = (1 + Math.floor((Math.random() * 59)))
-                          									}else if(rand>0.3&&rand<=0.6){
-                          										stopAt = (61 + Math.floor((Math.random() * 59)))
-                          									}else if(rand>0.1&&rand<=0.3){
-                          										stopAt = (241 + Math.floor((Math.random() * 59)))
-                          									}else if(rand>0.05&&rand<=0.1){
-                          										stopAt = (181 + Math.floor((Math.random() * 59)))
-                          									}else if(rand>0.01&&rand<=0.05){
-                          										stopAt = (121 + Math.floor((Math.random() * 59)))
-                          									}else{
-                          										stopAt = (300 + Math.floor((Math.random() * 59)))
-                          									}
- 															 
- 															
-														 
-														     // 휠이 돌아가기전에 멈추는 각 지정
-														     theWheel.animation.stopAngle = stopAt;
-                                  		                     // Begin the spin animation by calling startAnimation on the wheel object.
-                                  		                     theWheel.startAnimation();
+                				swal({
+                					  title: "10포인트가 차감됩니다.",
+                					  text: "그래도 계속하시겠습니까?",
+                					  icon: "warning",
+                					  buttons: true,
+                					  dangerMode: true,
+                					}).then((willDelete) => {
+                						  if (willDelete) {
+                							  $.ajax({
+                                					url : "${pageContext.request.contextPath}/point/getPoint.do",
+                                					success : function(point){
+                                						console.log("point : "+point);
+                                						if(point < 10){
+                                							 swal("포인트가 모자랍니다.");
+                                							 location.reload(true);
+                                						 }else{
+                                						
+                                						 $.ajax({
+                                								url : "${pageContext.request.contextPath}/point/updatePoint.do",
+                                								data : {increasePoint : -10,
+                                										pContent : "룰렛 포인트 차감"
+                                										},
+                                								success : function(){
+                                								//확률 조작 코드
+                                									var rand = Math.random();
+                                									let stopAt = 0;
+                                									
+                                									if(rand>0.6){
+                                										stopAt = (1 + Math.floor((Math.random() * 59)))
+                                									}else if(rand>0.3&&rand<=0.6){
+                                										stopAt = (61 + Math.floor((Math.random() * 59)))
+                                									}else if(rand>0.1&&rand<=0.3){
+                                										stopAt = (241 + Math.floor((Math.random() * 59)))
+                                									}else if(rand>0.05&&rand<=0.1){
+                                										stopAt = (181 + Math.floor((Math.random() * 59)))
+                                									}else if(rand>0.01&&rand<=0.05){
+                                										stopAt = (121 + Math.floor((Math.random() * 59)))
+                                									}else{
+                                										stopAt = (300 + Math.floor((Math.random() * 59)))
+                                									}
+       															 
+       															
+      														 
+      														     // 휠이 돌아가기전에 멈추는 각 지정
+      														     theWheel.animation.stopAngle = stopAt;
+                                        		                     // Begin the spin animation by calling startAnimation on the wheel object.
+                                        		                     theWheel.startAnimation();
 
-                                  		                     // 휠이 돌아가는동안은 시작버튼 누를 수 없음
-                                  		                     wheelSpinning = true;
-                          									
-                          					            }, error : function(jqxhr, textStatus, errorThrown){
-                          					                console.log("차감 ajax 처리 실패");
-                          					                //에러로그
-                          					                console.log(jqxhr);
-                          					                console.log(textStatus);
-                          					                console.log(errorThrown);
-                          					            }
-                          							});
-                          						 
-                          						 
-                          						 
-                          							 
-                          						 }
+                                        		                     // 휠이 돌아가는동안은 시작버튼 누를 수 없음
+                                        		                     wheelSpinning = true;
+                                									
+                                					            }, error : function(jqxhr, textStatus, errorThrown){
+                                					                console.log("차감 ajax 처리 실패");
+                                					                //에러로그
+                                					                console.log(jqxhr);
+                                					                console.log(textStatus);
+                                					                console.log(errorThrown);
+                                					            }
+                                							});
+                                						 
+                                						 
+                                						 
+                                							 
+                                						 }
 
-                          						
-                          		            }, error : function(jqxhr, textStatus, errorThrown){
-                          		                console.log("포인트 얻기ajax 처리 실패");
-                          		                //에러로그
-                          		                console.log(jqxhr);
-                          		                console.log(textStatus);
-                          		                console.log(errorThrown);
-                          		            }
-                          				});
-                          			 
-
-                          		 }else{   //취소
-
-                          		     return false;
-
-                          		 }
+                                						
+                                		            }, error : function(jqxhr, textStatus, errorThrown){
+                                		                console.log("포인트 얻기ajax 처리 실패");
+                                		                //에러로그
+                                		                console.log(jqxhr);
+                                		                console.log(textStatus);
+                                		                console.log(errorThrown);
+                                		            }
+                                				});
+                							  } else {
+                							    return false;
+                							  }
+                							});
+                				
+                				
                 			}
                 		}, error : function(jqxhr, textStatus, errorThrown){
       		                console.log("포인트 얻기ajax 처리 실패");
@@ -242,10 +249,10 @@
                 // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
                 
                 if(indicatedSegment.data=="fail"){
-                	alert("아쉽지만 포인트를 획득하지 못했습니다.");
+                	swal("아쉽지만 포인트를 획득하지 못했습니다.");
                 	resetWheel(); return false;
                 }else {
-                	alert("축하합니다!" + indicatedSegment.data + "포인트에 당첨되었습니다!");
+                	swal("축하합니다!" + indicatedSegment.data + "포인트에 당첨되었습니다!");
                 	$.ajax({
     					url : "${pageContext.request.contextPath}/point/updatePoint.do",
     					data : {increasePoint : indicatedSegment.data,

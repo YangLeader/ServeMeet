@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <footer>
 	<div class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="footer-widget mb30">
-                        <h2 class="footer-title">한글</h2>
-                        <p>Lorem ipsum dolor sit amet lorem is consectetur adipiscing eti mteleisede urna id, aliquam dignsim liburabitur tortor vitaecus tepor suscipit.</p>
+                        <h2 class="footer-title">ServeMeet</h2>
+                        <p>ServeMeet은 단순 매칭 시스템을 넘어 <br> 종합 라이프 컨설팅 기업으로 미래를 준비합니다.<br>
+                        	ServeMeet은 고객과 소통을 이어나가며 합리적으로 <br> 매칭해주어 고객과 이해관계자가 함께 발전하는 <br> 새로운 비즈니스 모델을 만들었습니다.
+                        </p>
                         <div class="footer-social mb60">
                             <ul class="listnone">
                                 <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
@@ -23,11 +25,12 @@
                     <div class="footer-widget mb30">
                         <h2 class="footer-title">qUICK LINKS</h2>
                         <ul class="listnone">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="menu.html">Menu</a></li>
-                            <li><a href="service-list.html">Services</a></li>
-                            <li><a href="blog-default.html">Blog</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                            <li><a href="${pageContext.request.contextPath}/">매칭</a></li>
+                            <li><a href="${pageContext.request.contextPath }/chat/memberList.do">채팅</a></li>
+                            <li><a href="${pageContext.request.contextPath }/board/boardList.do">커뮤니티</a></li>
+                            <li><a href="${pageContext.request.contextPath}/point/point.do">이벤트</a></li>
+                            <li><a href="${pageContext.request.contextPath }/batting/battingList.ba">배팅</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,25 +39,24 @@
                         <h2 class="footer-title">Contact info</h2>
                         <ul class="listnone">
                             <li><i class="fa fa-map-marker"></i>
-                                <p>2426 Snowbird Lane Prague, NE 68050</p>
+                                <p>서울특별시 강남구 테헤란로<br>14길 6 남도빌딩</p>
                             </li>
                             <li><i class="fa fa-phone"></i>
-                                <p>800-123-4567
-                                    <br> 800-123-8910
+                                <p>1544-9970
                                 </p>
                             </li>
-                            <li><i class="fa fa-envelope-o"></i>
-                                <p>info@restaurant.com</p>
+                            <li><i class="fa fa-home"></i>
+                                <p>http://www.iei.or.kr/</p>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                     <div class="footer-widget mb30">
-                        <h2 class="footer-title">Subscribe here</h2>
-                        <p>Stay update with the latest our menu special offers & restaurant events!</p>
-                        <input type="text" placeholder="Your Email" class="form-control">
-                        <a href="#" class="btn btn-primary">SUbscribe</a> </div>
+                        <h2 class="footer-title">Subscribe ServeMeet</h2>
+                        <p>ServeMeet만의 특별한 이벤트와 소식을 받아보세요!</p>
+                        <input type="text" placeholder="Your Email" class="form-control" id="emailBox">
+                        <a onclick="sub();" class="btn btn-primary">Subscribe</a> </div>
                 </div>
             </div>
         </div>
@@ -63,7 +65,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <p>Copyright © All Rights Reserved. 2017 </p>
+                    <p>Copyright © ServeMeet. All Rights Reserved. 2019 </p>
                 </div>
             </div>
         </div>
@@ -98,4 +100,15 @@
     <script src="${pageContext.request.contextPath}/resources/js/menumaker.js"></script>
     <!-- Back to top -->
     <script src="${pageContext.request.contextPath}/resources/js/back-to-top.js" type="text/javascript"></script>
+    
+    <script>
+    	function sub(){
+    		if($("#emailBox").val() == ""){
+    			swal("이메일주소를 입력해주세요");
+    		}else{
+    			swal("신청해주셔서 감사합니다.");	
+    		}
+    		
+    	}
+    </script>
    </footer>
