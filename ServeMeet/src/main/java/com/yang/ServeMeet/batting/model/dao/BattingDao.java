@@ -27,4 +27,6 @@ public interface BattingDao {
 	List<Map<String,Object>> battingAllocation(Map<String,Object> hmap);
 	
 	int battingPoint(List<Map<String,Object>> list);
+	
+	List<Map<String,Object>> myBattingList(String userName);
 }

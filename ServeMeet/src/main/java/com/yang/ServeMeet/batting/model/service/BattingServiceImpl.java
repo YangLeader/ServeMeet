@@ -94,5 +94,11 @@ public class BattingServiceImpl implements BattingService {
 		
 		return battingDao.battingPoint(list);
 	}
+	
+	@Override
+	public List<Map<String,Object>> myBattingList(String userName){
+		
+		return battingDao.myBattingList(userName);
+	}
 
 }

@@ -176,4 +176,15 @@ public class battingController {
 		
 		return "redirect:/batting/battingClose.ba?battingId="+battingId;
 	}
+	
+	@RequestMapping("batting/myBattingList.ba")
+	public String myBattingList(@RequestParam String userName , Model model) {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(battingService.myBattingList(userName));
+		
+		model.addAttribute("list",list);
+		
+		
+		return "batting/myBattingList";
+	}
 }
