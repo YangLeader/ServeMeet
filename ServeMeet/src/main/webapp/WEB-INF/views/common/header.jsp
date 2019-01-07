@@ -9,6 +9,7 @@
 
 	
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 <!-- 부트스트랩적용 -->
 <!-- Latest compiled and minified CSS -->
@@ -155,12 +156,19 @@ $(function() {
 										href="${pageContext.request.contextPath }/board/boardList.do"
 										title="Contact Us"><span class="mainNav">게시판</a>
 									</li>
-		  							<li><a href="${pageContext.request.contextPath}/point/point.do"><span class="mainNav">포인트<span></a> </li>
-		  							
-	                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="batting"><span class="mainNav">배팅<span></a>
+									
+		  							<li class="has-sub"><a href="${pageContext.request.contextPath }/point/point.do" title="batting"><span class="mainNav">이벤트<span></a>
 		                                <ul>
-	                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="battingList">진행중인 배팅</a></li>
-	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="battingHistory">종료된 배팅</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/point/attendence.do" title="출석체크">출석체크</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/point/scratch.do" title="스크래치 복권">스크래치 복권</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/point/roulette.do" title="룰렛">룰렛</a></li>
+		                                </ul>
+	                                </li>
+		  							
+	                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="배팅"><span class="mainNav">배팅<span></a>
+		                                <ul>
+	                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="진행중인 배팅">진행중인 배팅</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="종료된 배팅">종료된 배팅</a></li>
 		                                </ul>
 	                                </li>
 		                         
@@ -180,8 +188,9 @@ $(function() {
 											<ul>
 												<li><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 												title="내정보보기">내정보보기</a></li>
-												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}+&type=P" title="등록중인 매칭">등록중인 매칭</a></li>
-												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}+&type=E" title="종료된 매칭">종료된 매칭</a>
+												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="등록중인 매칭">등록중인 매칭</a></li>
+												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=E" title="종료된 매칭">종료된 매칭</a>
+												<li><a href="${pageContext.request.contextPath}/batting/battingHistoryList.ba?userName=${member.userName}" title="배팅히스토리">배팅 히스토리</a>
 												<li ><a href ="${pageContext.request.contextPath}/member/memberLogout.do">LOG
 													OUT</a></li>
 											</ul>		
