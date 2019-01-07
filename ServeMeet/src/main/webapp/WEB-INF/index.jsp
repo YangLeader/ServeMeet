@@ -23,16 +23,12 @@
 				</h1>&nbsp;
 				<h2> 찾고 싶으세요?</h2>
 			</div>
-			<div style=" margin-bottom: 20px; border: 5px #5e73de solid; width: 100%; height: 50px; ">
-				<input style=" border: 0px; width: 85%; height: 100%; font-size:x-large;padding-left: 10px;" placeholder="전하고 싶은 인삿말을 적어주세요."><div style="display: inline-block; width: /* 14.628% */15%; height: 100%; background-color:#5e73de;border: 0px;">
-				검색
-				</div>
-			</div>
+			
 			<c:import url="views/matching/matching.jsp" />
 		</article>
 		<article class="subArt" >
 			<div class="subContent">
-				<div class="sContent matting col-lg-7 listSec">
+				<div class="sContent matting col-lg-7 col-md-7 col-sm-12 col-xs-12 listSec">
 					<div>
 						<div class="midTitle">
 							<a>
@@ -73,7 +69,7 @@
 						<div class="sList">
 						</div>
 					</div>
-				</div><div class="col-lg-5 listSec contentList">
+				</div><div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 listSec contentList">
 					<div class="sContent conList">
 						<div class="midTitle">
 							<a>

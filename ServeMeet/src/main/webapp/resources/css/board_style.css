@@ -102,11 +102,11 @@ form, h1 {margin:0;}
 }
 
 #bbs-list-ul li:first-child {
-	border-top: 1px solid #e0e0e0;
+	/* border-top: 1px solid #e0e0e0; */
 }
 
 #bbs-list-ul li:last-child {
-	border-bottom:1px solid #e0e0e0;
+	/* border-bottom:1px solid #e0e0e0; */
 }
 
 /*
@@ -123,6 +123,12 @@ form, h1 {margin:0;}
 	display:inline-block;
 	cursor:text;
 	font-size: 10pt;
+}
+
+#bbs-list-ul li .dropdown {
+	position: relative;
+	text-align: center;
+    margin-top: -6px;
 }
 
 /*
@@ -1151,3 +1157,16 @@ form, h1 {margin:0;}
 
 #captcha_reload {background:url('./img/captcha_reload.png') no-repeat;}
 #captcha_mp3 {background:url('./img/captcha_mp3.png') no-repeat;}
+
+#dropdownlist .dropdown ul {
+background: #d5ffd5;
+display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
+height:auto;
+padding:0px;
+margin-top: -7px;
+margin-left: 50px;
+border-radius: 10px;
+position:absolute;
+width:200px;
+z-index:200;
+}

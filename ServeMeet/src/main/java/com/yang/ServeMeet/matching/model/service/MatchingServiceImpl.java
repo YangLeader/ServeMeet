@@ -6,8 +6,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yang.ServeMeet.category.model.vo.Category;
+import com.yang.ServeMeet.board.model.exception.BoardException;
+import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.dao.MatchingDao;
+
+import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
 
@@ -36,5 +39,39 @@ public class MatchingServiceImpl implements MatchingService {
 		return matchingDao.matchingInsert(matching);
 	}
 	
+	@Override
+	public MatchingHistory mHistorySelectOne(int mHistoryId) {
+		
+		return matchingDao.mHistorySelectOne(mHistoryId);
+	}
+	
+	@Override
+	public Matching matchingSelectOne(int matchingId) {
+		
+		return matchingDao.matchingSelectOne(matchingId);
+	}
+	
+	@Override
+	public int mHistoryInsert(MatchingHistory mHistory , List<BoardFile> fileList) {
+		
+		int result = 0;
+		
+		try {
+			result = matchingDao.insertMHistory(mHistory);
+			if(result == MATCHING_SERVICE_ERROR) throw new MatchingException();
+			
+			if(fileList.size()>0) {
+				for(BoardFile bf : fileList) {
+					result = matchingDao.insertMHistoryFile(bf);
+					System.out.println("result : "+result);
+					if(result == MATCHING_SERVICE_ERROR) throw new MatchingException();
+				}
+			}
+		} catch(Exception e){
+			throw e;
+		}
+		return result;
+		
+	}
 	
 }

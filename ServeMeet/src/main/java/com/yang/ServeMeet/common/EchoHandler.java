@@ -25,7 +25,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	private ChattingService cs;
 //웹 소켓에서 특정 사용자가 센션을 연결하여 주고받는 데이터를 처리하는 객체
 	// 접속 사용자 리스트
-	private List<WebSocketSession> sessionList = new ArrayList();
+	//private List<WebSocketSession> sessionList = new ArrayList();
 	private Map<String,WebSocketSession> mSessionMap= new HashMap<String,WebSocketSession>();
 	//private Map<Integer, List> rMap = new HashedMap();
 	private Map<Integer, List> rMap = new HashMap<Integer, List>();
@@ -36,10 +36,9 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// Websocket의 세션은 HttpSession과 다르다.
-		int chatNo;
-		if (session.getAttributes().get("chat") == null) {
-			chatNo = (Integer) (session.getAttributes().get("chatNo"));
-		} else {
+		int chatNo=0;
+		if (session.getAttributes().get("chat") != null) {
+		
 			chatNo = ((Chatting) (session.getAttributes().get("chat"))).getChattingId();
 		}
 		// 사용자 연결 시에 sessionList라는 사용자 리스트에 접속한 사용자를 추가한다.
@@ -126,7 +125,7 @@ public class EchoHandler extends TextWebSocketHandler {
 //		rSessionList = rMap.get(chatNo);
 //		System.out.println("rSessionList : " + rSessionList);
 
-		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload(), "N");
+		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload());
 
 		if (message.getPayload() != null) {
 			int result = cs.ChatLogInsert(chatLog);
@@ -134,9 +133,9 @@ public class EchoHandler extends TextWebSocketHandler {
 				// 사용자 모두에게 데이터를 전달하는 반복문
 				for (String userId : list) {
 					if(mSessionMap.get(userId)!=null) {
-						System.out.println("mSessionMap.get(userId) : "+mSessionMap.get(userId));
+						System.out.println("mSessionMap.get(userId) : "+mSessionMap.get(userId)+" : "+userId);
 						(mSessionMap.get(userId)).sendMessage(new TextMessage(session.getId() + " | " + message.getPayload() + "|"
-								+ session.getRemoteAddress() + "|" + userName));
+								+ session.getRemoteAddress() + "|" + userName+"|"+chatNo));
 					}
 				}
 				
@@ -149,28 +148,11 @@ public class EchoHandler extends TextWebSocketHandler {
 	// 사용자가 채팅방, 접속을 종료할 때 실행 되는 메소드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		int chatNo;
-		if (session.getAttributes().get("chat") == null) {
-			
-			chatNo = (Integer) (session.getAttributes().get("chatNo"));
-		} else {
-			Chatting chat = (Chatting) (session.getAttributes().get("chat"));
-			chatNo = chat.getChattingId();
-		}
-		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
-		rSessionList = rMap.get(chatNo);
-
-		//rSessionList.remove(session);
-		rMap.put(chatNo, rSessionList);
-		logger.info("{}연결끊김", session.getId());
-
-		for (WebSocketSession one : sessionList) {
-			if (one == session)
-				continue;
-			one.sendMessage(new TextMessage(session.getAttributes().get("userName1") + "님이 퇴장하셨습니다."));
-		}
-
-		// super.afterConnectionClosed(session, status);
+		Member m = (Member) session.getAttributes().get("member");
+		mSessionMap.remove(m.getUserName());
+		System.out.println("==============mSessionMap=================\n"+mSessionMap);
+//
+//		// super.afterConnectionClosed(session, status);
 	}
 
 }

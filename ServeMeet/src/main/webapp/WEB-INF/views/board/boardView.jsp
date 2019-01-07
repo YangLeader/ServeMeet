@@ -61,8 +61,8 @@
 <script>
 		
 	$(function(){
-		$("span.subject.text").on("click",function(){
-			var boardNo = $(this).children().attr("id");
+		$('[data-mytext=getNo]').on("click",function(){
+			var boardNo = $(this).attr("id");
 			console.log("bordNo="+boardNo);
 			location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo;
 		});
@@ -84,10 +84,10 @@ $(document).ready(function(){
 	});
 });
 </script> -->
-
 <div id="wrapper">
-	<div class="container">
 
+	<div class="container" style="background-color:white; border-radius: 20px;">
+	<br />
 <!-- 게시물 읽기 시작 { -->
 <article id="bbs-view" style="width:auto;">
 
@@ -109,7 +109,7 @@ $(document).ready(function(){
 					<span class="glyphicon glyphicon-edit" ></span> 수정
 				</a>
 				
-								<a href="${pageContext.request.contextPath}/board/boardDelete.do?no=${board.boardNo}" class="bbs_btn">
+								<a href="${pageContext.request.contextPath}/board/boardDelete.do?no=${board.boardNo}" class="bbs_btn" onclick="return delete_board();">
 					<span class="glyphicon glyphicon-trash"></span> 삭제
 				</a>
 			
@@ -174,7 +174,7 @@ $(document).ready(function(){
         	</p>
         	</c:forEach>
         	<p><br /></p>
-        	<pre><p>${board.boardContent }</p></pre>
+        	<pre style="background-color: white;"><p>${board.boardContent }</p></pre>
         	<p><br /></p>
         </div>
                 <!-- } 본문 내용 끝 -->
@@ -182,15 +182,11 @@ $(document).ready(function(){
         		
 		
 		<!-- 스크랩 추천 비추천 시작 { -->
-				<div id="bo_v_act">
-					<a href="./good.php?bo_table=free&amp;wr_id=111&amp;good=good&amp;" id="good_button" class="btn_bg btn">
-						<span class="glyphicon glyphicon-thumbs-up"></span> 추천 지금은 안됨ㅋ
-						<span id="bo_v_act_good" class="wr_count wr_good_cnt">0</span>
-					</a>
+		<div id="bo_v_act">
 					
-					<a href="./scrap_popin.php?bo_table=free&amp;wr_id=111" target="_blank"  class="btn_bg" onclick="win_scrap(this.href); return false;" title="신고">
-					<span class="glyphicon glyphicon-bell"></span> 신고 지금은 안됨ㅋ
-					</a>
+			<a href="reportBoard.do?no=${board.boardNo }&name=${member.userName}" class="btn_bg" onclick="return report_board();" title="신고">
+				<span class="glyphicon glyphicon-bell"></span> 게시글 신고
+			</a>
 			
 		</div>
 				<!-- } 스크랩 추천 비추천 끝 -->
@@ -249,10 +245,11 @@ var char_max = parseInt(0); // 최대
 					</c:if>
 					
 					<div class="cmt_button_box">
+						<c:if test="${cl.commentStatus eq 'Y' }">
 						<a class="btn_cmt btn btn-default btn-xs"  onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, '${cl.userName }'); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
-						
+						</c:if>
 						<c:if test="${cl.userName eq member.userName and cl.commentStatus eq 'Y'}">
 						<a class="btn_cmt btn btn-default btn-xs"  onclick="comment_box(${cl.commentId}, 'cu', ${ cl.orderList }, 1); return false;">
 							<span class="glyphicon glyphicon-edit"></span> 수정
@@ -298,10 +295,11 @@ var char_max = parseInt(0); // 최대
 					</c:if>
 
 					<div class="cmt_button_box">
+						<c:if test="${cl.commentStatus eq 'Y' }">
 						<a class="btn_cmt btn btn-default btn-xs"  onclick="comment_box(${cl.commentId}, 'c', ${ cl.orderList }, '${cl.userName }'); return false;">
 							<span class="glyphicon glyphicon-comment"></span> 답글쓰기
 						</a>
-						
+						</c:if>
 						<c:if test="${cl.userName eq member.userName and cl.commentStatus eq 'Y'}">
 						<a class="btn_cmt btn btn-default btn-xs" onclick="comment_box(${cl.commentId}, 'cu', ${ cl.orderList }, 1); return false;">
 							<span class="glyphicon glyphicon-edit"></span> 수정
@@ -343,7 +341,7 @@ var char_max = parseInt(0); // 최대
 				<div class="wr_option">
 					
 				
-				<textarea id="wr_content" name="commentCon" class="form-control" title="내용"  rows="3" maxlength="10000" required></textarea>
+				<textarea id="wr_content" name="commentCon" class="form-control" title="내용"  rows="5" maxlength="10000" style="resize:none;" required ></textarea>
 
 								</div>
 
@@ -547,6 +545,17 @@ function comment_delete()
     return confirm("이 댓글을 삭제하시겠습니까?");
 }
 
+function report_board()
+{
+    return confirm("이 게시글을 신고 하시겠습니까?");
+}
+
+function delete_board()
+{
+    return confirm("정말 게시글을 삭제 하시겠습니까?");
+}
+
+
 comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
 
 
@@ -698,13 +707,24 @@ function excute_good(href, $el, $tx)
 			<c:forEach items="${list}" var="b">
 			<li class="bbs_list_basic">
 				<span class="subject text">
-					<a id="${b.boardNo }"><b>${b.boardTitle }</b></a> 
+					<a data-mytext="getNo" id="${b.boardNo }">
+						<b>${b.boardTitle }</b>
+						<c:if test="${b.commentCount ne 0 }">&nbsp;&nbsp;[${b.commentCount  }]</c:if>
+					</a>  
 						<span class="w45 icon"> </span>
 				</span> 
 				<span class="dec"> 
-					<span class="w45 wr_name"> 
+					<span class="w45 wr_name" id="dropdownlist"> 
 						<span class="glyphicon glyphicon-user"></span> 
-								${b.userName }
+							<ul style="padding-inline-start: 0px;">
+								<li class="dropdown"><a class="drop">${b.userName }</a>
+									<ul style="width: auto; dispaly:none;" id="downlist">
+									<form id="chatting"action="/ServeMeet/chat/chattingRoom.do/${b.userName }" method="post">
+										<li><input type="button" value="1:1 채팅" onclick="chatting();"></li>
+									</form>
+									</ul>
+								</li>
+							</ul>
 					</span> 
 					<span class="w45 wr_date" style="width:6.5em"> 
 						<span class="glyphicon glyphicon-time"></span> 
@@ -784,6 +804,26 @@ function excute_good(href, $el, $tx)
 
 
 <script>
+$('.dropdown').click(function(){
+	
+	/* $(this).children('#downlist').css('display', 'block'); */
+	$(this).children('#downlist').toggle('fast');										
+	
+$('html').click(function(e) {
+	
+	if(!$(e.target).hasClass("drop")) { 
+			
+		$('.dropdown').children('#downlist').css('display', 'none');
+	}
+								
+})
+										
+});
+
+function chatting(){
+	
+	$('#chatting').submit();
+}
 
 function search(){
 	location.href="searchBoard.do?con="+$('#sfl').val()+"&keyword="+$('#stx').val();

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
+import com.yang.ServeMeet.chatting.model.vo.ChattingRoom;
 import com.yang.ServeMeet.member.model.vo.Member;
 @Controller
 public class ChatController {
@@ -34,12 +35,12 @@ public class ChatController {
 	
 	@RequestMapping("/chat/chatListMin.do")
 	@ResponseBody
-	public List<ChattingLog> chatListMin(HttpSession session) {
+	public List<ChattingRoom> chatListMin(HttpSession session) {
 		
 		int userNo = ((Member)(session.getAttribute("member"))).getUserNo();
-		List<ChattingLog> chatList = new ArrayList<ChattingLog>();
-		chatList=cs.selectChatLog(userNo);
-		for(ChattingLog c :chatList) {
+		List<ChattingRoom> chatList = new ArrayList<ChattingRoom>();
+		chatList=cs.selectChattingList(userNo);
+		for(ChattingRoom c :chatList) {
 			String tmp=c.getChContent();
 			if(tmp!=null&&tmp.length()>30) {
 				tmp=tmp.substring(0, 30)+"...";

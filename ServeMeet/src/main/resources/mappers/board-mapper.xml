@@ -8,7 +8,8 @@
 	<!-- vo를 사용하는 경우 -->
 	<select id="selectBoardList" resultType="board">
 		SELECT A.*, (SELECT
-		COUNT(*) FROM BOARDFILE WHERE BOARDNO = A.BOARDNO) FILECOUNT
+		COUNT(*) FROM BOARD_COMMENT WHERE BOARDNO = A.BOARDNO
+        AND COMMENTSTATUS = 'Y') COMMENTCOUNT
 		FROM
 		BOARD A
 		WHERE BOARDSTATUS = 'Y'
@@ -74,12 +75,18 @@
 	</update>
 	
 	<select id="searchBoard" parameterType="hashMap" resultType="board">
-		SELECT * FROM BOARD
+		SELECT A.*, (SELECT
+		COUNT(*) FROM BOARD_COMMENT WHERE BOARDNO = A.BOARDNO
+        AND COMMENTSTATUS = 'Y') COMMENTCOUNT
+		FROM
+		BOARD A
 		<bind name="myPattern" value="'%'+keyword+'%'" />
 		<where>
-			<if test="condition == 'writer'"> USERNAME LIKE #{myPattern} AND BOARDSTATUS = 'Y'</if>
-			<if test="condition == 'title'"> BOARDTITLE LIKE #{myPattern} AND BOARDSTATUS = 'Y'</if>
-			<if test="condition == 'content'"> BOARDCONTENT LIKE #{myPattern} AND BOARDSTATUS = 'Y'</if>
+			<if test="condition == 'writer'"> USERNAME LIKE #{myPattern}</if>
+			<if test="condition == 'title'"> BOARDTITLE LIKE #{myPattern}</if>
+			<if test="condition == 'content'"> BOARDCONTENT LIKE #{myPattern}</if>
 		</where>
+		AND BOARDSTATUS = 'Y'
+		ORDER BY BOARDDATE DESC, BOARDNO DESC
 	</select>
 </mapper>

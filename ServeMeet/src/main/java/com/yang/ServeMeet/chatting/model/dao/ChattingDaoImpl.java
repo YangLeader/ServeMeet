@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
+import com.yang.ServeMeet.chatting.model.vo.ChattingRoom;
 import com.yang.ServeMeet.member.model.vo.Member;
 
 @Repository
@@ -47,15 +48,11 @@ public class ChattingDaoImpl implements ChattingDao {
 		// TODO Auto-generated method stub
 		return sst.insert("chat.insertChat",userNameMap);
 	}
+	
 	@Override
-	public Chatting selectChat(int chatNo) {
+	public List<ChattingRoom> selectChattingList(int chattingId) {
 		// TODO Auto-generated method stub
-		return sst.selectOne("chat.selectChat",chatNo);
-	}
-	@Override
-	public List<ChattingLog> selectChatLog(int chattingId) {
-		// TODO Auto-generated method stub
-		return sst.selectList("chat.selectChatLastLog",chattingId);
+		return sst.selectList("chat.selectChattingList",chattingId);
 	}
 	@Override
 	public List<ChattingLog> selectChatLogList(int chatNo) {
@@ -71,5 +68,15 @@ public class ChattingDaoImpl implements ChattingDao {
 	public List<ChatUser> selectChatMembers(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sst.selectList("chat.selectChatMembers",map);
+	}
+	@Override
+	public Chatting getChatName(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("chat.getChatName",map);
+	}
+	@Override
+	public void updateStatus(Map<String, Integer> map) {
+		sst.update("chat.updateStatus",map);
+		
 	}
 }
