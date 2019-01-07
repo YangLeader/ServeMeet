@@ -18,12 +18,7 @@ public class ChattingServiceImpl implements ChattingService {
 
 	@Autowired
 	private ChattingDao cDao;
-	@Override
-	public List<Chatting> selectChatList(int userNo) {
-		
-		return cDao.selectChatList(userNo);
-	}
-
+	
 
 	@Override
 	public int ChatLogInsert(ChattingLog chatLog) {
@@ -31,19 +26,14 @@ public class ChattingServiceImpl implements ChattingService {
 		return cDao.ChatLogInsert(chatLog);
 	}
 	@Override
-	public List<Member> memberList(int userNo) {
-		// TODO Auto-generated method stub
-		return cDao.memberList(userNo);
-	}
-	@Override
 	public Chatting isChat(Map<String, String> userNameMap) {
 		// TODO Auto-generated method stub
 		return cDao.isChat(userNameMap);
 	}
 	@Override
-	public int insertChat(Map<String, String> userNameMap) {
+	public int insertChat(Map<String, List> nameMap) {
 		// TODO Auto-generated method stub
-		return cDao.insertChat(userNameMap);
+		return cDao.insertChat(nameMap);
 	}
 
 
@@ -57,11 +47,6 @@ public class ChattingServiceImpl implements ChattingService {
 		// TODO Auto-generated method stub
 		return cDao.selectChatLogList(chatNo);
 	}
-	@Override
-	public List<ChatUser> selectChatMember(Map<String, Integer> map) {
-		// TODO Auto-generated method stub
-		return cDao.selectChatMember(map);
-	}
 	public List<ChatUser> selectChatMembers(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return cDao.selectChatMembers(map);
@@ -74,5 +59,15 @@ public class ChattingServiceImpl implements ChattingService {
 	@Override
 	public void updateStatus(Map<String, Integer> map) {
 		cDao.updateStatus(map);		
+	}
+	@Override
+	public Chatting selectLastChatNo(int userNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectLastChatNo(userNo);
+	}
+	@Override
+	public void deletechatRoom(Map<String, Integer> map) {
+		cDao.deletechatRoom(map);
+		
 	}
 }

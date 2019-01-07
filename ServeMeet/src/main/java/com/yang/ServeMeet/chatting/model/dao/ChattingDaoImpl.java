@@ -19,12 +19,7 @@ public class ChattingDaoImpl implements ChattingDao {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	@Override
-	public List<Chatting> selectChatList(int userNo) {
-		
-		return sst.selectList("chat.selectCahtList",userNo);
-	}
-
+	
 
 	@Override
 	public int ChatLogInsert(ChattingLog chatLog) {
@@ -33,20 +28,15 @@ public class ChattingDaoImpl implements ChattingDao {
 	}
 
 	@Override
-	public List<Member> memberList(int userNo) {
-		// TODO Auto-generated method stub
-		return sst.selectList("chat.selectMember",userNo);
-	}
-	@Override
 	public Chatting isChat(Map<String, String> userNameMap) {
 		// TODO Auto-generated method stub
 		System.out.println(userNameMap);
 		return sst.selectOne("chat.isChat",userNameMap);
 	}
 	@Override
-	public int insertChat(Map<String, String> userNameMap) {
+	public int insertChat(Map<String, List> nameMap) {
 		// TODO Auto-generated method stub
-		return sst.insert("chat.insertChat",userNameMap);
+		return sst.insert("chat.insertChat",nameMap);
 	}
 	
 	@Override
@@ -60,11 +50,6 @@ public class ChattingDaoImpl implements ChattingDao {
 		return sst.selectList("chat.selectChatLogList",chatNo);
 	}
 	@Override
-	public List<ChatUser> selectChatMember(Map<String, Integer> map) {
-		// TODO Auto-generated method stub
-		return sst.selectList("chat.selectChatMember",map);
-	}
-	@Override
 	public List<ChatUser> selectChatMembers(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sst.selectList("chat.selectChatMembers",map);
@@ -76,7 +61,17 @@ public class ChattingDaoImpl implements ChattingDao {
 	}
 	@Override
 	public void updateStatus(Map<String, Integer> map) {
-		sst.update("chat.updateStatus",map);
+		//sst.update("chat.updateStatus",map);
 		
+	}
+	@Override
+	public Chatting selectLastChatNo(int userNo) {
+		// TODO Auto-generated method stub
+		return sst.selectOne("chat.selectLastChatNo",userNo);
+	}
+	@Override
+	public void deletechatRoom(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		sst.delete("chat.deletechatRoom",map);
 	}
 }

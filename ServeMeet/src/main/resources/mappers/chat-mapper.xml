@@ -5,82 +5,67 @@
 <mapper namespace="chat">
 
 
-	<select id="selectCahtList" parameterType="int"	resultType = "Chatting">
-		select CHATTINGID,CHATTINGNAME
-		from (select CHATTINGID,CHATTINGNAME,(select O.USERNO1 from	CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID and	O.USERNO1=#{userNo}) no1,
-											 (select O.USERNO2 from CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID	and O.USERNO2=#{userNo}) no2,
-											 (select G.USERNO from CHATTING_GROUP G where L.chattingid = G.CHATTINGID and G.USERNO=#{userNo}) no3
-			from CHATTINGLIST L
-		)T where no1=#{userNo} or no2=#{userNo} or no3=#{userNo}
-	</select>
-	<select id="isChat" parameterType="Map" resultType="Chatting">
-			select L.Chattingid,nvl(L.CHATTINGNAME,case when(select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO1) USERName from CHATTING_ONE O where o.chattingid = L.CHATTINGID)=#{myName} 
-                                             then (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO2) userName from CHATTING_ONE O where o.chattingid = L.CHATTINGID) else
-                                                (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO1) userName  from CHATTING_ONE O where o.chattingid = L.CHATTINGID) 
-                                             end) chatname
-        from CHATTINGLIST L
-		where L.CHATTINGID=(select CHATTINGID from CHATTING_ONE
-		where (userno1=(select userno from MEMBER where username=#{myName})
-		or
-		userno2=(select userno from MEMBER where username=#{myName}))
-		and
-		(userno1=(select userno from MEMBER where username=#{userName})
-		or
-		userno2=(select userno from MEMBER where username=#{userName}))
-		)
+	<sql id="chatList">
+		select G.Chattingid,LD.Userno,
+		       nvl((select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid),
+		                                  (select (select (select M.Username from Member M where M.Userno=g2.Userno) userName 
+		                                           from Chatting_Group G2 
+		                                           where g2.Chattingid=L.Chattingid and g2.Userno!=#{userNo}
+		                                          ) chattingName 
+		                                    from Chattinglist L where L.Chattingid= G.Chattingid
+		                                    )
+			             ) chattingName,
+		         Chcontent,Chstatus,Chdate                       
+		from Chatting_Group G left join 
+		    (select Chattingid,Userno,Chcontent,Chstatus,Chdate
+		    from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog)
+		    where mindate=Chdate
+		     Order by mindate desc)LD
+		on G.Chattingid=Ld.Chattingid
+		where G.Userno=#{userNo} and Ld.Userno is not null
+		
+	</sql>
 
+	<select id="isChat" parameterType="Map" resultType="Chatting">
+		select G1.Chattingid,nvl((select L.Chattingname from Chattinglist L where L.Chattingid= G1.Chattingid),
+		                           (select g3.userName 
+		                            from(select G2.Chattingid,(select M.Username from Member M where M.Userno=G2.Userno) userName
+		                                from Chatting_Group g2 )g3
+		                            where g3.userName!=#{myName} and G3.Chattingid=G1.Chattingid)
+		                        ) chattingName
+		from (select Chattingid
+		        from (select G.Chattingid,(select M.Username from Member M where M.Userno=G.Userno )userName from Chatting_Group g) 
+		        where userName in (#{myName},#{userName}) group by Chattingid 
+		        having count(*) <![CDATA[>]]>1 and count(*) <![CDATA[<]]>3)G1
 	</select>
-	<select id="selectMember" parameterType="int"
-		resultType="Member">
-		select * from Member where userno != #{userName}
-	</select>
-	<select id="selectChat" parameterType="int" resultType="Chatting">
-		select * from ChattingList where CHATTINGID=#{chattingId}
-	</select>
+	
 	<select id="selectChattingList" parameterType="int" resultType="ChattingRoom">
-		select LG.CHATTINGID CHATTINGID,userNo,chDate,chContent,chstatus,(select NVL(CHATTINGNAME,
-                                                                                       (select (select M.USERNAME from MEMBER M where M.USERNO= case when T.USERNO1=#{userNo} then USERNO2 
-                                                                                                                                                                  else USERNO1 end) username
-                                                                                        from (select * from CHATTING_ONE where USERNO1=#{userNo} or USERNO2 = #{userNo})T
-                                                                                        where T.CHATTINGID=L.CHATTINGID
-                                                                                         )
-                                                                               )  
-                                                                  from CHATTINGLIST L 
-                                                                  where LG.chattingId=L.CHATTINGID) CHATTINGNAME,
-                                                                (select count(*) from Chattinglog pc where pc.Chattingid=LG.Chattingid and pc.Chstatus>0 and pc.Userno!=#{userNo})nCount
-		from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog) Lg 
-		where Chdate=mindate
-		and Chattingid in(  select CHATTINGID
-		                    from (select CHATTINGID,(select O.USERNO1 from	CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID and	O.USERNO1=#{userNo}) no1,
-		                                            (select O.USERNO2 from CHATTING_ONE O where L.CHATTINGID= O.CHATTINGID	and O.USERNO2=#{userNo}) no2,
-		                                            (select G.USERNO from CHATTING_GROUP G where L.chattingid = G.CHATTINGID and G.USERNO=#{userNo}) no3
-		                        from CHATTINGLIST L
-		                    )T where no1=#{userNo} or no2=#{userNo} or no3=#{userNo})
-		 order by chDate desc
+		<include refid="chatList"/>
 	</select>
+	
 	<select id="selectChatLogList" parameterType="_int" resultType="ChattingLog">
 		select *from ChattingLog where chattingId=#{chatNo} order by chdate
 	</select>
-	<select id="selectChatAlam" parameterType="Map" resultType="_int">
-		 SELECT COUNT(*) FROM CHATTINGLOG WHERE CHSTATUS>0 AND CHATTINGID = #{chatId} AND USERNO!=#{userNo}
-	</select>
-	<select id="selectChatMember" parameterType="Map" resultType="ChatUser">
-		select Chattingid,case when userno1=#{userNo} 
-						  then (select M.Username from Member M where M.Userno=O.Userno2)else
-                               (select M.Username from Member M where M.Userno=O.Userno1)
-                  end username
-		from CHATTING_ONE O where CHATTINGID=#{chatNo}
-	</select>
+	
 	<select id="selectChatMembers" parameterType="Map" resultType="ChatUser">
 		select Chattingid,(select M.Username from Member M where M.Userno=G.Userno)username from Chatting_Group G where Chattingid=#{chatNo} and Userno!=#{userNo}
 	</select>
+	
 	<select id="getChatName" parameterType="Map" resultType="Chatting">
-	select Chattingid,nvl(L.CHATTINGNAME,case when(select O.USERNO1 from CHATTING_ONE O where o.chattingid = L.CHATTINGID)=#{userNo} 
-                                             then (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO2) userName from CHATTING_ONE O where o.chattingid = L.CHATTINGID) else
-                                                (select (select M.USERNAME from MEMBER M where M.USERNO=O.USERNO1) userName  from CHATTING_ONE O where o.chattingid = L.CHATTINGID) 
-                                             end) chattingname 
-	from CHATTINGLIST L
-	where L.CHATTINGID = #{chatNo}
+		select Chattingid,nvl(Chattingname,(
+		                                    select (select M.Username from Member M where M.Userno=g.Userno) userName
+		                                    from Chatting_Group G 
+		                                    where G.Chattingid=L.Chattingid and G.Userno!=#{userNo}
+		                                    ) 
+		                     )chattingName
+		from Chattinglist L where Chattingid=#{chatNo}
+	</select>
+	
+	<select id="selectLastChatNo" parameterType="_int" resultType="Chatting">
+		select * from (
+			<include refid="chatList"/>
+		)
+		where rownum=1
 	</select>
 
 
@@ -92,20 +77,17 @@
 		insert all
 		into
 		CHATTINGLIST VALUES(seq_chat.nextval ,null,2)
-		into CHATTING_ONE
-		VALUES(seq_chat.currval ,(select userno from MEMBER
-		where
-		username=#{myName}),(select userno from MEMBER where
-		username=#{userName}))
+		<foreach collection="userNameList" item="item">
+		into CHATTING_GROUP
+		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}))
+		</foreach>
 		select *
 		from dual
 	</insert>
 	
-	<update id="updateStatus" parameterType="HashMap">
-		update Chattinglog set Chstatus=Chstatus-1
-		where Chattingid=#{chatNo} and Userno!=#{userNo} 
-	</update>
-
+	<delete id="deletechatRoom" parameterType="map">
+		delete from Chatting_Group where Chattingid=#{chatNo} and Userno =#{userNo}
+	</delete>
 
 
 

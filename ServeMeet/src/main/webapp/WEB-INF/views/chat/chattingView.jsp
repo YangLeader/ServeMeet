@@ -16,16 +16,55 @@
 <title>실시간 채팅</title>
 <script>
 	var chatNo = ${chatNo};
-	console.log("chatNo : "+chatNo);
-	var chatName= ${chatName}
-	console.log("chatName : "+chatName);
 	
-	function chatLog() {
+	var chatName= "${chatName}";
+	
+	var myNo=${member.userNo}
+	$(function() {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
+			data:{chatNo:chatNo},
 		 	datatype:"json",
 		 	success : function(data) {
-				console.log(data);
+				//console.log(data);
+				for(var i in data){
+					
+					var message=data[i].chContent;
+					var userName=data[i].userNo;
+					var today=new Date(data[i].chDate);
+					amtoPm="am ";
+					if(today.getHours()>12){
+						amtoPm="pm "+ (today.getHours()-12);
+					}else{
+						amtoPm=amtoPm+today.getHours();
+					}
+					printDate=today.getFullYear()+"/"+(today.getMonth()+1)+"/"+today.getDate()+" "+amtoPm+":"+today.getMinutes()+":"+today.getSeconds();
+					console.log("message="+message);
+					console.log("userName="+userName);
+					console.log("today="+printDate);
+					
+					if(data[i].userNo==myNo)
+					{
+						var printHTML="<div style='margin-left: 30%;margin-bottom: 10px;word-break:break-all;text-align: right;'>";
+						printHTML+="<div >";
+						printHTML+="<div class='myChatLog'>"+message+"</div><br/>";
+						printHTML+="<sub>"+printDate+"</sub>";
+						printHTML+="</div>";
+						printHTML+="</div>";
+						$('#chatdata').append(printHTML);
+					}
+					else{
+						var printHTML="<div style='margin-right:30%;word-break:break-all;text-align: left;'>";
+						printHTML+="<div >";
+						printHTML+="<div class='otherChatLog'>"+message+"</div><br/>";
+						printHTML+="<sub>"+printDate+"</sub>";
+						printHTML+="</div>";
+						printHTML+="</div>";
+						$('#chatdata').append(printHTML);
+						
+					}
+				} 
+				$("#chatdata").scrollTop($("#chatdata")[0].scrollHeight);
 			},
 			error : function() {
 				console.log("chatLog 에러");
@@ -33,8 +72,18 @@
 		 	
 			
 		});
-	}
-
+	});
+	$(function() {
+		$(".outBtn").click(function() {
+			if (confirm("채팅방을 나가시겠습니까?") == true){    //확인
+				location.href="${pageContext.request.contextPath}/chat/chatOut.do/"+chatNo;
+			}else{   //취소
+			    return;
+			}
+			
+		})
+	})
+	
 </script>
 <style>
 
@@ -46,11 +95,13 @@
 	</header>
 <div class="chattingRoom">
 	<div class = "chattingTop">
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 myList" >
+			<span><img class="plusBtn" alt="채팅방 만들기" src="${pageContext.request.contextPath}/resources/images/plus.png"></span>
+		</div>
 		<div  class= 'col-lg-8 col-md-8 col-sm-8 col-xs-8 chatName'>
 			<h2>${chatName}</h2>
 			<span><img class="outBtn" alt="채팅방 나가기" src="${pageContext.request.contextPath}/resources/images/out.png"></span> 
-			<span><img class="plusBtn" alt="채팅방 만들기" src="${pageContext.request.contextPath}/resources/images/plus.png"></span>
+			
 		</div>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 chatList scrollbar-primary" >
@@ -58,11 +109,11 @@
 	<div class= 'col-lg-8 col-md-8 col-sm-8 col-xs-8 form-group' style="">
 		<!-- 메세지 작성부분 -->
 		<!-- 대화내용이 출력되는 부분 -->
-		<div class='panel panel-default scrollbar-primary'>
-			<div id='chatdata' class='panel-body'></div>
+		<div class='panel panel-default'>
+			<div id='chatdata' class='panel-body scrollbar-primary'></div>
 		</div>
 		<div id = "chatSend" >
-			<input type="text"  name="chatTxt" id = "chatTxt"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/search2.png"></button></span>
+			<input type="text"  name="chatTxt" id = "chatTxt"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/chatSend2.png"></button></span>
 		</div>
 		
 	</div>

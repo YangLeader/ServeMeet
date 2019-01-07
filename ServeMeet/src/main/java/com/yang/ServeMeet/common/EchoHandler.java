@@ -57,11 +57,9 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		System.out.println(mSessionMap);
 	
-		chatUser=cs.selectChatMember(map);
 		
-		if(chatUser.isEmpty()) {
-			chatUser=cs.selectChatMembers(map);
-		}
+		chatUser=cs.selectChatMembers(map);
+		
 		System.out.println(chatUser);
 		users.add(userName);
 		for(ChatUser c:chatUser) {
