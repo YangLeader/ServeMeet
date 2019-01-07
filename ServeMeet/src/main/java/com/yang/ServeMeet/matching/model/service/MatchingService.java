@@ -20,11 +20,12 @@ public interface MatchingService {
 	List<Map<String,String>> myMatchingList(String userName,String type);
 
 	Map<String,String> mHistorySelectOne(int mHistoryId);
+
 	
 	Matching matchingSelectOne(int matchingId);
 	
 	int mHistoryInsert(MatchingHistory mHistory , List<BoardFile> fileList);
-	
+
 	List<Map<String,String>> mHistoryList();
 	
 }

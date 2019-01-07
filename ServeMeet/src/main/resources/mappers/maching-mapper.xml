@@ -6,6 +6,7 @@
 
 
 	<select id="myMatchingList" resultType="Map">
+
 		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'BEFORE' AND USERNAME1 = #{userName}
 	</select>
 
@@ -25,6 +26,7 @@
 			#{categoryId}, #{mWriter}, 'NONE', #{mtime}, DEFAULT 
 			)
 	</insert>
+
 	<select id="mHistorySelectOne" resultType="Map">
 		SELECT * FROM MATCHINGHISTORY JOIN MATCHING USING(MATCHINGID) WHERE MHISTORYID =#{mHistoryId}
 	</select>

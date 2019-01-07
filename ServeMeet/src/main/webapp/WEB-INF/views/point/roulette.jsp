@@ -127,6 +127,7 @@
                 		success : function(data){
                 			console.log("count : " +data )
                 			if(data>=100){
+
                 				swal("룰렛은 하루에 3번만 참여하실 수 있습니다.","내일 또 참여해주세요");
                 			}else{
                 				swal({

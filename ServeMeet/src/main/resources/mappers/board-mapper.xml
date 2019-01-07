@@ -46,7 +46,7 @@
 
 	<select id="selectBoardFileList" parameterType="_int"
 		resultMap="boardFile">
-		SELECT * FROM BOARDFILE WHERE BOARDNO = #{boardNo}
+		SELECT FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME,substr(changename, instr(changename,'.')) extension FROM BOARDFILE WHERE BOARDNO = #{boardNo}
 	</select>
 	<update id="updateBoard" parameterType="Board">
 		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}, BOARDDATE = DEFAULT

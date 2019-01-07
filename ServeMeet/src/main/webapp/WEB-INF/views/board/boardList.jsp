@@ -182,7 +182,7 @@
 									<option value="writer">글쓴이</option>					
 								</select>
 								
-								<input type="text" name="stx" class="form-control value=" required id="stx" size="15" maxlength="15" 
+								<input type="text" name="stx" class="form-control" value="" required id="stx" size="15" maxlength="15" 
 										onkeypress="if(event.keyCode==13) {search(); return false;}">
 
 								<button type="button" id="searchsubmit" onclick="search();">
@@ -245,7 +245,14 @@
 			});
 			
 			function search(){
-				location.href="searchBoard.do?con="+$('#sfl').val()+"&keyword="+$('#stx').val();
+				
+				if($('#stx').val() !== ''){
+					location.href="searchBoard.do?con="+$('#sfl').val()+"&keyword="+$('#stx').val();
+				} else {
+					alert('내용입력');
+				}
+				
+				
 			}
 			
 			function chatting(){

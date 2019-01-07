@@ -276,7 +276,7 @@ p:last-child { margin-bottom: 0px; }
 ul, ol { margin: 0;}
 ul li, ol li {   }
 a { color: #7a8080; text-decoration: none; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
-a:focus, a:hover { text-decoration: none; color: #00ffff; }
+a:focus, a:hover { text-decoration: none; color: #265a88; cursor:pointer; }
 strong { }
 .listnone { list-style: none; padding: 0px; }
 .lead { font-size: 21px; }
@@ -316,10 +316,10 @@ a{text-decoration: none;}
 -----------------------------------*/
 label { }
 .control-label { color: #212330; font-weight: 700; font-size: 12px; text-transform:uppercase;}
-.form-control { width: 100%; height: 50px; padding: 6px 12px; font-size: 10px; line-height: 1.42857143; color: #333;
+.form-control { width: 100%; height: 50px; padding: 6px 12px; font-size: 11px; line-height: 1.42857143; color: #333;
  background-color: #fff; border: 1px solid #f1f2f4; background-image: none; border-radius: 0px;
   -webkit-box-shadow: inset 0 0px 0px rgba(235, 237, 238, .075);
-   box-shadow: inset 3px 3px 3px rgba(235, 237, 238, .075); margin-bottom: 15px; color:#cbcbcc; }
+   box-shadow: inset 3px 3px 3px rgba(235, 237, 238, .075); margin-bottom: 15px; color:#000; }
 .form-control:focus { border-color: #66afe9; outline: 0; -webkit-box-shadow: inset 0 1px 1px rgba(235, 237, 238, .075), 0 0 8px rgba(102, 175, 233, .6); box-shadow: inset 0 3px 3px rgba(235, 237, 238, .075), 0 0 8px rgba(235, 237, 238, .6); background-color: #edf3f6; }
 .textarea.form-control { background-color: #f6f8f9; height: auto; }
 .required { }

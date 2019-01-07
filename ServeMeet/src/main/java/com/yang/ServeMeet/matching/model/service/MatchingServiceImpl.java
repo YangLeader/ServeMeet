@@ -41,6 +41,7 @@ public class MatchingServiceImpl implements MatchingService {
 	
 	@Override
 	public Map<String,String> mHistorySelectOne(int mHistoryId) {
+
 		
 		return matchingDao.mHistorySelectOne(mHistoryId);
 	}
@@ -74,6 +75,7 @@ public class MatchingServiceImpl implements MatchingService {
 		
 	}
 	
+
 	@Override
 	public List<Map<String,String>> mHistoryList(){
 		
