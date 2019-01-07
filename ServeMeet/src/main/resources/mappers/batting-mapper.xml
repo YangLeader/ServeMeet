@@ -49,5 +49,9 @@
 	<update id="battingPoint" parameterType="map">
 		UPDATE MEMBER SET POINT = POINT + #{alloc} WHERE USERNAME = #{USERNAME}
 	</update>
+	
+	<select id="myBattingList" resultType="map">
+		SELECT * FROM (SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID)JOIN BATTINGUSER USING(BATTINGID)) JOIN CATEGORY USING(CATEGORYID) WHERE userName= #{userName}
+	</select>
 
 </mapper>

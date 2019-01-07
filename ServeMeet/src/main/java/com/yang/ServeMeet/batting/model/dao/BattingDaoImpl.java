@@ -84,5 +84,12 @@ public class BattingDaoImpl implements BattingDao {
 		return result;
 	}
 	
+	@Override
+	public List<Map<String,Object>> myBattingList(String userName){
+		
+		return sqlSession.selectList("Batting_Mapper.myBattingList",userName);
+	}
+	
+	
 
 }

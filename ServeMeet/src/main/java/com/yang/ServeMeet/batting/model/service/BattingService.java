@@ -28,4 +28,6 @@ public interface BattingService {
 	List<Map<String,Object>> battingAllocation(int battingId, String battingType);
 	
 	int battingPoint(List<Map<String,Object>> list);
+	
+	List<Map<String,Object>> myBattingList(String userName);
 }
