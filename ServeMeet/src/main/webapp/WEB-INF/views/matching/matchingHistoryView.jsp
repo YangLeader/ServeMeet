@@ -49,7 +49,7 @@
 			
 			<c:if test="${board.userName eq member.userName}">
 			<div class="button_box_right">
-								<a href="${pageContext.request.contextPath }/board/boardUpdateView.do?no=${board.boardNo }" class="bbs_btn">
+								<a href="${pageContext.request.contextPath }/board/boardUpdateView.do?no=${board.boardNo}" class="bbs_btn">
 					<span class="glyphicon glyphicon-edit" ></span> 수정
 				</a>
 				
@@ -70,17 +70,17 @@
 		</header>
 
 		<section id="bbs-view-info">
-			<span class="write_user"><span class="sv_guest">${board.userName }</span></span>
+			<span class="write_user"><span class="sv_guest">${mHistory.USERNAME}</span></span>
 			<span></span>
 			<span>
-				<span class="glyphicon glyphicon-time"></span> ${board.boardDate }		</span>
+				<span class="glyphicon glyphicon-time"></span> ${mHistory.MTITLE}		</span>
 			
 			<span>
-				<span class="glyphicon glyphicon-eye-open"></span> ${board.boardCount }			</span>
+				<span class="glyphicon glyphicon-eye-open"></span> ${mHistory.MHCONTENT}			</span>
 		</section>
 	</div>
 
-    <!-- 첨부파일 시작 { -->
+    <%-- <!-- 첨부파일 시작 { -->
     <c:forEach items="${boardFileList}" var="bf">
     <div id="bo_v_file">
         <span>
@@ -91,7 +91,7 @@
 		</span>
     </div>
     </c:forEach>
-    <!-- } 첨부파일 끝 -->
+    <!-- } 첨부파일 끝 --> --%>
     
     
     <section id="bo_v_atc">
@@ -111,7 +111,7 @@
         	</p>
         	</c:forEach>
         	<p><br /></p>
-        	<pre><p>${board.boardContent }</p></pre>
+        	<pre><p>${mHistory.MHCONTENT}</p></pre>
         	<p><br /></p>
         </div>
                 <!-- } 본문 내용 끝 -->
@@ -119,7 +119,7 @@
         		
 		
 		<!-- 스크랩 추천 비추천 시작 { -->
-				<div id="bo_v_act">
+				<!-- <div id="bo_v_act">
 					<a href="./good.php?bo_table=free&amp;wr_id=111&amp;good=good&amp;" id="good_button" class="btn_bg btn">
 						<span class="glyphicon glyphicon-thumbs-up"></span> 추천 지금은 안됨ㅋ
 						<span id="bo_v_act_good" class="wr_count wr_good_cnt">0</span>
@@ -129,7 +129,7 @@
 					<span class="glyphicon glyphicon-bell"></span> 신고 지금은 안됨ㅋ
 					</a>
 			
-		</div>
+		</div> -->
 				<!-- } 스크랩 추천 비추천 끝 -->
 		
     </section>
@@ -230,7 +230,7 @@ function excute_good(href, $el, $tx)
 
 <!-- } 게시글 읽기 끝 -->
 <!-- 게시판 목록 시작 { -->
-<div id="bbs-list-wrap">
+<%-- <div id="bbs-list-wrap">
 
 	<div id="bbs-list-top">
 		<!-- 게시판 타이틀 -->
@@ -345,7 +345,7 @@ function excute_good(href, $el, $tx)
 					</nav> -->
 				</div>
 
-</div>
+</div> --%>
 
 
 <script>

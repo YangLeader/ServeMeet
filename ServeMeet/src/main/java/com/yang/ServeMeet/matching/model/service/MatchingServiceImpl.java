@@ -40,7 +40,7 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 	
 	@Override
-	public MatchingHistory mHistorySelectOne(int mHistoryId) {
+	public Map<String,String> mHistorySelectOne(int mHistoryId) {
 		
 		return matchingDao.mHistorySelectOne(mHistoryId);
 	}
@@ -72,6 +72,12 @@ public class MatchingServiceImpl implements MatchingService {
 		}
 		return result;
 		
+	}
+	
+	@Override
+	public List<Map<String,String>> mHistoryList(){
+		
+		return matchingDao.mHistoryList();
 	}
 	
 }

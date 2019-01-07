@@ -33,7 +33,7 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 	
 	@Override
-	public MatchingHistory mHistorySelectOne(int mHistoryId) {
+	public Map<String,String> mHistorySelectOne(int mHistoryId) {
 		
 		return session.selectOne("Matching.mHistorySelectOne",mHistoryId);
 	}
@@ -61,5 +61,11 @@ public class MatchingDaoImpl implements MatchingDao {
 	public int insertMHistoryFile(BoardFile boardFile) {
 		
 		return session.insert("Matching.insertmHistoryFile", boardFile);
+	}
+	
+	@Override
+	public List<Map<String,String>> mHistoryList(){
+		
+		return session.selectList("Matching.mHistoryList");
 	}
 }
