@@ -23,42 +23,50 @@
         	background-color : white;
         	margin-left : 15%;
         	margin-right : 15%;
-        	height : 1200px;
+        	height : 1600px;
         }
+        
 		.title{
 		margin-top : 10px;
 		  height :200px;
 		 padding : 20px;
 		  width : 100%;
 		}
+		
 		.month{
 		height : 90px;
 		font-size : 50px;
 		}
+		
 		.chkBtn{
 		height : 90px;
 		}
+		
 		.cal{
 		height : 750px;
 		width : 100%;
 		margin-left : auto;
 		margin-right : auto;
 		}
+		
 		#checkImg{
 		height : 80%;
 		width : 80%;
 		}
+		
 		table{
-		border : 1px solid #bcbcbc;
+		border : 5px solid #265a88;
 		width : 70%;
 		height : 100%; 
-		border-top: 1px solid #444444;
+		border-radius: 10px;
 		}
+		
 		th{
 		border : 1px solid #bcbcbc;
 		width: 150px;
 		height:30px;
 		text-align : center;
+		background-color : #337ab7;
 		}
 		
 		td {
@@ -66,7 +74,7 @@
 		width: 150px;
 		height:100px;
 		text-align : center;
-		background-color : white;
+		/* background-color : #afc0f1; */
 		}
 		
 		.blank{
@@ -77,6 +85,19 @@
 		font-size : 25px;
 		}
 		
+		p{
+		font-size : 17px;
+		}
+		
+		.msgBox{
+         	width : 70%;
+         	height : 170px;
+         	border-radius:10px;
+         	border : 1px solid #265a88;
+         	padding :10px;
+         	text-align : left;
+         	background-color : #E0ECF8;
+         }
 		
 	</style>
 </head>
@@ -89,7 +110,9 @@
 	<div class="cal" align = "center">
 	  <div class="title"> 
       <div class = "month">
-      <span>1월 출석체크</span>
+      <span>1월의 출석체크</span>
+      <br><br>
+      <p>매일매일 출석하고 포인트 받아가세요!</p>
       </div>
       <div class = "chkBtn">
       <a class="btn btn-primary" onclick="attend(<%=today%>);">출석하기</a>
@@ -156,6 +179,16 @@
       </tbody>
       
     </table>
+    	<br><br>
+      <div class ="msgBox">
+	  	<h3><b>&nbsp;꼭 확인하세요!</b></h3>
+	  	<ul>
+	  		<li>출석체크는 1일 1회 참여 가능합니다.</li>
+	  		<li>당첨 포인트는 실시간으로 적립됩니다.</li>
+	  		<li>포인트 적립은 마이페이지에서 확인하실 수 있습니다.</li>
+	  		<li>포인트 적립은 운영방침에 따라서 매주 달라질 수 있습니다.</li>
+	  	</ul>
+	  </div>
      </div>
 <br><br>
 	

@@ -30,11 +30,13 @@
 		  background-color : white;
 		}
 		.ready_container{
-		border: 3px solid skyblue;
+		border: 3px solid #265a88;
 		  position: relative;
-		  width: 456px;
-		  height: 256px;
+		  width: 460px;
+		  height: 262px;
 		  margin: 0 auto;
+		  padding : 2px; 
+		  border-radius : 10px;
 		  -webkit-user-select: none;
 		  -moz-user-select: none;
 		  -ms-user-select: none; 
@@ -70,11 +72,25 @@
         	margin-left : 300px;
         	margin-right : 300px;
         }
+        
+        .btn-primary{
+		font-size : 25px;
+		}
+		
+		.msgBox{
+         	width : 60%;
+         	height : 190px;
+         	border-radius:10px;
+         	border : 1px solid #265a88;
+         	padding :10px;
+         	text-align : left;
+         	background-color : #E0ECF8;
+         }
 	</style>
 </head>
 <body>
 
-<div class="frame" >
+<div class="frame" align = "center" >
 <div  align="center" >
 <br><br>
 <br><br>
@@ -84,7 +100,7 @@
 </div>
 <br>
 <div align="center">
-<button class="btn-lg btn-default" id="scratchBtn" onclick="buyScratch()">복권 구매하기</button>
+<a class="btn btn-primary" id="scratchBtn" onclick="buyScratch();">복권 구매하기</a>
 <br><br>
 <div class="ready_container" id="ready-container" style="display:">
 	<img src="${pageContext.request.contextPath}/resources/images/Lucky_Scratch.jpeg">
@@ -119,9 +135,19 @@
   	</div>
 
   </form>
-    
+  
 </div>
-    <br><br>
+	<br><br>
+	<div class ="msgBox">
+  	<h3><b>&nbsp;꼭 확인하세요!</b></h3>
+  	<ul>
+  		<li>1일 무제한 참여 가능합니다.</li>
+  		<li>참여시 10포인트가 차감됩니다.</li>
+  		<li>당첨 여부는 즉시 확인하실 수 있습니다.</li>
+  		<li>당첨 포인트는 실시간으로 적립됩니다.</li>
+  		<li>포인트 적립은 마이페이지에서 확인하실 수 있습니다.</li>
+  	</ul>
+  </div>
     <br><br>
     <br><br>
 </div>
