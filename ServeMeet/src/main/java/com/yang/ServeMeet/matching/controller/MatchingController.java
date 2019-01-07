@@ -159,6 +159,8 @@ public class MatchingController {
 //			path = "matching/myMatchingEndList";
 //		}
 //		
+		System.out.println("userName = "+userName);
+
 		
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.myMatchingList(userName,type));
 		
@@ -167,10 +169,23 @@ public class MatchingController {
 		return "/matching/myMatchingList";
 	}
 	
-	@RequestMapping("matching/matchingSelectOne.ma")
+	@RequestMapping("matching/mHistoryList.ma")
+	public String mHistoryList(Model model) {
+		
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.mHistoryList());
+		
+		model.addAttribute("list",list);
+				
+		return "/matching/matchingHistoryList";
+	}
+	
+	
+	@RequestMapping("matching/mHistorySelectOne.ma")
 	public String mHistorySelectOne(@RequestParam("no") int mHistoryId , Model model ) {
 		
-		MatchingHistory mHistory = matchingService.mHistorySelectOne(mHistoryId);
+		Map<String,String> mHistory = matchingService.mHistorySelectOne(mHistoryId);
+		
+		model.addAttribute("mHistory",mHistory);
 		
 		return "/matching/matchingHistoryView";
 	}
