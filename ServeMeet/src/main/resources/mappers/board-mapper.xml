@@ -13,7 +13,7 @@
 		FROM
 		BOARD A
 		WHERE BOARDSTATUS = 'Y'
-		ORDER BY BOARDDATE DESC, BOARDNO DESC
+		ORDER BY BOARDNO DESC, BOARDDATE DESC
 	</select>
 	<select id="selectBoardTotalContents" resultType="_int">
 		SELECT COUNT(*)
@@ -49,7 +49,7 @@
 		SELECT * FROM BOARDFILE WHERE BOARDNO = #{boardNo}
 	</select>
 	<update id="updateBoard" parameterType="Board">
-		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}
+		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}, BOARDDATE = DEFAULT
 		WHERE BOARDNO = #{boardNo}
 	</update>
 	<insert id="updateBoardFile" parameterType="BoardFile">

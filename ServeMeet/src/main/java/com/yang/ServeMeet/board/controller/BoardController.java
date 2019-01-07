@@ -37,7 +37,7 @@ public class BoardController {
 			@RequestParam(value="cPage", required=false, defaultValue="1")
 			int cPage, Model model) {
 		
-		int numPerPage = 10; // 한 페이지당 게시글 수
+		int numPerPage = 15; // 한 페이지당 게시글 수
 		
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> list = 

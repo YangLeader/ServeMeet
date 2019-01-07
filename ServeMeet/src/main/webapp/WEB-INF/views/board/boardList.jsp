@@ -228,16 +228,16 @@
 
 			<script>
 			
-			$('.dropdown').click(function(){
+			$('.drop').click(function(){
 									
 					/* $(this).children('#downlist').css('display', 'block'); */
-					$(this).children('#downlist').toggle('fast');										
+					$(this).siblings('#downlist').toggle('fast');										
 					
 				$('html').click(function(e) {
 					
 					if(!$(e.target).hasClass("drop")) { 
 							
-						$('.dropdown').children('#downlist').css('display', 'none');
+						$('.drop').siblings('#downlist').hide('fast');
 					}
 												
 				})
