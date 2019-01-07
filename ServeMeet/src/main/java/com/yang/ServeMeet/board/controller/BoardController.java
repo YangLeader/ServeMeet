@@ -37,7 +37,7 @@ public class BoardController {
 			@RequestParam(value="cPage", required=false, defaultValue="1")
 			int cPage, Model model) {
 		
-		int numPerPage = 15; // 한 페이지당 게시글 수
+		int numPerPage = 10; // 한 페이지당 게시글 수
 		
 		// 1. 현재 페이지 게시글 목록 가져오기
 		ArrayList<Map<String, String>> list = 
@@ -408,10 +408,10 @@ public class BoardController {
 		
 	}
 	
-	/*@RequestMapping("/board/reportBoard.do")
-	public String reportBoard(@RequestParam("no") int boardNo, @RequestParam("name") String userName, Model model) {
+	@RequestMapping("/board/boardReport.do")
+	public String reportBoard(/*@RequestParam("no") int boardNo, @RequestParam("name") String userName,*/ Model model) {
 		
-		int result;
+		/*int result;
 		
 		
 		try {
@@ -435,8 +435,10 @@ public class BoardController {
 			msg = "댓글 삭제 실패!";
 		}
 			
-		model.addAttribute("loc", loc).addAttribute("msg", msg);
+		model.addAttribute("loc", loc).addAttribute("msg", msg);*/
 				
-		return "common/msg";
-	}*/
+		return "board/boardReport";
+	}
+	
+	
 }

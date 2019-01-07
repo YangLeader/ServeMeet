@@ -164,17 +164,19 @@ $(document).ready(function(){
         <!-- 본문 내용 시작 { -->
         <div id="bo_v_con">
         	<c:forEach items="${boardFileList}" var="bf">
+        	<c:if test="${bf.extension eq '.png' or bf.extension eq '.bmp' or bf.extension eq '.jpg' or bf.extension eq '.jpeg' or bf.extension eq '.gif'}">
         	<p>
         		<a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" onclick="window.open(this.href,'_blank','width=700,height=700');return false;">
-        		<%-- <a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" target="_blank" class="view_image"> --%>
+        		
         			<img src="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" alt="${bf.originName }" style="width: 70%;"/>
         			<br />
         		</a>
         		<br style="clear:both;" />
         	</p>
+        	</c:if>
         	</c:forEach>
         	<p><br /></p>
-        	<pre style="background-color: white;"><p>${board.boardContent }</p></pre>
+        	<pre style="background-color: white; white-space: pre-wrap;"><p>${board.boardContent}</p></pre>
         	<p><br /></p>
         </div>
                 <!-- } 본문 내용 끝 -->
@@ -183,8 +185,8 @@ $(document).ready(function(){
 		
 		<!-- 스크랩 추천 비추천 시작 { -->
 		<div id="bo_v_act">
-					
-			<a href="reportBoard.do?no=${board.boardNo }&name=${member.userName}" class="btn_bg" onclick="return report_board();" title="신고">
+					<%-- reportBoard.do?no=${board.boardNo }&name=${member.userName} --%>
+			<a href="${pageContext.request.contextPath }/board/boardReport.do" target="_blank" class="btn_bg" onclick="win_scrap(this.href); return false;" title="신고">
 				<span class="glyphicon glyphicon-bell"></span> 게시글 신고
 			</a>
 			
@@ -241,7 +243,7 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">${cl.commentCon }</p>
 					</c:if>
 					<c:if test="${cl.commentStatus ne 'Y' }">
-					<p class="cmt_content" style="color:red;">삭제된 댓글 입니다.</p>
+					<p class="cmt_content" style="color:#adadad;">삭제된 댓글 입니다.</p>
 					</c:if>
 					
 					<div class="cmt_button_box">
@@ -291,7 +293,7 @@ var char_max = parseInt(0); // 최대
 					<p class="cmt_content">${cl.commentCon }</p>
 					</c:if>
 					<c:if test="${cl.commentStatus ne 'Y' }">
-					<p class="cmt_content" style="color:red;">삭제된 댓글 입니다.</p>
+					<p class="cmt_content" style="color:#adadad;">삭제된 댓글 입니다.</p>
 					</c:if>
 
 					<div class="cmt_button_box">

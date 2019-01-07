@@ -159,7 +159,7 @@
 						<c:forEach items="${boardFileList}" var="bf" varStatus="vs">
 						<div class="wr_option">
 							<label>첨부파일 ${vs.count }</label> ${bf.originName }<input type="file" name="upFile"
-								title="파일첨부 1 : 용량 1,048,576 바이트 이하만 업로드 가능">
+								title="파일첨부  : 용량 1,048,576 바이트 이하만 업로드 가능">
 						</div>
 						</c:forEach>
 						</c:if>

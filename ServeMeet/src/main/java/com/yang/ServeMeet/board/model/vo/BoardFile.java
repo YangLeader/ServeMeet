@@ -11,6 +11,7 @@ public class BoardFile {
 	private String originName;
 	private String changeName;
 	private String userName;
+	private String extension;
 
 	public BoardFile() {
 		super();
@@ -21,14 +22,17 @@ public class BoardFile {
 		this.originName = originName;
 		this.changeName = changeName;
 	}
-	
-	public BoardFile(int boardNo, int mhistoryId, String originName, String changeName, String userName) {
+
+	public BoardFile(int fileId, int boardNo, int mhistoryId, String originName, String changeName, String userName,
+			String extension) {
 		super();
+		this.fileId = fileId;
 		this.boardNo = boardNo;
 		this.mhistoryId = mhistoryId;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.userName = userName;
+		this.extension = extension;
 	}
 
 	public int getFileId() {
@@ -79,11 +83,19 @@ public class BoardFile {
 		this.userName = userName;
 	}
 
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardFile [fileId=" + fileId + ", boardNo=" + boardNo + ", mhistoryId=" + mhistoryId + ", originName="
-				+ originName + ", changeName=" + changeName + ", userName=" + userName + "]";
+				+ originName + ", changeName=" + changeName + ", userName=" + userName + ", extension=" + extension
+				+ "]";
 	}
-	
-	
+
 }
