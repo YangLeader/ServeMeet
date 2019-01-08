@@ -73,6 +73,15 @@
 		select point from member
 		where userNo = #{userNo}
 	</select>
+	
+	<select id="searchPwdCheck" parameterType="hashmap" resultType="_int">
+		select count(*) from member
+		where userId = #{userId} and email = #{email}
+	</select>
+	
+	<select id="resetPwd" parameterType="hashmap" resultType="_int">
+		update member set userPwd = #{userPwd} where userId = #{userId}
+	</select>
 <!--
 
 // 아이디 체크 프로시저
