@@ -94,7 +94,7 @@
 			-->
 			<!-- skin : _basic -->
 			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/board/boardFormEnd.do"
-					onsubmit="return fwrite_submit(this);" method="post" enctype="multipart/form-data">
+					 method="post" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="uid" value="18122113471404"> 
 				<input type="hidden" name="w" value=""> 
 				<input type="hidden" name="bo_table" value="funny"> 
@@ -135,7 +135,7 @@
 						<div>
 							<textarea id="wr_content" name="boardContent"
 							class="smarteditor2 form-control" maxlength="65536"
-							style="width: 100%; height: 300px"></textarea>
+							style="width: 100%; height: 300px; resize: none;"></textarea>
 								
 						</div>
 
@@ -154,13 +154,45 @@
 
 				</div>
 				<div class="wr_submit">
-					<input type="submit" class="btn btn-info" value="확인" />
+					<input type="submit" class="btn btn-info" name="submitButton" value="확인" />
 					<a href="${pageContext.request.contextPath }/board/boardList.do" class="btn btn-default">취소</a>
 				</div>
-				<br /><br /><br /><br /><br /><br />
+				<br /><br /><br /><br />
 			</form>
 
 				<script>
+					$('#fwrite').submit(function(){
+						
+						
+						if($('#wr_content').val() == ''){
+							alert('내용을 입력해 주세요!');
+							$('#wr_content').focus();
+						} else {
+							
+							$('#fwrite').submit();
+							
+							$.ajax({
+								url : "${pageContext.request.contextPath}/point/updatePoint.do",
+								data : {increasePoint : 2,
+										pContent : "게시글 작성 포인트"
+										},
+								success : function(){
+									
+									
+									
+					            }, error : function(jqxhr, textStatus, errorThrown){
+					                console.log("ajax 처리 실패");
+					                //에러로그
+					                console.log(jqxhr);
+					                console.log(textStatus);
+					                console.log(errorThrown);
+					            }
+							});
+						}
+						
+						return false;
+					});
+					
 					function html_auto_br(obj) {
 						if (obj.checked) {
 							result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");

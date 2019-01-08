@@ -130,6 +130,7 @@
 									</span> -->
 								</span>
 							</li>
+							<form id="chatting" method="post">
 							<c:forEach items="${list}" var="b">
 							<li class="bbs_list_basic">
 								<span class="subject text">
@@ -145,9 +146,9 @@
 											<ul style="padding-inline-start: 0px;">
 												<li class="dropdown"><a class="drop">${b.userName }</a>
 										        	<ul style="width: auto; dispaly:none;" id="downlist">
-										         	<form id="chatting" action="/ServeMeet/chat/chattingRoom.do/${b.userName }" method="post">
-										            	<li><input type="button" value="1:1 채팅" onclick="chatting();"></li>
-										            </form>
+										         		<c:if test="${member.userName ne b.userName }">
+										            	<li><input type="button" value="1:1 채팅" onclick="chatting('${b.userName}');"></li>
+										            	</c:if>
 										         	</ul>
 										    	</li>
 										    </ul>
@@ -168,6 +169,7 @@
 							
 							</li>
 							</c:forEach>
+							</form>
 						</ul>
 					</div>
 
@@ -255,7 +257,9 @@
 				
 			}
 			
-			function chatting(){
+			function chatting(userName){
+				
+				$('#chatting').attr('action', "/ServeMeet/chat/chattingRoom.do/"+userName);
 				
 				$('#chatting').submit();
 			}
