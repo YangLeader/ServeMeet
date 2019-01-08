@@ -1,6 +1,8 @@
 package com.yang.ServeMeet.chatting.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,44 @@ public class WebSocketChattingController {
 
 	@Autowired
 	private ChattingService cs;
-	
+	@RequestMapping(value = "/chat/allChatList.do", method = RequestMethod.POST)
+	public ModelAndView allChatList(HttpServletRequest req,HttpSession session) throws Exception {
+
+		ModelAndView mv = new ModelAndView();
+		String ipAddr = req.getRemoteAddr();
+
+		Chatting chat = cs.selectLastChatNo(((Member)session.getAttribute("member")).getUserNo());
+		System.out.println("allList ----------chat : "+chat);
+
+		mv.addObject("chatName", chat.getChattingName());
+		mv.addObject("chatNo", chat.getChattingId());
+		mv.addObject("host", ipAddr);
+		mv.setViewName("chat/chattingView");
+
+		return mv;
+	}
+	@RequestMapping(value = "/chat/chatOut.do/{chatNo}", method = RequestMethod.GET)
+	public ModelAndView chatOut(HttpSession session,@PathVariable int chatNo,HttpServletRequest req) throws Exception {
+
+		ModelAndView mv = new ModelAndView();
+		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		map.put("chatNo", chatNo);
+		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
+		
+		cs.deletechatRoom(map);
+
+		Chatting chat = cs.selectLastChatNo(((Member)session.getAttribute("member")).getUserNo());
+		System.out.println("allList ----------chat : "+chat);
+		String ipAddr = req.getRemoteAddr();
+		
+		mv.addObject("chatName", chat.getChattingName());
+		mv.addObject("chatNo", chat.getChattingId());
+		mv.addObject("host", ipAddr);
+		mv.setViewName("chat/chattingView");
+
+		return mv;
+	}
 	@RequestMapping(value = "/chat/chatting.do/{chatNo}", method = RequestMethod.POST)
 	public ModelAndView chattingMethod(@PathVariable("chatNo")int chatNo,HttpServletRequest req, HttpSession session) throws Exception {
 
@@ -59,6 +98,8 @@ public class WebSocketChattingController {
 		
 		ModelAndView mv = new ModelAndView();
 		Map<String,Integer> map = new HashMap<String,Integer>();
+		Map<String,List> nameMap = new HashMap<String,List>();
+		List<String> list =new ArrayList<String>();
 		String myName = ((Member)session.getAttribute("member")).getUserName();
 		String ipAddr = req.getRemoteAddr();
 	
@@ -67,15 +108,19 @@ public class WebSocketChattingController {
 		userNameMap.put("myName", myName);
 		userNameMap.put("userName", userName);
 		
+		list.add(myName);
+		list.add(userName);
+		nameMap.put("userNameList", list);
+		
 		Chatting chat = cs.isChat(userNameMap);
 		
 		if(chat==null) {
-			cs.insertChat(userNameMap);
+			cs.insertChat(nameMap);
 			chat = cs.isChat(userNameMap);
 		}
 		map.put("chatNo", chat.getChattingId());
 		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
-
+		System.out.println("chat++++++++++++"+chat);
 		session.setAttribute("chat", chat);	
 		cs.updateStatus(map);
 		

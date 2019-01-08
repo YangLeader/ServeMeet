@@ -211,7 +211,7 @@ $(function() {
 											<div class="chatListBox">
 												<div class="topImg" style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTopTry.png');"></div>
 												<div class="carea" style="width: 100%; height: 20px; background-color: #5e73de;padding: 5px 10px; ">
-													<span style="font-size: 11px;float:left;color: #fff;">모두보기</span>
+													<span style="font-size: 11px;float:left;color: #fff;" class="allchatList">모두보기</span>
 													<span style="font-size: 11px;float:right; color: #fff;">채팅방 만들기</span>
 												</div>
 												<div class="chatList carea scrollbar scrollbar-primary">
@@ -251,24 +251,31 @@ $(function() {
 			$(function(){
 				chatListMin();
 				//chatLog();
-				$(".chatSendBtn").click(function(){
+				$(".chatSendBtn").on("click",function(){
 					console.log("send message.....");
-					/* 채팅창에 작성한 메세지 전송 */
-					sendMessage();
-					
+					/* 채팅창에 작성한 메세지 전송 */			
+						sendMessage();	
 					/* 전송 후 작성창 초기화 */
 					$("#chatTxt").val('');
 				});
+				$("#chatTxt").keydown(function(key) {
+					if(key.keyCode==13){
+						sendMessage();	
+						$("#chatTxt").val('');
+					}
+				})
 				$("#exitBtn").click(function(){
 					console.log("exit message.....");
 					/* 채팅창에 작성한 메세지 전송 */
 					sock.onclose();
+					
 				});
 			});
 			function sendMessage(){
 				/* 맵핑된 핸들러 객채의 handleTextMessage메소드가 실행 */
-				sock.send($("#chatTxt").val());
-			
+				if($("#chatTxt").val()!=""){
+					sock.send($("#chatTxt").val());
+				}
 			};
 			function onMessage(evt){
 				
@@ -293,7 +300,13 @@ $(function() {
 						host=strArray[2].substr(1,strArray[2].indexOf(":")-1);
 						userName=strArray[3];
 						today=new Date();
-						printDate=today.getFullYear()+"/"+today.getMonth()+"/"+today.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+						amtoPm="am ";
+						if(today.getHours()>12){
+							amtoPm="pm "+ (today.getHours()-12);
+						}else{
+							amtoPm+=today.getHours();
+						}
+						printDate=today.getFullYear()+"/"+today.getMonth()+"/"+today.getDate()+" "+amtoPm+":"+today.getMinutes()+":"+today.getSeconds();
 						
 						console.log(today);
 						var ck_host='${host}';
@@ -312,15 +325,31 @@ $(function() {
 							printHTML+="</div>";
 							printHTML+="</div>";
 							$('#chatdata').append(printHTML);
+							$("#chatdata").scrollTop($("#chatdata")[0].scrollHeight);
 						}
 						else{
-							var printHTML="<div style='margin-left: -5%;margin-right:25%;word-break:break-all;'>";
-							printHTML+="<div class='otherChatLog'>";
-							printHTML+=message+"<br/>";
+							var printHTML="<div style='margin-right:30%;word-break:break-all;text-align: left;'>";
+							printHTML+="<div >";
+							printHTML+="<div class='otherChatLog'>"+message+"</div><br/>";
 							printHTML+="<sub>"+printDate+"</sub>";
 							printHTML+="</div>";
 							printHTML+="</div>";
+							
+							clientHeigth=$("#chatdata").height()+$("#chatdata").scrollTop()+13
+							clientScrollHeigth=$("#chatdata")[0].scrollHeight
+							
+							console.log("현재 div 크기"+$("#chatdata").height());
+							console.log("스크롤위치"+$("#chatdata").scrollTop());
+							console.log("스크롤하는 div 크기"+$("#chatdata")[0].scrollHeight);
+							
 							$('#chatdata').append(printHTML);
+							
+							if(clientScrollHeigth==clientHeigth){
+								console.log("같아요");
+								$("#chatdata").scrollTop($("#chatdata")[0].scrollHeight);
+							}
+							
+							
 							
 						}
 						//console.log('chatting data : '+data);
@@ -383,6 +412,14 @@ $(function() {
 		$("#chatGo").attr("action",url).submit();
 
 	}
+	$(function() {
+		$(".allchatList").click(function() {
+			var url = "${pageContext.request.contextPath }/chat/allChatList.do";
+			console.log(url);
+			
+			$("#chatGo").attr("action",url).submit();
+		})
+	})
 	function updateStatus(chatNo) {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/upStatus.do/"+chatNo,

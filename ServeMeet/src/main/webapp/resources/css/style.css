@@ -192,7 +192,7 @@ article{
 .chattingRoom .chattingTop{
 	width: 100%;height: 70px; background-color: #5e73de
 }
-.chattingRoom .chattingTop .chatName{
+.chattingRoom .chattingTop .chatName,  .chattingRoom .chattingTop .myList{
 	padding: 9px 15px;
 }
 .chattingRoom .chattingTop .chatName h2{
@@ -200,11 +200,11 @@ article{
 	margin-top: 10px;
 	display: inline-block;
 }
-.chattingRoom .chattingTop .chatName span{
+.chattingRoom .chattingTop .chatName span,  .chattingRoom .chattingTop .myList span{
 	float: right;
 	margin: 0px 5px;
 }
-.chattingRoom .chattingTop .chatName img{
+.chattingRoom .chattingTop .chatName img, .chattingRoom .chattingTop .myList img{
 	width: 27px;
 	height: 27px;
 	margin: 10px 2px;
@@ -215,7 +215,7 @@ article{
 .chattingRoom .chatList {
 	border:1px #ddd solid;
 	background-color : #fff;
-	height:640px;
+	height:642px;
 	padding: 15px 10px;
 }
 .chattingRoom .chatList .chatBox{
@@ -226,15 +226,27 @@ article{
 }
 .chattingRoom .form-group .panel{
 	margin: 0px;
+}
+.chattingRoom .form-group .panel #chatdata{
+
 	overflow: scroll;height: 600px;
 }
 .chattingRoom .form-group .panel .myChatLog{
-	min-width:100px;
+	padding: 5px 10px;
 	border:2px #5e72de solid;
 	display: inline-block;
 	border-radius: 5px; 
-	padding: 5px;
 
+	text-align: left;
+}
+.chattingRoom .form-group .panel .otherChatLog{
+	padding: 5px 10px;
+	border:2px #5e72de solid;
+	background-color: #5e72de;
+	color: #fff;
+	border-radius: 5px; 
+	display: inline-block;
+	
 }
 .chattingRoom #chatSend{
 	border:1px #ddd  solid;
@@ -255,6 +267,13 @@ article{
 	border: 0px;
 	background-color: #fff;
 	height: 100%;
+}
+.chattingRoom #chatSend  .chatSendImg{
+	width: 30px;
+	height: 30px;
+}
+.chattingRoom .myChatLog{
+
 }
 /*-----------------------------------
     1. Body / Typography 
