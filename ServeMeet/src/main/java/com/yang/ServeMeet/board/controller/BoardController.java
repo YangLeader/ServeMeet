@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardComment;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.yang.ServeMeet.board.model.vo.Report;
 import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.board.model.exception.BoardException;
@@ -408,15 +409,41 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping("/board/boardReportView.do")
+	public String boardReportView(@RequestParam("no") int boardNo, @RequestParam("name") String userName, Model model) {
+		
+		Report report = boardService.selectReportCheck(boardNo, userName);
+		
+		String msg = "";
+		
+		if(report != null) {
+			
+			msg = "이미 신고한 게시글 입니다.";
+			
+			model.addAttribute("msg", msg);
+			
+			return "board/boardReport";
+			
+		} else {
+			model.addAttribute("boardNo", boardNo).addAttribute("userName", userName);
+			
+			System.out.println(boardNo + "=========확인용========" + userName);
+					
+			return "board/boardReport";
+		}
+		
+		
+	}
+	
 	@RequestMapping("/board/boardReport.do")
-	public String reportBoard(/*@RequestParam("no") int boardNo, @RequestParam("name") String userName,*/ Model model) {
+	@ResponseBody
+	public String boardReport(Report report, Model model) {
 		
-		/*int result;
-		
+		int result;
 		
 		try {
 					
-			result = boardService.reportBoard(boardNo, userName);
+			result = boardService.insertBoardReport(report);
 					
 		} catch(Exception e) {
 					
@@ -428,16 +455,16 @@ public class BoardController {
 		String msg = "";
 				
 		if(result > 0) {
-			msg = "댓글 삭제 성공!";
-			loc = "/board/boardView.do?no="+ boardNo;
+			msg = "신고 처리 됐습니다.";
+			loc = "/board/boardView.do?no="+report.getBoardNo();
 					
 		} else {
-			msg = "댓글 삭제 실패!";
+			msg = "신고 처리 실패!";
 		}
 			
-		model.addAttribute("loc", loc).addAttribute("msg", msg);*/
+		model.addAttribute("loc", loc).addAttribute("msg", msg);
 				
-		return "board/boardReport";
+		return "common/msg";
 	}
 	
 	

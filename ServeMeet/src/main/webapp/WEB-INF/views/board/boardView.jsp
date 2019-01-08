@@ -186,7 +186,7 @@ $(document).ready(function(){
 		<!-- 스크랩 추천 비추천 시작 { -->
 		<div id="bo_v_act">
 					<%-- reportBoard.do?no=${board.boardNo }&name=${member.userName} --%>
-			<a href="${pageContext.request.contextPath }/board/boardReport.do" target="_blank" class="btn_bg" onclick="win_scrap(this.href); return false;" title="신고">
+			<a href="${pageContext.request.contextPath }/board/boardReportView.do?no=${board.boardNo}&name=${member.userName}" target="_blank" class="btn_bg" onclick="win_scrap(this.href); return false;" title="신고">
 				<span class="glyphicon glyphicon-bell"></span> 게시글 신고
 			</a>
 			

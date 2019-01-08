@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.yang.ServeMeet.board.model.exception.BoardException;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.yang.ServeMeet.board.model.vo.Report;
 import com.yang.ServeMeet.board.model.dao.BoardDao;
 import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardComment;
@@ -178,6 +179,23 @@ public class BoardServiceImpl implements BoardService {
 		ArrayList<Map<String, String>> list = boardDao.searchBoard(hmap);
 		
 		return list;
+	}
+
+	@Override
+	public int insertBoardReport(Report report) {
+		
+		return boardDao.insertBoardReport(report);
+	}
+
+	@Override
+	public Report selectReportCheck(int boardNo, String userName) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("boardNo", boardNo);
+		map.put("userName", userName);
+		
+		return boardDao.selectReportCheck(map);
 	}
 
 
