@@ -103,6 +103,12 @@ $(document).ready(function(){
 				<span class="glyphicon glyphicon-list-alt"></span> 목록
 			</a>
 			
+			<c:if test="${board.userName ne member.userName}">
+			<a href="${pageContext.request.contextPath}/board/boardForm.do" class="bbs_btn btn_write">
+			<span class="glyphicon glyphicon-pencil"></span> 글쓰기
+			</a>
+			</c:if>
+			
 			<c:if test="${board.userName eq member.userName}">
 			<div class="button_box_right">
 								<a href="${pageContext.request.contextPath }/board/boardUpdateView.do?no=${board.boardNo }" class="bbs_btn">
@@ -706,6 +712,7 @@ function excute_good(href, $el, $tx)
 					</span>
 				</span>
 			</li>
+			<form id="chatting" method="post">
 			<c:forEach items="${list}" var="b">
 			<li class="bbs_list_basic">
 				<span class="subject text">
@@ -721,9 +728,11 @@ function excute_good(href, $el, $tx)
 							<ul style="padding-inline-start: 0px;">
 								<li class="dropdown"><a class="drop">${b.userName }</a>
 									<ul style="width: auto; dispaly:none;" id="downlist">
-									<form id="chatting"action="/ServeMeet/chat/chattingRoom.do/${b.userName }" method="post">
-										<li><input type="button" value="1:1 채팅" onclick="chatting();"></li>
-									</form>
+									
+										<c:if test="${member.userName ne b.userName }">
+											<li><input type="button" value="1:1 채팅" onclick="chatting('${b.userName}');"></li>
+										</c:if>
+									
 									</ul>
 								</li>
 							</ul>
@@ -744,6 +753,7 @@ function excute_good(href, $el, $tx)
 							
 			</li>
 			</c:forEach>
+			</form>
 		</ul>
 	</div>
 
@@ -822,7 +832,8 @@ $('html').click(function(e) {
 										
 });
 
-function chatting(){
+function chatting(userName){
+	$('#chatting').attr('action', "/ServeMeet/chat/chattingRoom.do/"+userName);
 	
 	$('#chatting').submit();
 }

@@ -295,7 +295,7 @@ p:last-child { margin-bottom: 0px; }
 ul, ol { margin: 0;}
 ul li, ol li {   }
 a { color: #7a8080; text-decoration: none; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
-a:focus, a:hover { text-decoration: none; color: #265a88; cursor:pointer; }
+a:focus, a:hover { text-decoration: none; color: #5e73de; cursor:pointer; }
 strong { }
 .listnone { list-style: none; padding: 0px; }
 .lead { font-size: 21px; }
