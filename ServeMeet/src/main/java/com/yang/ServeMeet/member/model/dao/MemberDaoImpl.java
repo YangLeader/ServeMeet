@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.member.model.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,14 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int getPoint(int userNo) {
 		return sqlSession.selectOne("member.getPoint",userNo);
+	}
+	@Override
+	public List<String> memberSearch(String keyword) {
+		// TODO Auto-generated method stub
+		System.out.println("keywoardkeywoardkeywoardkeywoard"+keyword);
+		List<String> list=sqlSession.selectList("member.memberSearch",keyword);
+		System.out.println(list);
+		return list;
 	}
 
 	@Override

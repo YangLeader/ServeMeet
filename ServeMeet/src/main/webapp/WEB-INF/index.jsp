@@ -23,7 +23,6 @@
 				</h1>&nbsp;
 				<h2> 찾고 싶으세요?</h2>
 			</div>
-			
 			<c:import url="views/matching/matching.jsp" />
 		</article>
 		<article class="subArt" >

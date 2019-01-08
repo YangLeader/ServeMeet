@@ -1,5 +1,7 @@
 package com.yang.ServeMeet.member.model.service;
 
+import java.util.List;
+
 import com.yang.ServeMeet.member.model.vo.Member;
 
 public interface MemberService {
@@ -22,8 +24,11 @@ public interface MemberService {
 
 	int getPoint(int userNo);
 
+	List<String> memberSearch(String keyword);
+
 	int searchPwdCheck(String userId, String email);
 
 	int resetPwd(String userId, String userPwd);
+
 
 }
