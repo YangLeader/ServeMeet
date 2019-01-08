@@ -232,21 +232,21 @@ article{
 	overflow: scroll;height: 600px;
 }
 .chattingRoom .form-group .panel .myChatLog{
-	min-width:100px;
+	padding: 5px 10px;
 	border:2px #5e72de solid;
 	display: inline-block;
 	border-radius: 5px; 
-	padding: 5px;
 
+	text-align: left;
 }
 .chattingRoom .form-group .panel .otherChatLog{
-	min-width:100px;
+	padding: 5px 10px;
 	border:2px #5e72de solid;
 	background-color: #5e72de;
 	color: #fff;
 	border-radius: 5px; 
 	display: inline-block;
-	padding: 5px;
+	
 }
 .chattingRoom #chatSend{
 	border:1px #ddd  solid;
@@ -271,6 +271,9 @@ article{
 .chattingRoom #chatSend  .chatSendImg{
 	width: 30px;
 	height: 30px;
+}
+.chattingRoom .myChatLog{
+
 }
 /*-----------------------------------
     1. Body / Typography 

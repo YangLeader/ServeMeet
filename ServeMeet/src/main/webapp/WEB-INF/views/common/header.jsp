@@ -320,7 +320,22 @@ $(function() {
 							printHTML+="<sub>"+printDate+"</sub>";
 							printHTML+="</div>";
 							printHTML+="</div>";
+							
+							clientHeigth=$("#chatdata").height()+$("#chatdata").scrollTop()+13
+							clientScrollHeigth=$("#chatdata")[0].scrollHeight
+							
+							console.log("현재 div 크기"+$("#chatdata").height());
+							console.log("스크롤위치"+$("#chatdata").scrollTop());
+							console.log("스크롤하는 div 크기"+$("#chatdata")[0].scrollHeight);
+							
 							$('#chatdata').append(printHTML);
+							
+							if(clientScrollHeigth==clientHeigth){
+								console.log("같아요");
+								$("#chatdata").scrollTop($("#chatdata")[0].scrollHeight);
+							}
+							
+							
 							
 						}
 						//console.log('chatting data : '+data);
