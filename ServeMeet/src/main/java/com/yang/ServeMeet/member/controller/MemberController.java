@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -247,9 +248,70 @@ public class MemberController {
 		
 		String isSame = memberService.searchIdConfirm(userName,email);
 		
-		
-		
 		return isSame;
 	}
+	
+	@RequestMapping("/member/searchPwdCheck.do")
+	@ResponseBody
+	public int searchPwdCheck(@RequestParam String userId, @RequestParam String email){
+		
+		if(logger.isDebugEnabled()) logger.debug("아이디와 이메일 일치 여부 확인!");
+		
+		int isSame = memberService.searchPwdCheck(userId,email);
+		return isSame;
+	}
+	
+	@RequestMapping("/member/sendEmail.do")
+	@ResponseBody
+	public int sendPwdEmail(@RequestParam String email) {
+		// Mail Server 설정
+			String charSet = "utf-8";
+			String hostSMTP = "smtp.naver.com";		
+			String hostSMTPid = "servemeet19@naver.com"; // 본인의 아이디 입력		
+			String hostSMTPpwd = "@Qlalf0108"; // 비밀번호 입력
+			
+			// 보내는 사람 EMail, 제목, 내용 
+			String fromEmail = "servemeet19@naver.com"; // 보내는 사람 eamil
+			String fromName = "ServeMeet";  // 보내는 사람 이름
+			String subject = "이메일 발송 테스트"; // 제목
+			
+			// 받는 사람 E-Mail 주소
+			String mail = email;  // 받는 사람 email	
+			
+			// 인증번호 랜덤 6자리
+			int identify = (int)(Math.random()*100000);
+			
+			try {
+				HtmlEmail hEmail = new HtmlEmail();
+				hEmail.setDebug(true);
+				hEmail.setCharset(charSet);
+				hEmail.setSSL(true);
+				hEmail.setHostName(hostSMTP);
+				hEmail.setSmtpPort(587);	// SMTP 포트 번호 입력
+
+				hEmail.setAuthentication(hostSMTPid, hostSMTPpwd);
+				hEmail.setTLS(true);
+				hEmail.addTo(mail, charSet);
+				hEmail.setFrom(fromEmail, fromName, charSet);
+				hEmail.setSubject(subject);
+				hEmail.setHtmlMsg("<p>이메일 발송 테스트 입니다.<br> 인증번호는 "+identify+"</p>"); // 본문 내용
+				hEmail.send();			
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			
+			return identify;
+	}
+	
+	@RequestMapping("/member/resetPwd.do")
+	@ResponseBody
+	public int resetPwd(@RequestParam String userId, @RequestParam String userPwd){
+		
+		if(logger.isDebugEnabled()) logger.debug("비밀번호 변경 확인!");
+		
+		int isSame = memberService.resetPwd(userId,userPwd);
+		return isSame;
+	}
+	
 
 }

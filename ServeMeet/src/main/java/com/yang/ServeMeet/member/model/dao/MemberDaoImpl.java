@@ -57,16 +57,9 @@ public class MemberDaoImpl implements MemberDao {
 		if(result == null) {
 			result ="";
 		}
-		
 		return result;
 	}
-
-	@Override
-	public int searchPwdConfirm(HashMap<String, String> hmap) {
-		
-		return sqlSession.selectOne("member.searchPwdConfirm", hmap);
-	}
-
+	
 	@Override
 	public int updatePoint(HashMap<String,Integer> hmap) {
 		
@@ -77,5 +70,17 @@ public class MemberDaoImpl implements MemberDao {
 	public int getPoint(int userNo) {
 		return sqlSession.selectOne("member.getPoint",userNo);
 	}
+
+	@Override
+	public int searchPwdCheck(HashMap<String, String> hmap) {
+		return sqlSession.selectOne("member.searchPwdCheck",hmap);
+	}
+
+	@Override
+	public int resetPwd(HashMap<String, String> hmap) {
+		return sqlSession.selectOne("member.resetPwd",hmap);
+	}
+
+	
 
 }

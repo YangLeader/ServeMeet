@@ -63,7 +63,7 @@
               <div>
               <hr>
               <br>
-              <p align="center"><a href="${pageContext.request.contextPath}/member/memberLoginView.do">로그인 </a> | <a href="${pageContext.request.contextPath}/member/memberEnroll.do">회원가입</a></p> 
+              <p align="center"><a href="${pageContext.request.contextPath}/member/searchPwd.do">비밀번호 찾기 </a> | <a href="${pageContext.request.contextPath}/member/memberLoginView.do">로그인 </a> | <a href="${pageContext.request.contextPath}/member/memberEnroll.do">회원가입</a></p> 
              </div>
             </form>
           </div>
