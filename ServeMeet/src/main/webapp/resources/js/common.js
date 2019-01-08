@@ -361,7 +361,7 @@ var win_profile = function(href) {
  * ��ũ�� â
  **/
 var win_scrap = function(href) {
-    var new_win = window.open(href, 'win_scrap', 'left=100,top=100,width=500,height=500,resizable=no');
+    var new_win = window.open(href, 'win_scrap', 'left=100,top=100,width=500,height=450,resizable=no');
     new_win.focus();
 }
 

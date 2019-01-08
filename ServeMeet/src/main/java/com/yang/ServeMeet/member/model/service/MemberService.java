@@ -19,13 +19,16 @@ public interface MemberService {
 	int checkNameDuplicate(String userName);
 
 	String searchIdConfirm(String userName, String email);
-	
-	int searchPwdConfirm(String userId, String userEmail);
 
 	int updatePoint(int userNo, int increasePoint);
 
 	int getPoint(int userNo);
 
 	List<String> memberSearch(String keyword);
+
+	int searchPwdCheck(String userId, String email);
+
+	int resetPwd(String userId, String userPwd);
+
 
 }

@@ -89,4 +89,13 @@
 		AND BOARDSTATUS = 'Y'
 		ORDER BY BOARDDATE DESC, BOARDNO DESC
 	</select>
+	
+	<insert id="insertBoardReport" parameterType="Report">
+		INSERT INTO REPORT(BOARDNO, USERNAME, CATEGORY, REPORTCONTENT)
+		VALUES (#{boardNo}, #{userName}, #{category}, NVL(#{reportContent},' '))
+	</insert>
+	
+	<select id="selectReportCheck" parameterType="map" resultType="Report">
+		SELECT * FROM REPORT WHERE BOARDNO = #{boardNo} AND USERNAME = #{userName}
+	</select>
 </mapper>

@@ -75,8 +75,6 @@
 			<span>
 				<span class="glyphicon glyphicon-time"></span> ${mHistory.MTITLE}		</span>
 			
-			<span>
-				<span class="glyphicon glyphicon-eye-open"></span> ${mHistory.MHCONTENT}			</span>
 		</section>
 	</div>
 

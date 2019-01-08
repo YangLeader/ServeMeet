@@ -4,12 +4,20 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Batting_Mapper">
 	
+	<select id="battingSelectOne" resultType="map">
+		SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID) WHERE BATTINGID = #{battingId}
+	</select>
+	
 	<select id="battingSelect" resultType="Batting">
 		SELECT * FROM BATTING WHERE BATTINGID = #{battingId}
 	</select>
 	
-	<select id="battingList" resultType="Batting">
-		SELECT * FROM BATTING WHERE BSTATUS = 'N'
+	<select id="battingList" resultType="map">
+		SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID) WHERE BSTATUS = 'N'
+	</select>
+	
+	<select id="battingHistoryList" resultType="map">
+		SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID) WHERE BSTATUS = 'Y'
 	</select>
 	
 	<update id="battingPick" parameterType="map">
@@ -29,17 +37,13 @@
 	<select id="battingPickCheck" parameterType="BattingUser" resultType="BattingUser">
 		SELECT * FROM BATTINGUSER WHERE BATTINGID = #{battingId} AND USERNAME = #{userName}
 	</select>
-	
-	<select id="battingHistoryList" resultType="Batting">
-		SELECT * FROM BATTING WHERE BSTATUS = 'Y'
-	</select>
-	
+		
 	<update id="battingClose">
 		UPDATE BATTING SET BSTATUS = 'Y' WHERE BATTINGID = #{battingId}
 	</update>
 	
 	<insert id="battingInsert" parameterType="_int">
-		INSERT INTO BATTING VALUES(SEQ_BATTING.NEXTVAL,3,0,0,DEFAULT)
+		INSERT INTO BATTING VALUES(SEQ_BATTING.NEXTVAL,SEQ_MATCHINGID.CURRVAL,0,0,DEFAULT)
 	</insert>
 	
 	<select id="battingWinner" parameterType="map" resultType="map">

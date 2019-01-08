@@ -23,9 +23,11 @@ int insertMember(Member member);
 
 	String searchIdConfirm(HashMap<String, String> hmap);
 
-	int searchPwdConfirm(HashMap<String, String> hmap);
-
 	int getPoint(int userNo);
 
 	List<String> memberSearch(String keyword);
+
+	int searchPwdCheck(HashMap<String, String> hmap);
+
+	int resetPwd(HashMap<String, String> hmap);
 }

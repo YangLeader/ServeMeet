@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.yang.ServeMeet.board.model.vo.Report;
 import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardComment;
 
@@ -39,5 +40,9 @@ public interface BoardService {
 	int deleteBoardComment(BoardComment bComment);
 
 	ArrayList<Map<String, String>> searchBoard(String condition, String keyword);
+
+	int insertBoardReport(Report report);
+
+	Report selectReportCheck(int boardNo, String userName);
 
 }

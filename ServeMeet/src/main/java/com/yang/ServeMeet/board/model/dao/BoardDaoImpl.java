@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardComment;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.yang.ServeMeet.board.model.vo.Report;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -123,6 +124,18 @@ public class BoardDaoImpl implements BoardDao {
 	public ArrayList<Map<String, String>> searchBoard(HashMap<String, String> hmap) {
 
 		return new ArrayList<Map<String, String>>(sqlSession.selectList("board.searchBoard", hmap));
+	}
+
+	@Override
+	public int insertBoardReport(Report report) {
+		
+		return sqlSession.insert("board.insertBoardReport", report);
+	}
+
+	@Override
+	public Report selectReportCheck(Map<String, Object> map) {
+		
+		return sqlSession.selectOne("board.selectReportCheck", map);
 	}
 
 }

@@ -22,11 +22,19 @@ public class BattingDaoImpl implements BattingDao {
 
 		return sqlSession.selectOne("Batting_Mapper.battingSelect",battingId);
 	}
+	
+	@Override
+	public Map<String,Object> battingSelectOne(int battingId) {
+		
+		return sqlSession.selectOne("Batting_Mapper.battingSelectOne",battingId);
+	}
 		
 	@Override
-	public List<Map<String,String>> battingList(){
+	public List<Map<String,String>> battingList(String type){
 		
-		return sqlSession.selectList("Batting_Mapper.battingList");
+		String path = type.equals("I") ? "Batting_Mapper.battingList" : "Batting_Mapper.battingHistoryList";
+		
+		return sqlSession.selectList(path);
 	}
 	
 	@Override

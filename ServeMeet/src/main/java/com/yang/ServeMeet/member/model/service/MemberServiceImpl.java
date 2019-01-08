@@ -69,15 +69,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.searchIdConfirm(hmap);
 	}
 
-	@Override
-	public int searchPwdConfirm(String userId, String userEmail) {
-		HashMap<String,String> hmap = new HashMap<String, String>();
-		
-		hmap.put("userId", userId);
-		hmap.put("userEmail", userEmail);
-		
-		return memberDao.searchPwdConfirm(hmap);
-	}
+	
 
 	@Override
 	public int updatePoint(int userNo, int increasePoint) {
@@ -97,6 +89,24 @@ public class MemberServiceImpl implements MemberService {
 	public List<String> memberSearch(String keyword) {
 		// TODO Auto-generated method stub
 		return memberDao.memberSearch(keyword);
+	}
+
+	@Override
+	public int searchPwdCheck(String userId, String email) {
+		HashMap<String,String> hmap = new HashMap<String,String>();
+		
+		hmap.put("userId", userId);
+		hmap.put("email",email);
+		return memberDao.searchPwdCheck(hmap);
+	}
+
+	@Override
+	public int resetPwd(String userId, String userPwd) {
+		HashMap<String,String> hmap = new HashMap<String,String>();
+		
+		hmap.put("userId", userId);
+		hmap.put("userPwd",userPwd);
+		return memberDao.resetPwd(hmap);
 	}
 
 }

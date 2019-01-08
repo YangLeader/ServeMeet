@@ -33,8 +33,7 @@ if("${msg}" !="login"){
 		    	  location.href="${pageContext.request.contextPath}${loc}";
 		      });
 		    });
-	}
-    
+	}  
 }else{
 	location.href="${pageContext.request.contextPath}/";
 }

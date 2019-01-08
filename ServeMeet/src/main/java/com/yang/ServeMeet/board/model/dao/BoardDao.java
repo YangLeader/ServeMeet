@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.yang.ServeMeet.board.model.vo.Report;
 import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardComment;
 
@@ -47,4 +48,7 @@ public interface BoardDao {
 
 	ArrayList<Map<String, String>> searchBoard(HashMap<String, String> hmap);
 
+	int insertBoardReport(Report report);
+
+	Report selectReportCheck(Map<String, Object> map);
 }
