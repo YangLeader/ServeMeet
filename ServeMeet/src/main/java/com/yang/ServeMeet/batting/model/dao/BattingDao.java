@@ -9,8 +9,10 @@ import com.yang.ServeMeet.batting.model.vo.BattingUser;
 public interface BattingDao {
 	
 	Batting battingSelect(int battingId);
+	
+	Map<String,Object> battingSelectOne(int battingId);
 
-	List<Map<String,String>> battingList();
+	List<Map<String,String>> battingList(String type);
 	
 	int battingPick(Map<String, Object> hmap);
 	

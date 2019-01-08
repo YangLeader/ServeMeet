@@ -165,10 +165,10 @@ $(function() {
 		                                </ul>
 	                                </li>
 		  							
-	                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="배팅"><span class="mainNav">배팅<span></a>
+	                                <li class="has-sub"><a href="${pageContext.request.contextPath }/batting/battingList.ba?type=I" title="배팅"><span class="mainNav">배팅<span></a>
 		                                <ul>
-	                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba" title="진행중인 배팅">진행중인 배팅</a></li>
-	                                        <li><a href="${pageContext.request.contextPath }/batting/battingHistory.ba" title="종료된 배팅">종료된 배팅</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba?type=I" title="진행중인 배팅">진행중인 배팅</a></li>
+	                                        <li><a href="${pageContext.request.contextPath }/batting/battingList.ba?type=E" title="종료된 배팅">종료된 배팅</a></li>
 		                                </ul>
 	                                </li>
 		                         

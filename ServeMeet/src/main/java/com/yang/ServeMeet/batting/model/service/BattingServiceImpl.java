@@ -27,9 +27,15 @@ public class BattingServiceImpl implements BattingService {
 	}
 	
 	@Override
-	public List<Map<String, String>> battingList(){
+	public Map<String,Object> battingSelectOne(int battingId){
+		
+		return battingDao.battingSelectOne(battingId);
+	}
 	
-		return battingDao.battingList();
+	@Override
+	public List<Map<String, String>> battingList(String type){
+	
+		return battingDao.battingList(type);
 	}
 
 	@Override

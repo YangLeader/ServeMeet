@@ -28,21 +28,21 @@ public class battingController {
 	@Autowired
 	private PointService pointService;	
 	
+	
 	@RequestMapping("/batting/battingInfo.ba")
 	public String battingInfo(@RequestParam int no, Model model) {
 		
-		model.addAttribute("batting",battingService.battingSelect(no));
+		model.addAttribute("batting",battingService.battingSelectOne(no));
 		
 		return "batting/battingInfo";
 	}
 	
 	@RequestMapping("/batting/battingList.ba")
-	public String battingList(Model model) {
+	public String battingList(@RequestParam String type ,Model model) {
 		
-		ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList());
+		ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList(type));
 		
 		model.addAttribute("list",list);
-		
 		
 		return "batting/battingList";
 	}
@@ -70,7 +70,7 @@ public class battingController {
 		
 		int result2 = battingService.battingPickUser(bUser);
 		
-		ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList());
+		ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList("I"));
 		
 		model.addAttribute("list",list);
 		
@@ -103,14 +103,14 @@ public class battingController {
 		boolean check = result >0;
 		
 		String msg = check ? "배팅을 종료 하였습니다." : "배팅을 종료하지 못했습니다.";
-		String loc = check ? "/batting/battingList.ba" : "/batting/battingInfo.ba";
+		String loc = check ? "/batting/battingList.ba?type=I" : "/batting/battingInfo.ba";
 		
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc",loc);
 		
 		return "common/msg";
 	}
-	
+	/*
 	@RequestMapping("/batting/battingInsert.ba")
 	public String battingInsert(Model model) {
 		
@@ -124,7 +124,7 @@ public class battingController {
 		
 		return "common/msg";
 		
-	}
+	}*/
 	@RequestMapping("/batting/battingAllocation.ba")
 	public String battingAllocation(@RequestParam int battingId, Model model) {
 		

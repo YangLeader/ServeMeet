@@ -35,20 +35,16 @@ $(function(){
 						<th>B팀 인원</th>
 					</tr>
 					<c:forEach items="${list}" var="b"> 
-					<tr id="${b.battingId}">
-						<td>${b.battingId}</td>
-						<td>타-이틀(매칭과 조인)</td>
-						<td>${b.battingPNumA}</td>
-						<td>${b.battingPNumB}</td>
+					<tr id="${b.BATTINGID}">
+						<td>${b.BATTINGID}</td>
+						<td>${b.MTITLE}</td>
+						<td>${b.BATTINGPNUMA}</td>
+						<td>${b.BATTINGPNUMB}</td>
 					</tr>
 					</c:forEach>
 				</table>
 				<c:out value="${pageBar}" escapeXml="false"/>
 			</section> 
-	</div>
-	
-	<div>
-		<input type="button" value="배팅 생성" onclick="location.href='${pageContext.request.contextPath}/batting/battingInsert.ba';"/>
 	</div>
 
 </body>
