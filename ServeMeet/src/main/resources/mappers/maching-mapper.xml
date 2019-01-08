@@ -23,7 +23,7 @@
 		INSERT INTO MATCHING VALUES(
 			SEQ_MATCHINGID.NEXTVAL, #{mTitle}, 
 			#{mContent}, #{mPeoplenum}, #{locationId}, 
-			#{categoryId}, #{mWriter}, 'NONE', #{mtime}, DEFAULT 
+			#{categoryId}, #{mWriter}, NULL, #{mtime}, DEFAULT 
 			)
 	</insert>
 
