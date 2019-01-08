@@ -191,4 +191,14 @@ public class MatchingController {
 		return "/matching/matchingHistoryView";
 	}
 	
+	@RequestMapping("matching/matchingList.ma")
+	public String mList(@RequestParam String type, Model model) {
+		System.out.println(type);
+		
+		ArrayList<Object> list = new ArrayList<>();
+		list = (ArrayList<Object>) matchingService.matchingSelectList(type);
+		
+		return "/matching/matchingList";
+	}
+	
 }
