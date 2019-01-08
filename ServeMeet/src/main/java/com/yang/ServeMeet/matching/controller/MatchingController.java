@@ -35,11 +35,12 @@ public class MatchingController {
 	}
 	
 	@RequestMapping("matching/matchingInsert.ma")
-	public String matchingInsert(Matching matching , Model model , HttpSession session) {
+	public String matchingInsert(Matching matching , Model model , HttpSession session, @RequestParam("batChk") String batChk) {
 		//int result = matchingService.matchingInsert(matching);
 		System.out.println(matching.toString());
-		
+		System.out.println("test:" + batChk);
 		int result = matchingService.matchingInsert(matching);
+		
 		String home = "/";
 		String msg = "";
 		if(result > 0) {

@@ -142,7 +142,7 @@
 	<div class="insertDiv">
 		<div class="titleDiv">
 			<h2>매칭 제목</h2>
-			<input type="text" name="mWriter" value="${member.userName}" />
+			<input type="text" name="mWriter" value="${member.userName}" style="display: none" />
 			
 			<br />
 			<input type="text" class="form-control" name="mTitle" id="wr_subject" placeholder="매칭 제목을 작성해주세요."/>
@@ -217,10 +217,15 @@
 								<option value="30">30명</option>
 							</select>
 						</td>
+						<th class="mtH">배팅 여부</th>
+						<td >
+							<label for="batTrue"><input type="radio" name="batChk" id="batTrue" value="true" disabled/>배팅 가능</label>&nbsp;
+							<label for="batFalse"><input type="radio" name="batChk" id="batFalse" value="false" checked="checked" disabled/>배팅 불가능</label>
+						</td>
 					</tr>
 					<tr>
 						<th class="mtH">장소</th>
-						<td>
+						<td colspan="3">
 							<select name="mathingBig" id="bigLoc">
 								<option value="시도" selected="selected">시/도</option>
 								<option value="서울특별시">서울특별시</option>
@@ -392,6 +397,8 @@ $(function(){
 
 function circleSelBox() {
 	var circles = ["여행","공연","음악","영화","전시회","미팅","미술","기타"];
+	$("input[name=batChk]").attr("disabled","true");
+	$("#batFalse").prop("checked","true");
 	$('#event').empty();
 	for(var i in circles){		
 		$('#event').append("<option value='"+circles[i]+"'>"+circles[i]+"</option>");
@@ -400,6 +407,8 @@ function circleSelBox() {
 
 function sportsSelBox() {
 	var sprots = ["농구","축구","풋살","야구","배구","탁구","배드민턴","볼링","당구","테니스","기타"];
+	$("input[name=batChk]").attr("disabled","true");
+	$("#batFalse").prop("checked","true");
 	$('#event').empty();
 	for(var i in sprots){		
 		$('#event').append("<option value='"+sprots[i]+"'>"+sprots[i]+"</option>");
@@ -408,6 +417,7 @@ function sportsSelBox() {
 
 function eSportsSelBox() {
 	var eSports = ["리그오브레전드","피파온라인","배틀그라운드","오버워치","스타크래프트","기타"];
+	$("input[name=batChk]").removeAttr("disabled");
 	$('#event').empty();
 	for(var i in eSports){		
 		$('#event').append("<option value='"+eSports[i]+"'>"+eSports[i]+"</option>");
