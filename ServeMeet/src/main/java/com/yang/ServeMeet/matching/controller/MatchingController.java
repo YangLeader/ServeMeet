@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
@@ -28,6 +29,9 @@ public class MatchingController {
 	
 	@Autowired
 	private MatchingService matchingService;
+	
+	@Autowired
+	private BattingService battingService;
 	
 	@RequestMapping("matching/matchingInsertView.ma")
 	public String matchingInsertView(){
@@ -47,6 +51,13 @@ public class MatchingController {
 			msg = "매칭이 등록 되었습니다.";
 		}else {
 			msg = "매칭 등록에 실패하였습니다.";
+		}
+		if(batChk.equals("true")) {
+		
+			battingService.battingInsert();
+			
+			System.out.println("배팅 생성 성공!!");
+			
 		}
 		
 		model.addAttribute("home", home);

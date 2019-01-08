@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../common/header.jsp" />
+
+
 <title>종료된 배팅 목록</title>
 
 
@@ -23,6 +25,7 @@ $(function(){
 </script>
 </head>
 <body>
+
 
 <div id="container">
 			<section id="board-container" class="container">
@@ -39,14 +42,21 @@ $(function(){
 						<th>승리여부</th>
 					</tr>
 					<c:forEach items="${list}" var="mybatting"> 
+					
+					<c:set var = "pNumA">${mybatting.BATTINGPNUMA}</c:set>
+					<c:set var = "pNumB">${mybatting.BATTINGPNUMB}</c:set>
+						
 					<tr id="${mybatting.BATTINGID}">
 						<td>${mybatting.BATTINGID}</td>
 						<td>${mybatting.BIGCATEGORY} - ${mybatting.MIDCATEGORY}</td>
 						<td>${mybatting.MTITLE}</td>
 						<td>${mybatting.BATTINGSELECT}팀</td>
-						<td>배당</td>
+						<td>
+						<c:if test='${mybatting.BATTINGSELECT eq "A"}'><fmt:formatNumber value="${(100-pNumA/(pNumA + pNumB)*100)*15/1000 + 1}" pattern=".00"/>배</c:if>
+						<c:if test='${mybatting.BATTINGSELECT eq "B"}'><fmt:formatNumber value="${(100-pNumB/(pNumA + pNumB)*100)*15/1000 + 1}" pattern=".00"/>배</c:if>
+						</td>
 						<td>${mybatting.BSTATUS}</td>
-						<td>승리여부</td>
+						<td>${pNumA} / ${pNumB}</td>
 					</tr>
 					</c:forEach>
 				</table>

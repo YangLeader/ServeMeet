@@ -11,7 +11,9 @@ public interface BattingService {
 	
 	Batting battingSelect(int battingId);
 	
-	List<Map<String,String>> battingList();
+	Map<String,Object> battingSelectOne(int battingId);
+	
+	List<Map<String,String>> battingList(String type);
 	
 	int battingPick(int battingId, String battingSelect);
 	
