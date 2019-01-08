@@ -115,20 +115,32 @@
 							 .attr("value",data[i])
 						);
 					}
-					$(".memberName").click(function() {
-						var mName=$(this).attr("value");
-						memberArray(mName);
-						console.log(mName);
-					})
+					
 				},error: function() {
 					console.log("에러");
 				}
 			});
 		});
-		
+		$(document).on("click",".inMemberName",function() {
+			var inUserName=$(this).attr("value");
+			$(this).remove();
+			var temp = new Array();
+			for(var i in mName){
+				if(mName[i]!=inUserName){
+					temp.push(mName[i]);
+				}
+			}
+			mName=temp;
+			console.log("지운있는 회원");
+			console.log(mName);
+		})
+		$(document).on("click",".memberName",function() {
+						var mName=$(this).attr("value");
+						memberArray(mName);
+						console.log(mName);
+					})
 		
 	});
-	
 	function memberArray(userName) {
 		if(!mName.includes(userName)){
 			mName.push(userName);
@@ -138,10 +150,19 @@
 				).attr("class","inMemberName")
 				 .attr("value",userName)
 			);
+		//	var printHTML="<div class='inMemberName'value='"+userName+"'>";
+		//	printHTML+="<span>"+userName;
+		//	printHTML+="</span>";
+		//	printHTML+="</div>";
+		//	$('.inMember').append(printHTML);
 			
 		}
-	
+		
 		console.log(mName);
+	}
+	function createChatGroup()() {
+		action="${pageContext.request.contextPath}/chat/insertChatRoom.do";
+		
 	}
 </script>
 <style>

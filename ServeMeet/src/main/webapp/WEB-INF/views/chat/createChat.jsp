@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form id="createChatForm" method="post">
 <div class="container">
 	<div class="modal fade" id="createChat" role="dialog">
 	    <div class="modal-dialog">
@@ -32,14 +33,15 @@
 	          </div>
 	        </div>
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" onclick="createChatRoom();" data-dismiss="modal">Close</button>
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-default" onclick="createChatGroup();" data-dismiss="modal">만들기</button>
+	          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 	        </div>
 	      </div>
 	      
 	    </div>
     </div>
 </div>
+</form>
 <script >
 	
 </script>

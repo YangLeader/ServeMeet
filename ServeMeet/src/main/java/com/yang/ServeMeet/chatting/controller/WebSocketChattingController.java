@@ -24,6 +24,7 @@ public class WebSocketChattingController {
 
 	@Autowired
 	private ChattingService cs;
+	
 	@RequestMapping(value = "/chat/allChatList.do", method = RequestMethod.POST)
 	public ModelAndView allChatList(HttpServletRequest req,HttpSession session) throws Exception {
 
@@ -111,7 +112,7 @@ public class WebSocketChattingController {
 		list.add(myName);
 		list.add(userName);
 		nameMap.put("userNameList", list);
-		
+				
 		Chatting chat = cs.isChat(userNameMap);
 		
 		if(chat==null) {
