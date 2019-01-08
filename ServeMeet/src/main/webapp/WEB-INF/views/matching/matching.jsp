@@ -78,7 +78,8 @@
 	<div class="in scrollbar-primary scrollbar" id="bottomDiv" style=""></div>
 </div>
 
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
 
@@ -97,7 +98,7 @@
 			        $('div #bottomDiv').append("<a class='btn-xs btn-default' id='dateStr' onclick='check(this);'>"+ date + "<span class='delTag'></span></a>");
 			  }
 		
-		});
+		}); 
 	
 	var arr = new Array();
 	//var compareArr = new Array();
