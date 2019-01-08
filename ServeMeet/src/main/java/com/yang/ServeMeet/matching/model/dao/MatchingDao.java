@@ -27,4 +27,6 @@ public interface MatchingDao {
 
 	List<Map<String,String>> mHistoryList();
 	
+	List matchingSelectList(String type);
+	
 }

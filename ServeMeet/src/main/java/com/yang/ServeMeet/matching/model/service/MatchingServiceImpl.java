@@ -81,5 +81,11 @@ public class MatchingServiceImpl implements MatchingService {
 		
 		return matchingDao.mHistoryList();
 	}
+
+	@Override
+	public List matchingSelectList(String type) {
+		
+		return matchingDao.matchingSelectList(type);
+	}
 	
 }

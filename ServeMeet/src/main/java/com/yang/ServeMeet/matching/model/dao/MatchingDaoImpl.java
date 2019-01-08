@@ -68,4 +68,20 @@ public class MatchingDaoImpl implements MatchingDao {
 		
 		return session.selectList("Matching.mHistoryList");
 	}
+
+	@Override
+	public List matchingSelectList(String type) {
+		String cat = "";
+		if(type.equals("M")) {
+			System.out.println("소모임 입니다.");
+			cat = "1";
+		}else if(type.equals("S")) {
+			System.out.println("스포츠 입니다.");
+			cat = "2";
+		}else {
+			System.out.println("E-스포츠 입니다.");
+			cat = "3";
+		}
+		return session.selectList("Matching.matchingSelectList", cat);
+	}
 }

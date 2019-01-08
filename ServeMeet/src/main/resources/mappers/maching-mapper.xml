@@ -35,6 +35,10 @@
 		SELECT * FROM MATCHING WHERE MATCHINGID = #{matchingId}
 	</select>
 	
+	<select id="matchingSelectList" parameterType="string" resultType="Matching">
+		SELECT * FROM MATCHING WHERE CATEGORYID LIKE #{cat} || '%'
+	</select>
+	
 	<insert id="mHistoryInsert">
 		INSERT INTO MATCHINGHISTORY VALUES(SEQ_MHISTORYID.NEXTVAL , #{matchingId} ,#{userName} ,#{mhContent}, DEFAULT , DEFAULT)
 	</insert>
