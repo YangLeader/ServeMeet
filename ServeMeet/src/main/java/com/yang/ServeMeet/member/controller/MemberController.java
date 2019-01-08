@@ -1,6 +1,8 @@
 package com.yang.ServeMeet.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -34,6 +36,16 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	@RequestMapping("/member/memberSearch.do")
+	@ResponseBody
+	public List<String> memberSearch(@RequestParam String keyword) {
+		ModelAndView mv = new ModelAndView();
+		List<String> list = new ArrayList<String>();
+		
+		list=memberService.memberSearch(keyword);
+		
+		return list;
+	}
 	@RequestMapping("/member/memberEnroll.do")
 	public String memberEnroll() {
 		if(logger.isDebugEnabled()) logger.debug("회원가입페이지 고");

@@ -7,6 +7,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- cnd방식으로 sockjs불러오기 -->
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
@@ -19,7 +22,9 @@
 	
 	var chatName= "${chatName}";
 	
-	var myNo=${member.userNo}
+	var myNo=${member.userNo};
+	
+	var mName=new Array();
 	$(function() {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
@@ -82,21 +87,76 @@
 			}
 			
 		})
+		$(".outBtn").click(function() {
+		
+				location.href="#createChat";
+			
+			
+		})
 	})
+	function createChatRoom(){
+		console.log("만들기");
+	}
+	$(function() {
+		$(".mSearch").click(function() {
+			var keyword=$(".keyword").val();
+			console.log(keyword);
+			$.ajax({
+				url:"${pageContext.request.contextPath }/member/memberSearch.do",
+				data:{keyword:keyword},
+				datatype:"json",
+				success : function(data) {
+					console.log(data);
+					for(var i in data){
+						$(".searchMember").append(
+							$("<div>").append(
+								$("<span>").append(data[i])		
+							).attr("class","memberName")
+							 .attr("value",data[i])
+						);
+					}
+					$(".memberName").click(function() {
+						var mName=$(this).attr("value");
+						memberArray(mName);
+						console.log(mName);
+					})
+				},error: function() {
+					console.log("에러");
+				}
+			});
+		});
+		
+		
+	});
 	
+	function memberArray(userName) {
+		if(!mName.includes(userName)){
+			mName.push(userName);
+			$(".inMember").append(
+				$("<div>").append(
+					$("<span>").append(userName)		
+				).attr("class","inMemberName")
+				 .attr("value",userName)
+			);
+			
+		}
+	
+		console.log(mName);
+	}
 </script>
 <style>
 
 </style>
 </head>
 <body>
-<header>
+	<header>
 		<c:import url="../common/header.jsp" />
-	</header>
+	</header> 
 <div class="chattingRoom">
 	<div class = "chattingTop">
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 myList" >
-			<span><img class="plusBtn" alt="채팅방 만들기" src="${pageContext.request.contextPath}/resources/images/plus.png"></span>
+			<span data-toggle="modal" data-target="#createChat"><img class="plusBtn" alt="채팅방 만들기" src="${pageContext.request.contextPath}/resources/images/plus.png"></span>
+		
 		</div>
 		<div  class= 'col-lg-8 col-md-8 col-sm-8 col-xs-8 chatName'>
 			<h2>${chatName}</h2>
@@ -118,8 +178,13 @@
 		
 	</div>
 </div>
+<section>
+	<article>
+		<c:import url="createChat.jsp"/>
+	</article>
+</section>	
 	<footer>
 		<c:import url="../common/footer.jsp" />
-	</footer>
+	</footer> 
 </body>
 </html>
