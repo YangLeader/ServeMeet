@@ -23,6 +23,7 @@ import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
+import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 
 @Controller
 public class MatchingController {
@@ -42,7 +43,7 @@ public class MatchingController {
 	public String matchingInsert(Matching matching , Model model , HttpSession session, @RequestParam("batChk") String batChk) {
 		//int result = matchingService.matchingInsert(matching);
 		System.out.println(matching.toString());
-		System.out.println("test:" + batChk);
+		System.out.println("++++++++++++++++++++++++++++++++" + batChk);
 		int result = matchingService.matchingInsert(matching);
 		
 		String home = "/";
@@ -200,6 +201,17 @@ public class MatchingController {
 		model.addAttribute("mHistory",mHistory);
 		
 		return "/matching/matchingHistoryView";
+	}
+	
+	@RequestMapping("matching/matchingList.ma")
+	public String mList(@RequestParam String type, Model model) {
+		System.out.println(type);
+		
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>(matchingService.matchingSelectList(type));
+
+		model.addAttribute("matchingList",list);
+		
+		return "/matching/matchingList";
 	}
 	
 }

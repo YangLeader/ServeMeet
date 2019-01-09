@@ -78,6 +78,7 @@
 	<select id ="memberSearch" parameterType="string" resultType="String">
 		select USERNAME from MEMBER where USERNAME like '%' || #{keyword} || '%'
 	</select>
+
 	<select id="searchPwdCheck" parameterType="hashmap" resultType="_int">
 		select count(*) from member
 		where userId = #{userId} and email = #{email}
@@ -135,6 +136,7 @@ BEGIN
 END;
 /
 -->
+
 </mapper>
 
 

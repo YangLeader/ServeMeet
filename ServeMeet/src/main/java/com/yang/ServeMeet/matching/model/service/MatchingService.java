@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.matching.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import com.yang.ServeMeet.category.model.vo.Category;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
+import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 
 public interface MatchingService {
 	
@@ -27,5 +29,7 @@ public interface MatchingService {
 	int mHistoryInsert(MatchingHistory mHistory , List<BoardFile> fileList);
 
 	List<Map<String,String>> mHistoryList();
+	
+	List<Map<String,String>> matchingSelectList(String type);
 	
 }

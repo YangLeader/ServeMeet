@@ -12,7 +12,7 @@
 }
 
 #loc{
-	width: 15%;
+	width: 20%;
 }
 
 #cate{
@@ -73,7 +73,7 @@
 	float: left;
 	display: inline-block;
 	background: white;
-	width: 15%;
+	width: 20%;
 	height: 300px;
 	overflow: auto;
 	margin: auto;
@@ -141,8 +141,15 @@
 	
 }
 
+.item2in1{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
 #midDiv {
-	width: 40%;
+	width: 35%;
 	font-size: 11px;
 }
 
@@ -167,8 +174,9 @@
 	float: left;
 }
 
+
 #dateDiv{
-	width: 53%;
+	width: 48%;
 	float: left;
 }
 
@@ -198,6 +206,9 @@ label {
 	background: white;
 }
 
+.dekd{
+	display: none;
+}
 .delTag {
 	margin-left: 3px;
 	margin-bottom: 2px;

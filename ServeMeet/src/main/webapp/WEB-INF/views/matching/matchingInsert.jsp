@@ -219,8 +219,9 @@
 						</td>
 						<th class="mtH">배팅 여부</th>
 						<td >
-							<label for="batTrue"><input type="radio" name="batChk" id="batTrue" value="true" disabled/>배팅 가능</label>&nbsp;
-							<label for="batFalse"><input type="radio" name="batChk" id="batFalse" value="false" checked="checked" disabled/>배팅 불가능</label>
+							<label for="batTrue"><input type="radio" name="batChkbt" id="batTrue" value="true" disabled/>배팅 가능</label>&nbsp;
+							<label for="batFalse"><input type="radio" name="batChkbt" id="batFalse" value="false" checked="checked" disabled/>배팅 불가능</label>
+							<input type="hidden" name="batChk" value="false" />
 						</td>
 					</tr>
 					<tr>
@@ -288,7 +289,10 @@
 	<!-- <script src="lang/summernote-ko-KR.js"></script> -->
 <script>
 $(function(){
-
+	
+	$('input[name=batChkbt]').change(function () {
+		$('input[name=batChk]').val($('input[name=batChkbt]:checked').val());
+	});
 	// --------- flatpicker -------- //
 	$("#datePic").flatpickr({
 		  dateFormat: "Y-m-d",
@@ -397,7 +401,7 @@ $(function(){
 
 function circleSelBox() {
 	var circles = ["여행","공연","음악","영화","전시회","미팅","미술","기타"];
-	$("input[name=batChk]").attr("disabled","true");
+	$("input[name=batChkbt]").attr("disabled","true");
 	$("#batFalse").prop("checked","true");
 	$('#event').empty();
 	for(var i in circles){		
@@ -407,7 +411,7 @@ function circleSelBox() {
 
 function sportsSelBox() {
 	var sprots = ["농구","축구","풋살","야구","배구","탁구","배드민턴","볼링","당구","테니스","기타"];
-	$("input[name=batChk]").attr("disabled","true");
+	$("input[name=batChkbt]").attr("disabled","true");
 	$("#batFalse").prop("checked","true");
 	$('#event').empty();
 	for(var i in sprots){		
@@ -417,7 +421,7 @@ function sportsSelBox() {
 
 function eSportsSelBox() {
 	var eSports = ["리그오브레전드","피파온라인","배틀그라운드","오버워치","스타크래프트","기타"];
-	$("input[name=batChk]").removeAttr("disabled");
+	$("input[name=batChkbt]").removeAttr("disabled");
 	$('#event').empty();
 	for(var i in eSports){		
 		$('#event').append("<option value='"+eSports[i]+"'>"+eSports[i]+"</option>");
@@ -452,6 +456,7 @@ function arrCheck() {
 	})
 	
 	if(bigCat == '소모임'){
+		$('input[name=batChk]').val('false');
 		categoryId = 100;
 		if(midCat == '여행'){
 			categoryId += 1;
@@ -471,6 +476,7 @@ function arrCheck() {
 			categoryId += 0;
 		}
 	}else if(bigCat == '스포츠'){
+		$('input[name=batChk]').val('false');
 		categoryId = 200;
 		if(midCat == '농구'){
 			categoryId += 1;
