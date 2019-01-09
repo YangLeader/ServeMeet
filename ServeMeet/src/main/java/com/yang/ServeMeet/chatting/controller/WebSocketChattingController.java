@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
+import com.yang.ServeMeet.chatting.model.vo.ChatCreateInfo;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.member.model.vo.Member;
 
@@ -132,5 +135,25 @@ public class WebSocketChattingController {
 		
 		
 		return mv;
+	}
+	@RequestMapping(value="/chat/insertChatRoom.do" ,method=RequestMethod.POST)
+	public ModelAndView insertChat(@RequestParam("memberName") String memberName,@RequestParam String chatName/*List<String> memberName*/,HttpServletRequest req, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("memberName  "+memberName);
+		List<String> jsonToObj = new Gson().fromJson(memberName, List.class);
+		List<String> list = new ArrayList<String>();
+		
+		ChatCreateInfo chatInfo = new ChatCreateInfo();
+		chatInfo.setChatName(chatName);
+		for(String s :jsonToObj) {
+			list.add(s);
+		}
+		chatInfo.setUserName(list);
+		cs.insertChatGroup(chatInfo);
+
+		
+		
+		mv.setViewName("chat/chattingView");
+		return mv;		
 	}
 }

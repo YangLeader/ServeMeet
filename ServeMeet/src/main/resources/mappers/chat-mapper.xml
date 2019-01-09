@@ -84,6 +84,17 @@
 		select *
 		from dual
 	</insert>
+	<insert id="insertChatGroup" parameterType="ChatCreateInfo">
+		insert all
+		into
+		CHATTINGLIST VALUES(seq_chat.nextval ,#{chatName},default)
+		<foreach collection="userName" item="item">
+		into CHATTING_GROUP
+		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}))
+		</foreach>
+		select *
+		from dual
+	</insert>
 	
 	<delete id="deletechatRoom" parameterType="map">
 		delete from Chatting_Group where Chattingid=#{chatNo} and Userno =#{userNo}

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -24,7 +23,7 @@
 	
 	var myNo=${member.userNo};
 	
-	var mName=new Array();
+	var memberName=new Array();
 	$(function() {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
@@ -125,14 +124,14 @@
 			var inUserName=$(this).attr("value");
 			$(this).remove();
 			var temp = new Array();
-			for(var i in mName){
-				if(mName[i]!=inUserName){
-					temp.push(mName[i]);
+			for(var i in memberName){
+				if(memberName[i]!=inUserName){
+					temp.push(memberName[i]);
 				}
 			}
-			mName=temp;
+			memberName=temp;
 			console.log("지운있는 회원");
-			console.log(mName);
+			console.log(memberName);
 		})
 		$(document).on("click",".memberName",function() {
 						var mName=$(this).attr("value");
@@ -142,8 +141,8 @@
 		
 	});
 	function memberArray(userName) {
-		if(!mName.includes(userName)){
-			mName.push(userName);
+		if(!memberName.includes(userName)){
+			memberName.push(userName);
 			$(".inMember").append(
 				$("<div>").append(
 					$("<span>").append(userName)		
@@ -158,12 +157,24 @@
 			
 		}
 		
-		console.log(mName);
+		console.log(memberName);
 	}
-	function createChatGroup()() {
-		action="${pageContext.request.contextPath}/chat/insertChatRoom.do";
-		
-	}
+  	function createChatGroup(){
+		var jArray=JSON.stringify(memberName);
+		var cChatName = $(".modal-body .chatName").val();
+		console.log("jArray+++");	
+		console.log(jArray);	
+		$.ajax({
+			url:"${pageContext.request.contextPath}/chat/insertChatRoom.do",
+			data:{
+				 memberName:jArray,
+				 chatName:cChatName	},
+			datatype:"json",
+			type:"post"
+			//, contentType: "application/json; charset=UTF-8"
+			
+		});
+		}
 </script>
 <style>
 
