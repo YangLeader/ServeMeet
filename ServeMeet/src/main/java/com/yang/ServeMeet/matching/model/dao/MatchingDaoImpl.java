@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.matching.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
+import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 
 @Repository
 public class MatchingDaoImpl implements MatchingDao {
@@ -70,7 +72,7 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 
 	@Override
-	public List matchingSelectList(String type) {
+	public List<Map<String,String>> matchingSelectList(String type) {
 		String cat = "";
 		if(type.equals("M")) {
 			System.out.println("소모임 입니다.");
@@ -82,6 +84,7 @@ public class MatchingDaoImpl implements MatchingDao {
 			System.out.println("E-스포츠 입니다.");
 			cat = "3";
 		}
+		System.out.println("조회 결과 :" +session.selectList("Matching.matchingSelectList", cat));
 		return session.selectList("Matching.matchingSelectList", cat);
 	}
 }

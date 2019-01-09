@@ -10,12 +10,16 @@
 		<typeAlias type="com.yang.ServeMeet.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.yang.ServeMeet.board.model.vo.BoardComment" alias="BoardComment"/>
 		<typeAlias type="com.yang.ServeMeet.board.model.vo.BoardFile" alias="BoardFile"/>
+		<typeAlias type="com.yang.ServeMeet.board.model.vo.Report" alias="Report"/>
 		<typeAlias type="com.yang.ServeMeet.category.model.vo.Category" alias="Category"/>
 		<typeAlias type="com.yang.ServeMeet.location.model.vo.Location" alias="Location"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChatUser" alias="ChatUser"/>
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.Chatting" alias="Chatting"/>
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingLog" alias="ChattingLog"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingRoom" alias="ChattingRoom"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.Matching" alias="Matching"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingHistory" alias="MatchingHistory"/>
+		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingListObj" alias="MatchingObj"/>
 		<typeAlias type="com.yang.ServeMeet.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.yang.ServeMeet.common.StringArrayTypeHandler"
 			alias ="strArrTypeHandler"/>

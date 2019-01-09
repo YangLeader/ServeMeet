@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.matching.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import com.yang.ServeMeet.matching.model.dao.MatchingDao;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
+import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 
 @Service
 public class MatchingServiceImpl implements MatchingService {
@@ -83,7 +85,7 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 
 	@Override
-	public List matchingSelectList(String type) {
+	public List<Map<String,String>> matchingSelectList(String type) {
 		
 		return matchingDao.matchingSelectList(type);
 	}
