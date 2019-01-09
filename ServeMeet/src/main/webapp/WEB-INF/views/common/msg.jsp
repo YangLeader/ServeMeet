@@ -24,6 +24,15 @@ if("${msg}" !="login"){
 		    	  location.href="${pageContext.request.contextPath}${loc}";
 		      });
 		    });
+	}else if("${msg}" == "게시글 등록 성공!"){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
 	}else{
 		document.addEventListener("DOMContentLoaded", function(event) {
 		      swal({

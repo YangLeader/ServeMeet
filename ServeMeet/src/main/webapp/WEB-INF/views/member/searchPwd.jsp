@@ -11,6 +11,21 @@
 	<meta charset="UTF-8">
 	<title>비밀번호 찾기</title>
 	<c:import url="../common/header.jsp"/>
+	<style>
+		.swal-overlay {
+		  background-color: rgba(30, 30, 30, 0.45);
+		}
+		.swal-title {
+		  font-size: 20px;
+		}
+		.swal-text {
+		  font-size : 14px;
+		}
+		
+		.swal-content__input{
+		  font-size : 12px;
+		}
+	</style>
 </head>
 <body>
 
@@ -88,20 +103,73 @@
                         data : { email : $("#email").val()},
                         success : function(data){
                              console.log("이메일전송결과 : " + data);
-                             swal("입력하신 이메일로 인증번호를 전송하였습니다.",{
-                                 content: "input"
-                               })
+                             swal({
+                  			   title : "입력하신 이메일로 인증번호를 전송하였습니다.",
+               		   			text : "인증번호를 입력해주세요",
+               		   			content : "input",
+               		   			closeOnClickOutside: false
+               		   			})
                                .then((value) => {
                             	   if(value==data){
                             		   swal({
                             			   title : "인증번호 확인이 완료되었습니다.",
                             		   		text : "비밀번호를 다시 설정해주세요",
-                            		   		content : "input"
+                            		   		content: {
+                            		   		    element: "input",
+                            		   		    attributes: {
+                            		   		      placeholder: "비밀번호는 6~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.",
+                            		   		      type: "password",
+                            		   		   	button : {
+                        				    	   closeOnClickOutside: false,
+                              		   		   	   closeModal : false   
+                        				       	}
+                            		   		    }
+                            		   		}
                             		   })
                             		   .then((pwd) => {
-                            			   //swal("변경한 비밀번호 값은 :"+pwd);
-                            			   
+                            			   var isPwd = /^[A-Za-z0-9_-]{6,18}$/;
+                            			   if(!isPwd.test(pwd)){
+                            				   swal({
+                            					   text : "비밀번호 형식이 맞지 않습니다.",
+                            				       icon : "error",
+                            				       button : {
+                            				    	   closeOnClickOutside: false
+                            				       }
+                            				       
+                            				   })
+                            			   }else{
+                            			   $.ajax({
+                            		            url  : "${pageContext.request.contextPath}/member/resetPwd.do",
+                            		            data : {userId: $('#userId').val(),
+                            		            		userPwd: pwd},
+                            		            success : function(){
+                            		            	 swal({
+                            		            		 text : "비밀번호 변경이 완료되었습니다!",
+                            		            	 	 icon : "success"
+                            		            	 })
+                            		            	 .then((value) => {
+                                		            	 location.href="${pageContext.request.contextPath}/member/memberLoginView.do";
+                            		            	 })
+                            		            	 
+                            		            }, error : function(jqxhr, textStatus, errorThrown){
+                            		                console.log("ajax 처리 실패");
+                            		                //에러로그
+                            		                console.log(jqxhr);
+                            		                console.log(textStatus);
+                            		                console.log(errorThrown);
+                            		            }
+                            	        	});
+                            			   }
                             		   });
+                            	   }else {
+                            		   swal({
+                    					   text : "인증번호가 일치하지 않습니다.",
+                    				       icon : "error",
+                    				       button : {
+                    				    	   closeOnClickOutside: false
+                    				       }
+                    				       
+                    				   })
                             	   }
                                });
                              }, error : function(jqxhr, textStatus, errorThrown){

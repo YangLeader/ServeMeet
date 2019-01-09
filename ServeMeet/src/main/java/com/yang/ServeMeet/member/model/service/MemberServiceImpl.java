@@ -102,11 +102,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int resetPwd(String userId, String userPwd) {
-		HashMap<String,String> hmap = new HashMap<String,String>();
 		
+		HashMap<String,String> hmap = new HashMap<String,String>();
 		hmap.put("userId", userId);
 		hmap.put("userPwd",userPwd);
+		
 		return memberDao.resetPwd(hmap);
+		
 	}
 
 }

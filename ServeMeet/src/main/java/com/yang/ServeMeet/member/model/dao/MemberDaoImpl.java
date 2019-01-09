@@ -87,7 +87,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int resetPwd(HashMap<String, String> hmap) {
-		return sqlSession.selectOne("member.resetPwd",hmap);
+		return sqlSession.update("member.resetPwd",hmap);
 	}
 
 	

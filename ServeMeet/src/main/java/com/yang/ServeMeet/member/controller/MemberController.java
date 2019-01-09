@@ -11,6 +11,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +53,8 @@ public class MemberController {
 		if(logger.isDebugEnabled()) logger.debug("회원가입페이지 고");
 		return "member/memberEnroll";
 	}
+	
+	
 	
 	@RequestMapping("member/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
@@ -158,7 +161,7 @@ public class MemberController {
 		
 		if(logger.isDebugEnabled()) logger.debug("회원 상세 페이지 이동 확인!");
 		
-		return "member/memberView";
+		return "member/myPage";
 		
 	}
 	
@@ -280,7 +283,7 @@ public class MemberController {
 			String charSet = "utf-8";
 			String hostSMTP = "smtp.naver.com";		
 			String hostSMTPid = "servemeet19@naver.com"; // 본인의 아이디 입력		
-			String hostSMTPpwd = "@Qlalf0108"; // 비밀번호 입력
+			String hostSMTPpwd = "@Qlalf0109"; // 비밀번호 입력
 			
 			// 보내는 사람 EMail, 제목, 내용 
 			String fromEmail = "servemeet19@naver.com"; // 보내는 사람 eamil
@@ -291,7 +294,7 @@ public class MemberController {
 			String mail = email;  // 받는 사람 email	
 			
 			// 인증번호 랜덤 6자리
-			int identify = (int)(Math.random()*100000);
+			int identify = (int)(Math.random()*100000)+100000;
 			
 			try {
 				HtmlEmail hEmail = new HtmlEmail();
@@ -306,7 +309,7 @@ public class MemberController {
 				hEmail.addTo(mail, charSet);
 				hEmail.setFrom(fromEmail, fromName, charSet);
 				hEmail.setSubject(subject);
-				hEmail.setHtmlMsg("<p>이메일 발송 테스트 입니다.<br> 인증번호는 "+identify+"</p>"); // 본문 내용
+				hEmail.setHtmlMsg("<div width ='500px' height='100px'><p><b>비밀번호 변경을 위한 인증메일입니다.</b><br><hr><br> 인증번호는 "+identify+"입니다.</p></div>"); // 본문 내용
 				hEmail.send();			
 			} catch (Exception e) {
 				System.out.println(e);
@@ -317,12 +320,25 @@ public class MemberController {
 	
 	@RequestMapping("/member/resetPwd.do")
 	@ResponseBody
-	public int resetPwd(@RequestParam String userId, @RequestParam String userPwd){
+	public String resetPwd(@RequestParam String userId, @RequestParam String userPwd){
 		
 		if(logger.isDebugEnabled()) logger.debug("비밀번호 변경 확인!");
 		
-		int isSame = memberService.resetPwd(userId,userPwd);
-		return isSame;
+		ModelAndView mv = new ModelAndView();
+		
+		String password = bcryptPasswordEncoder.encode(userPwd);
+		
+		memberService.resetPwd(userId,password);
+		
+		String loc = "/";
+		String msg ="비밀번호 변경 완료!";
+		
+		
+		
+		mv.addObject("loc", loc).addObject("msg", msg)
+		.setViewName("common/msg");
+		
+		return "common/msg";
 	}
 	
 
