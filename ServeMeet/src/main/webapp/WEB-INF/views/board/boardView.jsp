@@ -66,6 +66,10 @@
 			console.log("bordNo="+boardNo);
 			location.href = "${pageContext.request.contextPath}/board/boardView.do?no="+boardNo;
 		});
+		
+		var count = $('input[name="reportCount"]').val();
+		
+		console.log("이 게시글의 신고 횟수 : " + count);
 	});
 </script>
 
@@ -139,6 +143,7 @@ $(document).ready(function(){
 			
 			<span>
 				<span class="glyphicon glyphicon-eye-open"></span> ${board.boardCount }			</span>
+				<input type="hidden" name="reportCount" value="${board.reportCount }"/>
 		</section>
 	</div>
 

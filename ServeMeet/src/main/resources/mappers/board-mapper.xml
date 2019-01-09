@@ -7,9 +7,9 @@
 	<!-- <select id="selectBoardList" resultMap="map"> -->
 	<!-- vo를 사용하는 경우 -->
 	<select id="selectBoardList" resultType="board">
-		SELECT A.*, (SELECT
-		COUNT(*) FROM BOARD_COMMENT WHERE BOARDNO = A.BOARDNO
-        AND COMMENTSTATUS = 'Y') COMMENTCOUNT
+		SELECT A.*, (SELECT COUNT(*) FROM BOARD_COMMENT 
+					 WHERE BOARDNO = A.BOARDNO AND COMMENTSTATUS = 'Y') COMMENTCOUNT,			 
+					 (SELECT COUNT(*) FROM REPORT WHERE BOARDNO = A.BOARDNO) REPORTCOUNT
 		FROM
 		BOARD A
 		WHERE BOARDSTATUS = 'Y'
@@ -22,7 +22,9 @@
 	</select>
 	<select id="selectOneBoard" parameterType="_int"
 		resultType="Board">
-		SELECT * FROM BOARD WHERE BOARDNO = #{boardNo}
+		SELECT A.*, (SELECT COUNT(*)
+             		 FROM REPORT WHERE BOARDNO = A.BOARDNO) REPORTCOUNT  
+		FROM BOARD A WHERE BOARDNO = #{boardNo}
 	</select>
 	<insert id="insertBoard">
 		INSERT INTO BOARD(BOARDNO, BOARDTITLE, BOARDCONTENT, USERNAME, BOARDCOUNT, BOARDDATE, BOARDSTATUS)

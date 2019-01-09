@@ -233,7 +233,7 @@
 			$('.drop').click(function(){
 									
 					/* $(this).children('#downlist').css('display', 'block'); */
-					$(this).siblings('#downlist').toggle('fast');										
+					$(this).siblings('#downlist').toggle('fast');
 					
 				$('html').click(function(e) {
 					

@@ -20,6 +20,47 @@
 	gtag('config', 'UA-109178580-1');
 </script>
 
+<!-- Smart Editor -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+ 
+ 
+<!-- Smart Editor -->
+<script type="text/javascript">
+
+var oEditors = [];
+$(function(){
+nhn.husky.EZCreator.createInIFrame({
+oAppRef: oEditors,
+elPlaceHolder: "wr_content",
+sSkinURI: "${pageContext.request.contextPath }/resources/se2/SmartEditor2Skin.html",
+fCreator: "createSEditor2"
+});
+});
+ 
+//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+function submitContents(elClickedObj) {
+    // 에디터의 내용이 textarea에 적용된다.
+    oEditors.getById["wr_content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+ 
+    // 에디터의 내용에 대한 값 검증은 이곳에서
+    // document.getElementById("wr_content").value를 이용해서 처리한다.
+  
+    try {
+        elClickedObj.form.submit();
+    } catch(e) {
+     
+    }
+}
+ 
+// textArea에 이미지 첨부
+function pasteHTML(filepath){
+    var sHTML = '<img src="${pageContext.request.contextPath }/resources/upload/'+filepath+'">';
+    oEditors.getById["wr_content"].exec("PASTE_HTML", [sHTML]);
+}
+ 
+</script>
+
 <!--
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
@@ -169,19 +210,27 @@
 					<input type="submit" class="btn btn-info" value="확인" />
 					<a href="${pageContext.request.contextPath }/board/boardList.do" class="btn btn-default">취소</a>
 				</div>
+			</div>
 				<br /><br /><br /><br />
 			</form>
 
 				<script>
 				
 					$('#fwrite').submit(function(){
-					
-					
-						if($('#wr_content').val() == ''){
-							alert('내용을 입력해 주세요!');
-							$('#wr_content').focus();
+						
+						oEditors.getById["wr_content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+						
+						var wr_content = $('#wr_content').val();
+						
+						console.log(wr_content);
+	
+						if( wr_content == ""  || wr_content == null || wr_content == '&nbsp;' || wr_content == '<p>&nbsp;</p>' || wr_content == '<br>')  {
+					             alert("내용을 입력하세요.");
+					             
+					             oEditors.getById["wr_content"].exec("FOCUS"); //포커싱
+						
 						} else {
-							$('#fwrite').submit();
+								$('#fwrite').submit();
 						}
 						
 						return false;
@@ -199,79 +248,6 @@
 							obj.value = "";
 					}
 
-					function fwrite_submit(f) {
-						var wr_content_editor_data = oEditors.getById['wr_content']
-								.getIR();
-						oEditors.getById['wr_content'].exec(
-								'UPDATE_CONTENTS_FIELD', []);
-						if (jQuery.inArray(document
-								.getElementById('wr_content').value
-								.toLowerCase().replace(/^\s*|\s*$/g, ''), [
-								'&nbsp;', '<p>&nbsp;</p>', '<p><br></p>',
-								'<div><br></div>', '<p></p>', '<br>', '' ]) != -1) {
-							document.getElementById('wr_content').value = '';
-						}
-						if (!wr_content_editor_data
-								|| jQuery.inArray(wr_content_editor_data
-										.toLowerCase(), [ '&nbsp;',
-										'<p>&nbsp;</p>', '<p><br></p>',
-										'<p></p>', '<br>' ]) != -1) {
-							alert("내용을 입력해 주십시오.");
-							oEditors.getById['wr_content'].exec('FOCUS');
-							return false;
-						}
-
-						var subject = "";
-						var content = "";
-						$.ajax({
-							url : g5_bbs_url + "/ajax.filter.php",
-							type : "POST",
-							data : {
-								"subject" : f.wr_subject.value,
-								"content" : f.wr_content.value
-							},
-							dataType : "json",
-							async : false,
-							cache : false,
-							success : function(data, textStatus) {
-								subject = data.subject;
-								content = data.content;
-							}
-						});
-
-						if (subject) {
-							alert("제목에 금지단어('" + subject + "')가 포함되어있습니다");
-							f.wr_subject.focus();
-							return false;
-						}
-
-						if (content) {
-							alert("내용에 금지단어('" + content + "')가 포함되어있습니다");
-							if (typeof (ed_wr_content) != "undefined")
-								ed_wr_content.returnFalse();
-							else
-								f.wr_content.focus();
-							return false;
-						}
-
-						if (document.getElementById("char_count")) {
-							if (char_min > 0 || char_max > 0) {
-								var cnt = parseInt(check_byte("wr_content",
-										"char_count"));
-								if (char_min > 0 && char_min > cnt) {
-									alert("내용은 " + char_min + "글자 이상 쓰셔야 합니다.");
-									return false;
-								} else if (char_max > 0 && char_max < cnt) {
-									alert("내용은 " + char_max + "글자 이하로 쓰셔야 합니다.");
-									return false;
-								}
-							}
-						}
-
-						document.getElementById("btn_submit").disabled = "disabled";
-
-						return true;
-					}
 
 					/*
 					$(document).ready(function(){

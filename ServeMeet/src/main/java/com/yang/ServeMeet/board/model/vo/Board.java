@@ -14,13 +14,14 @@ public class Board {
 	private Date boardDate;
 	private String boardStatus;
 	private int commentCount;
+	private int reportCount;
 	
 	public Board() {
 		super();
 	}
 
 	public Board(int boardNo, String boardTitle, String boardContent, String userName, int boardCount, Date boardDate,
-			String boardStatus, int commentCount) {
+			String boardStatus, int commentCount, int reportCount) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -30,85 +31,60 @@ public class Board {
 		this.boardDate = boardDate;
 		this.boardStatus = boardStatus;
 		this.commentCount = commentCount;
+		this.reportCount = reportCount;
 	}
 
 	public int getBoardNo() {
 		return boardNo;
 	}
 
-
-
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
-
-
 
 	public String getBoardTitle() {
 		return boardTitle;
 	}
 
-
-
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
-
-
 
 	public String getBoardContent() {
 		return boardContent;
 	}
 
-
-
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-
-
 
 	public String getUserName() {
 		return userName;
 	}
 
-
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-
 
 	public int getBoardCount() {
 		return boardCount;
 	}
 
-
-
 	public void setBoardCount(int boardCount) {
 		this.boardCount = boardCount;
 	}
-
-
 
 	public Date getBoardDate() {
 		return boardDate;
 	}
 
-
-
 	public void setBoardDate(Date boardDate) {
 		this.boardDate = boardDate;
 	}
 
-
-
 	public String getBoardStatus() {
 		return boardStatus;
 	}
-
-
 
 	public void setBoardStatus(String boardStatus) {
 		this.boardStatus = boardStatus;
@@ -122,11 +98,20 @@ public class Board {
 		this.commentCount = commentCount;
 	}
 
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", userName=" + userName + ", boardCount=" + boardCount + ", boardDate=" + boardDate
-				+ ", boardStatus=" + boardStatus + ", commentCount=" + commentCount + "]";
+				+ ", boardStatus=" + boardStatus + ", commentCount=" + commentCount + ", reportCount=" + reportCount
+				+ "]";
 	}
 	
 }
