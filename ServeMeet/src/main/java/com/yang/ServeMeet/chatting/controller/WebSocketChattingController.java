@@ -138,21 +138,33 @@ public class WebSocketChattingController {
 	}
 	@RequestMapping(value="/chat/insertChatRoom.do" ,method=RequestMethod.POST)
 	public ModelAndView insertChat(@RequestParam("memberName") String memberName,@RequestParam String chatName/*List<String> memberName*/,HttpServletRequest req, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		System.out.println("memberName  "+memberName);
+		
 		List<String> jsonToObj = new Gson().fromJson(memberName, List.class);
 		List<String> list = new ArrayList<String>();
-		
+		Map<String,Integer> map = new HashMap<String,Integer>();
+
+		ModelAndView mv = new ModelAndView();
 		ChatCreateInfo chatInfo = new ChatCreateInfo();
+		
+		String ipAddr = req.getRemoteAddr();
+
+		System.out.println("memberName  "+memberName);
+		
 		chatInfo.setChatName(chatName);
 		for(String s :jsonToObj) {
 			list.add(s);
 		}
 		chatInfo.setUserName(list);
 		cs.insertChatGroup(chatInfo);
-
+		map.put("chatNo", chatInfo.getReturnChatId());
+		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
 		
+		Chatting chat=cs.getChatName(map);
+		session.setAttribute("chat", chat);	
 		
+		mv.addObject("chatName", chat.getChattingName());
+		mv.addObject("chatNo", chat.getChattingId());
+		mv.addObject("host", ipAddr);
 		mv.setViewName("chat/chattingView");
 		return mv;		
 	}

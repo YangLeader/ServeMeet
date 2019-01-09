@@ -192,6 +192,7 @@ article{
 .chattingRoom .chattingTop{
 	width: 100%;height: 70px; background-color: #5e73de
 }
+
 .chattingRoom .chattingTop .chatName,  .chattingRoom .chattingTop .myList{
 	padding: 9px 15px;
 }
@@ -217,6 +218,7 @@ article{
 	background-color : #fff;
 	height:642px;
 	padding: 15px 10px;
+	overflow: scroll;
 }
 .chattingRoom .chatList .chatBox{
 	padding: 4px 10px;

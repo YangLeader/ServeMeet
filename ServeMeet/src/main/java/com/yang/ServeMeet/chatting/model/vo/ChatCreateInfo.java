@@ -5,6 +5,14 @@ import java.util.List;
 public class ChatCreateInfo {
 	private String chatName;
 	private List<String> userName;
+	private int returnChatId;
+	
+	public int getReturnChatId() {
+		return returnChatId;
+	}
+	public void setReturnChatId(int returnChatId) {
+		this.returnChatId = returnChatId;
+	}
 	public ChatCreateInfo(String chatName, List<String> userName) {
 		super();
 		this.chatName = chatName;

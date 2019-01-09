@@ -80,5 +80,6 @@ public class ChattingDaoImpl implements ChattingDao {
 		// TODO Auto-generated method stub
 		sst.insert("chat.insertChatGroup",chatInfo);
 		
+		
 	}
 }

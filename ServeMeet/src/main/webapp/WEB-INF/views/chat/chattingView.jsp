@@ -162,7 +162,7 @@
   	function createChatGroup(){
 		var jArray=JSON.stringify(memberName);
 		var cChatName = $(".modal-body .chatName").val();
-		console.log("jArray+++");	
+		/* console.log("jArray+++");	
 		console.log(jArray);	
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/insertChatRoom.do",
@@ -171,9 +171,30 @@
 				 chatName:cChatName	},
 			datatype:"json",
 			type:"post"
-			//, contentType: "application/json; charset=UTF-8"
 			
-		});
+			
+			
+		}); */
+		 var form = document.createElement("form");
+
+         form.setAttribute("method", "Post");  //Post 방식
+         form.setAttribute("action", "${pageContext.request.contextPath}/chat/insertChatRoom.do"); //요청 보낼 주소
+
+         var hiddenField = document.createElement("input");
+         hiddenField.setAttribute("type", "hidden");
+         hiddenField.setAttribute("name", "memberName");
+         hiddenField.setAttribute("value", jArray);
+         form.appendChild(hiddenField);
+
+         hiddenField = document.createElement("input");
+         hiddenField.setAttribute("type", "hidden");
+         hiddenField.setAttribute("name", "chatName");
+         hiddenField.setAttribute("value", cChatName);
+         form.appendChild(hiddenField);
+
+         document.body.appendChild(form);
+         form.submit();
+
 		}
 </script>
 <style>
