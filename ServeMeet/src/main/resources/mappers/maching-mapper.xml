@@ -3,7 +3,23 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Matching">
-
+	<resultMap type="map" id="MatchingList">
+		<result property="matchingId" column="MATCHINGID"/>
+		<result property="mTitle" column="MTITLE"/>
+		<result property="mContent" column="MCONTENT"></result>
+		<result property="mPeoplenum" column="MPEOPLENUM"></result>
+		<result property="locationId" column="LOCATIONID"></result>
+		<result property="categoryId" column="CATEGORYID"></result>
+		<result property="mWriter" column="MWRITER"></result>
+		<result property="mGuest" column="MGUEST"></result>
+		<result property="mtime" column="MTIME"></result>
+		<result property="mStatus" column="MSTATUS"></result>
+		<result property="bigCategory" column="BIGCATEGORY"></result>
+		<result property="midCategory" column="MIDCATEGORY"></result>
+		<result property="bigLocation" column="BIGLOCATION"></result>
+		<result property="midLocation" column="MIDLOCATION"></result>
+		<result property="smallCategory" column="SMALLCATEGORY"></result>
+	</resultMap>
 
 	<select id="myMatchingList" resultType="Map">
 
@@ -35,8 +51,14 @@
 		SELECT * FROM MATCHING WHERE MATCHINGID = #{matchingId}
 	</select>
 	
-	<select id="matchingSelectList" parameterType="string" resultType="Matching">
-		SELECT * FROM MATCHING WHERE CATEGORYID LIKE #{cat} || '%'
+	<select id="matchingSelectList" parameterType="string" resultMap="MatchingList">
+		<!-- SELECT * FROM MATCHING WHERE CATEGORYID LIKE #{cat} || '%' -->
+		SELECT  M.MATCHINGID,C.BIGCATEGORY, C.MIDCATEGORY , M.MTITLE,  L.BIGLOCATION, L.MIDLOCATION, L.SMALLCATEGORY,
+        M.MPEOPLENUM, M.CATEGORYID, M.MWRITER, M.MGUEST, M.MTIME, M.MSTATUS
+		FROM MATCHING M, LOCATION L, CATEGORY C
+		WHERE M.LOCATIONID = L.LOCATIONID
+		AND M.CATEGORYID = C.CATEGORYID
+		AND M.CATEGORYID LIKE #{cat} || '%'
 	</select>
 	
 	<insert id="mHistoryInsert">

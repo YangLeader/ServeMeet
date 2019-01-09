@@ -11,7 +11,7 @@
 	.listDiv{
 		border: 1px solid black;
 		margin: auto;
-		width: 80%;
+		width: 95%;
 		text-align: center;
 	}
 	
@@ -38,7 +38,7 @@
 	}
 	
 	#catBName{
-		width: 10%;
+		width: 7%;
 	}
 	
 	#catSName{
@@ -58,9 +58,11 @@
 	}
 	
 	#mtTime{
-		width: 10%;
+		width: 7%;
 	}
-	
+	#mpeople{
+		width: 6%;
+	}
 	#mStatus{
 		width: 10%;
 	}
@@ -77,15 +79,18 @@
 		<h1>매칭 리스트</h1>
 		<br /><br />
 		<div class="listDetailDiv">
-				<div class="objM">
-					<div class="con" id="catBName">소모임</div>
-					<div class="con" id="catSName">영화</div>
-					<div class="con" id="mtTitle">금요일날 영화볼 3명구합니다.</div>
-					<div class="con" id="locName">서울특별시 강남구 논현동</div>
-					<div class="con" id="mtwriter">관리자</div>
-					<div class="con" id="mtTime">2019-01-01 12:00</div>
-					<div class="con" id="mStatus">대기중</div>
-				</div>
+				<c:forEach items="${matchingList}" var="m">
+					<div class="objM">
+						<div class="con" id="catBName">${m.bigCategory }</div>
+						<div class="con" id="catSName">${m.midCategory }</div>
+						<div class="con" id="mtTitle">${m.mTitle }</div>
+						<div class="con" id="locName">${m.bigLocation } ${m.midLocation } ${m.smallCategory }</div>
+						<div class="con" id="mtwriter">${m.mWriter }</div>
+						<div class="con" id="mtTime">${m.mtime}</div>
+						<div class="con" id="mpeople">${m.mPeoplenum }</div>
+						<div class="con" id="mStatus">${m.mStatus}</div>
+					</div>
+				</c:forEach>
 		</div>
 	</div>
 	<br />

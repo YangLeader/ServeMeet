@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.matching.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import com.yang.ServeMeet.category.model.vo.Category;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
+import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 
 public interface MatchingDao {
 	
@@ -27,6 +29,6 @@ public interface MatchingDao {
 
 	List<Map<String,String>> mHistoryList();
 	
-	List matchingSelectList(String type);
+	List<Map<String,String>> matchingSelectList(String type);
 	
 }

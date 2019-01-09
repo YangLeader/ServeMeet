@@ -19,6 +19,7 @@
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingRoom" alias="ChattingRoom"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.Matching" alias="Matching"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingHistory" alias="MatchingHistory"/>
+		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingListObj" alias="MatchingObj"/>
 		<typeAlias type="com.yang.ServeMeet.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.yang.ServeMeet.common.StringArrayTypeHandler"
 			alias ="strArrTypeHandler"/>
