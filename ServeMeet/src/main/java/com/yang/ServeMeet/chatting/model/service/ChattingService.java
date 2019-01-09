@@ -3,6 +3,7 @@ package com.yang.ServeMeet.chatting.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.yang.ServeMeet.chatting.model.vo.ChatCreateInfo;
 import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
@@ -29,6 +30,8 @@ public interface ChattingService {
 	Chatting selectLastChatNo(int userNo);
 
 	void deletechatRoom(Map<String, Integer> map);
+
+	void insertChatGroup(ChatCreateInfo chatInfo);
 
 	
 

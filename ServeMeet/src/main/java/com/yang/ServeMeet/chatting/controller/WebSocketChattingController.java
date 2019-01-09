@@ -12,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
+import com.yang.ServeMeet.chatting.model.vo.ChatCreateInfo;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.member.model.vo.Member;
 
@@ -24,6 +27,7 @@ public class WebSocketChattingController {
 
 	@Autowired
 	private ChattingService cs;
+	
 	@RequestMapping(value = "/chat/allChatList.do", method = RequestMethod.POST)
 	public ModelAndView allChatList(HttpServletRequest req,HttpSession session) throws Exception {
 
@@ -111,7 +115,7 @@ public class WebSocketChattingController {
 		list.add(myName);
 		list.add(userName);
 		nameMap.put("userNameList", list);
-		
+				
 		Chatting chat = cs.isChat(userNameMap);
 		
 		if(chat==null) {
@@ -131,5 +135,37 @@ public class WebSocketChattingController {
 		
 		
 		return mv;
+	}
+	@RequestMapping(value="/chat/insertChatRoom.do" ,method=RequestMethod.POST)
+	public ModelAndView insertChat(@RequestParam("memberName") String memberName,@RequestParam String chatName/*List<String> memberName*/,HttpServletRequest req, HttpSession session) {
+		
+		List<String> jsonToObj = new Gson().fromJson(memberName, List.class);
+		List<String> list = new ArrayList<String>();
+		Map<String,Integer> map = new HashMap<String,Integer>();
+
+		ModelAndView mv = new ModelAndView();
+		ChatCreateInfo chatInfo = new ChatCreateInfo();
+		
+		String ipAddr = req.getRemoteAddr();
+
+		System.out.println("memberName  "+memberName);
+		
+		chatInfo.setChatName(chatName);
+		for(String s :jsonToObj) {
+			list.add(s);
+		}
+		chatInfo.setUserName(list);
+		cs.insertChatGroup(chatInfo);
+		map.put("chatNo", chatInfo.getReturnChatId());
+		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
+		
+		Chatting chat=cs.getChatName(map);
+		session.setAttribute("chat", chat);	
+		
+		mv.addObject("chatName", chat.getChattingName());
+		mv.addObject("chatNo", chat.getChattingId());
+		mv.addObject("host", ipAddr);
+		mv.setViewName("chat/chattingView");
+		return mv;		
 	}
 }

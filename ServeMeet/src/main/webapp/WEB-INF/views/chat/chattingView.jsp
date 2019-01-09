@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -24,7 +23,7 @@
 	
 	var myNo=${member.userNo};
 	
-	var mName=new Array();
+	var memberName=new Array();
 	$(function() {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
@@ -115,34 +114,88 @@
 							 .attr("value",data[i])
 						);
 					}
-					$(".memberName").click(function() {
-						var mName=$(this).attr("value");
-						memberArray(mName);
-						console.log(mName);
-					})
+					
 				},error: function() {
 					console.log("에러");
 				}
 			});
 		});
-		
+		$(document).on("click",".inMemberName",function() {
+			var inUserName=$(this).attr("value");
+			$(this).remove();
+			var temp = new Array();
+			for(var i in memberName){
+				if(memberName[i]!=inUserName){
+					temp.push(memberName[i]);
+				}
+			}
+			memberName=temp;
+			console.log("지운있는 회원");
+			console.log(memberName);
+		})
+		$(document).on("click",".memberName",function() {
+						var mName=$(this).attr("value");
+						memberArray(mName);
+						console.log(mName);
+					})
 		
 	});
-	
 	function memberArray(userName) {
-		if(!mName.includes(userName)){
-			mName.push(userName);
+		if(!memberName.includes(userName)){
+			memberName.push(userName);
 			$(".inMember").append(
 				$("<div>").append(
 					$("<span>").append(userName)		
 				).attr("class","inMemberName")
 				 .attr("value",userName)
 			);
+		//	var printHTML="<div class='inMemberName'value='"+userName+"'>";
+		//	printHTML+="<span>"+userName;
+		//	printHTML+="</span>";
+		//	printHTML+="</div>";
+		//	$('.inMember').append(printHTML);
 			
 		}
-	
-		console.log(mName);
+		
+		console.log(memberName);
 	}
+  	function createChatGroup(){
+		var jArray=JSON.stringify(memberName);
+		var cChatName = $(".modal-body .chatName").val();
+		/* console.log("jArray+++");	
+		console.log(jArray);	
+		$.ajax({
+			url:"${pageContext.request.contextPath}/chat/insertChatRoom.do",
+			data:{
+				 memberName:jArray,
+				 chatName:cChatName	},
+			datatype:"json",
+			type:"post"
+			
+			
+			
+		}); */
+		 var form = document.createElement("form");
+
+         form.setAttribute("method", "Post");  //Post 방식
+         form.setAttribute("action", "${pageContext.request.contextPath}/chat/insertChatRoom.do"); //요청 보낼 주소
+
+         var hiddenField = document.createElement("input");
+         hiddenField.setAttribute("type", "hidden");
+         hiddenField.setAttribute("name", "memberName");
+         hiddenField.setAttribute("value", jArray);
+         form.appendChild(hiddenField);
+
+         hiddenField = document.createElement("input");
+         hiddenField.setAttribute("type", "hidden");
+         hiddenField.setAttribute("name", "chatName");
+         hiddenField.setAttribute("value", cChatName);
+         form.appendChild(hiddenField);
+
+         document.body.appendChild(form);
+         form.submit();
+
+		}
 </script>
 <style>
 

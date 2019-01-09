@@ -7,14 +7,17 @@
 
 	<sql id="chatList">
 		select G.Chattingid,LD.Userno,
-		       nvl((select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid),
+		       case when (select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid) is null then
 		                                  (select (select (select M.Username from Member M where M.Userno=g2.Userno) userName 
 		                                           from Chatting_Group G2 
 		                                           where g2.Chattingid=L.Chattingid and g2.Userno!=#{userNo}
 		                                          ) chattingName 
 		                                    from Chattinglist L where L.Chattingid= G.Chattingid
 		                                    )
-			             ) chattingName,
+		                                    else
+		                                    (select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid)
+		                                    end
+			              chattingName,
 		         Chcontent,Chstatus,Chdate                       
 		from Chatting_Group G left join 
 		    (select Chattingid,Userno,Chcontent,Chstatus,Chdate
@@ -22,17 +25,19 @@
 		    where mindate=Chdate
 		     Order by mindate desc)LD
 		on G.Chattingid=Ld.Chattingid
-		where G.Userno=#{userNo} and Ld.Userno is not null
+		where G.Userno=#{userNo}
 		
 	</sql>
 
 	<select id="isChat" parameterType="Map" resultType="Chatting">
-		select G1.Chattingid,nvl((select L.Chattingname from Chattinglist L where L.Chattingid= G1.Chattingid),
+		select G1.Chattingid,case when(select L.Chattingname from Chattinglist L where L.Chattingid= G1.Chattingid) is null then 
 		                           (select g3.userName 
 		                            from(select G2.Chattingid,(select M.Username from Member M where M.Userno=G2.Userno) userName
 		                                from Chatting_Group g2 )g3
 		                            where g3.userName!=#{myName} and G3.Chattingid=G1.Chattingid)
-		                        ) chattingName
+		                            else (select L.Chattingname from Chattinglist L where L.Chattingid= G1.Chattingid)
+		                            end
+		                        chattingName
 		from (select Chattingid
 		        from (select G.Chattingid,(select M.Username from Member M where M.Userno=G.Userno )userName from Chatting_Group g) 
 		        where userName in (#{myName},#{userName}) group by Chattingid 
@@ -52,12 +57,14 @@
 	</select>
 	
 	<select id="getChatName" parameterType="Map" resultType="Chatting">
-		select Chattingid,nvl(Chattingname,(
+		select Chattingid,case when Chattingname is null then(
 		                                    select (select M.Username from Member M where M.Userno=g.Userno) userName
 		                                    from Chatting_Group G 
 		                                    where G.Chattingid=L.Chattingid and G.Userno!=#{userNo}
-		                                    ) 
-		                     )chattingName
+		                                    )else
+                                            Chattingname
+                                            end
+		                     chattingName
 		from Chattinglist L where Chattingid=#{chatNo}
 	</select>
 	
@@ -76,8 +83,22 @@
 	<insert id="insertChat" parameterType="HashMap">
 		insert all
 		into
-		CHATTINGLIST VALUES(seq_chat.nextval ,null,2)
+		CHATTINGLIST VALUES(seq_chat.nextval ,null,default)
 		<foreach collection="userNameList" item="item">
+		into CHATTING_GROUP
+		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}))
+		</foreach>
+		select *
+		from dual
+	</insert>
+	<insert id="insertChatGroup" parameterType="ChatCreateInfo">
+		<selectKey keyProperty="returnChatId" order="AFTER" resultType="_int">
+			select seq_chat.currval from dual
+		</selectKey>
+		insert all
+		into
+		CHATTINGLIST VALUES(seq_chat.nextval ,#{chatName},default)
+		<foreach collection="userName" item="item">
 		into CHATTING_GROUP
 		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}))
 		</foreach>
@@ -89,6 +110,14 @@
 		delete from Chatting_Group where Chattingid=#{chatNo} and Userno =#{userNo}
 	</delete>
 
-
+<!-- select * 
+from (
+    select G.Chattingid, G.Userno,L.Chattingname 
+    from (select * from CHATTING_GROUP where userNo=46)G join CHATTINGLIST L on L.chattingId=g.chattingID
+    ) GL join
+(select Chattingid,Userno,Chcontent,Chstatus,Chdate
+from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog)
+where mindate=Chdate
+)LD on LD.chattingID = GL.chattingID; -->
 
 </mapper>

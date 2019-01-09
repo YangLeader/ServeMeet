@@ -17,6 +17,7 @@
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.Chatting" alias="Chatting"/>
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingLog" alias="ChattingLog"/>
 		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChattingRoom" alias="ChattingRoom"/>
+		<typeAlias type="com.yang.ServeMeet.chatting.model.vo.ChatCreateInfo" alias="ChatCreateInfo"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.Matching" alias="Matching"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingHistory" alias="MatchingHistory"/>
 		<typeAlias type="com.yang.ServeMeet.matching.model.vo.MatchingListObj" alias="MatchingObj"/>

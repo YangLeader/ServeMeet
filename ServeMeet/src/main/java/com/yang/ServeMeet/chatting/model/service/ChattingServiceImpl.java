@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yang.ServeMeet.chatting.model.dao.ChattingDao;
+import com.yang.ServeMeet.chatting.model.vo.ChatCreateInfo;
 import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
@@ -69,5 +70,10 @@ public class ChattingServiceImpl implements ChattingService {
 	public void deletechatRoom(Map<String, Integer> map) {
 		cDao.deletechatRoom(map);
 		
+	}
+	@Override
+	public void insertChatGroup(ChatCreateInfo chatInfo) {
+		// TODO Auto-generated method stub
+		cDao.insertChatGroup(chatInfo);
 	}
 }
