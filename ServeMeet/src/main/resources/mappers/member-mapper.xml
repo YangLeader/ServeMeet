@@ -25,7 +25,7 @@
 	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER 
-		SET PASSWORD = #{userPwd},
+		SET USERPWD = #{userPwd},
 		EMAIL = #{email},
 		WHERE USERID = #{userId}
 	</update>
@@ -86,7 +86,6 @@
 	
 	<select id="resetPwd" parameterType="hashmap" resultType="_int">
 		update member set userPwd = #{userPwd} where userId = #{userId}
-
 	</select>
 <!--
 
