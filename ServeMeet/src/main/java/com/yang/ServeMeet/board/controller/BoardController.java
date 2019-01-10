@@ -8,12 +8,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +27,7 @@ import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.board.model.vo.Report;
 import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.google.gson.Gson;
 import com.yang.ServeMeet.board.model.exception.BoardException;
 import com.yang.ServeMeet.board.model.service.BoardService;
 
@@ -465,6 +469,19 @@ public class BoardController {
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 				
 		return "common/msg";
+	}
+	
+	@RequestMapping(value="/ajax/boardTop7.do", method=RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<Board> boardTop7(HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		ArrayList<Board> list = new ArrayList<Board>();
+		
+		list = boardService.selectBoardTop7List();
+		
+		
+		return list;
+		
 	}
 	
 	

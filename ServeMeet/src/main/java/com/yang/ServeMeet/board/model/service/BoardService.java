@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.board.model.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -44,5 +45,7 @@ public interface BoardService {
 	int insertBoardReport(Report report);
 
 	Report selectReportCheck(int boardNo, String userName);
+
+	ArrayList<Board> selectBoardTop7List();
 
 }

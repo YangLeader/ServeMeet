@@ -100,4 +100,16 @@
 	<select id="selectReportCheck" parameterType="map" resultType="Report">
 		SELECT * FROM REPORT WHERE BOARDNO = #{boardNo} AND USERNAME = #{userName}
 	</select>
+	
+	<select id="selectBoardTop7List" resultType="board">
+		SELECT A.*, (SELECT COUNT(*) FROM BOARD_COMMENT 
+					 WHERE BOARDNO = A.BOARDNO AND COMMENTSTATUS = 'Y') COMMENTCOUNT,			 
+					 (SELECT COUNT(*) FROM REPORT WHERE BOARDNO = A.BOARDNO) REPORTCOUNT
+		FROM
+		BOARD A
+		<![CDATA[
+		WHERE BOARDSTATUS = 'Y' AND ROWNUM < 8
+		ORDER BY BOARDNO DESC, BOARDDATE ASC
+		]]>
+	</select>
 </mapper>

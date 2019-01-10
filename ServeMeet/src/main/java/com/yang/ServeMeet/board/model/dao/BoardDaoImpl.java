@@ -138,4 +138,10 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.selectReportCheck", map);
 	}
 
+	@Override
+	public ArrayList<Board> selectBoardTop7List() {
+		
+		return (ArrayList)sqlSession.selectList("board.selectBoardTop7List");
+	}
+
 }

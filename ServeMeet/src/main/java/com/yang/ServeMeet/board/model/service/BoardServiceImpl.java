@@ -198,5 +198,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectReportCheck(map);
 	}
 
+	@Override
+	public ArrayList<Board> selectBoardTop7List() {
+		
+		return boardDao.selectBoardTop7List();
+	}
+
 
 }
