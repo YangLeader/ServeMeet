@@ -8,6 +8,7 @@
 <html lang="ko">
 <head>
 <c:import url="../common/header.jsp" />
+<title>마이페이지</title>
 <meta charset="UTF-8" />
 <style>
 	.container {
@@ -61,7 +62,7 @@
 	}
 	
 	.contxt { 
-	
+		font-size : 13px;
 		margin-top : 20px;
 	}
 	
@@ -122,6 +123,11 @@
 		position: relative;
 		width : 30%;
 	}
+	span {
+		padding-top : 10px;
+		padding-bottom : 10px;
+	}
+	
 	
 </style>
 
@@ -145,25 +151,29 @@
 						</div>
 						<div class="nick column">
 							<h3 class="nic_tit">
-								<br>
 								<b>닉네임</b>
 							</h3>
 							<h4 class="nic_txt"> ${member.userName}</h4>
+							<h4 style="color:#5e73de"><b>${member.point}p</b></h4>
+							<a href="#">>포인트 내역</a>
 						</div>
 					</div>
 				</div>
 				<br>
 				<div class="btn_area">
-					<a href="#" class = "sb_btn" onclick="updateMember();">내 정보보기</a>
+					<a href="${pageContext.request.contextPath}/member/memberInfo.do?userNo=${member.userNo}" class = "sb_btn">내 정보보기</a>
 				</div>
 			</div>
 			<div class="sm_group">
 				<div class="sm_header">
-					<h2>등록중인 매칭</h2>
+					<h2>매칭 히스토리</h2>
 				</div>
 				<div class="sm_content">
 					<p class="contxt">
-					현재 등록된 매칭을 보여줍니다.
+					<span>매칭 히스토리를 보여줍니다.<br></span>
+					<span>현재 진행중인 매칭과 종료된 매칭을 <br>확인하실 수 있습니다.</span>
+					</p>
+					<p class="contxt">
 					</p>
 				</div>
 				<div class="btn_area">
@@ -174,11 +184,11 @@
 		<div class ="column box">
 			<div class="sm_group">
 				<div class="sm_header">
-					<h2>종료된 매칭</h2>
+					<h2>내가 작성한 게시글</h2>
 				</div>
 				<div class="sm_content">
 					<p class="contxt">
-					종료된 매칭을 보여줍니다.
+					게시판에 작성한 글을 보여줍니다.
 					</p>
 				</div>
 				<div class="btn_area">
@@ -195,7 +205,7 @@
 					</p>
 				</div>
 				<div class="btn_area">
-					<a href="#" class = "sb_btn" onclick="updateMember();">조회하기</a>
+					<a href="${pageContext.request.contextPath}/batting/myBattingList.ba?userName=${member.userName}" class = "sb_btn">조회하기</a>
 				</div>
 			</div>
 		</div>

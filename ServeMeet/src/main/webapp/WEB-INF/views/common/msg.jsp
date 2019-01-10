@@ -15,6 +15,15 @@ if("${msg}" !="login"){
 		    	  location.href="${pageContext.request.contextPath}/";
 		      });
 		});
+	}else if("${msg}" == "회원 정보가 수정되었습니다!"){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((login) => {
+		    	  location.href="${pageContext.request.contextPath}/member/memberView.do";
+		      });
+		    });
 	}else if("${msg}" == "회원 가입 성공!"){
 		document.addEventListener("DOMContentLoaded", function(event) {
 		      swal({

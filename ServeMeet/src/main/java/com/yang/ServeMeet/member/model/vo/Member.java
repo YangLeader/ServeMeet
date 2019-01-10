@@ -26,11 +26,10 @@ public class Member {
 	}
 
 
-	public Member(String userId, String userPwd, String userName, String email) {
+	public Member(int userNo, String userPwd,String email) {
 		super();
-		this.userId = userId;
+		this.userNo = userNo;
 		this.userPwd = userPwd;
-		this.userName = userName;
 		this.email = email;
 	}
 
