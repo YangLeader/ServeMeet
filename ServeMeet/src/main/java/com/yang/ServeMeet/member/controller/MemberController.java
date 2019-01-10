@@ -11,7 +11,6 @@ import org.apache.commons.mail.HtmlEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,11 +39,14 @@ public class MemberController {
 	
 	@RequestMapping("/member/memberSearch.do")
 	@ResponseBody
-	public List<String> memberSearch(@RequestParam String keyword) {
-		ModelAndView mv = new ModelAndView();
+	public List<String> memberSearch(@RequestParam String keyword,HttpSession session) {
+		Map<String,String> map = new HashMap<String,String>();
 		List<String> list = new ArrayList<String>();
 		
-		list=memberService.memberSearch(keyword);
+		Member m = (Member)session.getAttribute("member");
+		map.put("keyword", keyword);
+		map.put("myName",m.getUserName() );
+		list=memberService.memberSearch(map);
 		
 		return list;
 	}

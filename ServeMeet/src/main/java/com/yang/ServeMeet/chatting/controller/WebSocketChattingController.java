@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.yang.ServeMeet.chatting.model.service.ChattingService;
 import com.yang.ServeMeet.chatting.model.vo.ChatCreateInfo;
+import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.member.model.vo.Member;
 
@@ -71,6 +72,7 @@ public class WebSocketChattingController {
 
 		ModelAndView mv = new ModelAndView();
 		Map<String,Integer> map = new HashMap<String,Integer>();
+	
 		req.setCharacterEncoding("utf-8");
 
 		String ipAddr = req.getRemoteAddr();
@@ -79,7 +81,8 @@ public class WebSocketChattingController {
 		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
 		Chatting chat=cs.getChatName(map);
 		session.setAttribute("chat", chat);
-		cs.updateStatus(map);
+		ChatUser chatuser = new ChatUser(chatNo,((Member)session.getAttribute("member")).getUserName());
+		cs.updateStatus(chatuser);
 		
 		mv.addObject("chatName", chat.getChattingName());
 		mv.addObject("chatNo", chat.getChattingId());
@@ -90,10 +93,9 @@ public class WebSocketChattingController {
 	}
 	@RequestMapping(value="/chat/upStatus.do/{chatNo}")
 	public void upStatus(@PathVariable("chatNo")int chatNo, HttpSession session) {
-		Map<String,Integer> map = new HashMap<String,Integer>();
-		map.put("chatNo", chatNo);
-		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
-		cs.updateStatus(map);
+		
+		ChatUser chatuser = new ChatUser(chatNo,((Member)session.getAttribute("member")).getUserName());
+		cs.updateStatus(chatuser);
 		System.out.println("1111111111111111111111확인1111111111111111111111111");
 	}
 	
@@ -101,7 +103,7 @@ public class WebSocketChattingController {
 	public ModelAndView chattingRoom(@PathVariable("userName")String userName,HttpServletRequest req, HttpSession session) {
 		
 		ModelAndView mv = new ModelAndView();
-		Map<String,Integer> map = new HashMap<String,Integer>();
+		Map<String,Object> map = new HashMap<String,Object>();
 		Map<String,List> nameMap = new HashMap<String,List>();
 		List<String> list =new ArrayList<String>();
 		String myName = ((Member)session.getAttribute("member")).getUserName();
@@ -123,10 +125,11 @@ public class WebSocketChattingController {
 			chat = cs.isChat(userNameMap);
 		}
 		map.put("chatNo", chat.getChattingId());
-		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
+		map.put("userName", ((Member)session.getAttribute("member")).getUserName());
 		System.out.println("chat++++++++++++"+chat);
 		session.setAttribute("chat", chat);	
-		cs.updateStatus(map);
+		ChatUser chatuser = new ChatUser(chat.getChattingId(),((Member)session.getAttribute("member")).getUserName());
+		cs.updateStatus(chatuser);
 		
 		mv.addObject("chatName", chat.getChattingName());
 		mv.addObject("chatNo", chat.getChattingId());

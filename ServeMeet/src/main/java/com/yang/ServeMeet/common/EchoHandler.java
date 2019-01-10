@@ -100,7 +100,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// session.sendMessage(new TextMessage(session.gadminetId() + "|" +
 		// message.getPayload()));
-
+		Map<String,Object> map;
 		Member m = (Member) session.getAttributes().get("member");
 		int chatNo;
 		int userNo = m.getUserNo();
@@ -123,21 +123,30 @@ public class EchoHandler extends TextWebSocketHandler {
 //		rSessionList = rMap.get(chatNo);
 //		System.out.println("rSessionList : " + rSessionList);
 
-		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload());
-
+		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload(),list);
+		System.out.println(chatLog);
 		if (message.getPayload() != null) {
-			int result = cs.ChatLogInsert(chatLog);
-			if (result > 0) {
-				// 사용자 모두에게 데이터를 전달하는 반복문
-				for (String userId : list) {
-					if(mSessionMap.get(userId)!=null) {
-						System.out.println("mSessionMap.get(userId) : "+mSessionMap.get(userId)+" : "+userId);
-						(mSessionMap.get(userId)).sendMessage(new TextMessage(session.getId() + " | " + message.getPayload() + "|"
-								+ session.getRemoteAddress() + "|" + userName+"|"+chatNo));
+			if(list.contains(m.getUserName())) {
+				System.out.println("있음");
+				list.remove(m.getUserName());
+				int result = cs.ChatLogInsert(chatLog);
+				System.out.println("지웠음 "+ list);
+				list.add(m.getUserName());
+				if (result > 0) {
+					// 사용자 모두에게 데이터를 전달하는 반복문
+					for (String userId : list) {
+						map=new HashMap<>();
+						
+						if(mSessionMap.get(userId)!=null) {
+							System.out.println("mSessionMap.get(userId) : "+mSessionMap.get(userId)+" : "+userId);
+							(mSessionMap.get(userId)).sendMessage(new TextMessage(session.getId() + " | " + message.getPayload() + "|"
+									+ session.getRemoteAddress() + "|" + userName+"|"+chatNo));
+						}
 					}
+					
 				}
-				
 			}
+			
 		}
 
 		// super.handleTextMessage(session, message);

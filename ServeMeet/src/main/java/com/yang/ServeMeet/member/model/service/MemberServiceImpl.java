@@ -2,6 +2,7 @@ package com.yang.ServeMeet.member.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,9 +87,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getPoint(userNo);
 	}
 	@Override
-	public List<String> memberSearch(String keyword) {
+	public List<String> memberSearch(Map<String,String> map) {
 		// TODO Auto-generated method stub
-		return memberDao.memberSearch(keyword);
+		return memberDao.memberSearch(map);
 	}
 
 	@Override

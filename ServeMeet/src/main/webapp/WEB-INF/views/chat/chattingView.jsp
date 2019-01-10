@@ -24,6 +24,7 @@
 	var myNo=${member.userNo};
 	
 	var memberName=new Array();
+	memberName.push("${member.userName}");
 	$(function() {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",

@@ -61,8 +61,8 @@ public class ChattingDaoImpl implements ChattingDao {
 		return sst.selectOne("chat.getChatName",map);
 	}
 	@Override
-	public void updateStatus(Map<String, Integer> map) {
-		//sst.update("chat.updateStatus",map);
+	public void updateStatus(ChatUser chatuser) {
+		sst.update("chat.updateStatus",chatuser);
 		
 	}
 	@Override
