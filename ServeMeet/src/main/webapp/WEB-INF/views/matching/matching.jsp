@@ -94,7 +94,9 @@
 		<div class="condition" id="cal" onclick="selectdateCategory()">
 			<span>날짜</span>
 		</div>
+		<input type="hidden" id="mName" value="${member.userName }"/>
 		<a href="${pageContext.request.contextPath }/matching/matchingInsertView.ma"  class="submit_btn">+ 매칭등록</a>
+
 	</div>
 	<div class="in scrollbar-primary scrollbar" id="location" style="position: relative;">
 	<div class="over" style="display: none">
@@ -219,6 +221,8 @@
 			  }
 		
 		}); 
+
+		//
 	
 	var arr = new Array();
 	//var compareArr = new Array();
@@ -229,7 +233,7 @@
 	var locName = "";
 	var textkd = "소모임";
 	$(function() {
-
+	
 		$(".item").click(function() {
 			$('#midDiv').show();
 			$('#smallDiv').show();

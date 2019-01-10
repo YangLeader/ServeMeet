@@ -87,4 +87,10 @@ public class MatchingDaoImpl implements MatchingDao {
 		System.out.println("조회 결과 :" +session.selectList("Matching.matchingSelectList", cat));
 		return session.selectList("Matching.matchingSelectList", cat);
 	}
+
+	@Override
+	public MatchingListObj matchingDetail(int matNum) {
+		System.out.println("객체 : " + session.selectOne("Matching.matchingDetail", matNum));
+		return session.selectOne("Matching.matchingDetail", matNum);
+	}
 }

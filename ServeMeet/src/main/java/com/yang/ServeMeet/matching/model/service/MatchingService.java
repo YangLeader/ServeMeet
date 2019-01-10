@@ -32,4 +32,6 @@ public interface MatchingService {
 	
 	List<Map<String,String>> matchingSelectList(String type);
 	
+	MatchingListObj matchingDetail(int matNum);
+	
 }
