@@ -8,7 +8,6 @@ import com.yang.ServeMeet.chatting.model.vo.ChatUser;
 import com.yang.ServeMeet.chatting.model.vo.Chatting;
 import com.yang.ServeMeet.chatting.model.vo.ChattingLog;
 import com.yang.ServeMeet.chatting.model.vo.ChattingRoom;
-import com.yang.ServeMeet.member.model.vo.Member;
 
 public interface ChattingService {
 	int ChatLogInsert(ChattingLog chatLog);
@@ -25,7 +24,7 @@ public interface ChattingService {
 
 	Chatting getChatName(Map<String, Integer> map);
 
-	void updateStatus(Map<String, Integer> map);
+	void updateStatus(ChatUser chatuser);
 
 	Chatting selectLastChatNo(int userNo);
 

@@ -27,7 +27,7 @@ public interface ChattingDao {
 
 	Chatting getChatName(Map<String, Integer> map);
 
-	void updateStatus(Map<String, Integer> map);
+	void updateStatus(ChatUser chatuser);
 
 	Chatting selectLastChatNo(int userNo);
 

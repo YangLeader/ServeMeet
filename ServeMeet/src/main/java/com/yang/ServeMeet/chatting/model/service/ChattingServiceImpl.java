@@ -58,8 +58,8 @@ public class ChattingServiceImpl implements ChattingService {
 		return cDao.getChatName(map);
 	}
 	@Override
-	public void updateStatus(Map<String, Integer> map) {
-		cDao.updateStatus(map);		
+	public void updateStatus(ChatUser chatuser) {
+		cDao.updateStatus(chatuser);		
 	}
 	@Override
 	public Chatting selectLastChatNo(int userNo) {
