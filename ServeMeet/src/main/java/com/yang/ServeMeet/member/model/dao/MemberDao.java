@@ -2,6 +2,7 @@ package com.yang.ServeMeet.member.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.yang.ServeMeet.member.model.vo.Member;
 
@@ -25,7 +26,7 @@ int insertMember(Member member);
 
 	int getPoint(int userNo);
 
-	List<String> memberSearch(String keyword);
+	List<String> memberSearch(Map<String,String> map);
 
 	int searchPwdCheck(HashMap<String, String> hmap);
 

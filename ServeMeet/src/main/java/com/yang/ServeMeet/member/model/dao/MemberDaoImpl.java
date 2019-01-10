@@ -2,6 +2,7 @@ package com.yang.ServeMeet.member.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,11 +73,11 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.getPoint",userNo);
 	}
 	@Override
-	public List<String> memberSearch(String keyword) {
+	public List<String> memberSearch(Map<String,String> map) {
 		// TODO Auto-generated method stub
-		System.out.println("keywoardkeywoardkeywoardkeywoard"+keyword);
-		List<String> list=sqlSession.selectList("member.memberSearch",keyword);
-		System.out.println(list);
+
+		List<String> list=sqlSession.selectList("member.memberSearch",map);
+
 		return list;
 	}
 

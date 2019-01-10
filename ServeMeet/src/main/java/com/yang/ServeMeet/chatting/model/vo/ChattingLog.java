@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.chatting.model.vo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -15,6 +16,19 @@ public class ChattingLog {
 	private String chContent;
 	private int chStatus;
 	private String chattingName;
+	private List<String> list;
+
+	
+
+
+	public List<String> getList() {
+		return list;
+	}
+
+	public void setList(List<String> list) {
+		this.list = list;
+	}
+
 	public ChattingLog(int chattingId, int userNo, Timestamp chDate, String chContent, int chStatus,
 			String chattingName) {
 		super();
@@ -26,11 +40,12 @@ public class ChattingLog {
 		this.chattingName = chattingName;
 	}
 	
-	public ChattingLog(int chattingId, int userNo, String chContent) {
+	public ChattingLog(int chattingId, int userNo, String chContent,List<String> list) {
 		super();
 		this.chattingId = chattingId;
 		this.userNo = userNo;
 		this.chContent = chContent;
+		this.list=list;
 	}
 
 	public ChattingLog() {

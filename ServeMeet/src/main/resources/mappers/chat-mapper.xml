@@ -77,8 +77,16 @@
 
 
 	<insert id="insertChatLog" parameterType="ChattingLog">
-		insert into ChattingLog
-		values(#{chattingId},#{userNo},default,#{chContent},(select L.Personcount from Chattinglist L where L.Chattingid=#{chattingId})-1)
+		insert all
+		into ChattingLog
+		values(seq_LOG.nextval,#{chattingId},#{userNo},default,#{chContent},(select L.Personcount from Chattinglist L where L.Chattingid=#{chattingId})-1)
+		<foreach collection="list" item="item">
+		into CHATREAD
+		VALUES(seq_LOG.currval ,#{item},default)
+		</foreach>
+		select *
+		from dual
+	
 	</insert>
 	<insert id="insertChat" parameterType="HashMap">
 		insert all
@@ -110,14 +118,11 @@
 		delete from Chatting_Group where Chattingid=#{chatNo} and Userno =#{userNo}
 	</delete>
 
-<!-- select * 
-from (
-    select G.Chattingid, G.Userno,L.Chattingname 
-    from (select * from CHATTING_GROUP where userNo=46)G join CHATTINGLIST L on L.chattingId=g.chattingID
-    ) GL join
-(select Chattingid,Userno,Chcontent,Chstatus,Chdate
-from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog)
-where mindate=Chdate
-)LD on LD.chattingID = GL.chattingID; -->
+<!-- select * from (select L.CHATTINGID 
+from (select CHATTINGID from CHATTINGLIST where chattingname is null) L join (select * from CHATTING_GROUP)G 
+                                                                        on g.chattingid=L.chattingID
+group by L.CHATTINGID
+having count(*)>1 and count(*)<3)
+; -->
 
 </mapper>

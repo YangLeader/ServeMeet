@@ -75,8 +75,8 @@
 	</select>
 	
 
-	<select id ="memberSearch" parameterType="string" resultType="String">
-		select USERNAME from MEMBER where USERNAME like '%' || #{keyword} || '%'
+	<select id ="memberSearch" parameterType="Map" resultType="String">
+		select USERNAME from MEMBER where USERNAME like '%' || #{keyword} || '%' and username !=#{myName}
 	</select>
 
 	<select id="searchPwdCheck" parameterType="hashmap" resultType="_int">
