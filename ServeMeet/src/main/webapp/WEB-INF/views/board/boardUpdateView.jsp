@@ -55,7 +55,7 @@ function submitContents(elClickedObj) {
  
 // textArea에 이미지 첨부
 function pasteHTML(filepath){
-    var sHTML = '<img src="${pageContext.request.contextPath }/resources/upload/'+filepath+'">';
+    var sHTML = '<img src="${pageContext.request.contextPath }/resources/upload/board/'+filepath+'">';
     oEditors.getById["wr_content"].exec("PASTE_HTML", [sHTML]);
 }
  

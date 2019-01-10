@@ -77,6 +77,12 @@
 							</a>
 						</div>
 						<div class="sList">
+							<div style="padding:10px;">
+							<ul class="post-list" style="list-style:none; padding: 0px;">
+								
+								
+							</ul>
+							</div>
 						</div>
 					</div>
 					<div class="sContent conList" >
@@ -99,6 +105,40 @@
 		<c:import url="views/common/footer.jsp" />
 	</footer>
 
+	<script>
+		
+		$(function(){
+			
+			$.ajax({
+				
+				url: "${pageContext.request.contextPath}/ajax/boardTop7.do",
+				type: "GET",
+				dataType: "json",
+				contentType: "application/json",
+				success: function(data){
+					
+					for(var i in data){					
+						
+						var li = '<li class="ellipsis">'
+							+ '<a href="https://mangashow.me/bbs/board.php?bo_table=msm_free&amp;wr_id=72249" id="inserttitle">'
+							+ '<span class="pull-right gray font-12">&nbsp;'+data[i].userName+'</span>'
+							+ '<span class="wr-icon wr-new">'
+							+ '<img src="${pageContext.request.contextPath }/resources/images/icon_new.gif" class="icon_new">'
+							+ '</span>'+data[i].boardTitle+'</a>'
+							+ '</li>';
+							
+						$('.post-list').html(li);
+					
+					}
+					
+				}, error: function(data){
+				
+					console.log("top7 조회 실패!");
+				}
+			});
+		});
+	
+	</script>
 
 </body>
 

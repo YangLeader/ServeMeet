@@ -51,4 +51,6 @@ public interface BoardDao {
 	int insertBoardReport(Report report);
 
 	Report selectReportCheck(Map<String, Object> map);
+
+	ArrayList<Board> selectBoardTop7List();
 }
