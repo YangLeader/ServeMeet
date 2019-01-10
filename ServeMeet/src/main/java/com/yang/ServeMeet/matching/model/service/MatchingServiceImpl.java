@@ -89,5 +89,11 @@ public class MatchingServiceImpl implements MatchingService {
 		
 		return matchingDao.matchingSelectList(type);
 	}
+
+	@Override
+	public MatchingListObj matchingDetail(int matNum) {
+		
+		return matchingDao.matchingDetail(matNum);
+	}
 	
 }

@@ -31,4 +31,6 @@ public interface MatchingDao {
 	
 	List<Map<String,String>> matchingSelectList(String type);
 	
+	MatchingListObj matchingDetail(int matNum);
+	
 }

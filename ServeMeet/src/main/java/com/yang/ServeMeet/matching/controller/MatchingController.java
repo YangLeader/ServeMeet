@@ -206,12 +206,31 @@ public class MatchingController {
 	@RequestMapping("matching/matchingList.ma")
 	public String mList(@RequestParam String type, Model model) {
 		System.out.println(type);
-		
+		String listName = "";
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>(matchingService.matchingSelectList(type));
-
+		
+		if(type.equals("M")) {
+			listName = "소모임";
+		}else if(type.equals("S")) {
+			listName = "스포츠";
+		}else {
+			listName = "E-스포츠";
+		}
 		model.addAttribute("matchingList",list);
+		model.addAttribute("lName", listName);
 		
 		return "/matching/matchingList";
 	}
 	
+	@RequestMapping("matching/matchingDetail.md")
+	public String mDatail(@RequestParam("matNum") int matNum, Model model) {
+		System.out.println("조회할 매칭 matNum : " + matNum);
+		
+		MatchingListObj mo = new MatchingListObj();
+		mo = matchingService.matchingDetail(matNum);
+		
+		model.addAttribute("mDetail", mo);
+		
+		return "/matching/matchingDetail";
+	}
 }

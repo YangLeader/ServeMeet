@@ -180,7 +180,7 @@
 							</select>
 						</td>
 					</tr>
-					<tr>
+					<tr id="peopletr">
 						<th class="mtH">모집 인원</th>
 						<td>
 							<select name="mPeoplenum" >
@@ -224,8 +224,8 @@
 							<input type="hidden" name="batChk" value="false" />
 						</td>
 					</tr>
-					<tr>
-						<th class="mtH">장소</th>
+					<tr id="loctr">
+						<th class="mtH">모임 장소</th>
 						<td colspan="3">
 							<select name="mathingBig" id="bigLoc">
 								<option value="시도" selected="selected">시/도</option>
@@ -403,6 +403,7 @@ function circleSelBox() {
 	var circles = ["여행","공연","음악","영화","전시회","미팅","미술","기타"];
 	$("input[name=batChkbt]").attr("disabled","true");
 	$("#batFalse").prop("checked","true");
+	$('#loctr').show();
 	$('#event').empty();
 	for(var i in circles){		
 		$('#event').append("<option value='"+circles[i]+"'>"+circles[i]+"</option>");
@@ -413,6 +414,7 @@ function sportsSelBox() {
 	var sprots = ["농구","축구","풋살","야구","배구","탁구","배드민턴","볼링","당구","테니스","기타"];
 	$("input[name=batChkbt]").attr("disabled","true");
 	$("#batFalse").prop("checked","true");
+	$('#loctr').show();
 	$('#event').empty();
 	for(var i in sprots){		
 		$('#event').append("<option value='"+sprots[i]+"'>"+sprots[i]+"</option>");
@@ -422,6 +424,10 @@ function sportsSelBox() {
 function eSportsSelBox() {
 	var eSports = ["리그오브레전드","피파온라인","배틀그라운드","오버워치","스타크래프트","기타"];
 	$("input[name=batChkbt]").removeAttr("disabled");
+	/* $('#bigLoc').attr('disabled','true');
+	$('#midLoc').attr('disabled','true');
+	$('#smallLoc').attr('disabled', 'true'); */
+	$('#loctr').hide();
 	$('#event').empty();
 	for(var i in eSports){		
 		$('#event').append("<option value='"+eSports[i]+"'>"+eSports[i]+"</option>");
@@ -435,12 +441,13 @@ function arrCheck() {
 	
 	var locCheck = new Object();
 	
+	
 	locCheck.bigloCation = $('#bigLoc').val();
 	locCheck.midloCation = $('#midLoc').val();
 	locCheck.smallCategory = $('#smallLoc').val();
 	
 	var jsonData = JSON.stringify(locCheck);
-	
+
 	$.ajax({
 		url : "${pageContext.request.contextPath}/location/locationcheck.lc",
 		type : "GET",
@@ -449,14 +456,29 @@ function arrCheck() {
 		data : {chkloc:jsonData},
 		success : function (data) {
 			$('input[name=locationId]').val(data);
-			alert("data : " + data);
 		},error : function (data) {
 			alert("에러발생!");
 		}
 	})
 	
+	var chkTitle = $('input[name=mTitle]').val();
+	
+	if(chkTitle.trim().length == 0){
+		alert("매칭 제목을 입력해주세요.");
+		$('input[name=mTitle]').focus();
+		console.log("DD:" + $('#datePic').val());
+		console.log("dd:" +$('#timePic').val());
+		return false;
+		
+	}
+	
 	if(bigCat == '소모임'){
 		$('input[name=batChk]').val('false');
+		if($('input[name=locationId]').val().trim().length == 0){
+			alert("지역을 선택하지 않았습니다.");
+			$('#bigLoc').focus();
+			return false;
+		}	
 		categoryId = 100;
 		if(midCat == '여행'){
 			categoryId += 1;
@@ -477,6 +499,11 @@ function arrCheck() {
 		}
 	}else if(bigCat == '스포츠'){
 		$('input[name=batChk]').val('false');
+		if($('input[name=locationId]').val().trim().length == 0){
+			alert("지역을 선택하지 않았습니다.");
+			$('#bigLoc').focus();
+			return false;
+		}
 		categoryId = 200;
 		if(midCat == '농구'){
 			categoryId += 1;
@@ -502,6 +529,7 @@ function arrCheck() {
 			categoryId += 0;
 		}
 	}else{
+		$('input[name=locationId]').val("0");
 		categoryId = 300;
 		if(midCat == '리그오브레전드'){
 			categoryId += 1;
@@ -517,16 +545,33 @@ function arrCheck() {
 			categoryId += 0;
 		}
 	}
-
+	
 	$('input[name=categoryId]').val(categoryId);
-	
-	
-	$('input[name=mtime]').val($('#datePic').val() + " " +  $('#timePic').val());
 
+	$('input[name=mtime]').val($('#datePic').val() + " " +  $('#timePic').val());
 	
-	return true;
+	var chkDate = $('#datePic').val();
+	var chkTime = $('#timePic').val();
+	
+	if(chkDate.trim().length == 0 || chkTime.trim().length == 0){
+		alert("모임 날짜를 선택해주세요.");
+		return false;
+	}
+	var chkContent = $('#content').val();
+	
+	alert(chkContent);
+	if(chkContent.trim().length == 0){
+		alert("세부 내용을 입력해주세요.");
+		$('#content').focus();
+		return false;
+	}
+	
+	
+	return true;	
 	
 }
+
+
 
 </script>
 </body>

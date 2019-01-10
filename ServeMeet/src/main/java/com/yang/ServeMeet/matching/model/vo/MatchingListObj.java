@@ -6,6 +6,7 @@ public class MatchingListObj extends Matching{
 	private String bigLocation;
 	private String midLocation;
 	private String smallCategory;
+
 	public MatchingListObj() {}
 	
 	public MatchingListObj(String bigCategory, String midCategory, String bigLocation, String midLocation,
