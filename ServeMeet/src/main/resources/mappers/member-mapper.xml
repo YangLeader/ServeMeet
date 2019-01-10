@@ -9,8 +9,6 @@
     연결의 착오를 줄인다. -->
 <mapper namespace="member">
 
-
-
 	<select id="loginMember" parameterType="string"
 		resultType = "Member">
 	SELECT * FROM MEMBER 
@@ -25,9 +23,11 @@
 	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER 
-		SET USERPWD = #{userPwd},
-		EMAIL = #{email},
-		WHERE USERID = #{userId}
+		<set>
+			<if test="#{userPwd} == null">userPwd = userPwd</if>
+		</set>
+		set email = #{email}
+		WHERE USERNO = #{userNo}
 	</update>
 	
 	<update id="updatePoint" parameterType="hashmap">

@@ -157,7 +157,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/memberView.do")
-	public String memberView(@RequestParam String userId) {
+	public String memberView() {
 		
 		if(logger.isDebugEnabled()) logger.debug("회원 상세 페이지 이동 확인!");
 		
@@ -179,7 +179,7 @@ public class MemberController {
 		
 		if(result > 0) {
 			
-			msg="회원 정보 수정 성공!";
+			msg="회원 정보가 수정되었습니다!";
 			mv.addObject("member", m);
 			
 		} else msg = "회원 정보 수정 실패!";
@@ -255,6 +255,12 @@ public class MemberController {
 		return "member/searchPwd";
 	}
 	
+	@RequestMapping("/member/memberInfo.do")
+	public String memberInfo() {
+		if(logger.isDebugEnabled()) logger.debug("내 정보 페이지 고");
+		return "member/memberInfo";
+	}
+	
 	@RequestMapping("/member/searchIdConfirm.do")
 	@ResponseBody
 	public String searchIdConfirm(@RequestParam String userName, @RequestParam String email){
@@ -283,7 +289,7 @@ public class MemberController {
 			String charSet = "utf-8";
 			String hostSMTP = "smtp.naver.com";		
 			String hostSMTPid = "servemeet19@naver.com"; // 본인의 아이디 입력		
-			String hostSMTPpwd = "@Qlalf0109"; // 비밀번호 입력
+			String hostSMTPpwd = "@Qlalf0110!"; // 비밀번호 입력
 			
 			// 보내는 사람 EMail, 제목, 내용 
 			String fromEmail = "servemeet19@naver.com"; // 보내는 사람 eamil

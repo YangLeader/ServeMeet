@@ -186,7 +186,7 @@ $(function() {
 										<li class="suvNav has-sub"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
 												title="내정보보기"><span class="mainNav">${member.userName}</span></a>
 											<ul>
-												<li><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
+												<li><a href="${pageContext.request.contextPath}/member/memberInfo.do?userNo=${member.userNo}"
 												title="내정보보기">내정보보기</a></li>
 												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="등록중인 매칭">등록중인 매칭</a></li>
 												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=E" title="종료된 매칭">종료된 매칭</a>
