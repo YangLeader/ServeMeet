@@ -155,7 +155,7 @@
 							</h3>
 							<h4 class="nic_txt"> ${member.userName}</h4>
 							<h4 style="color:#5e73de"><b>${member.point}p</b></h4>
-							<a href="#">>포인트 내역</a>
+							<a href="${pageContext.request.contextPath}/point/pointList.do">>포인트 내역</a>
 						</div>
 					</div>
 				</div>

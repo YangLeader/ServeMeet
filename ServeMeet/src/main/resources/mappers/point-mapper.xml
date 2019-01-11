@@ -8,42 +8,63 @@
     보통 서비스의 이름과 같게 설정하여
     연결의 착오를 줄인다. -->
 <mapper namespace="point">
-
+	<!-- db에 포인트 내역 삽입-->
 	<insert id="insertPoint" parameterType="Point">
 		INSERT INTO POINT VALUES(
 		 #{userNo},#{increasePoint},DEFAULT,#{pContent}
 		)
 	</insert>
 	
+	<!-- db에 출석 내역 삽입-->
 	<insert id="inserAttendence" parameterType="Attendence">
 		INSERT INTO ATTENDENCE VALUES(
 		SEQ_ATT.NEXTVAL,#{userNo},DEFAULT,#{att_point}
 		)
 	</insert>
 	
+	<!-- 출석 내역 불러오기 -->
 	<select id="selectAtt" parameterType="int" resultType="Attendence">
 		SELECT * FROM ATTENDENCE
 		WHERE USERNO = #{userNo} 
 		and extract(month from att_date) = (SELECT extract(month from sysdate) FROM dual)
 	</select>
 	
+	<!-- 출석 횟수 가져오기 -->
 	<select id="selectAttCnt" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM ATTENDENCE
 		WHERE USERNO = #{userNo}
 		and extract(month from att_date) = (SELECT extract(month from sysdate) FROM dual)
 	</select>
 	
+	<!-- 룰렛 횟수 카운트 -->
 	<select id="getCount" parameterType="Point" resultType="_int">
 		select count(*) from point 
 		where userNo = #{userNo} and pContent = #{pContent} 
 		and TO_CHAR(to_date(pdate,'YY-MM-DD'), 'yyyy/mm/dd') = (SELECT TO_CHAR(to_date(sysdate,'YY-MM-DD'), 'yyyy/mm/dd') FROM dual)
 	</select>
-
+	
+	<!-- 배팅포인트 지급..이거 왜 따로만들었을까..? -->
 	<insert id="insertBattingPoint" parameterType="Map">
 		INSERT INTO POINT VALUES(
 			#{USERNO},#{alloc},DEFAULT,#{pContent}
 		)
 		
 	</insert>
+	
+	<!-- 포인트 내역 리스트 -->
+	<select id="selectPointList" parameterType="_int" resultType="point">
+		SELECT * FROM POINT
+		WHERE USERNO = #{userNo} 
+		ORDER BY PDATE DESC
+	</select>
+	
+	<!-- 포인트 내역 전체 카운트 -->
+	<select id="selectPointTotalContents" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM POINT
+		WHERE USERNO = #{userNo}
+	</select>
+	
+	
 </mapper>
 

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.member.model.service.MemberService;
 import com.yang.ServeMeet.member.model.vo.Member;
 import com.yang.ServeMeet.point.model.service.PointService;
@@ -56,6 +58,7 @@ public class PointController {
 		if(logger.isDebugEnabled()) logger.debug("스크래치 페이지 고");
 		return "point/scratch";
 	}
+	
 	@RequestMapping("/point/roulette.do")
 	public String roulette() {
 		if(logger.isDebugEnabled()) logger.debug("룰렛 페이지 고");
@@ -190,6 +193,33 @@ public class PointController {
 		int result = pointService.getCount(p);
 		
 		return result;
+	}
+	
+	// 포인트 내역 조회 코드
+	@RequestMapping(value="point/pointList.do", method= RequestMethod.GET)
+	public String selectPointList(
+			@RequestParam(value="cPage", required=false, defaultValue="1")
+			int cPage, Model model, Member m) {
+		
+		int numPerPage = 10; // 한 페이지당 게시글 수
+		
+		// 1. 현재 페이지 게시글 목록 가져오기
+		ArrayList<Map<String, String>> list = 
+				new ArrayList<Map<String, String>>(pointService.selectPointList(cPage, numPerPage,m.getUserNo()));
+		
+		
+		// 2. 전체 게시글 개수 가져오기
+		int totalContents = pointService.selectPointTotalContents(m.getUserNo());
+		
+		// 3. 페이지 계산 후 작성할 HTML 추가
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "pointList.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		
+		return "point/pointList";
 	}
 	
 	

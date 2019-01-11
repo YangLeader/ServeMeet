@@ -9,6 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>ServeMeet</title>
 </head>
 <body>
@@ -16,6 +17,9 @@
 		<c:import url="views/common/header.jsp" />
 	</header>
 	<section id="mainSec" style="margin-top: 50px; ">
+		<div class="ad" style="position:fixed; top:10; left:3">
+			<c:import url="views/point/adSide.jsp"/>
+		</div>
 		<article class="titleAt">
 			<div class="mainTitle">
 				<h1 style="color: #5e73de">
