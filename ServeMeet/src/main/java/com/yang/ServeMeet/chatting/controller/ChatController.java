@@ -29,14 +29,6 @@ public class ChatController {
 		int userNo = ((Member)(session.getAttribute("member"))).getUserNo();
 		List<ChattingRoom> chatList = new ArrayList<ChattingRoom>();
 		chatList=cs.selectChattingList(userNo);
-		for(ChattingRoom c :chatList) {
-			String tmp=c.getChContent();
-			if(tmp!=null&&tmp.length()>30) {
-				tmp=tmp.substring(0, 30)+"...";
-				c.setChContent(tmp);
-			}
-		
-		}
 		
 		return chatList;
 	}
