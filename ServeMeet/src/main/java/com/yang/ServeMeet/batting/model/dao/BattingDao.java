@@ -31,4 +31,6 @@ public interface BattingDao {
 	int battingPoint(List<Map<String,Object>> list);
 	
 	List<Map<String,Object>> myBattingList(String userName);
+	
+	int battingTotalContents();
 }

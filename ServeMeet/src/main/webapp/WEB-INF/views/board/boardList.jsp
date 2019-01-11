@@ -136,7 +136,7 @@
 								<span class="subject text">
 									<a data-mytext="getNo" id="${b.boardNo }">
 										<b>${b.boardTitle }</b>
-										<c:if test="${b.commentCount ne 0 }">&nbsp;&nbsp;[${b.commentCount  }]</c:if>
+										<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+${b.commentCount  }</span></c:if>
 									</a>  
 									<span class="w45 icon"> </span>
 								</span> 

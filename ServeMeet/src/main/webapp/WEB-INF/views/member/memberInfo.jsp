@@ -42,6 +42,10 @@
 	}
 	
 	
+	.txtDiv {
+		padding-bottom : 12px;
+	}
+	
 </style>
 </head>
 <body>
@@ -51,19 +55,20 @@
     <div class="row" style="text-align:left" >
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="get-in-touch">
-          <h1 class="mb30">내 정보 수정하기</h1>
+          <h1 class="mb40">개인정보관리</h1>
+          <p>회원가입시 등록했던 기본 사항입니다. 변경사항이 있으면 수정해주세요.</p>
           <div class="row">
             <form name="memberEnrollFrm" id ="updateForm" action="memberUpdate.do" method="post">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!-- Text input-->
-                <div class="row">
+                <div class="row txtDiv">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label class=" control-label" for="id">아이디 :</label>
                     </div>
                     <div class="col-md-9">
-                    	<div id="userId-container">
-                    		<span>${member.userId}</span>
+                    	<div id="userId-container txtdiv">
+                    		<span class="txtSpan">&nbsp;${member.userId}</span>
                     	</div>
                     </div>
                   </div>
@@ -71,14 +76,30 @@
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!-- Text input-->
-                <div class="row">
+                <div class="row txtDiv">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label class=" control-label" for="name">닉네임 :</label>
                     </div>
                     <div class="col-md-9">
-                      <div id="userName-container">
-                      		<span>${member.userName}</span>
+                      <div id="userName-container txtdiv">
+                      		<span class="txtSpan">&nbsp;${member.userName}</span>
+                      </div>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!-- Text input-->
+                <div class="row txtDiv">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <label class=" control-label" for="name">보유 포인트 :</label>
+                    </div>
+                    <div class="col-md-9">
+                      <div id="userName-container txtdiv">
+                      		<span class="txtSpan">&nbsp;${member.point}p</span>
                       </div>
                     
                     </div>
@@ -115,14 +136,14 @@
               </div>
               <!-- Text input-->
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row">
+                <div class="row txtDiv">
                   <div class="form-group">
                     <div class="col-md-3">
                       <label class=" control-label" for="email">E-mail :</label>
                     </div>
                     <div class="col-md-9 email-container" id="email-container" style="display:">
-                    	<div class="col-md-9">
-                    	<span id="emailSpan">${member.email}</span>
+                    	<div class="col-md-9 txtdiv">
+                    	<span id="emailSpan txtSpan">&nbsp;${member.email}</span>
                     	</div>
                     	<div class="button_box col-md-3">
                     	<a class="bbs_btn btn_write" onclick="inputEmail();">
@@ -149,7 +170,7 @@
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="form-group" align="center">
                 <br>
-                  <button type="reset" id="cancelbutton" name="cancelbutton" class="btn btn-default">Cancel</button> 
+                <button onclick="cancel();" type="reset" id="cancelbutton" name="cancelbutton" class="btn btn-default">&nbsp;취소&nbsp;</button> 
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <button type ="submit" id="sendbutton" name="sendbutton" class="btn btn-default" onclick="sendBtn();">&nbsp;확인&nbsp;</button>
                 </div>
@@ -258,6 +279,11 @@
 			$("#emailMsg").hide();
 			emailFlag = true;
 		}
+		
+	}
+	
+	function cancel(){
+		location.href="${pageContext.request.contextPath}/member/memberView.do";
 		
 	}
 

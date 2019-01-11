@@ -37,12 +37,15 @@ public class WebSocketChattingController {
 
 		Chatting chat = cs.selectLastChatNo(((Member)session.getAttribute("member")).getUserNo());
 		System.out.println("allList ----------chat : "+chat);
-
-		mv.addObject("chatName", chat.getChattingName());
-		mv.addObject("chatNo", chat.getChattingId());
-		mv.addObject("host", ipAddr);
+		if(chat!=null) {
+			mv.addObject("chatName", chat.getChattingName());
+			mv.addObject("chatNo", chat.getChattingId());
+			mv.addObject("host", ipAddr);
+		}else {
+			mv.addObject("chatName", null);
+			mv.addObject("chatNo", -1);
+		}
 		mv.setViewName("chat/chattingView");
-
 		return mv;
 	}
 	@RequestMapping(value = "/chat/chatOut.do/{chatNo}", method = RequestMethod.GET)
@@ -60,11 +63,17 @@ public class WebSocketChattingController {
 		System.out.println("allList ----------chat : "+chat);
 		String ipAddr = req.getRemoteAddr();
 		
-		mv.addObject("chatName", chat.getChattingName());
-		mv.addObject("chatNo", chat.getChattingId());
-		mv.addObject("host", ipAddr);
+		
+		
+		if(chat!=null) {
+			mv.addObject("chatName", chat.getChattingName());
+			mv.addObject("chatNo", chat.getChattingId());
+			mv.addObject("host", ipAddr);
+		}else {
+			mv.addObject("chatName", null);
+			mv.addObject("chatNo", -1);
+		}
 		mv.setViewName("chat/chattingView");
-
 		return mv;
 	}
 	@RequestMapping(value = "/chat/chatting.do/{chatNo}", method = RequestMethod.POST)

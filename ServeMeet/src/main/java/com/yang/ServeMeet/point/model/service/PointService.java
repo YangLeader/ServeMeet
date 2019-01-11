@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.point.model.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -25,5 +26,10 @@ public interface PointService {
 	int getCount(Point point);
 	
 	int insertBattingPoint(List<Map<String,Object>> list);
+
+	List<Map<String, String>> selectPointList(int cPage, int numPerPage, int userNo);
+
+	int selectPointTotalContents(int userNo);
+
 
 }

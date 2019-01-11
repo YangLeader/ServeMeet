@@ -1,6 +1,5 @@
 package com.yang.ServeMeet.point.model.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,4 +25,8 @@ public interface PointDao {
 	int getCount(Point point);
 	
 	int insertBattingPoint(List<Map<String,Object>> list);
+
+	List<Map<String, String>> selectPointList(int cPage, int numPerPage,int userNo);
+
+	int selectPointTotalContents(int userNo);
 }

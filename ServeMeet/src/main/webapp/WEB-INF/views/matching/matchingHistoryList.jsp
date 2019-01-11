@@ -44,7 +44,7 @@ $(function(){
 						<td>${item.MTITLE}</td>
 						<td>${item.MPEOPLENUM}</td>
 						<td>${item.BIGLOCATION}&nbsp; ${item.MIDLOCATION}&nbsp; ${item.SMALLLOCATION}</td>
-						<td>${item.BIGCATEGORY}&nbsp; ${item.MIDCATEGORY}&nbsp; ${item.SMALLCATEGORY}</td>
+						<td>${item.BIGCATEGORY}&nbsp; ${item.MIDCATEGORY}</td>
 					</tr>
 					</c:forEach>
 				</table>

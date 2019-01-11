@@ -154,37 +154,37 @@ public class MatchingController {
 		
 	}
 	
-	@RequestMapping("matching/myMatchingList.ma")
-	public String myMatchingList(@RequestParam String userName, @RequestParam String type, Model model) {
-
-		
-//		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+//	@RequestMapping("matching/myMatchingList.ma")
+//	public String myMatchingList(@RequestParam String userName, @RequestParam String type, Model model) {
+//
 //		
-//		String path = "";
+////		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+////		
+////		String path = "";
+////		
+////		if(type.equals("P")) {
+////			
+////			list = matchingService.myMatchingList(userName);
+////			
+////			model.addAttribute("list",list);
+////			path = "matching/myMatchingList";
+////			
+////		} else {
+////			list = matchingService.myMatchingEndList(userName);
+////			
+////			model.addAttribute("list",list);
+////			path = "matching/myMatchingEndList";
+////		}
+////		
+//		System.out.println("userName = "+userName);
+//
 //		
-//		if(type.equals("P")) {
-//			
-//			list = matchingService.myMatchingList(userName);
-//			
-//			model.addAttribute("list",list);
-//			path = "matching/myMatchingList";
-//			
-//		} else {
-//			list = matchingService.myMatchingEndList(userName);
-//			
-//			model.addAttribute("list",list);
-//			path = "matching/myMatchingEndList";
-//		}
+//		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.myMatchingList(userName,type));
 //		
-		System.out.println("userName = "+userName);
-
-		
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.myMatchingList(userName,type));
-		
-		model.addAttribute("list",list);
-		
-		return "/matching/myMatchingList";
-	}
+//		model.addAttribute("list",list);
+//		
+//		return "/matching/myMatchingList";
+//	}
 	
 	@RequestMapping("matching/mHistoryList.ma")
 	public String mHistoryList(Model model) {
@@ -217,8 +217,10 @@ public class MatchingController {
 			listName = "소모임";
 		}else if(type.equals("S")) {
 			listName = "스포츠";
-		}else {
+		}else if(type.equals("E")){
 			listName = "E-스포츠";
+		}else {
+			listName = "전부찾기";
 		}
 		model.addAttribute("matchingList",list);
 		model.addAttribute("lName", listName);
@@ -226,7 +228,17 @@ public class MatchingController {
 		return "/matching/matchingList";
 	}
 	
-	@RequestMapping("matching/matchingDetail.md")
+	@RequestMapping("matching/myMatchingList.ma")
+	public String myMatchingList(@RequestParam String userName , @RequestParam String type , Model model) {
+		
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.myMatchingList(userName,type));
+		
+		model.addAttribute("matchingList",list);
+		
+		return "/matching/myMatchingList";
+	}
+	
+	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
 	public String mDatail(@RequestParam("matNum") int matNum, Model model) {
 		System.out.println("조회할 매칭 matNum : " + matNum);
 		

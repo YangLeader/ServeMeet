@@ -127,11 +127,12 @@ public class EchoHandler extends TextWebSocketHandler {
 		System.out.println(chatLog);
 		if (message.getPayload() != null) {
 			if(list.contains(m.getUserName())) {
-				System.out.println("있음");
+				System.out.println("있음 "+ list);
 				list.remove(m.getUserName());
 				int result = cs.ChatLogInsert(chatLog);
 				System.out.println("지웠음 "+ list);
 				list.add(m.getUserName());
+				System.out.println("추가함 "+ list);
 				if (result > 0) {
 					// 사용자 모두에게 데이터를 전달하는 반복문
 					for (String userId : list) {

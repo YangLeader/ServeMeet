@@ -54,7 +54,17 @@
 <!--
 <script src="http://aq23r1gt.iwinv.net/js/jquery-1.8.3.min.js"></script>
 -->
+<style>
+#bo_v_con span{
 
+	cursor : text;
+}
+
+#bo_v_con img{
+
+	cursor : default;
+}
+</style>
 </head>
 <body>
 
@@ -187,7 +197,7 @@ $(document).ready(function(){
         	</c:if>
         	</c:forEach>
         	<p><br /></p>
-        	<pre style="background-color: white; white-space: pre-wrap;"><p>${board.boardContent}</p></pre>
+        	<pre style="background-color: white; white-space: pre-wrap; padding: 30px 15px;"><p>${board.boardContent}</p></pre>
         	<p><br /></p>
         </div>
                 <!-- } 본문 내용 끝 -->
@@ -291,7 +301,7 @@ var char_max = parseInt(0); // 최대
 					<p style="z-index:4" class="cmt_mb_info">
 						<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
 						
-						<font class="write_user"><a>${cl.userName } ▶ <b style="color:red;">${cl.getName }</b></a></font>
+						<font class="write_user"><a>${cl.userName } ▶ <b style="color:red;">${cl.getName}</b></a></font>
 
 						<span>
 							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
@@ -723,7 +733,7 @@ function excute_good(href, $el, $tx)
 				<span class="subject text">
 					<a data-mytext="getNo" id="${b.boardNo }">
 						<b>${b.boardTitle }</b>
-						<c:if test="${b.commentCount ne 0 }">&nbsp;&nbsp;[${b.commentCount  }]</c:if>
+						<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+${b.commentCount  }</span></c:if>
 					</a>  
 						<span class="w45 icon"> </span>
 				</span> 
