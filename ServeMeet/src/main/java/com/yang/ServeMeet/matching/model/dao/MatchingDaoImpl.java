@@ -93,4 +93,15 @@ public class MatchingDaoImpl implements MatchingDao {
 		System.out.println("객체 : " + session.selectOne("Matching.matchingDetail", matNum));
 		return session.selectOne("Matching.matchingDetail", matNum);
 	}
+
+	@Override
+	public int matchingRequest(int matchingId, String writerName, String guestName, String content) {
+		Matching m = new Matching();
+		m.setMatchingId(matchingId);
+		m.setmWriter(writerName);
+		m.setmGuest(guestName);
+		m.setmContent(content);
+		
+		return session.insert("Matching.matchingRequest", m);
+	}
 }

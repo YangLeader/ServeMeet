@@ -344,7 +344,7 @@ $(function(){
 			$('#midLoc').empty();
 			$('#midLoc').append("<option value='시구군'>시/구/군</option>");
 		}else{		
-			$.ajax({
+			$.ajax({	
 				url : "${pageContext.request.contextPath}/location/midLocation.do",
 				type : "GET",
 				dataType : "JSON",
