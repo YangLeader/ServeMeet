@@ -2,6 +2,8 @@ package com.yang.ServeMeet.board.model.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Board {
 
 	private static final long serialVersionUID = 4000L;
@@ -11,6 +13,7 @@ public class Board {
 	private String boardContent;
 	private String userName;
 	private int boardCount;
+	@JsonFormat(pattern="MM-dd", timezone = "Asia/Seoul")
 	private Date boardDate;
 	private String boardStatus;
 	private int commentCount;

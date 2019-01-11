@@ -304,7 +304,6 @@ ul, ol { margin: 0;}
 ul li, ol li {   }
 a { color: #7a8080; text-decoration: none; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
 a:focus, a:hover { text-decoration: none; color: #5e73de; cursor:pointer; }
-#inserttitle:focus, #inserttitle:hover {text-decoration: none; color: #ff0000; cursor:pointer;}
 strong { }
 .listnone { list-style: none; padding: 0px; }
 .lead { font-size: 21px; }
@@ -321,6 +320,18 @@ hr {
     border-top: 1px solid #f1f3f8;
 }
 /*-------------- align ------------*/
+
+#inserttitle{
+	display: block;
+	font-size:12px; 
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap; 
+	width:auto;
+	height:30px;
+}
+
+#inserttitle:focus, #inserttitle:hover { text-decoration: none; color: #5e73de; cursor:pointer;}
 
 /* =WordPress Core
 -------------------------------------------------------------- */
@@ -833,7 +844,7 @@ text-transform: uppercase;background-color: #fff; }
 -------------------------------------*/
 
 .orangered, i.orangered {
-    color: #ff4500;
+    color: #5e73de;
 }
 
 .count {
@@ -1120,7 +1131,7 @@ search-query:focus + button {z-index: 3;}
 .widget-archives ul { }
 .widget-archives ul li { }
 .widget-archives ul li a { }
-.post-list { margin-bottom: 30px; }
+.post-list {  }
 .widget-link { }
 .widget-link:hover { }
 .post-image { }
