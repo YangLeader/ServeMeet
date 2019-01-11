@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+.listDiv{
+	
+	border-radius: 30px;
+	margin: auto;
+	width: 95%;
+	text-align: center;
+}
+
+.listDetailDiv{
+	
+}
+
+ul{
+	list-style: none;
+}
+
+.objM{
+	
+	border-radius: 10px;
+	margin: auto;
+	width: 80%;
+	height: 80px;
+	margin-bottom: 10px;
+	border: 1px solid #e0e0e0;	
+	font-size: 9pt;
+	cursor: pointer;
+}
+
+.objM:hover{
+	border: 1px solid #DEEBFF;
+	background: #DEEBFF;
+}
+
+.objTitle{
+	font-size: 9pt;
+	border: 1px solid #e0e0e0;
+	padding-top: 10px;
+	border-radius: 10px;
+	margin: auto;
+	width: 80%;
+	height: 50px;
+	margin-bottom: 10px;	
+	background: #f9f9f9;
+	font-weight: bold;
+	
+}
+
+.con{
+	vertical-align: middle;
+	float: left;	
+	height: 100%;
+	padding-top: 25px;
+	
+}
+
+.conTitle{
+	vertical-align: middle;
+	float: left;	
+	height: 100%;
+	
+	
+}
+
+#catBName{
+	width: 7%;
+	
+}
+
+#catSName{
+	width: 10%;
+}
+
+#mtTitle{
+	width: 30%;
+}
+
+#locName{
+	width: 20%;
+}
+
+#mtwriter{
+	width: 10%;
+}
+
+#mtTime{
+	padding-top: 15px;
+	width: 7%;
+}
+
+#mpeople{
+	
+	width: 6%;
+}
+#mStatus{
+	width: 10%;
+}
+
+
+#mTimeTitle{
+	width: 7%;
+}
+
+.cgr{
+	color: #45C21B;
+}
+
+.cbl{
+	color: blue;
+}
+
+.crd{
+	color: red;
+}
+
+#detailKindsDiv{
+	width: 64%;
+	
+}
+.item2in1{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 10%;
+}
+
+.dekd{
+	display: none;
+}
+
+.itemframe3 li {
+    width: 20%;
+    display: inline-block;
+    margin-left: 10px;
+    padding-left: 5px;
+}
+
+.sb_btn {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background: #5e73de;
+    font-size: 13pt;
+    font-weight: 600;
+    padding: 0 8px;
+    line-height: 34px;
+    border-radius: 0.3em;
+    border: 0;
+    text-align: center;
+     box-shadow:3px 3px 3px 1px #999;
+}
+
+.submit_btn{
+	width: 10%;
+    height: 70%;
+    color: black;
+    background: white;
+    font-size: 10pt;
+    font-weight: 400;
+    padding: 0 8px;
+    border-radius: 0.3em;
+    border: 1px solid black;
+    text-align: center;
+  	margin-top: 5px;
+  	margin-right: 10px;
+  	float: right;
+}
+.over {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 226px;
+    height: 430px;
+    text-align: center;
+    line-height: 300px;
+    background-color: rgba( 0, 0, 0, 0.6 );
+    color: white;
+}

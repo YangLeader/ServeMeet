@@ -33,6 +33,12 @@ public class BattingServiceImpl implements BattingService {
 	}
 	
 	@Override
+	public int battingTotalContents() {
+		
+		return battingDao.battingTotalContents();
+	}
+	
+	@Override
 	public List<Map<String, String>> battingList(String type){
 	
 		return battingDao.battingList(type);

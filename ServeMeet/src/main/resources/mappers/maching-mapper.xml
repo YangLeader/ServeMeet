@@ -83,4 +83,5 @@
 		AND M.CATEGORYID = C.CATEGORYID
 		AND M.MATCHINGID = #{matNum}
 	</select>
+	
 </mapper>

@@ -8,74 +8,8 @@
 
 <!-- 	<label for="ck1"><input type="checkbox" id="ck1" value="test">test</label>
 	<label for="ck2"><input type="checkbox" id="ck2" value="test2">test2</label> -->
-<style>
-<!--
-#detailKindsDiv{
-	width: 64%;
-	
-}
-.item2in1{
-	margin-top: 5px;
-	margin-bottom: 5px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	width: 10%;
-}
 
-.dekd{
-	display: none;
-}
 
-.itemframe3 li {
-    width: 20%;
-    display: inline-block;
-    margin-left: 10px;
-    padding-left: 5px;
-}
-
-.sb_btn {
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    background: #5e73de;
-    font-size: 13pt;
-    font-weight: 600;
-    padding: 0 8px;
-    line-height: 34px;
-    border-radius: 0.3em;
-    border: 0;
-    text-align: center;
-     box-shadow:3px 3px 3px 1px #999;
-}
-
-.submit_btn{
-	width: 10%;
-    height: 70%;
-    color: black;
-    background: white;
-    font-size: 10pt;
-    font-weight: 400;
-    padding: 0 8px;
-    border-radius: 0.3em;
-    border: 1px solid black;
-    text-align: center;
-  	margin-top: 5px;
-  	margin-right: 10px;
-  	float: right;
-}
-.over {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 226px;
-    height: 430px;
-    text-align: center;
-    line-height: 300px;
-    background-color: rgba( 0, 0, 0, 0.6 );
-    color: white;
-}
--->
-</style>
 
 <div class="out">
 	<div class="category">

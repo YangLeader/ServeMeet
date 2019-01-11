@@ -29,6 +29,12 @@
 		</if>
 		WHERE BATTINGID = #{battingId}
 	</update>
+	
+	
+	<select id="battingTotalContents" resultType="_int">
+		SELECT COUNT(*) FROM BATTING WHERE BSTATUS = 'Y'
+	</select>
+	
 
 	<insert id="battingPickUser" parameterType="BattingUser">
 		INSERT INTO BATTINGUSER VALUES (#{battingId},#{userName},#{battingSelect})
