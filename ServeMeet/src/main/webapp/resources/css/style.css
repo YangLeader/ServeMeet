@@ -292,6 +292,18 @@ article{
 .modal-backdrop {
 	z-index: 9998;
 }
+.modal-dialog{
+	width: 450px!important;
+}
+.modal-dialog .modal-content .modal-header{
+	    border-radius: 5px 5px 0px 0px;
+	    color:#fff;
+}
+.modal-dialog .modal-content .modal-header h4{
+	text-align:center;
+	 color:#fff;
+}
+
 /*-----------------------------------
     1. Body / Typography 
 -----------------------------------*/
