@@ -10,7 +10,7 @@
 		       case when (select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid) is null then
 		                                  (select NVL((select (select M.Username from Member M where M.Userno=g2.Userno) userName 
 		                                           from Chatting_Group G2 
-		                                           where g2.Chattingid=g.Chattingid and g2.Userno!=#{userNo}and G2.STATUS='Y'
+		                                           where g2.Chattingid=g.Chattingid and g2.Userno!=#{userNo} and G2.STATUS='Y'
 		                                          ),'(알수없음)') chattingName 
 		                                    from Chattinglist L where L.Chattingid= G.Chattingid
 		                                    )
@@ -22,10 +22,10 @@
 		from Chatting_Group G left join 
 		    (select Chattingid,Userno,Chcontent,Chstatus,Chdate
 		    from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog)
-		    where mindate=Chdate and Chcontent is not null
+		    where mindate=Chdate <!-- and Chcontent is not null -->
 		     Order by mindate desc)LD
 		on G.Chattingid=Ld.Chattingid
-		where G.Userno=#{userNo} and G.STATUS='Y' and Chcontent is not null
+		where G.Userno=#{userNo} and G.STATUS='Y' <!-- and Chcontent is not null -->
 		
 	</sql>
 
@@ -64,7 +64,7 @@
 		select * from (                
 		    select  ROWNUM rnum,chattingId,userNo,chDate,chContent,username 
 		    from (select chattingId,userNo,chDate,chContent,(select M.username from MEMBER M where M.USERNO=L.userNo) username 
-		          from ChattingLog L where L.chattingId=79 order by chdate desc)
+		          from ChattingLog L where L.chattingId=#{chatNo} order by chdate desc)
 		    where ROWNUM <![CDATA[<]]> ((#{page}*20)+21)+#{msgCount} order by chDate)
 		where rnum <![CDATA[>]]>(#{page}*20)+#{msgCount}     
                 

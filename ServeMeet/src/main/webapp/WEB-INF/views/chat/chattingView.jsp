@@ -19,15 +19,24 @@
 <script>
 	var msgCount=0;
 	var page =0;
+	
 	var chatNo = ${chatNo};
 	
 	var chatName= "${chatName}";
 	
 	var myNo=${member.userNo};
 	
+	
+	
 	var memberName=new Array();
 	memberName.push("${member.userName}");
 	$(function() {
+		if(chatNo==-1||chatName==null){
+			
+			$("#chatTxt").attr("disabled", "disabled");
+			$(".outBtn").prop('id', 'noneBtn');
+			console.log("1");
+		}
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
 			data:{
@@ -81,6 +90,8 @@
 					}
 				} 
 				$("#chatdata").scrollTop($("#chatdata")[0].scrollHeight);
+				page=page+1;
+				console.log("page : "+page);
 			},
 			error : function() {
 				console.log("chatLog 에러");
@@ -90,7 +101,7 @@
 		});
 	});
 	$(function() {
-		$(".outBtn").click(function() {
+		$("#outBtn").click(function() {
 			if (confirm("채팅방을 나가시겠습니까?") == true){    //확인
 				location.href="${pageContext.request.contextPath}/chat/chatOut.do/"+chatNo;
 			}else{   //취소
@@ -241,7 +252,7 @@
 		</div>
 		<div  class= 'col-lg-8 col-md-8 col-sm-8 col-xs-8 chatName'>
 			<h2>${chatName}</h2>
-			<span><img class="outBtn" alt="채팅방 나가기" src="${pageContext.request.contextPath}/resources/images/out.png"></span> 
+			<span><img class="outBtn" id="outBtn" alt="채팅방 나가기" src="${pageContext.request.contextPath}/resources/images/out.png"></span> 
 			
 		</div>
 	</div>
