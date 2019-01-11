@@ -34,7 +34,7 @@
 	          </div>
 	        </div>
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" onclick="createChatGroup();" data-dismiss="modal">만들기</button>
+	          <button type="button" class="btn btn-default" onclick="createChatRoom();" data-dismiss="modal">만들기</button>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 	        </div>
 	      </div>

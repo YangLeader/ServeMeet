@@ -244,6 +244,80 @@ $(function() {
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script>
 	$(function() {
+		
+		$("#chatdata").scroll(
+				function() {
+					if($("#chatdata").scrollTop()==0){
+						$.ajax({
+							url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
+							data:{
+								chatNo:chatNo,
+								msgCount:msgCount,
+								page:page
+							},
+						 	datatype:"json",
+						 	success : function(data) {
+								//console.log(data.length);
+								//console.log(data);
+								carrHei=$("#chatdata")[0].scrollHeight;
+								console.log("carrHei : "+carrHei);
+								 for(var i=data.length-1;i>-1;i--){
+									
+									var message=data[i].chContent;
+									var userName=data[i].userName;
+									var today=new Date(data[i].chDate);
+									amtoPm="am ";
+									if(today.getHours()>12){
+										amtoPm="pm "+ (today.getHours()-12);
+									}else{
+										amtoPm=amtoPm+today.getHours();
+									}
+									printDate=today.getFullYear()+"/"+(today.getMonth()+1)+"/"+today.getDate()+" "+amtoPm+":"+today.getMinutes()+":"+today.getSeconds();
+									
+									
+									if(data[i].userNo==myNo)
+									{
+										var printHTML="<div style='margin-left: 30%;margin-bottom: 10px;word-break:break-all;text-align: right;'>";
+										printHTML+="<div >";
+										printHTML+="<div class='myChatLog'>"+message+"</div><br/>";
+										printHTML+="<sub>"+printDate+"</sub>";
+										printHTML+="</div>";
+										printHTML+="</div>";
+										$('#chatdata').prepend(printHTML);
+									}
+									else{
+										var printHTML="<div style='margin-right:30%;word-break:break-all;text-align: left;'>";
+										printHTML+="<div ><div class='nameTag'>"+userName+"</div><br>";
+										printHTML+="<div class='otherChatLog'>"+message+"</div><br/>";
+										printHTML+="<sub>"+printDate+"</sub>";
+										printHTML+="</div>";
+										printHTML+="</div>";
+										
+										$('#chatdata').prepend(printHTML);
+										
+									}
+									
+								}  
+								prependHei=$("#chatdata")[0].scrollHeight
+								console.log("prependHei : "+prependHei);
+								$("#chatdata").scrollTop(prependHei-carrHei);
+								page=page+1;
+								console.log("page : "+page);
+							},
+							error : function() {
+								console.log("chatLog 에러");
+							}
+						 	
+							
+						});
+					}
+
+				});
+		
+		
+		
+		
+		
 		var member="${member.userId}";
 		if(member!=""){
 			console.log(member);
@@ -299,6 +373,11 @@ $(function() {
 					console.log('str['+i+'] :' + strArray[i]);	 		
 				}
 				if(strArray[4]==chatNo){
+					msgCount++;
+					console.log("채팅카운트 : "+msgCount)
+					
+					
+					
 					if(strArray.length>1)
 					{
 						sessionId=strArray[0];
@@ -335,7 +414,7 @@ $(function() {
 						}
 						else{
 							var printHTML="<div style='margin-right:30%;word-break:break-all;text-align: left;'>";
-							printHTML+="<div >";
+							printHTML+="<div ><div class='nameTag'>"+userName+"</div><br>";
 							printHTML+="<div class='otherChatLog'>"+message+"</div><br/>";
 							printHTML+="<sub>"+printDate+"</sub>";
 							printHTML+="</div>";
