@@ -33,4 +33,5 @@ public interface MatchingDao {
 	
 	MatchingListObj matchingDetail(int matNum);
 	
+	int matchingRequest(int matchingId,String writerName,String guestName,String content);
 }

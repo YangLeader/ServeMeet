@@ -95,5 +95,11 @@ public class MatchingServiceImpl implements MatchingService {
 		
 		return matchingDao.matchingDetail(matNum);
 	}
+
+	@Override
+	public int matchingRequest(int matchingId, String writerName, String guestName, String content) {
+		
+		return matchingDao.matchingRequest(matchingId, writerName, guestName, content);
+	}
 	
 }

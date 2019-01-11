@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yang.ServeMeet.batting.model.service.BattingService;
@@ -232,5 +236,38 @@ public class MatchingController {
 		model.addAttribute("mDetail", mo);
 		
 		return "/matching/matchingDetail";
+	}
+	
+	@RequestMapping("matching/matchingApply.ma")
+	public String mApply() {
+		return "/matching/matchingApply";
+	}
+	
+	/*@RequestMapping("matching/matchingRequest.ma")
+	public String mApplyRequest(@RequestParam("matchingId") int matchingId, @RequestParam("writerName") String writerName,
+								@RequestParam("guestName") String guestName, @RequestParam("content") String content, Model model) {
+		System.out.println("매칭아이디:"+matchingId);
+		System.out.println("매칭등록자:"+writerName);
+		System.out.println("매칭신청자:"+guestName);
+		System.out.println("컨텐츠:"+content);
+		
+		matchingService.matchingRequest(matchingId, writerName, guestName, content);
+		
+		model.addAttribute("msg", "매칭 신청이 완료되었습니다.");
+		
+		return "common/msg";
+	}*/
+	
+	@RequestMapping(value = "matching/matchingRequest.ma", method = RequestMethod.POST)
+	@ResponseBody
+	public int mApplyRequest(@RequestParam int matchingId, @RequestParam String writerName,
+								@RequestParam String guestName, @RequestParam String content) { 
+		System.out.println("매칭아이디:"+matchingId);
+		System.out.println("매칭등록자:"+writerName);
+		System.out.println("매칭신청자:"+guestName);
+		System.out.println("컨텐츠:"+content);
+		int result = matchingService.matchingRequest(matchingId, writerName, guestName, content);
+		
+		return result;
 	}
 }
