@@ -187,7 +187,7 @@ $(document).ready(function(){
         	</c:if>
         	</c:forEach>
         	<p><br /></p>
-        	<pre style="background-color: white; white-space: pre-wrap;"><p>${board.boardContent}</p></pre>
+        	<pre style="background-color: white; white-space: pre-wrap; padding: 30px 15px;"><p>${board.boardContent}</p></pre>
         	<p><br /></p>
         </div>
                 <!-- } 본문 내용 끝 -->

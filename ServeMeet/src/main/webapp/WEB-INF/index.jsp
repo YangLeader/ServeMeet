@@ -71,14 +71,14 @@
 				</div><div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 listSec contentList">
 					<div class="sContent conList">
 						<div class="midTitle">
-							<a>
+							<a href="${pageContext.request.contextPath}/board/boardList.do">
 								<span class="midTitleName"><b>자유게시판</b></span>
 								<span>+</span>
 							</a>
 						</div>
 						<div class="sList">
-							<div style="padding:10px;">
-							<ul class="post-list" style="list-style:none; padding: 0px;">
+							<div style="padding:3px;">
+							<ul class="post-list" style="list-style:none; padding: 5px 0px;">
 								
 								
 							</ul>
@@ -120,14 +120,18 @@
 					for(var i in data){					
 						
 						var li = '<li class="ellipsis">'
-							+ '<a href="https://mangashow.me/bbs/board.php?bo_table=msm_free&amp;wr_id=72249" id="inserttitle">'
-							+ '<span class="pull-right gray font-12">&nbsp;'+data[i].userName+'</span>'
+							+ '<a href="${pageContext.request.contextPath}/board/boardView.do?no='+data[i].boardNo+'" id="inserttitle">'
+							+ '<span class="pull-right gray font-12" id="spanname"><span class="count orangered">+'+data[i].commentCount+'</span>&nbsp;'+data[i].userName+'</span>'
 							+ '<span class="wr-icon wr-new">'
 							+ '<img src="${pageContext.request.contextPath }/resources/images/icon_new.gif" class="icon_new">'
-							+ '</span>'+data[i].boardTitle+'</a>'
+							+ '</span>&nbsp;'+data[i].boardTitle+'</a>'
 							+ '</li>';
 							
-						$('.post-list').html(li);
+						$('.post-list').html($('.post-list').html()+li);
+						
+						//$('#spanname').html();
+						
+						//$('#inserttitle').append();
 					
 					}
 					
