@@ -17,6 +17,8 @@
 <meta charset="UTF-8">
 <title>실시간 채팅</title>
 <script>
+	var msgCount=0;
+	var page =0;
 	var chatNo = ${chatNo};
 	
 	var chatName= "${chatName}";
@@ -28,14 +30,18 @@
 	$(function() {
 		$.ajax({
 			url:"${pageContext.request.contextPath}/chat/chatLogList.do/",
-			data:{chatNo:chatNo},
+			data:{
+				chatNo:chatNo,
+				msgCount:msgCount,
+				page:page
+			},
 		 	datatype:"json",
 		 	success : function(data) {
 				//console.log(data);
 				for(var i in data){
 					
 					var message=data[i].chContent;
-					var userName=data[i].userNo;
+					var userName=data[i].userName;
 					var today=new Date(data[i].chDate);
 					amtoPm="am ";
 					if(today.getHours()>12){
@@ -60,13 +66,18 @@
 					}
 					else{
 						var printHTML="<div style='margin-right:30%;word-break:break-all;text-align: left;'>";
-						printHTML+="<div >";
+						printHTML+="<div ><div class='nameTag'>"+userName+"</div><br>";
 						printHTML+="<div class='otherChatLog'>"+message+"</div><br/>";
 						printHTML+="<sub>"+printDate+"</sub>";
 						printHTML+="</div>";
 						printHTML+="</div>";
+						clientHeigth=$("#chatdata").height()+$("#chatdata").scrollTop()+13
+						clientScrollHeigth=$("#chatdata")[0].scrollHeight
 						$('#chatdata').append(printHTML);
-						
+						if(clientScrollHeigth==clientHeigth){
+							console.log("같아요");
+							$("#chatdata").scrollTop($("#chatdata")[0].scrollHeight);
+						}
 					}
 				} 
 				$("#chatdata").scrollTop($("#chatdata")[0].scrollHeight);
@@ -87,16 +98,9 @@
 			}
 			
 		})
-		$(".outBtn").click(function() {
 		
-				location.href="#createChat";
-			
-			
-		})
 	})
-	function createChatRoom(){
-		console.log("만들기");
-	}
+	
 	$(function() {
 		$(".mSearch").click(function() {
 			var keyword=$(".keyword").val();
@@ -160,6 +164,18 @@
 		
 		console.log(memberName);
 	}
+	function createChatRoom(){
+		if(memberName.length>1){
+			
+			if($(".modal-body .chatName").val()!=null){
+				createChatGroup();
+			}else{
+				 swal("방 이름을 입력해주세요");
+			}
+		}else{
+			 swal("함께할 회원을 선택해주세요");
+		}
+	}
   	function createChatGroup(){
 		var jArray=JSON.stringify(memberName);
 		var cChatName = $(".modal-body .chatName").val();
@@ -197,6 +213,17 @@
          form.submit();
 
 		}
+  	$('html').click(function() {
+  		$modal = $(".modal").css("display");
+  		if($modal=='none'){
+  			$(".inMember").children().remove();
+  	  		$(".searchMember").children().remove();
+  	  		memberName=new Array();
+  	  		memberName.push("${member.userName}");
+  	  		
+  		}
+	})
+
 </script>
 <style>
 
@@ -227,7 +254,7 @@
 			<div id='chatdata' class='panel-body scrollbar-primary'></div>
 		</div>
 		<div id = "chatSend" >
-			<input type="text"  name="chatTxt" id = "chatTxt"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/chatSend2.png"></button></span>
+			<input type="text"  name="chatTxt" id = "chatTxt"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/chatSend3.png"></button></span>
 		</div>
 		
 	</div>

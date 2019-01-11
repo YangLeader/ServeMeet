@@ -11,6 +11,7 @@ public class ChattingLog {
 	
 	private int chattingId;
 	private int userNo;
+	private String userName;
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.m", timezone = "Asia/Seoul")
 	private Timestamp chDate;
 	private String chContent;
@@ -26,6 +27,27 @@ public class ChattingLog {
 	}
 
 	public void setList(List<String> list) {
+		this.list = list;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public ChattingLog(int chattingId, int userNo, String userName, Timestamp chDate, String chContent, int chStatus,
+			String chattingName, List<String> list) {
+		super();
+		this.chattingId = chattingId;
+		this.userNo = userNo;
+		this.userName = userName;
+		this.chDate = chDate;
+		this.chContent = chContent;
+		this.chStatus = chStatus;
+		this.chattingName = chattingName;
 		this.list = list;
 	}
 
@@ -88,11 +110,14 @@ public class ChattingLog {
 	public void setChattingName(String chattingName) {
 		this.chattingName = chattingName;
 	}
+
 	@Override
 	public String toString() {
-		return "ChattingLog [chattingId=" + chattingId + ", userNo=" + userNo + ", chDate=" + chDate + ", chContent="
-				+ chContent + ", chStatus=" + chStatus + ", chattingName=" + chattingName + "]";
+		return "ChattingLog [chattingId=" + chattingId + ", userNo=" + userNo + ", userName=" + userName + ", chDate="
+				+ chDate + ", chContent=" + chContent + ", chStatus=" + chStatus + ", chattingName=" + chattingName
+				+ ", list=" + list + "]";
 	}
+
 				   
 
 	

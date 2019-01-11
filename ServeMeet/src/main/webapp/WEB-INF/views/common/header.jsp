@@ -293,6 +293,8 @@ $(function() {
 					console.log('str['+i+'] :' + strArray[i]);	 		
 				}
 				if(strArray[4]==chatNo){
+					msgCount++;
+					console.log("채팅카운트 : "+msgCount)
 					if(strArray.length>1)
 					{
 						sessionId=strArray[0];
@@ -329,7 +331,7 @@ $(function() {
 						}
 						else{
 							var printHTML="<div style='margin-right:30%;word-break:break-all;text-align: left;'>";
-							printHTML+="<div >";
+							printHTML+="<div ><div class='nameTag'>"+userName+"</div><br>";
 							printHTML+="<div class='otherChatLog'>"+message+"</div><br/>";
 							printHTML+="<sub>"+printDate+"</sub>";
 							printHTML+="</div>";

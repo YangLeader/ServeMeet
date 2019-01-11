@@ -220,6 +220,8 @@ article{
 	padding: 15px 10px;
 	overflow: scroll;
 }
+
+    
 .chattingRoom .chatList .chatBox{
 	padding: 4px 10px;
 }
@@ -248,8 +250,13 @@ article{
 	color: #fff;
 	border-radius: 5px; 
 	display: inline-block;
-	
+	margin-left: 20px;
 }
+.chattingRoom .form-group .panel #chatdata .nameTag{
+    display: inline;
+    border-right: 4px #5e73de solid;
+    margin-right: 5px;
+    padding-right: 5px;}
 .chattingRoom #chatSend{
 	border:1px #ddd  solid;
 	width: 100%;

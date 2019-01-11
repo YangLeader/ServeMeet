@@ -8,10 +8,10 @@
 	<sql id="chatList">
 		select G.Chattingid,LD.Userno,
 		       case when (select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid) is null then
-		                                  (select (select (select M.Username from Member M where M.Userno=g2.Userno) userName 
+		                                  (select NVL((select (select M.Username from Member M where M.Userno=g2.Userno) userName 
 		                                           from Chatting_Group G2 
-		                                           where g2.Chattingid=L.Chattingid and g2.Userno!=#{userNo}
-		                                          ) chattingName 
+		                                           where g2.Chattingid=g.Chattingid and g2.Userno!=#{userNo}and G2.STATUS='Y'
+		                                          ),'(알수없음)') chattingName 
 		                                    from Chattinglist L where L.Chattingid= G.Chattingid
 		                                    )
 		                                    else
@@ -22,10 +22,10 @@
 		from Chatting_Group G left join 
 		    (select Chattingid,Userno,Chcontent,Chstatus,Chdate
 		    from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog)
-		    where mindate=Chdate
+		    where mindate=Chdate and Chcontent is not null
 		     Order by mindate desc)LD
 		on G.Chattingid=Ld.Chattingid
-		where G.Userno=#{userNo}
+		where G.Userno=#{userNo} and G.STATUS='Y' and Chcontent is not null
 		
 	</sql>
 
@@ -41,7 +41,7 @@
 		 from (select L.CHATTINGID 
 		from (select CHATTINGID from CHATTINGLIST where chattingname is null) L join( select Username,chattingid from (select chattingid,(select M.Username 
 		                                                                                                                from Member M where m.userno=Chatting_Group.Userno)username  
-		                                                                            from CHATTING_GROUP) where username in (#{myName},#{userName}))G 
+		                                                                            from CHATTING_GROUP  where CHATTING_GROUP.STATUS='Y') where username in (#{myName},#{userName}))G 
 		                                                                        on g.chattingid=L.chattingID
 		group by L.CHATTINGID
 		having count(*)<![CDATA[>]]>1 and count(*)<![CDATA[<]]>3)g1
@@ -49,40 +49,30 @@
 	
 	<select id="selectChattingList" parameterType="int" resultType="ChattingRoom">
 		
-		SELECT  T1.Chattingid,Userno,chattingName, Chcontent,Chdate,NVL(T2.nCOUNT,0)nCOUNT   FROM (select G.Chattingid,LD.Userno,
-				       case when (select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid) is null then
-				                                  (select (select (select M.Username from Member M where M.Userno=g2.Userno) userName 
-				                                           from Chatting_Group G2 
-				                                           where g2.Chattingid=L.Chattingid and g2.Userno!=#{userNo}
-				                                          ) chattingName 
-				                                    from Chattinglist L where L.Chattingid= G.Chattingid
-				                                    )
-				                                    else
-				                                    (select L.Chattingname from Chattinglist L where L.chattingid = G.Chattingid)
-				                                    end
-					              chattingName,
-				         Chcontent,Chstatus,Chdate                       
-				from Chatting_Group G left join 
-				    (select Chattingid,Userno,Chcontent,Chstatus,Chdate
-				    from (select Chattingid,Userno,Chcontent,Chstatus,Chdate,max(Chdate)over(Partition by Chattingid)mindate from Chattinglog)
-				    where mindate=Chdate
-				     Order by mindate desc)LD
-				on G.Chattingid=Ld.Chattingid
-				where G.Userno=#{userNo} AND CHCONTENT IS NOT NULL)T1 LEFT JOIN
+		SELECT  T1.Chattingid,Userno,chattingName, Chcontent,Chdate,NVL(T2.nCOUNT,0)nCOUNT   FROM (
+		<include refid="chatList"/>
+		)T1 LEFT JOIN
 		 (       
 		SELECT CHATTINGid,COUNT(*) nCOUNT
 		FROM (SELECT Logid,Readcount,(SELECT Lg.Chattingid 
 		                            FROM Chattinglog lg WHERE Lg.Logid=R.Logid) CHATTINGid 
-		    FROM Chatread R WHERE Readcount>0 AND (SELECT USERNO FROM MEMBER M WHERE M.USERNAME=R.USERNAME ) =#{userNo}) 
+		    FROM Chatread R WHERE Readcount<![CDATA[>]]>0 AND (SELECT USERNO FROM MEMBER M WHERE M.USERNAME=R.USERNAME ) =#{userNo}) 
 		GROUP BY CHATTINGid) T2 ON T1.Chattingid=T2.Chattingid
 	</select>
 	
-	<select id="selectChatLogList" parameterType="_int" resultType="ChattingLog">
-		select *from ChattingLog where chattingId=#{chatNo} order by chdate
+	<select id="selectChatLogList" parameterType="map" resultType="ChattingLog">
+		select * from (                
+		    select  ROWNUM rnum,chattingId,userNo,chDate,chContent,username 
+		    from (select chattingId,userNo,chDate,chContent,(select M.username from MEMBER M where M.USERNO=L.userNo) username 
+		          from ChattingLog L where L.chattingId=79 order by chdate desc)
+		    where ROWNUM <![CDATA[<]]> ((#{page}*20)+21)+#{msgCount} order by chDate)
+		where rnum <![CDATA[>]]>(#{page}*20)+#{msgCount}     
+                
 	</select>
 	
 	<select id="selectChatMembers" parameterType="Map" resultType="ChatUser">
-		select Chattingid,(select M.Username from Member M where M.Userno=G.Userno)username from Chatting_Group G where Chattingid=#{chatNo} and Userno!=#{userNo}
+		select Chattingid,(select M.Username from Member M where M.Userno=G.Userno)username 
+		from Chatting_Group G where Chattingid=#{chatNo} and Userno!=#{userNo} and G.STATUS = 'Y'
 	</select>
 	
 	<select id="getChatName" parameterType="Map" resultType="Chatting">
@@ -137,7 +127,7 @@
 		CHATTINGLIST VALUES(seq_chat.nextval ,#{chatName},default)
 		<foreach collection="userName" item="item">
 		into CHATTING_GROUP
-		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}))
+		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}),default)
 		</foreach>
 		select *
 		from dual
@@ -145,9 +135,9 @@
 	<update id="updateStatus" parameterType="ChatUser">
 		update Chatread set Readcount=0 where Chattingid=#{chattingId} and Username=#{userName}
 	</update>
-	<delete id="deletechatRoom" parameterType="map">
-		delete from Chatting_Group where Chattingid=#{chatNo} and Userno =#{userNo}
-	</delete>
+	<update id="deletechatRoom" parameterType="map">
+		update Chatting_Group set STATUS='N' where Chattingid=#{chatNo} and Userno =#{userNo}
+	</update>
 	
 <!-- select * from (select L.CHATTINGID 
 from (select CHATTINGID from CHATTINGLIST where chattingname is null) L join (select * from CHATTING_GROUP)G 
