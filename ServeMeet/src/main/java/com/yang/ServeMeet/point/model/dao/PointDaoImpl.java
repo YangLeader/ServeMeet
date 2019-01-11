@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -68,6 +69,18 @@ public class PointDaoImpl implements PointDao {
 		for(int i = 0 ; i <list.size() ; i++) sqlSession.insert("point.insertBattingPoint",list.get(i));
 		
 		return result;
+	}
+
+	@Override
+	public List<Map<String, String>> selectPointList(int cPage, int numPerPage, int userNo) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("point.selectPointList",userNo,rowBounds);
+	}
+
+	@Override
+	public int selectPointTotalContents(int userNo) {
+		return sqlSession.selectOne("point.selectPointTotalContents",userNo);
+
 	}
 	
 

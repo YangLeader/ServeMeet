@@ -59,15 +59,15 @@
               <hr>
               <br>
               <p align="center"><a href="${pageContext.request.contextPath}/member/searchId.do">아이디 찾기 </a> | <a href="${pageContext.request.contextPath}/member/searchPwd.do">비밀번호 찾기</a> | <a href="${pageContext.request.contextPath}/member/memberEnroll.do">회원가입</a></p> 
-              <p align = "center"><a href="${pageContext.request.contextPath}/point/point.do">포인트페이지 이동</a></p>
             </form>
           </div>
         </div>
       </div>
       <div class="col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4 col-sm-6 col-xs-12">
-        		<div class="contact-block">
-          			<img width="500" height="500" src="${pageContext.request.contextPath}/resources/images/AllRight_AD.png">
-        		</div>
+        		<%-- <div class="contact-block">
+          			<img width="500" height="500" onclick="adClick();" src="${pageContext.request.contextPath}/resources/images/AllRight_AD.png">
+        		</div> --%>
+        		<c:import url="../point/ad.jsp"/>
       </div>
     </div>
   </div>
@@ -83,9 +83,12 @@
 		$("#loginForm").submit();
 		//location.href="${pageContext.request.contextPath}/member/memberEnrollEnd.do";
 	}
-
-    </script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?&callback=initMap" async defer></script> -->
+	
+	
+	function adClick(){
+		
+	}
+</script>
 
 	
 	<c:import url="../common/footer.jsp"/>

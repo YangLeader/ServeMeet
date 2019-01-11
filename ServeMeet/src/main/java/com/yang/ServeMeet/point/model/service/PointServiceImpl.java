@@ -68,4 +68,14 @@ public class PointServiceImpl implements PointService {
 		return pointDao.insertBattingPoint(list);
 	}
 
+	@Override
+	public List<Map<String, String>> selectPointList(int cPage, int numPerPage, int userNo) {
+		return pointDao.selectPointList(cPage,numPerPage,userNo);
+	}
+
+	@Override
+	public int selectPointTotalContents(int userNo) {
+		return pointDao.selectPointTotalContents(userNo);
+	}
+
 }
