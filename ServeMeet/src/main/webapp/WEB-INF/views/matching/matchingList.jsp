@@ -187,7 +187,9 @@
 	}  */
 	$('.con').click(function () {
 		var matNum = $(this).siblings().last().val();
-		location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + matNum;
+		var userName = $(this).siblings("#mtwriter").val();
+		console.log(userName);
+		location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?userName="+userName+"&matNum=" + matNum;
 	});
 </script>
 </body>

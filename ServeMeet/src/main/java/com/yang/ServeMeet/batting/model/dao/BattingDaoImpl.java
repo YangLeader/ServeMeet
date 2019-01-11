@@ -38,6 +38,12 @@ public class BattingDaoImpl implements BattingDao {
 	}
 	
 	@Override
+	public int battingTotalContents() {
+		
+		return sqlSession.selectOne("Batting_Mapper.battingTotalContents");
+	}
+	
+	@Override
 	public int battingPick(Map<String, Object> hmap) {
 		
 		System.out.println(hmap);

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.batting.model.vo.Batting;
 import com.yang.ServeMeet.batting.model.vo.BattingUser;
+import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.point.model.service.PointService;
 import com.yang.ServeMeet.point.model.service.PointServiceImpl;
 
@@ -38,13 +39,25 @@ public class battingController {
 	}
 	
 	@RequestMapping("/batting/battingList.ba")
-	public String battingList(@RequestParam String type ,Model model) {
+	public String battingList(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage,@RequestParam String type ,Model model) {
 		
-		ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList(type));
 		
-		model.addAttribute("list",list);
+	int numPerPage = 10; 
+	
+	ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList(type));
+	
+	int totalContents = battingService.battingTotalContents();
+	
+	String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "battingList.do");
+	
+	model.addAttribute("list", list)
+	.addAttribute("totalContents", totalContents)
+	.addAttribute("numPerPage", numPerPage)
+	.addAttribute("pageBar", pageBar);
 		
-		return "batting/battingList";
+	return "batting/battingList";
+	
 	}
 	
 	@RequestMapping("/batting/battingPick.ba")
@@ -56,7 +69,7 @@ public class battingController {
 		
 		if(check != null) {
 			
-			model.addAttribute("loc","/batting/battingList.ba");
+			model.addAttribute("loc","/batting/battingList.ba?type=I");
 			
 			model.addAttribute("msg","한 배팅 당 한 번의 선택만 할 수 있습니다.");
 			
@@ -83,11 +96,24 @@ public class battingController {
 	
 	
 	@RequestMapping("/batting/battingHistory.ba")
-	public String battingHistory(Model model) {
+	public String battingHistory(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage,Model model) {
+		
+		
+		int numPerPage = 10; 
 		
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingHistory());
 		
-		model.addAttribute("list",list);
+		int totalContents = battingService.battingTotalContents();
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "battingList.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		
+		
 		
 		
 		return "batting/battingHistoryList";
