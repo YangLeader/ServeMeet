@@ -149,7 +149,9 @@ article{
 	
 }
 
-.chatListBox .chatList .chatBox {
+ .chatList .chatBox {
+	text-overflow: ellipsis;
+	overflow:hidden;
 	padding: 15px 10px;
 	z-index:9999; 
 }
