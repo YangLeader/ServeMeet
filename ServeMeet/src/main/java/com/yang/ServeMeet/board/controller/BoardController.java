@@ -26,8 +26,6 @@ import com.yang.ServeMeet.board.model.vo.BoardComment;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.board.model.vo.Report;
 import com.yang.ServeMeet.common.util.Utils;
-import com.yang.ServeMeet.board.model.vo.BoardFile;
-import com.google.gson.Gson;
 import com.yang.ServeMeet.board.model.exception.BoardException;
 import com.yang.ServeMeet.board.model.service.BoardService;
 

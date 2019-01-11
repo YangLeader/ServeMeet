@@ -123,6 +123,10 @@ form, h1 {margin:0;}
 	display:inline-block;
 	cursor:text;
 	font-size: 10pt;
+	overflow: hidden; 
+	text-overflow: ellipsis; 
+	white-space: nowrap; 
+	width:auto;
 }
 
 #bbs-list-ul li .dropdown {
@@ -289,15 +293,14 @@ form, h1 {margin:0;}
 	#bbs-list-ul li .dec .w45 .glyphicon {display:none;}
 
 	#bbs-list-ul li .dec .wr_name {
-		width:9em;
-		/*
-		text-overflow: ellipsis;
+		width:10em;
+		/* text-overflow: ellipsis;
 		-o-text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
 		word-wrap: normal !important;
-		display: inline-block;
-		*/
+		display: inline-block; */
+		
 	}
 	
 	#bbs-list-ul li .dec .wr_date {width:6.5em;}

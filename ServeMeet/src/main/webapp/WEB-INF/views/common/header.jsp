@@ -157,6 +157,11 @@ $(function() {
 										title="Contact Us"><span class="mainNav">게시판</a>
 									</li>
 									
+									<li><a
+										href="${pageContext.request.contextPath }/admin/admin.do"
+										title="Contact Us"><span class="mainNav">관리자페이지</a>
+									</li>
+									
 		  							<li class="has-sub"><a href="${pageContext.request.contextPath }/point/point.do" title="batting"><span class="mainNav">이벤트<span></a>
 		                                <ul>
 	                                        <li><a href="${pageContext.request.contextPath }/point/attendence.do" title="출석체크">출석체크</a></li>

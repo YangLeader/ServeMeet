@@ -77,8 +77,8 @@
 							</a>
 						</div>
 						<div class="sList">
-							<div style="padding:3px;">
-							<ul class="post-list" style="list-style:none; padding: 5px 0px;">
+							<div style="padding:15px 0px;">
+							<ul class="post-list" style="list-style:none; padding: 10px 0px;">
 								
 								
 							</ul>
@@ -121,9 +121,9 @@
 						
 						var li = '<li class="ellipsis">'
 							+ '<a href="${pageContext.request.contextPath}/board/boardView.do?no='+data[i].boardNo+'" id="inserttitle">'
-							+ '<span class="pull-right gray font-12" id="spanname"><span class="count orangered">+'+data[i].commentCount+'</span>&nbsp;'+data[i].userName+'</span>'
+							+ '<span class="pull-right gray font-12" id="spanname"><span class="count orangered">+'+data[i].commentCount+'</span>&nbsp;'+data[i].boardDate+'</span>'
 							+ '<span class="wr-icon wr-new">'
-							+ '<img src="${pageContext.request.contextPath }/resources/images/icon_new.gif" class="icon_new">'
+							+ '<img src="${pageContext.request.contextPath }/resources/images/icon_new.png" class="icon_new">'
 							+ '</span>&nbsp;'+data[i].boardTitle+'</a>'
 							+ '</li>';
 							
