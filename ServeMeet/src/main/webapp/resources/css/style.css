@@ -304,6 +304,7 @@ ul, ol { margin: 0;}
 ul li, ol li {   }
 a { color: #7a8080; text-decoration: none; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
 a:focus, a:hover { text-decoration: none; color: #5e73de; cursor:pointer; }
+#inserttitle:focus, #inserttitle:hover {text-decoration: none; color: #ff0000; cursor:pointer;}
 strong { }
 .listnone { list-style: none; padding: 0px; }
 .lead { font-size: 21px; }
@@ -830,6 +831,19 @@ text-transform: uppercase;background-color: #fff; }
 /*-----------------------------------
 7. Content 
 -------------------------------------*/
+
+.orangered, i.orangered {
+    color: #ff4500;
+}
+
+.count {
+    font-size: 10px;
+    font-weight: 700;
+    font-family: verdana;
+    letter-spacing: -1px;
+    line-height: 16px;
+    padding-right: 1px;
+}
 
 /*-----------------------------------
 8. Footer 
