@@ -133,13 +133,14 @@
 							<form id="chatting" method="post">
 							<c:forEach items="${list}" var="b">
 							<li class="bbs_list_basic">
-								<span class="subject text">
+								<span class="subject text" style="width: 815px;">
 									<a data-mytext="getNo" id="${b.boardNo }">
 										<b>${b.boardTitle }</b>
-										<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+${b.commentCount  }</span></c:if>
+										<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+ ${b.commentCount  }</span></c:if>
 									</a>  
 									<span class="w45 icon"> </span>
 								</span> 
+								
 								<span class="dec"> 
 									<span class="w45 wr_name" id="dropdownlist"> 
 										<span class="glyphicon glyphicon-user"></span> 
@@ -275,7 +276,7 @@
 						$("#sfl").removeClass("dno");
 					});
 
-					bbs_list_width_fixed();
+					 bbs_list_width_fixed();
 
 					setTimeout(function() {
 						bbs_list_width_fixed();
@@ -283,7 +284,7 @@
 
 					$(window).resize(function() {
 						bbs_list_width_fixed();
-					});
+					}); 
 
 				});
 
