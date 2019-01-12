@@ -84,4 +84,8 @@
 		AND M.MATCHINGID = #{matNum}
 	</select>
 	
+	<insert id="matchingRequest">
+		INSERT INTO MATCHINGCONDITION VALUES (SEQ_MCONID.NEXTVAL, #{matchingId}, #{mWriter}, #{mGuest}, #{mContent}, DEFAULT)
+	</insert>
+
 </mapper>

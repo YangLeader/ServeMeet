@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>ServeMeet</title>
 <style>
@@ -137,20 +138,21 @@ hr{
 					<li class="matchingLi">날짜/시간 : ${mDetail.mtime }</li>
 					<li class="matchingLi">모임 지역 : ${mDetail.bigLocation } ${mDetail.midLocation } ${mDetail.smallCategory }</li>
 					<li class="matchingLi">모집 인원 : ${mDetail.mPeoplenum }명</li>
+					<li class="matchingLi"><input type="hidden" id="matchingId" value="${mDetail.matchingId}"/></li>
 					<br /><br />
 				</ul>
 				<span class="mInfo">개설자 정보</span>
 				<div class="greyRule"></div>
 				<div class="infoD">
 					<ul class="uls">
-						<li>등록자 이름 : ${mDetail.mWriter}</li>
+						<li>등록자 이름 : <a id="liWriter">${mDetail.mWriter}</a></li>
 					</ul>
 				</div>
 				<div class="report">신고하기</div>
 			</div>
 			
 			<br /><br />
-			<center><button class="sb_btn"data-toggle="modal" data-target="#myModal">매칭 신청</button></center>
+			<center><button class="sb_btn" onclick="popupOpen()">매칭 신청</button></center>
 		</div>
 	</div>
 	
@@ -160,6 +162,17 @@ hr{
 </footer>
 <c:import url="../matching/matchingModal.jsp" />
 <script>
+var openwin; 
+function popupOpen(){
+	var popUrl = "${pageContext.request.contextPath}/matching/matchingApply.ma";	//팝업창에 출력될 페이지 URL
+	var popupX = (window.screen.width / 2) - (500 / 2);
+	var popupY= (window.screen.height /2) - (360 / 2);
+	
+	var popOption = "width=500, height=360, left="+popupX+", top="+popupY+", screenX="+ popupX + ", screenY= "+ popupY+",resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+
+	openwin = window.open(popUrl,"",popOption);
+	
+}
 
 
 </script>
