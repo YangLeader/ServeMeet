@@ -11,13 +11,19 @@
 <meta charset="UTF-8">
 
 <title>ServeMeet</title>
+
+	<style>
+		
+		@media screen and (max-width: 1650px) { .ad_side { display: none; } } 
+
+	</style>
 </head>
 <body>
 	<header>
 		<c:import url="views/common/header.jsp" />
 	</header>
 	<section id="mainSec" style="margin-top: 50px; ">
-		<div class="ad" style="position:fixed; top:10; left:3">
+		<div class="ad_side" style="position:fixed; top:10; left:3">
 			<c:import url="views/point/adSide.jsp"/>
 		</div>
 		<article class="titleAt">
@@ -28,6 +34,11 @@
 				<h2> 찾고 싶으세요?</h2>
 			</div>
 			<c:import url="views/matching/matching.jsp" />
+		</article>
+		<article>
+			<div class="ad_space" >
+				<c:import url="views/point/adSpace.jsp"/>
+			</div>
 		</article>
 		<article class="subArt" >
 			<div class="subContent">
@@ -144,6 +155,14 @@
 					console.log("top7 조회 실패!");
 				}
 			});
+		});
+		var bSize = $('body').width();
+		
+		$(window).resize(function() { 
+		   
+			if(bSize < 1650px){
+				$('.ad').hide();
+			}   
 		});
 	
 	</script>

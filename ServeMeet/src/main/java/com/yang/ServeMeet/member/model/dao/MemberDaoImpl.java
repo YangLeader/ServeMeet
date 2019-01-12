@@ -33,8 +33,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int deleteMember(String userId) {
-		return sqlSession.delete("member.deleteMember",userId);
+	public int deleteMember(int userNo) {
+		return sqlSession.delete("member.deleteMember",userNo);
 	}
 
 	@Override
@@ -89,6 +89,21 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int resetPwd(HashMap<String, String> hmap) {
 		return sqlSession.update("member.resetPwd",hmap);
+	}
+
+	@Override
+	public int totalUser() {
+		return sqlSession.selectOne("member.totalUser");
+	}
+
+	@Override
+	public int todayUser() {
+		return sqlSession.selectOne("member.todayUser");
+	}
+
+	@Override
+	public int deleteUser() {
+		return sqlSession.selectOne("member.deleteUser");
 	}
 
 	

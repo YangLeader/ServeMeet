@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteMember(String userId) {
-		return memberDao.deleteMember(userId);
+	public int deleteMember(int userNo) {
+		return memberDao.deleteMember(userNo);
 	}
 
 	@Override
@@ -110,6 +110,21 @@ public class MemberServiceImpl implements MemberService {
 		
 		return memberDao.resetPwd(hmap);
 		
+	}
+
+	@Override
+	public int totalUser() {
+		return memberDao.totalUser();
+	}
+
+	@Override
+	public int todayUser() {
+		return memberDao.todayUser();
+	}
+
+	@Override
+	public int deleteUser() {
+		return memberDao.deleteUser();
 	}
 
 }

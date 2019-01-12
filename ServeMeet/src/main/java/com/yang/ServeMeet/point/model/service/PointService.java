@@ -31,5 +31,7 @@ public interface PointService {
 
 	int selectPointTotalContents(int userNo);
 
+	int totalPoint();
+
 
 }
