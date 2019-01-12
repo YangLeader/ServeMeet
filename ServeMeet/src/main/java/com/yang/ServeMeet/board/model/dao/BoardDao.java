@@ -53,4 +53,8 @@ public interface BoardDao {
 	Report selectReportCheck(Map<String, Object> map);
 
 	ArrayList<Board> selectBoardTop7List();
+
+	List<Map<String, Object>> myBoardList(String userName);
+
+	int selectMyBoardTotalContents(String userName);
 }

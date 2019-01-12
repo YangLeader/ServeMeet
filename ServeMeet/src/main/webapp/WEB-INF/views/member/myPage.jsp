@@ -192,7 +192,7 @@
 					</p>
 				</div>
 				<div class="btn_area">
-					<a href="#" class = "sb_btn" onclick="edMatching();">조회하기</a>
+					<a href="${pageContext.request.contextPath}/board/myBoardList.do?userName=${member.userName}" class = "sb_btn">조회하기</a>
 				</div>
 			</div>
 			<div class="sm_group">
