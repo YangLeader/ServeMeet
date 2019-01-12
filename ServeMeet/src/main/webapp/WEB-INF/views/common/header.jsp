@@ -188,8 +188,8 @@ $(function() {
 									<c:if test="${!empty member}">
 										
 										
-										<li class="suvNav has-sub"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
-												title="내정보보기"><span class="mainNav">${member.userName}</span></a>
+										<li class="suvNav has-sub" id="userNameArea"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
+												title="내정보보기"><span class="mainNav">${member.userName}<span class = "matchingCount"></span>	</span></a>
 											<ul>
 												<li><a href="${pageContext.request.contextPath}/member/memberInfo.do?userNo=${member.userNo}"
 												title="내정보보기">내정보보기</a></li>
@@ -199,7 +199,8 @@ $(function() {
 												<li><a href="${pageContext.request.contextPath}/batting/myBattingList.ba?userName=${member.userName}" title="배팅히스토리">배팅 히스토리</a>
 												<li ><a href ="${pageContext.request.contextPath}/member/memberLogout.do">LOG
 													OUT</a></li>
-											</ul>		
+											</ul>
+												
 										</li>
 										<li  class= "suvNav">
 											<span class="mainNav carea" id="chat">
@@ -331,6 +332,7 @@ $(function() {
 			var today=null;
 			$(function(){
 				chatListMin();
+				matchingConCnt();
 				//chatLog();
 				$(".chatSendBtn").on("click",function(){
 					console.log("send message.....");
@@ -515,6 +517,24 @@ $(function() {
 			} 
 		});
 	}
+	function matchingConCnt() {
+		$.ajax({
+			url:"${pageContext.request.contextPath}/matching/countMatchingCon.ma",
+			success: function(data) {
+				$(".matchingCount").children().remove();
+				if(data=="Y"){
+					$(".matchingCount").append(
+						$("<span>").attr("class","badge matCnt").text("N")		
+					);
+				}
+				
+				
+			} 
+		});
+	}
+	
+	
+	
 	function chatListMin() {
 		var nCount=0;
 		$.ajax({

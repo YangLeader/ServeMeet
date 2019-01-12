@@ -166,7 +166,7 @@ $('#requestMatching').click(function(){
 				 guestName : guest,
 				 content : content},
 		success : function(data){
-			console.log(data);
+			console.log("data : "+data);
 		}, error : function(data){
 			alert("에러가 발생했습니다!");
 			

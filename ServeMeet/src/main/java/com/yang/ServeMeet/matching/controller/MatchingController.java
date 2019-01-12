@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +27,7 @@ import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
 import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
+import com.yang.ServeMeet.member.model.vo.Member;
 
 @Controller
 public class MatchingController {
@@ -239,11 +239,13 @@ public class MatchingController {
 	}
 	
 	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
-	public String mDatail(@RequestParam("matNum") int matNum, Model model) {
+	public String mDatail(@RequestParam("matNum") int matNum, Model model,HttpSession session) {
 		System.out.println("조회할 매칭 matNum : " + matNum);
-		
+		Map map = new HashMap();
+		map.put("matNum", matNum);
+		map.put("userName",( (Member)session.getAttribute("member")).getUserName() );
 		MatchingListObj mo = new MatchingListObj();
-		mo = matchingService.matchingDetail(matNum);
+		mo = matchingService.matchingDetail(map);
 		
 		model.addAttribute("mDetail", mo);
 		
@@ -272,14 +274,34 @@ public class MatchingController {
 	
 	@RequestMapping(value = "matching/matchingRequest.ma", method = RequestMethod.POST)
 	@ResponseBody
-	public int mApplyRequest(@RequestParam int matchingId, @RequestParam String writerName,
+	public String mApplyRequest(@RequestParam int matchingId, @RequestParam String writerName,
 								@RequestParam String guestName, @RequestParam String content) { 
 		System.out.println("매칭아이디:"+matchingId);
 		System.out.println("매칭등록자:"+writerName);
 		System.out.println("매칭신청자:"+guestName);
 		System.out.println("컨텐츠:"+content);
 		int result = matchingService.matchingRequest(matchingId, writerName, guestName, content);
-		
-		return result;
+		String str = result+"";
+		return str;
 	}
+	
+	@RequestMapping("/matching/countMatchingCon.ma")
+	@ResponseBody
+	public String countMatchingCon(HttpSession session) {
+		String result="N";
+		System.out.println("countMatchingCon");
+		int count = matchingService.countMatchingCon(((Member)session.getAttribute("member")).getUserName());
+		if(count>0) result="Y";
+		System.out.println("countMatchingCon : "+ count);
+		return result;
+	} 
+	@RequestMapping("/ajax/topMatchingList.do")
+	@ResponseBody
+	public List<MatchingListObj> topMatchingList(@RequestParam String category) {
+		List<MatchingListObj> list = new ArrayList<MatchingListObj>();
+		System.out.println("실행");
+		list=matchingService.topMatchingList(category);
+		System.out.println("topMatchingList : "+list);
+		return list;
+	} 
 }

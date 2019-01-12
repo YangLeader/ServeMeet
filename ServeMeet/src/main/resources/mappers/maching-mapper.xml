@@ -60,6 +60,15 @@
 		AND M.CATEGORYID = C.CATEGORYID
 		AND M.CATEGORYID LIKE #{cat} || '%'
 	</select>
+	<select id="topMatchingList" parameterType="String" resultType="MatchingObj">
+		 select * from (SELECT  ROWNUM rnum,M.MATCHINGID,C.BIGCATEGORY, C.MIDCATEGORY , M.MTITLE,  L.BIGLOCATION, L.MIDLOCATION, M.MWRITER, M.MTIME
+		FROM MATCHING M, LOCATION L, CATEGORY C
+		WHERE M.LOCATIONID = L.LOCATIONID
+		AND M.CATEGORYID = C.CATEGORYID
+        AND M.CATEGORYID LIKE #{cat} || '%'
+        order by MATCHINGID desc)
+        where rnum<![CDATA[<]]>5
+	</select>
 	
 	<insert id="mHistoryInsert">
 		INSERT INTO MATCHINGHISTORY VALUES(SEQ_MHISTORYID.NEXTVAL , #{matchingId} ,#{userName} ,#{mhContent}, DEFAULT , DEFAULT)
@@ -75,13 +84,16 @@
 		VALUES (SEQ_FILEID.NEXTVAL, DEFAULT, #{mhistoryId}, #{originName}, #{changeName})
 	</insert>
 	
-	<select id="matchingDetail" parameterType="int" resultType="MatchingObj">
+	<select id="matchingDetail" parameterType="Map" resultType="MatchingObj">
 		SELECT  M.MATCHINGID,C.BIGCATEGORY, C.MIDCATEGORY , M.MTITLE,  L.BIGLOCATION, L.MIDLOCATION, L.SMALLCATEGORY,
-        M.MPEOPLENUM, M.CATEGORYID, M.MWRITER, M.MGUEST, M.MTIME, M.MSTATUS, M.MCONTENT
+        M.MPEOPLENUM, M.CATEGORYID, M.MWRITER,(select MC.MGUEST from Matchingcondition MC where MC.MATCHINGID= M.MATCHINGID and MC.MGUEST=#{userName}) MGUEST, M.MTIME, M.MSTATUS, M.MCONTENT
 		FROM MATCHING M, LOCATION L, CATEGORY C
 		WHERE M.LOCATIONID = L.LOCATIONID
 		AND M.CATEGORYID = C.CATEGORYID
 		AND M.MATCHINGID = #{matNum}
+	</select>
+	<select id="countMatchingCon" parameterType="String" resultType="_int">
+		 select count(*) from Matchingcondition where Mwriter=#{userName}  and MSTATUS='WAITING' 
 	</select>
 	
 	<insert id="matchingRequest">

@@ -111,6 +111,12 @@ hr{
 	color: red;
 	text-align: right;
 }
+.sb_btn_cmp{
+background-color: gray!important;
+}
+.sb_btn_cmp:hover{
+background-color: gray!important;
+}
 </style>
 </head>
 <body>
@@ -126,7 +132,7 @@ hr{
 				<div class="greyRule"></div>
 				<br />
 				<div class="detailC">
-					${mDetail.mContent }
+					${mDetail.mContent } 
 				</div>
 			</div>
 			
@@ -152,7 +158,14 @@ hr{
 			</div>
 			
 			<br /><br />
-			<center><button class="sb_btn" onclick="popupOpen()">매칭 신청</button></center>
+			<c:choose>
+				<c:when test="${mDetail.mGuest eq member.userName}">
+					<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">신청 완료</button></center>
+				</c:when>
+				<c:otherwise>
+					<center><button class="sb_btn" onclick="popupOpen()">매칭 신청</button></center>		
+				</c:otherwise>
+			</c:choose>	
 		</div>
 	</div>
 	

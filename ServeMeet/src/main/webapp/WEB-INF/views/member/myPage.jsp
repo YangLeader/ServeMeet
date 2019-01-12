@@ -7,7 +7,7 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<c:import url="../common/header.jsp" />
+
 <title>마이페이지</title>
 <meta charset="UTF-8" />
 <style>
@@ -26,7 +26,7 @@
 		border-radius : 2px;
 		background: #fff;
 	}
-	div{
+	.section_home div{
 		display : block;
 	}
 	
@@ -123,11 +123,18 @@
 		position: relative;
 		width : 30%;
 	}
-	span {
+	.section_home span {
 		padding-top : 10px;
 		padding-bottom : 10px;
 	}
-	
+	.section_home .matchingCount{
+	    top: 445px;
+	    left: 314px;
+	    padding:0px;
+	}
+	.matCnt{
+		padding:3px 7px!important;
+	}
 	
 </style>
 
@@ -135,7 +142,7 @@
 
 </head>
 <body>
-
+<c:import url="../common/header.jsp" />
 <div id="container">
 	<div id="content" class="section_home">
 		<div class="row">
@@ -166,7 +173,7 @@
 			</div>
 			<div class="sm_group">
 				<div class="sm_header">
-					<h2>매칭 히스토리</h2>
+					<h2>매칭 히스토리<span class = "matchingCount"></span></h2>
 				</div>
 				<div class="sm_content">
 					<p class="contxt">
