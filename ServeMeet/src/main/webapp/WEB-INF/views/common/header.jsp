@@ -193,7 +193,7 @@ $(function() {
 											<ul>
 												<li><a href="${pageContext.request.contextPath}/member/memberInfo.do?userNo=${member.userNo}"
 												title="내정보보기">내정보보기</a></li>
-												<li><a href="${pageContext.request.contextPath}/" title="등록중인 매칭">내가 작성한 게시글</a></li>
+												<li><a href="${pageContext.request.contextPath}/board/myBoardList.do?userName=${member.userName}" title="내 게시글">내가 작성한 게시글</a></li>
 												<%-- <li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="등록중인 매칭">매칭 히스토리</a></li> --%>
 												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="매칭 히스토리">매칭 히스토리</a>
 												<li><a href="${pageContext.request.contextPath}/batting/myBattingList.ba?userName=${member.userName}" title="배팅히스토리">배팅 히스토리</a>

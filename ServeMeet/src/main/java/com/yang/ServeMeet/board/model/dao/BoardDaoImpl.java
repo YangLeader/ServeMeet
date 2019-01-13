@@ -144,4 +144,16 @@ public class BoardDaoImpl implements BoardDao {
 		return (ArrayList)sqlSession.selectList("board.selectBoardTop7List");
 	}
 
+	@Override
+	public List<Map<String, Object>> myBoardList(String userName) {
+		
+		return sqlSession.selectList("board.myBoardList", userName);
+	}
+
+	@Override
+	public int selectMyBoardTotalContents(String userName) {
+
+		return sqlSession.selectOne("board.selectMyBoardTotalContents", userName);
+	}
+
 }
