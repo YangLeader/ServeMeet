@@ -52,4 +52,6 @@ public interface BoardService {
 
 	int selectMyBoardTotalContents(String userName);
 
+	List<Map<String, Object>> reportList();
+
 }

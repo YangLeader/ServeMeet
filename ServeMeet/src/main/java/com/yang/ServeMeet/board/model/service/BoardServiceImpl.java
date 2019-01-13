@@ -216,5 +216,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectMyBoardTotalContents(userName);
 	}
 
+	@Override
+	public List<Map<String, Object>> reportList() {
+		
+		return boardDao.selectReportList();
+	}
+
 
 }

@@ -203,7 +203,7 @@ $(document).ready(function(){
                 <!-- } 본문 내용 끝 -->
 
         		
-		
+		<c:if test="${member.userName ne board.userName }">
 		<!-- 스크랩 추천 비추천 시작 { -->
 		<div id="bo_v_act">
 					<%-- reportBoard.do?no=${board.boardNo }&name=${member.userName} --%>
@@ -213,7 +213,7 @@ $(document).ready(function(){
 			
 		</div>
 				<!-- } 스크랩 추천 비추천 끝 -->
-		
+		</c:if>
     </section>
 
 	

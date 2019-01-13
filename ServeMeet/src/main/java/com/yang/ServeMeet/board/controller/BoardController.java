@@ -496,5 +496,26 @@ public class BoardController {
 		return "board/myBoardList";
 	}
 	
+	@RequestMapping("admin/reportList.do")
+	public String reportList(Model model) {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(boardService.reportList());
+		
+		model.addAttribute("list",list);
+		
+		
+		return "admin/adminReport";
+	}
+	
+	@RequestMapping("/admin/blindBoard.do")
+	public String boardDelete(@RequestParam("boardNo") int boardNo, Model model) {
+		
+		boardService.deleteBoard(boardNo);
+		
+		reportList(model);
+		
+		return "admin/adminReport";
+		
+	}
 	
 }

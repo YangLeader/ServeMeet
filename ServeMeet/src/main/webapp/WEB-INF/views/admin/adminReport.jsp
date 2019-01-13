@@ -6,6 +6,21 @@
 
 <!doctype html>
 
+<style>
+.orangered, i.orangered {
+    color: #5e73de;
+}
+
+.count {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: verdana;
+    letter-spacing: -1px;
+    line-height: 16px;
+    padding-right: 1px;
+}
+</style>
+
 <head>
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="${pageContext.request.contextPath}/resources/assets/img/apple-icon.png">
@@ -18,6 +33,8 @@
     <meta name="viewport" content="width=device-width" />
 
 
+	<link href="${pageContext.request.contextPath}/resources/css/adminMember.css"
+	rel="stylesheet">
     <!-- Bootstrap core CSS     -->
     <link href="${pageContext.request.contextPath}/resources/assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -69,7 +86,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="${pageContext.request.contextPath}/admin/adminReport.do">
+                    <a href="${pageContext.request.contextPath}/admin/reportList.do">
                         <i class="ti-view-list-alt"></i>
                         <p>신고 관리</p>
                     </a>
@@ -160,184 +177,52 @@
         </nav>
 
 
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-warning text-center">
-                                            <i class="ti-server"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Capacity</p>
-                                            105GB
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-danger text-center">
-                                            <i class="ti-pulse"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Errors</p>
-                                            23
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> In the last hour
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-info text-center">
-                                            <i class="ti-twitter-alt"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Followers</p>
-                                            +45
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-                <div class="row">
+        <!-- CONTENTS -->
+		<div id="content" class="loginlist">
+		<div class="c_header">
+			<h2>게시글 신고 목록</h2>
+			<p class="contxt">신고된 게시글을 블라인드 처리하세요.</p>
+		</div>
+				
+		<ul class="tab_viewrecord" style="margin-bottom: -1px;">
+		<!-- [D] 탭 링크 선택시 class 에 on" 추가 -->
+			<li class="item1" style="margin-top:2px"><a href="#" class="on">신고 목록</a></li>
+			<!-- <li class="item2"><a href="userLoginLog.nhn?m=viewRegistedDevice&token_help=2CLWbLy7InikIdx2" onClick="clickcr(this,'smg.device','','',event);">등록한 기기 목록</a></li> -->
+		</ul>
+		
+		<div class="section">
+	        <!-- <div class="all_logout"><a href="javascript:;" class="btn_model" onclick="logoutAll();"><span class="btn6">전체 로그아웃</span></a></div> -->
+			<table border="1" class="tbl_row">
+			<col width="95"><col width="89"><col width="95"><col width="89"><col width="*"><col width="103"><col width="92">
+				<thead>
+					<tr>
+						<th scope="col" style="width:700px;">제목</th>
+						<th scope="col" style="width:110px;">작성자</th>
+						<th scope="col">작성일</th>
+						<th scope="col" style="width:70px;">조회수</th>
+						<th scope="col" style="width:70px;">신고 횟수</th>
+						<th scope="col">블라인드 처리</th>
+					</tr>
+				</thead>
+				<tbody>
+	        		<c:forEach items="${list}" var="b" >
+	        		<c:if test="${b.reportCount ne 0 }">
+					<tr id="row_1" style="display:">
+						<td>${b.boardTitle }<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+ ${b.commentCount  }</span></c:if></td>
+						<td>${b.userName }</td>	
+						<td>${b.boardDate }</td>
+						<td>${b.boardCount }</td>	
+						<td>${b.reportCount }</td>		
+						<td><input type="button" name="blind" id="${b.boardNo }" value="블라인드" /></td>
+					</tr>		
+					</c:if>
+					</c:forEach>
+	        	</tbody> 
+	    	</table> 
+		</div> 
 
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">24 Hours performance</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
-                                        <i class="fa fa-circle text-warning"></i> Click Second Time
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated 3 minutes ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Email Statistics</h4>
-                                <p class="category">Last Campaign Performance</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> Campaign sent 2 days ago
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">2015 Sales</h4>
-                                <p class="category">All products including Taxes</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
-
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-check"></i> Data information certified
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+	</div>
+        
 
 
         <footer class="footer">
@@ -394,20 +279,29 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<script type="text/javascript">
-    	$(document).ready(function(){
-
-        	demo.initChartist();
-
-        	$.notify({
-            	icon: 'ti-gift',
-            	message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
-
-            },{
-                type: 'success',
-                timer: 4000
-            });
-
+	
+    	$('input[name="blind"]').click(function(){
+    		
+    		var boardNo = $(this).attr("id");
+    		
+    		console.log(boardNo);
+    		
+    		var msg = boardNo+'번 글을 블라인드 처리 하시겠습니까?';
+    		
+    		if (confirm(msg)!=0) {
+                 
+    			 location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
+    			 
+    			 
+    			
+            } else {
+                
+            	return false;
+            }
+    		
+    		 
     	});
+    	
 	</script>
 
 </html>
