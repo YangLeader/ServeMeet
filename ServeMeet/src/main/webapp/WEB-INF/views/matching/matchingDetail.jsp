@@ -158,14 +158,23 @@ background-color: gray!important;
 			</div>
 			
 			<br /><br />
+			
 			<c:choose>
-				<c:when test="${mDetail.mGuest eq member.userName}">
-					<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">신청 완료</button></center>
+				<c:when test="${mDetail.mWriter eq member.userName}">
+					<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
 				</c:when>
 				<c:otherwise>
-					<center><button class="sb_btn" onclick="popupOpen()">매칭 신청</button></center>		
+					<c:choose>
+						<c:when test="${mDetail.mGuest eq member.userName}">
+							<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">신청 완료</button></center>
+						</c:when>
+						<c:otherwise>
+							<center><button class="sb_btn" onclick="popupOpen()">매칭 신청</button></center>		
+						</c:otherwise>
+					</c:choose>	
 				</c:otherwise>
-			</c:choose>	
+				
+			</c:choose>
 		</div>
 	</div>
 	
