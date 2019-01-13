@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 .subArt .subContent .matting,.subArt{
-height: 1200px!important;
+height: 1000px!important;
 }
 </style>
 </head>
@@ -55,17 +55,7 @@ height: 1200px!important;
 			            </div>
 			          </div>
 			        </div>
-			        <div>
-			          <div class="midTitle">
-			            <a> <span class="midTitleName"><b>배팅</b></span> <span>+</span>
-			            </a>
-			          </div>
-			          <div class="sList">
-			            <div class="sList" id="meeting">
-			
-			            </div>
-			          </div>
-			        </div>
+			       
 			        <div>
 			          <div class="midTitle">
 			            <a> <span class="midTitleName"><b>자유 게시판</b></span> <span>+</span>
