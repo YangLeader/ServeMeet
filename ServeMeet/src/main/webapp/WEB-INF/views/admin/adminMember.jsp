@@ -144,10 +144,15 @@
                               </ul>
                         </li>
 						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-settings"></i>
+									<p>setting</p>
+									<b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                              </ul>
                         </li>
                     </ul>
 
@@ -190,13 +195,13 @@
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
+                                            <i class="ti-user"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
+                                            <p>총 회원수</p>
+                                            	<span id="totalUser">명</span>
                                         </div>
                                     </div>
                                 </div>
@@ -215,13 +220,13 @@
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-danger text-center">
-                                            <i class="ti-pulse"></i>
+                                            <i class="ti-plus"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Errors</p>
-                                            23
+                                            <p>오늘 가입한 회원수</p>
+                                            <span id="todayUser">명</span>
                                         </div>
                                     </div>
                                 </div>
@@ -240,13 +245,13 @@
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-info text-center">
-                                            <i class="ti-twitter-alt"></i>
+                                            <i class="ti-minus"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Followers</p>
-                                            +45
+                                            <p>탈퇴한 회원수</p>
+                                            <span id="deleteUser">명</span>
                                         </div>
                                     </div>
                                 </div>
@@ -391,7 +396,11 @@
 
 	<script type="text/javascript">
     	$(document).ready(function(){
-
+			
+    		totalUser();
+    		todayUser();
+    		deleteUser();
+    		
         	demo.initChartist();
 
         	$.notify({
@@ -404,6 +413,59 @@
             });
 
     	});
+    	
+    	
+    	function totalUser(){
+    		$.ajax({
+	            url  : "${pageContext.request.contextPath}/member/totalUser.do",
+	            data : {},
+	            success : function(data){
+	                $("#totalUser").html(data+"명");
+	            }, error : function(jqxhr, textStatus, errorThrown){
+	                console.log("ajax 처리 실패");
+	                //에러로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
+        	});
+    		
+    	}
+    	
+    	function todayUser(){
+    		$.ajax({
+	            url  : "${pageContext.request.contextPath}/member/todayUser.do",
+	            data : {},
+	            success : function(data){
+	                $("#todayUser").html(data+"명");
+	            }, error : function(jqxhr, textStatus, errorThrown){
+	                console.log("ajax 처리 실패");
+	                //에러로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
+        	});
+    	}
+    	
+    	function deleteUser(){
+    		$.ajax({
+	            url  : "${pageContext.request.contextPath}/member/deleteUser.do",
+	            data : {},
+	            success : function(data){
+	                $("#deleteUser").html(data+"명");
+	            }, error : function(jqxhr, textStatus, errorThrown){
+	                console.log("ajax 처리 실패");
+	                //에러로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
+        	});
+    	}
+    	
+    	
+    	
 	</script>
 
 </html>

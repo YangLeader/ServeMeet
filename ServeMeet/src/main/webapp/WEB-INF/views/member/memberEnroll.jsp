@@ -48,7 +48,7 @@
                       <label class=" control-label" for="name">닉네임 :</label>
                     </div>
                     <div class="col-md-9">
-                      <input id="name" name="userName" type="text" class="form-control" placeholder="이름을 입력하세요" required>
+                      <input id="name" name="userName" type="text" class="form-control" placeholder="이름을 입력하세요" maxlength="7" required>
                       <span id="nameOk" style="display:none; color:green">사용가능한 닉네임입니다.</span>
                       <span id="nameErr" style="display:none; color:red">사용할 수 없는 닉네임입니다.</span>
                       <span id="nameInvalid" style="display:none; color:red">최소 3글자 이상 입력해주세요.</span>
@@ -304,27 +304,6 @@
 		
 	}
 
-    /* function initMap() {
-        var myLatLng = {
-            lat: 23.0225,
-            lng: 72.5714
-        };
-
-        var map = new google.maps.Map(document.getElementById('googleMap'), {
-            zoom: 8,
-            center: myLatLng,
-            scrollwheel: false,
-
-        });
-        var image = 'images/map-pin.png';
-        var marker = new google.maps.Marker({
-            position: myLatLng,
-            map: map,
-            icon: image,
-            title: 'Hello World!'
-
-        });
-    } */
     </script>
 <!-- <script src="https://maps.googleapis.com/maps/api/js?&callback=initMap" async defer></script> -->
 

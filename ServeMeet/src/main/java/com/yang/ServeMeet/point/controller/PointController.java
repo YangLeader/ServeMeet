@@ -222,6 +222,15 @@ public class PointController {
 		return "point/pointList";
 	}
 	
+	@RequestMapping("/point/totalPoint")
+	@ResponseBody
+	public int totalPoint() {
+		if(logger.isDebugEnabled()) logger.debug("총 포인트 조회");
+		
+		int result = pointService.totalPoint();
+		
+		return result;
+	}
 	
 	
 }

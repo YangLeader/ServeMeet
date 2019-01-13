@@ -80,14 +80,12 @@
 
 <script>
 	function sendBtn(){
+		
 		$("#loginForm").submit();
+		
 		//location.href="${pageContext.request.contextPath}/member/memberEnrollEnd.do";
 	}
 	
-	
-	function adClick(){
-		
-	}
 </script>
 
 	

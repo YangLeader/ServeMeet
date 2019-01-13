@@ -12,7 +12,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="${pageContext.request.contextPath}/resources/assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Paper Dashboard by Creative Tim</title>
+	<title>ServeMeet Administrator</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -36,7 +36,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
-
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 </head>
 <body>
 
@@ -82,7 +82,7 @@
                 </li>
                 <li class="active">
                     <a href="${pageContext.request.contextPath}/admin/adminPoint.do">
-                        <i class="ti-pencil-alt2"></i>
+                        <i class="ti-money"></i>
                         <p>포인트 관리</p>
                     </a>
                 </li>
@@ -144,10 +144,15 @@
                               </ul>
                         </li>
 						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-settings"></i>
+									<p>setting</p>
+									<b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                              </ul>
                         </li>
                     </ul>
 
@@ -170,8 +175,8 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Capacity</p>
-                                            105GB
+                                            <p>총 포인트</p>
+                                            <span id="totalPoint" class="counter">P</span>
                                         </div>
                                     </div>
                                 </div>
@@ -392,6 +397,9 @@
 	<script type="text/javascript">
     	$(document).ready(function(){
 
+    		
+    		totalPoint();
+    		
         	demo.initChartist();
 
         	$.notify({
@@ -402,8 +410,31 @@
                 type: 'success',
                 timer: 4000
             });
+        	
+        	
 
     	});
+    	
+    	function totalPoint() {
+    		
+    		$.ajax({
+	            url  : "${pageContext.request.contextPath}/point/totalPoint.do",
+	            data : {},
+	            success : function(data){
+	            	console.log("point : " +data);
+	                $("#totalPoint").html(data+"p");
+	            }, error : function(jqxhr, textStatus, errorThrown){
+	                console.log("ajax 처리 실패");
+	                //에러로그
+	                console.log(jqxhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
+        	});
+    		
+    	} 
+    	
+
 	</script>
 
 </html>

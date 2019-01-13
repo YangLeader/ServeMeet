@@ -1,5 +1,7 @@
 package com.yang.ServeMeet.member.model.vo;
 
+import java.sql.Date;
+
 public class Member {
 	
 	
@@ -11,6 +13,8 @@ public class Member {
 	private String userName;
 	private String email;
 	private int point;
+	private String userStatus;
+	private Date entryDate;
 	
 	
 	public Member() {
@@ -36,13 +40,39 @@ public class Member {
 
 
 
-	public Member(int userNo, String userId, String userPwd, String userName, String email) {
+	public Member(int userNo, String userId, String userPwd, String userName, String email, String userStatus, Date entryDate) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
 		this.userPwd = userPwd;
 		this.userName = userName;
 		this.email = email;
+		this.userStatus = userStatus;
+		this.entryDate = entryDate;
+	}
+
+
+
+	public Date getEntryDate() {
+		return entryDate;
+	}
+
+
+
+	public void setEntryDate(Date entryDate) {
+		this.entryDate = entryDate;
+	}
+
+
+
+	public String getUserStatus() {
+		return userStatus;
+	}
+
+
+
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
 	}
 
 
@@ -110,7 +140,8 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
-				+ ", email=" + email + ", point=" + point + "]";
+				+ ", email=" + email + ", point=" + point + ", userStatus=" + userStatus + ", entryDate=" + entryDate
+				+ "]";
 	}
 	
 	

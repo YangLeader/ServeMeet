@@ -53,6 +53,6 @@ if("${msg}" !="login"){
 		    });
 	}  
 }else{
-	location.href="${pageContext.request.contextPath}/";
+	location.href="${pageContext.request.contextPath}${loc}";
 }
 </script>

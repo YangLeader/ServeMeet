@@ -32,15 +32,20 @@
 .sList{
 padding-left: 8px;
 }
+
+  @media screen and (max-width: 1650px) { .ad_side { display: none; } } 
+  
 </style>
+
 </head>
 <body>
 	<header>
 		<c:import url="views/common/header.jsp" />
 	</header>
-	<section id="mainSec" style="margin-top: 50px;">
-		<div class="ad" style="position: fixed; top: 10; left: 3">
-			<c:import url="views/point/adSide.jsp" />
+
+	<section id="mainSec" style="margin-top: 50px; ">
+		<div class="ad_side" style="position:fixed; top:10; left:3">
+			<c:import url="views/point/adSide.jsp"/>
 		</div>
 		<article class="titleAt">
 			<div class="mainTitle">
@@ -52,7 +57,13 @@ padding-left: 8px;
 			</div>
 			<c:import url="views/matching/matching.jsp" />
 		</article>
-		<article class="subArt">
+
+		<article>
+			<div class="ad_space" >
+				<c:import url="views/point/adSpace.jsp"/>
+			</div>
+		</article>
+		<article class="subArt" >
 			<div class="subContent">
 				<div
 					class="sContent matting col-lg-8 col-md-8 col-sm-12 col-xs-12 listSec">
@@ -194,6 +205,16 @@ padding-left: 8px;
 				}
 			});
 		});
+
+		var bSize = $('body').width();
+		
+		$(window).resize(function() { 
+		   
+			if(bSize < 1650px){
+				$('.ad').hide();
+			}   
+		});
+	
 	</script>
 
 </body>

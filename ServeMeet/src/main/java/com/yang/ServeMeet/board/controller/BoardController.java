@@ -482,5 +482,19 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping("board/myBoardList.do")
+	public String myBattingList(@RequestParam String userName, Model model) {
+		
+		int totalContents = boardService.selectMyBoardTotalContents(userName);
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(boardService.myBoardList(userName));
+		
+		model.addAttribute("list",list)
+		.addAttribute("totalContents", totalContents);
+		
+		
+		return "board/myBoardList";
+	}
+	
 	
 }

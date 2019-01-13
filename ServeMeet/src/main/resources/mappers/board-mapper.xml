@@ -113,4 +113,18 @@
 		WHERE ROWNUM < 11
 		]]>
 	</select>
+	
+	<select id="myBoardList" parameterType="string" resultType="board">
+		SELECT A.*, (SELECT COUNT(*) FROM BOARD_COMMENT 
+					 WHERE BOARDNO = A.BOARDNO AND COMMENTSTATUS = 'Y') COMMENTCOUNT 
+		FROM BOARD A
+		WHERE USERNAME = #{userName} AND BOARDSTATUS = 'Y'
+		ORDER BY BOARDNO DESC
+	</select>
+	
+	<select id="selectMyBoardTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+		WHERE BOARDSTATUS = 'Y' AND USERNAME = #{userName}
+	</select>
 </mapper>

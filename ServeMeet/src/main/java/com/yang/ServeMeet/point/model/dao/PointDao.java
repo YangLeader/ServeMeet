@@ -29,4 +29,6 @@ public interface PointDao {
 	List<Map<String, String>> selectPointList(int cPage, int numPerPage,int userNo);
 
 	int selectPointTotalContents(int userNo);
+
+	int totalPoint();
 }

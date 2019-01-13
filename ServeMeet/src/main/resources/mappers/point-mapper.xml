@@ -43,7 +43,7 @@
 		and TO_CHAR(to_date(pdate,'YY-MM-DD'), 'yyyy/mm/dd') = (SELECT TO_CHAR(to_date(sysdate,'YY-MM-DD'), 'yyyy/mm/dd') FROM dual)
 	</select>
 	
-	<!-- 배팅포인트 지급..이거 왜 따로만들었을까..? -->
+	<!-- 배팅포인트 지급 -->
 	<insert id="insertBattingPoint" parameterType="Map">
 		INSERT INTO POINT VALUES(
 			#{USERNO},#{alloc},DEFAULT,#{pContent}
@@ -65,6 +65,10 @@
 		WHERE USERNO = #{userNo}
 	</select>
 	
+	<!-- 포인트 총액 조회 -->
+	<select id="totalPoint" resultType="_int">
+		select sum(point) from member
+	</select>
 	
 </mapper>
 
