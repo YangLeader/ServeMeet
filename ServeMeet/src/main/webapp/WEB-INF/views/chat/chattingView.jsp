@@ -113,28 +113,41 @@
 	})
 	
 	$(function() {
-		$(".mSearch").click(function() {
-			var keyword=$(".keyword").val();
-			console.log(keyword);
-			$.ajax({
-				url:"${pageContext.request.contextPath }/member/memberSearch.do",
-				data:{keyword:keyword},
-				datatype:"json",
-				success : function(data) {
-					console.log(data);
-					for(var i in data){
-						$(".searchMember").append(
-							$("<div>").append(
-								$("<span>").append(data[i])		
-							).attr("class","memberName")
-							 .attr("value",data[i])
-						);
-					}
-					
-				},error: function() {
-					console.log("에러");
+	
+			
+				mSearch
+		$("#mSearch").keydown(function(key) {
+			if(key.keyCode==13){
+				var keyword=$(".keyword").val();
+				if(keyword != ""){	
+					console.log(keyword);
+					$(".searchMember").children().remove();
+					$.ajax({
+						url:"${pageContext.request.contextPath }/member/memberSearch.do",
+						data:{keyword:keyword},
+						datatype:"json",
+						success : function(data) {
+							console.log(data);
+							for(var i in data){
+								$(".searchMember").append(
+									$("<div>").append(
+										$("<span>").append(data[i])		
+									).attr("class","memberName")
+									 .attr("value",data[i])
+									 .css({
+										 "padding":"5px 10px",
+										 "text-align": "center"
+									 })
+								);
+							}
+							
+						},error: function() {
+							console.log("에러");
+						}
+					});		
 				}
-			});
+			}
+			
 		});
 		$(document).on("click",".inMemberName",function() {
 			var inUserName=$(this).attr("value");
@@ -164,6 +177,10 @@
 					$("<span>").append(userName)		
 				).attr("class","inMemberName")
 				 .attr("value",userName)
+				 .css({
+					 "padding":"5px 10px",
+					 "text-align": "center"
+				 })
 			);
 		//	var printHTML="<div class='inMemberName'value='"+userName+"'>";
 		//	printHTML+="<span>"+userName;
@@ -270,11 +287,7 @@
 		
 	</div>
 </div>
-<section>
-	<article>
-		<c:import url="createChat.jsp"/>
-	</article>
-</section>	
+
 	<footer>
 		<c:import url="../common/footer.jsp" />
 	</footer> 

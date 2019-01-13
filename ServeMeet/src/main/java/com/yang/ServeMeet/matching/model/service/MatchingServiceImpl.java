@@ -91,15 +91,25 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 
 	@Override
-	public MatchingListObj matchingDetail(int matNum) {
+	public MatchingListObj matchingDetail(Map map) {
 		
-		return matchingDao.matchingDetail(matNum);
+		return matchingDao.matchingDetail(map);
 	}
 
 	@Override
 	public int matchingRequest(int matchingId, String writerName, String guestName, String content) {
 		
 		return matchingDao.matchingRequest(matchingId, writerName, guestName, content);
+	}
+	@Override
+	public int countMatchingCon(String userName) {
+		// TODO Auto-generated method stub
+		return matchingDao.countMatchingCon(userName);
+	}
+	@Override
+	public List<MatchingListObj> topMatchingList(String category) {
+		// TODO Auto-generated method stub
+		return matchingDao.topMatchingList(category);
 	}
 	
 }

@@ -89,9 +89,9 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 
 	@Override
-	public MatchingListObj matchingDetail(int matNum) {
-		System.out.println("객체 : " + session.selectOne("Matching.matchingDetail", matNum));
-		return session.selectOne("Matching.matchingDetail", matNum);
+	public MatchingListObj matchingDetail(Map map) {
+		System.out.println("객체 : " + session.selectOne("Matching.matchingDetail", map));
+		return session.selectOne("Matching.matchingDetail", map);
 	}
 
 	@Override
@@ -103,5 +103,17 @@ public class MatchingDaoImpl implements MatchingDao {
 		m.setmContent(content);
 		
 		return session.insert("Matching.matchingRequest", m);
+	}
+	@Override
+	public int countMatchingCon(String userName) {
+		// TODO Auto-generated method stub
+		return session.selectOne("Matching.countMatchingCon",userName);
+	}
+	@Override
+	public List<MatchingListObj> topMatchingList(String category) {
+		// TODO Auto-generated method stub
+		List<MatchingListObj> list = session.selectList("Matching.topMatchingList",category);
+		System.out.println("list : "+list);
+		return list;
 	}
 }

@@ -188,8 +188,8 @@ $(function() {
 									<c:if test="${!empty member}">
 										
 										
-										<li class="suvNav has-sub"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
-												title="내정보보기"><span class="mainNav">${member.userName}</span></a>
+										<li class="suvNav has-sub" id="userNameArea"><a href="${pageContext.request.contextPath}/member/memberView.do?userId=${member.userId}"
+												title="내정보보기"><span class="mainNav">${member.userName}<span class = "matchingCount"></span>	</span></a>
 											<ul>
 												<li><a href="${pageContext.request.contextPath}/member/memberInfo.do?userNo=${member.userNo}"
 												title="내정보보기">내정보보기</a></li>
@@ -199,7 +199,8 @@ $(function() {
 												<li><a href="${pageContext.request.contextPath}/batting/myBattingList.ba?userName=${member.userName}" title="배팅히스토리">배팅 히스토리</a>
 												<li ><a href ="${pageContext.request.contextPath}/member/memberLogout.do">LOG
 													OUT</a></li>
-											</ul>		
+											</ul>
+												
 										</li>
 										<li  class= "suvNav">
 											<span class="mainNav carea" id="chat">
@@ -218,7 +219,7 @@ $(function() {
 												<div class="topImg" style="background-image: url('${pageContext.request.contextPath}/resources/images/chatTopTry.png');"></div>
 												<div class="carea" style="width: 100%; height: 20px; background-color: #5e73de;padding: 5px 10px; ">
 													<span style="font-size: 11px;float:left;color: #fff;" class="allchatList">모두보기</span>
-													<span style="font-size: 11px;float:right; color: #fff;">채팅방 만들기</span>
+										
 												</div>
 												<div class="chatList carea scrollbar scrollbar-primary">
 													
@@ -239,6 +240,7 @@ $(function() {
             </div>
         </div>
     </div>
+	
 <!-- </div> -->
 <!-- cnd방식으로 sockjs불러오기 -->
 <script src="http://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
@@ -330,6 +332,7 @@ $(function() {
 			var today=null;
 			$(function(){
 				chatListMin();
+				matchingConCnt();
 				//chatLog();
 				$(".chatSendBtn").on("click",function(){
 					console.log("send message.....");
@@ -489,7 +492,7 @@ $(function() {
 	function onEvent() {
 		
 	}
-	function chatting(chatId) {
+	function goChattingDo(chatId) {
 		
 		var url = "${pageContext.request.contextPath }/chat/chatting.do/"+ chatId;
 		console.log(url);
@@ -514,6 +517,24 @@ $(function() {
 			} 
 		});
 	}
+	function matchingConCnt() {
+		$.ajax({
+			url:"${pageContext.request.contextPath}/matching/countMatchingCon.ma",
+			success: function(data) {
+				$(".matchingCount").children().remove();
+				if(data=="Y"){
+					$(".matchingCount").append(
+						$("<span>").attr("class","badge matCnt").text("N")		
+					);
+				}
+				
+				
+			} 
+		});
+	}
+	
+	
+	
 	function chatListMin() {
 		var nCount=0;
 		$.ajax({
@@ -532,7 +553,7 @@ $(function() {
 									  			  .attr("hidden","hidden")
 									  			)	  		
 							  .attr("class","chatBox carea")
-							  .attr("onclick","chatting("+data[i].chattingId+")")
+							  .attr("onclick","goChattingDo("+data[i].chattingId+")")
 							  .css({
 								  "width" : "100%",
 								  "height": "80px",

@@ -31,7 +31,11 @@ public interface MatchingDao {
 	
 	List<Map<String,String>> matchingSelectList(String type);
 	
-	MatchingListObj matchingDetail(int matNum);
+	MatchingListObj matchingDetail(Map map);
 	
 	int matchingRequest(int matchingId,String writerName,String guestName,String content);
+
+	int countMatchingCon(String userName);
+
+	List<MatchingListObj> topMatchingList(String category);
 }

@@ -87,10 +87,10 @@ article{
 	/*border: 1px #000 solid  #e4e4e4;*/
 }
 .subArt .subContent .matting {
-	width: 695px; height: 800px;  display: inline-block;
+	width: 795px; height: 800px;  display: inline-block;
 }
 .subArt .subContent .contentList {
-	width: 495px; height: 800px;  display: inline-block;
+	width: 395px; height: 800px;  display: inline-block;
 }
 .subArt .subContent> .matting>div{
 	width: 100%;
@@ -284,13 +284,31 @@ article{
 	height: 30px;
 }
 .chattingRoom .myChatLog{
-
+/* -------------------------modal----------------------------------- */
 }
 .modal{
 	z-index: 9999;
 }
 .modal-backdrop {
 	z-index: 9998;
+}
+.modal-dialog{
+	width: 450px!important;
+}
+.modal-dialog .modal-content .modal-header{
+	    border-radius: 5px 5px 0px 0px;
+	    color:#fff;
+}
+.modal-dialog .modal-content .modal-header h4{
+	text-align:center;
+	 color:#fff;
+}
+/* ------------------------------------------------------------ */
+.matchingCount{
+	position: absolute;
+    top: 4px;
+    left: 90px;
+	
 }
 /*-----------------------------------
     1. Body / Typography 
