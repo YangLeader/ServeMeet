@@ -615,14 +615,14 @@ height:50px;
 }
 .mid-header #search{
 	border:2px #5e73de  solid;
-	width: 400px;
+	width: 404.5px;
 	height: 40px;
 	display: inline-block;
 }
 .mid-header #search #searchTxt{
 	margin-left:10px;
 	width:340px;
-	height: 36px;
+	height: 34px;
 	border: none;
 	background: 0px;
 	
