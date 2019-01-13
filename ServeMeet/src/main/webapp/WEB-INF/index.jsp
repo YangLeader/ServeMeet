@@ -24,16 +24,17 @@
 	 
 }
 .matchingBox div{
-	width: 150px;
+	width: 160px;
 	height:30px;
 	overflow: hidden;
     text-overflow: ellipsis;
+        white-space: nowrap;
 }
 .matchingBox .category{
 font-size: 18px;
 }
 .matchingBox .mtitle{
-	font-size: 35px;
+	font-size: 25px;
 	margin: 2px 0px;
 }
 .matchingBox .location{
@@ -206,33 +207,7 @@ font-size: 18px;
 						}
 					});
 
-			$.ajax({
-				url : "${pageContext.request.contextPath}/ajax/topMatchingList.do",
-				type : "GET",
-				data:{category:"1"},
-				dataType : "json",
-				contentType : "application/json",
-				success : function(data) {
-					console.log(data);
-					for ( var i in data) {
-						$("#meeting").prepend(
-							$("<a>").append(
-								$("<div>").append(
-									$("<div>").text(data[i].midCategory))
-									 .append($("<div>").text(data[i].mTitle))
-									 .append($("<div>").text(data[i].bigLocation + " "+data[i].midLocation))
-									 .append($("<div>").text(data[i].mtime))
-									 .attr("class","matchingBox")
-							).attr("href","${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + data[i].matchingId)
-						);
-					}
-
-				},
-				error : function(data) {
-
-					console.log("sports조회 실패!");
-				}
-			});
+			
 		});
 
 		var bSize = $('body').width();
@@ -262,11 +237,11 @@ font-size: 18px;
 												 .attr("class","matchingBox")
 										).attr("href","${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + data[i].matchingId)
 						if(category=="1"){							
-							$("#meeting").prepend(matchingBox);
+							$("#meeting").append(matchingBox);
 						}else if(category=="2"){
-							$("#sports").prepend(matchingBox);
+							$("#sports").append(matchingBox);
 						}else if(category="3"){
-							$("#e_sports").prepend(matchingBox);
+							$("#e_sports").append(matchingBox);
 							$("#e_sports").children("a").children(".matchingBox").children(".location").remove();
 						}
 					}
