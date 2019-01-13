@@ -78,4 +78,9 @@ public class PointServiceImpl implements PointService {
 		return pointDao.selectPointTotalContents(userNo);
 	}
 
+	@Override
+	public int totalPoint() {
+		return pointDao.totalPoint();
+	}
+
 }

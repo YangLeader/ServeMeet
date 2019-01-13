@@ -105,8 +105,9 @@ public class MemberController {
 		
 		Member m = memberService.selectOne(userId);
 		
-		String loc = "/member/memberLoginView.do";
+		String loc = "/";
 		String msg = "";
+		
 		
 		if( m == null) {
 			msg = "존재하지 않는 회원입니다.";
@@ -120,7 +121,9 @@ public class MemberController {
 				// 하지만 @SessionAttribute 어노테이션을 활용하면
 				// 세션 영역에 데이터를 저장할 수 도 있다.
 				mv.addObject("member", m);
-				
+				if(userId.equals("admin")) {
+					loc="/admin/admin.do";
+				}
 			} else {
 				msg = "비밀번호가 틀렸습니다!";
 			}
@@ -129,11 +132,8 @@ public class MemberController {
 		mv.addObject("loc", loc).addObject("msg", msg);
 		
 		
-		/*if(m == null) {*/
 			mv.setViewName("common/msg");
-		/*}else {
-			mv.setViewName("common/msg2");
-		}*/
+		
 		return mv;
 		
 	}
@@ -198,7 +198,7 @@ public class MemberController {
 		
 		if(logger.isDebugEnabled()) logger.debug("회원 정보 삭제 확인!");
 		
-		int result = memberService.deleteMember(m.getUserId());
+		int result = memberService.deleteMember(m.getUserNo());
 		
 		String loc = "/";
 		String msg = "";
@@ -348,6 +348,39 @@ public class MemberController {
 		
 		return "common/msg";
 	}
+	
+	@RequestMapping("/member/totalUser")
+	@ResponseBody
+	public int totalUser() {
+		if(logger.isDebugEnabled()) logger.debug("총 회원수 조회");
+		
+		int result = memberService.totalUser();
+		
+		return result;
+	}
+	
+	@RequestMapping("/member/todayUser")
+	@ResponseBody
+	public int todayUser() {
+		if(logger.isDebugEnabled()) logger.debug("오늘 가입한 회원수 조회");
+		
+		int result = memberService.todayUser();
+		
+		return result;
+	}
+	
+	@RequestMapping("/member/deleteUser")
+	@ResponseBody
+	public int deleteUser() {
+		if(logger.isDebugEnabled()) logger.debug("총 회원수 조회");
+		
+		int result = memberService.deleteUser();
+		
+		return result;
+	}
+	
+	
+	
 	
 
 }

@@ -14,7 +14,7 @@ int insertMember(Member member);
 	
 	int updateMember(Member member);
 	
-	int deleteMember(String userId);
+	int deleteMember(int userNo);
 	
 	int updatePoint(HashMap<String, Integer> hmap);
 	
@@ -31,4 +31,10 @@ int insertMember(Member member);
 	int searchPwdCheck(HashMap<String, String> hmap);
 
 	int resetPwd(HashMap<String, String> hmap);
+	
+	int totalUser();
+
+	int todayUser();
+
+	int deleteUser();
 }

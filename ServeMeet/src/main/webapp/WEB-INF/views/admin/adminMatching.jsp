@@ -144,10 +144,14 @@
                               </ul>
                         </li>
 						<li>
-                            <a href="#">
-								<i class="ti-settings"></i>
-								<p>Settings</p>
-                            </a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-settings"></i>
+									<p>setting</p>
+									<b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a></li>
+                              </ul>
                         </li>
                     </ul>
 
