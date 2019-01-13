@@ -13,7 +13,7 @@ public interface MemberService {
 	
 	int updateMember(Member member);
 	
-	int deleteMember(String userId);
+	int deleteMember(int i);
 	
 	int checkIdDuplicate(String userId);
 	
@@ -30,6 +30,12 @@ public interface MemberService {
 	int searchPwdCheck(String userId, String email);
 
 	int resetPwd(String userId, String userPwd);
+
+	int totalUser();
+
+	int todayUser();
+
+	int deleteUser();
 
 
 }

@@ -166,7 +166,7 @@ function pasteHTML(filepath){
 
 					<div class="wr_option wr_subject">
 						<label>제목</label> 
-						<input type="text" name="boardTitle" id="wr_subject" class="form-control" value="" required maxlength="80" />
+						<input type="text" name="boardTitle" id="wr_subject" class="form-control" value="" required maxlength="65" />
 						<label>작성자</label>
 						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
 					</div>

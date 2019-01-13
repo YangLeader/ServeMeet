@@ -12,12 +12,12 @@
 	<select id="loginMember" parameterType="string"
 		resultType = "Member">
 	SELECT * FROM MEMBER 
-	WHERE USERID = #{userId}
+	WHERE USERID = #{userId} and USERSTATUS='Y'
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES(
-			SEQ_MEMBER.NEXTVAL,#{userId}, #{userPwd}, #{userName},#{email},0
+			SEQ_MEMBER.NEXTVAL,#{userId}, #{userPwd}, #{userName},#{email},0,default,default
 		)
 	</insert>
 	
@@ -36,8 +36,9 @@
 		WHERE USERNO = #{userNo}
 	</update>
 	
-	<delete id="deleteMember" parameterType="string">
-		DELETE FROM MEMBER WHERE USERID = #{userId}
+	<delete id="deleteMember" parameterType="_int">
+		UPDATE MEMBER SET USERSTATUS = 'N'
+		WHERE USERNO = #{userNo} 
 	</delete>
 	
 	<select id="checkIdDuplicate" statementType="CALLABLE" 
@@ -86,6 +87,18 @@
 	
 	<select id="resetPwd" parameterType="hashmap" resultType="_int">
 		update member set userPwd = #{userPwd} where userId = #{userId}
+	</select>
+	
+	<select id="totalUser" resultType="_int">
+		select count(*) from member where userstatus='Y'
+	</select>
+		
+	<select id="todayUser" resultType="_int">
+		select count(*) from member where extract(month from entrydate) = (SELECT extract(month from sysdate) FROM dual)
+	</select>
+		
+	<select id="deleteUser" resultType="_int">
+		select count(*) from member where userstatus='N' 
 	</select>
 <!--
 

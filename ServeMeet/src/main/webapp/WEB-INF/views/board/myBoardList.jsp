@@ -11,52 +11,15 @@
 <meta charset="UTF-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<!--
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-2755471938797797",
-          enable_page_level_ads: true
-     });
-</script>
--->
-
-<title>자유 게시판</title>
 
 
+<title>내 게시글</title>
 
-<!--[if lte IE 8]>
-<script src="http://aq23r1gt.iwinv.net/js/html5.js"></script>
-<![endif]-->
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-<script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-<!--
-<script src="http://aq23r1gt.iwinv.net/js/jquery-1.8.3.min.js"></script>
--->
 
 
 </head>
 <body>
 
-	<!-- preloader (화면 전환 효과) -->
-	
-	<!-- <div class="preloader"></div>
-
-	
-		$(document).ready(function() {
-			// 화면 전환 효과
-			$('.preloader').fadeOut(150);
-
-			$('.navbar-brand').width($('.navbar-brand > img').width());
-			$(window).resize(function() {
-				$('.navbar-brand').width($('.navbar-brand > img').width());
-			});
-		}); -->
 	<script>	
 		$(function(){
 			$('[data-mytext=getNo]').on("click",function(){
@@ -71,7 +34,6 @@
 	
 		<div class="container" style="background-color:white; border-radius: 20px;">
 		<br />
-			<!-- 게시판 목록 시작 { -->
 			<div id="bbs-list-wrap">
 
 				<div id="bbs-list-top">
@@ -276,7 +238,7 @@
 						$("#sfl").removeClass("dno");
 					});
 
-					 bbs_list_width_fixed();
+					bbs_list_width_fixed();
 
 					setTimeout(function() {
 						bbs_list_width_fixed();
@@ -284,7 +246,7 @@
 
 					$(window).resize(function() {
 						bbs_list_width_fixed();
-					}); 
+					});
 
 				});
 
@@ -319,32 +281,11 @@
 				}
 			</script>
 			<!-- } 게시판 목록 끝 -->
-			<!--</div>-->
-			<!-- .rightBox -->
-			<!--</div>-->
-			<!-- .row -->
 		</div>
 		<!-- .container -->
 	</div>
 	<!-- .wrapper -->
 
-
-
-	<!-- ie6,7에서 사이드뷰가 게시판 목록에서 아래 사이드뷰에 가려지는 현상 수정 -->
-	<!--[if lte IE 7]>
-<script>
-$(function() {
-    var $sv_use = $(".sv_use");
-    var count = $sv_use.length;
-
-    $sv_use.each(function() {
-        $(this).css("z-index", count);
-        $(this).css("position", "relative");
-        count = count - 1;
-    });
-});
-</script>
-<![endif]-->
 
 <c:import url="../common/footer.jsp"/>
 

@@ -48,15 +48,19 @@ font-size: 18px;
 .sList{
 	padding-left: 8px;
 }
+  @media screen and (max-width: 1650px) { .ad_side { display: none; } } 
+  
 </style>
+
 </head>
 <body>
 	<header>
 		<c:import url="views/common/header.jsp" />
 	</header>
-	<section id="mainSec" style="margin-top: 50px;">
-		<div class="ad" style="position: fixed; top: 10; left: 3">
-			<c:import url="views/point/adSide.jsp" />
+
+	<section id="mainSec" style="margin-top: 50px; ">
+		<div class="ad_side" style="position:fixed; top:10; left:3">
+			<c:import url="views/point/adSide.jsp"/>
 		</div>
 		<article class="titleAt">
 			<div class="mainTitle">
@@ -68,53 +72,59 @@ font-size: 18px;
 			</div>
 			<c:import url="views/matching/matching.jsp" />
 		</article>
-		<article class="subArt">
+
+		<article>
+			<div class="ad_space" >
+				<c:import url="views/point/adSpace.jsp"/>
+			</div>
+		</article>
+		<article class="subArt" >
 			<div class="subContent">
 				<div
-					class="sContent matting col-lg-8 col-md-8 col-sm-12 col-xs-12 listSec">
-					<div>
-						<div class="midTitle">
-							<a> <span class="midTitleName"><b>소모임</b></span> <span>+</span>
-							</a>
-						</div>
-						<div class="sList" id="meeting">
-						
-						</div>
-					</div>
-					<div>
-						<div class="midTitle">
-							<a> <span class="midTitleName"><b>e-스포츠</b></span> <span>+</span>
-							</a>
-						</div>
-						<div class="sList">
-							<div class="sList" id="e_sports">
-						
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="midTitle">
-							<a> <span class="midTitleName"><b>스포츠</b></span> <span>+</span>
-							</a>
-						</div>
-						<div class="sList">
-							<div class="sList" id="sports">
-						
-							</div>
-						</div>
-					</div>
-					<div>
-						<div class="midTitle">
-							<a> <span class="midTitleName"><b>배팅</b></span> <span>+</span>
-							</a>
-						</div>
-						<div class="sList">
-							<div class="sList" id="meeting">
-						
-							</div>
-						</div>
-					</div>
-				</div>
+        class="sContent matting col-lg-8 col-md-8 col-sm-12 col-xs-12 listSec">
+        <div>
+          <div class="midTitle">
+            <a> <span class="midTitleName"><b>소모임</b></span> <span>+</span>
+            </a>
+          </div>
+          <div class="sList" id="meeting">
+
+          </div>
+        </div>
+        <div>
+          <div class="midTitle">
+            <a> <span class="midTitleName"><b>e-스포츠</b></span> <span>+</span>
+            </a>
+          </div>
+          <div class="sList">
+            <div class="sList" id="e_sports">
+
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="midTitle">
+            <a> <span class="midTitleName"><b>스포츠</b></span> <span>+</span>
+            </a>
+          </div>
+          <div class="sList">
+            <div class="sList" id="sports">
+
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="midTitle">
+            <a> <span class="midTitleName"><b>배팅</b></span> <span>+</span>
+            </a>
+          </div>
+          <div class="sList">
+            <div class="sList" id="meeting">
+
+            </div>
+          </div>
+        </div>
+      </div>
 				<div
 					class="col-lg-4 col-md-4 col-sm-12 col-xs-12 listSec contentList">
 					<div class="sContent conList">
@@ -152,10 +162,9 @@ font-size: 18px;
 
 	<script>
 		$(function() {
-			topMatchingList("1");
+      topMatchingList("1");
 			topMatchingList("2");
 			topMatchingList("3");
-
 			$
 					.ajax({
 
@@ -197,9 +206,44 @@ font-size: 18px;
 						}
 					});
 
-			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/ajax/topMatchingList.do",
+				type : "GET",
+				data:{category:"1"},
+				dataType : "json",
+				contentType : "application/json",
+				success : function(data) {
+					console.log(data);
+					for ( var i in data) {
+						$("#meeting").prepend(
+							$("<a>").append(
+								$("<div>").append(
+									$("<div>").text(data[i].midCategory))
+									 .append($("<div>").text(data[i].mTitle))
+									 .append($("<div>").text(data[i].bigLocation + " "+data[i].midLocation))
+									 .append($("<div>").text(data[i].mtime))
+									 .attr("class","matchingBox")
+							).attr("href","${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + data[i].matchingId)
+						);
+					}
+
+				},
+				error : function(data) {
+
+					console.log("sports조회 실패!");
+				}
+			});
 		});
-		function topMatchingList(category) {
+
+		var bSize = $('body').width();
+		
+		$(window).resize(function() { 
+		   
+			if(bSize < 1650px){
+				$('.ad').hide();
+			}   
+		});
+    function topMatchingList(category) {
 			$.ajax({
 				url : "${pageContext.request.contextPath}/ajax/topMatchingList.do",
 				type : "GET",
@@ -234,8 +278,10 @@ font-size: 18px;
 				}
 			});
 		}
+	
 	</script>
 
 </body>
 
 </html>
+

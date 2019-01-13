@@ -122,8 +122,6 @@ form, h1 {margin:0;}
 #bbs-list-ul li .subject {
 	display:inline-block;
 	cursor:text;
-	font-size: 10pt;
-	overflow: hidden; 
 	text-overflow: ellipsis; 
 	white-space: nowrap; 
 	width:auto;
@@ -133,6 +131,7 @@ form, h1 {margin:0;}
 	position: relative;
 	text-align: center;
     margin-top: -6px;
+    border-bottom: none;
 }
 
 /*

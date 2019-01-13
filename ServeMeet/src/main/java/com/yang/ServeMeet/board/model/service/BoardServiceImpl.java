@@ -204,5 +204,17 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardTop7List();
 	}
 
+	@Override
+	public List<Map<String, Object>> myBoardList(String userName) {
+		
+		return boardDao.myBoardList(userName);
+	}
+
+	@Override
+	public int selectMyBoardTotalContents(String userName) {
+		
+		return boardDao.selectMyBoardTotalContents(userName);
+	}
+
 
 }

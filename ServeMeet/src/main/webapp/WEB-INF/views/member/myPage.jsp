@@ -199,7 +199,7 @@
 					</p>
 				</div>
 				<div class="btn_area">
-					<a href="#" class = "sb_btn" onclick="edMatching();">조회하기</a>
+					<a href="${pageContext.request.contextPath}/board/myBoardList.do?userName=${member.userName}" class = "sb_btn">조회하기</a>
 				</div>
 			</div>
 			<div class="sm_group">
@@ -216,13 +216,37 @@
 				</div>
 			</div>
 		</div>
+		
 		</div>
+		<br>
+		<p>ServeMeet을 더이상 이용하지 않는다면? <a onclick="deleteUser();">회원 탈퇴하기</a></p>
 		</div>
+		
 	
 </div>
 
 
 <c:import url="../common/footer.jsp"/>
+
+<script>
+
+	function deleteUser(){
+		
+		swal({
+			  title: "더 이상 ServeMeet을 이용하실 수 없습니다.",
+			  text: "이용내역은 사라지지 않습니다. 그래도 계속하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			}).then((willDelete) => {
+				location.href="${pageContext.request.contextPath}/member/memberDelete.do";
+			});
+		
+	}
+	
+	
+"${pageContext.request.contextPath}/member/memberDelete.do"
+</script>
 
 </body>
 </html>

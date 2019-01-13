@@ -82,6 +82,11 @@ public class PointDaoImpl implements PointDao {
 		return sqlSession.selectOne("point.selectPointTotalContents",userNo);
 
 	}
+
+	@Override
+	public int totalPoint() {
+		return sqlSession.selectOne("point.totalPoint");
+	}
 	
 
 }
