@@ -115,7 +115,7 @@
 	$(function() {
 	
 			
-				mSearch
+			
 		$("#mSearch").keydown(function(key) {
 			if(key.keyCode==13){
 				var keyword=$(".keyword").val();
@@ -195,7 +195,7 @@
 	function createChatRoom(){
 		if(memberName.length>1){
 			
-			if($(".modal-body .chatName").val()!=null){
+			if($(".modal-content .chatName").val()!=null){
 				createChatGroup();
 			}else{
 				 swal("방 이름을 입력해주세요");
@@ -206,7 +206,7 @@
 	}
   	function createChatGroup(){
 		var jArray=JSON.stringify(memberName);
-		var cChatName = $(".modal-body .chatName").val();
+		var cChatName = $(".modal-content .chatName").val();
 		/* console.log("jArray+++");	
 		console.log(jArray);	
 		$.ajax({
@@ -287,7 +287,11 @@
 		
 	</div>
 </div>
-
+<section>
+			<article>
+				<c:import url="../chat/createChat.jsp"></c:import>
+			</article>
+		</section>
 	<footer>
 		<c:import url="../common/footer.jsp" />
 	</footer> 

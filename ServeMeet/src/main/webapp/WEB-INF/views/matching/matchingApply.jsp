@@ -167,6 +167,10 @@ $('#requestMatching').click(function(){
 				 content : content},
 		success : function(data){
 			console.log("data : "+data);
+			opener.parent.matsk.send(writer);
+			opener.parent.location.reload();
+			window.close();
+
 		}, error : function(data){
 			alert("에러가 발생했습니다!");
 			

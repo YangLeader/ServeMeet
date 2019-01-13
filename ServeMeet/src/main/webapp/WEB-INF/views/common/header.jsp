@@ -327,6 +327,8 @@ $(function() {
 			sock.onmessage=onMessage;
 			sock.onclose=onClose;
 			
+			matsk=new SockJS("<c:url value='/matching'/>");
+			matsk.onmessage=matMessage;
 			/* SockJS객체생성 보낼 url경로를 매개변수로 등록 */
 			
 			var today=null;
@@ -360,6 +362,13 @@ $(function() {
 					sock.send($("#chatTxt").val());
 				}
 			};
+			function matMessage(evt) {
+				console.log("evt  :::: ");
+				console.log(evt);
+				if(evt.data=="new"){
+					matchingConCnt();
+				}
+			}
 			function onMessage(evt){
 				
 				var data=evt.data;//new text객체로 보내준 값을 받아옴.
