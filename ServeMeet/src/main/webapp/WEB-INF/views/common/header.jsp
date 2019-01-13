@@ -94,7 +94,12 @@ float: right;
 							src="${pageContext.request.contextPath}/resources/images/logo.png"
 							alt=""></a>
 						<div id = "search" >
-							<input type="text"  name="search" id = "searchTxt"/><span class = "a"><button class="searchBtn"><img class="searchImg" src="${pageContext.request.contextPath}/resources/images/search2.png"></button></span>
+							<input type="text"  name="search" id = "searchTxt"/>
+							<span class = "a">
+								<button class="searchBtn">
+									<img class="searchImg" src="${pageContext.request.contextPath}/resources/images/search2.png">
+								</button>
+							</span>
 						</div>
 					</div>
 				</div>
@@ -103,6 +108,10 @@ float: right;
 	</div>
 <script type="text/javascript">
 $(function() {
+	$("#search .searchBtn").click(function() {
+		var keyWord=$("#searchTxt").val();
+		location.href="${pageContext.request.contextPath}/searchAll.do?keyword="+keyWord;
+	});
 	$(".searchBtn").hover(function() {
 			$(".searchImg").attr("src","${pageContext.request.contextPath}/resources/images/search_hover.png");
 		},
@@ -148,10 +157,6 @@ $(function() {
 		                                </ul>
 									</li>
 
-
-									<li><a
-										href="${pageContext.request.contextPath }/chat/memberList.do"
-										title="Blog"><span class="mainNav">채팅</a></li>
 									<li><a
 										href="${pageContext.request.contextPath }/board/boardList.do"
 										title="Contact Us"><span class="mainNav">게시판</a>
