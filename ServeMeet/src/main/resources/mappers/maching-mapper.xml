@@ -66,7 +66,6 @@
 		WHERE M.LOCATIONID = L.LOCATIONID
 		AND M.CATEGORYID = C.CATEGORYID
         AND M.CATEGORYID LIKE #{cat} || '%'
-        and  M.MGUEST is null
         order by MATCHINGID desc)
         where rnum<![CDATA[<]]>5
 	</select>

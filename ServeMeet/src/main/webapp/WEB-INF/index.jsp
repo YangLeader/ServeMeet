@@ -15,11 +15,11 @@
 <style type="text/css">
 .matchingBox {
 	display:inline-block;
-	padding: 7px 12px;
+	padding: 10px;
 	width: 180px;
-	height: 130px;
-	border: 1px #aaa solid;
-	margin: 20px 3px;
+	height: 150px;
+	border: 1px #5e73de solid;
+	margin: 10px 3px;
 	box-shadow: 3px 3px 5px #aaaaaa; 
 	 
 }
@@ -29,25 +29,10 @@
 	overflow: hidden;
     text-overflow: ellipsis;
 }
-.matchingBox .category{
-font-size: 18px;
-}
-.matchingBox .mtitle{
-	font-size: 35px;
-	margin: 2px 0px;
-}
-.matchingBox .location{
-	font-size: 15px;
-	height:25px!important;
-}
-.matchingBox .time{
-	font-size: 13px;
-	height:20px!important;
+.sList{
+padding-left: 8px;
 }
 
-.sList{
-	padding-left: 8px;
-}
   @media screen and (max-width: 1650px) { .ad_side { display: none; } } 
   
 </style>
@@ -81,50 +66,38 @@ font-size: 18px;
 		<article class="subArt" >
 			<div class="subContent">
 				<div
-        class="sContent matting col-lg-8 col-md-8 col-sm-12 col-xs-12 listSec">
-        <div>
-          <div class="midTitle">
-            <a> <span class="midTitleName"><b>소모임</b></span> <span>+</span>
-            </a>
-          </div>
-          <div class="sList" id="meeting">
-
-          </div>
-        </div>
-        <div>
-          <div class="midTitle">
-            <a> <span class="midTitleName"><b>e-스포츠</b></span> <span>+</span>
-            </a>
-          </div>
-          <div class="sList">
-            <div class="sList" id="e_sports">
-
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="midTitle">
-            <a> <span class="midTitleName"><b>스포츠</b></span> <span>+</span>
-            </a>
-          </div>
-          <div class="sList">
-            <div class="sList" id="sports">
-
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="midTitle">
-            <a> <span class="midTitleName"><b>배팅</b></span> <span>+</span>
-            </a>
-          </div>
-          <div class="sList">
-            <div class="sList" id="meeting">
-
-            </div>
-          </div>
-        </div>
-      </div>
+					class="sContent matting col-lg-8 col-md-8 col-sm-12 col-xs-12 listSec">
+					<div>
+						<div class="midTitle">
+							<a> <span class="midTitleName"><b>소모임</b></span> <span>+</span>
+							</a>
+						</div>
+						<div class="sList" id="meeting">
+						
+						</div>
+					</div>
+					<div>
+						<div class="midTitle">
+							<a> <span class="midTitleName"><b>e-스포츠</b></span> <span>+</span>
+							</a>
+						</div>
+						<div class="sList"></div>
+					</div>
+					<div>
+						<div class="midTitle">
+							<a> <span class="midTitleName"><b>배팅</b></span> <span>+</span>
+							</a>
+						</div>
+						<div class="sList"></div>
+					</div>
+					<div>
+						<div class="midTitle">
+							<a> <span class="midTitleName"><b>스포츠</b></span> <span>+</span>
+							</a>
+						</div>
+						<div class="sList"></div>
+					</div>
+				</div>
 				<div
 					class="col-lg-4 col-md-4 col-sm-12 col-xs-12 listSec contentList">
 					<div class="sContent conList">
@@ -162,9 +135,7 @@ font-size: 18px;
 
 	<script>
 		$(function() {
-      topMatchingList("1");
-			topMatchingList("2");
-			topMatchingList("3");
+
 			$
 					.ajax({
 
@@ -243,45 +214,9 @@ font-size: 18px;
 				$('.ad').hide();
 			}   
 		});
-    function topMatchingList(category) {
-			$.ajax({
-				url : "${pageContext.request.contextPath}/ajax/topMatchingList.do",
-				type : "GET",
-				data:{category:category},
-				dataType : "json",
-				contentType : "application/json",
-				success : function(data) {
-					console.log(data);
-					for ( var i in data) {
-						var matchingBox= $("<a>").append(
-											$("<div>").append(
-												$("<div>").text("[ "+data[i].midCategory+" ]").attr("class","category"))
-												 .append($("<div>").text(data[i].mTitle).attr("class","mtitle"))
-												 .append($("<div>").text(data[i].midLocation).attr("class","location"))
-												 .append($("<div>").text(data[i].mtime).attr("class","time"))
-												 .attr("class","matchingBox")
-										).attr("href","${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + data[i].matchingId)
-						if(category=="1"){							
-							$("#meeting").prepend(matchingBox);
-						}else if(category=="2"){
-							$("#sports").prepend(matchingBox);
-						}else if(category="3"){
-							$("#e_sports").prepend(matchingBox);
-							$("#e_sports").children("a").children(".matchingBox").children(".location").remove();
-						}
-					}
-
-				},
-				error : function(data) {
-
-					console.log("sports조회 실패!");
-				}
-			});
-		}
 	
 	</script>
 
 </body>
 
 </html>
-
