@@ -68,7 +68,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public int deleteBoard(int boardNo) {
-		return sqlSession.delete("board.deleteBoard", boardNo);
+		return sqlSession.update("board.deleteBoard", boardNo);
 	}
 
 	@Override
@@ -154,6 +154,12 @@ public class BoardDaoImpl implements BoardDao {
 	public int selectMyBoardTotalContents(String userName) {
 
 		return sqlSession.selectOne("board.selectMyBoardTotalContents", userName);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectReportList() {
+
+		return sqlSession.selectList("board.selectReportList");
 	}
 
 }

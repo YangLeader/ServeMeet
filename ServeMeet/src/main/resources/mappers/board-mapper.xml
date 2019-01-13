@@ -58,10 +58,10 @@
 		INSERT INTO BOARDFILE(FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME)
 		VALUES (SEQ_FILEID.NEXTVAL, #{boardNo}, DEFAULT, #{originName}, #{changeName})
 	</insert>
-	<delete id="deleteBoard" parameterType="_int">
+	<update id="deleteBoard" parameterType="_int">
 		UPDATE BOARD SET BOARDSTATUS = 'N'
 		WHERE BOARDNO = #{boardNo} 
-	</delete>
+	</update>
 	
 	<delete id="deleteBoardFile" parameterType="_int"> 
 		DELETE FROM BOARDFILE WHERE BOARDNO = #{boardNo}
@@ -126,5 +126,15 @@
 		SELECT COUNT(*)
 		FROM BOARD
 		WHERE BOARDSTATUS = 'Y' AND USERNAME = #{userName}
+	</select>
+	
+	<select id="selectReportList" resultType="board">
+		SELECT A.*, (SELECT COUNT(*) FROM BOARD_COMMENT 
+					 WHERE BOARDNO = A.BOARDNO AND COMMENTSTATUS = 'Y') COMMENTCOUNT,			 
+					 (SELECT COUNT(*) FROM REPORT WHERE BOARDNO = A.BOARDNO) REPORTCOUNT
+		FROM
+		BOARD A
+		WHERE BOARDSTATUS = 'Y'
+		ORDER BY REPORTCOUNT DESC, BOARDNO DESC, BOARDDATE DESC
 	</select>
 </mapper>

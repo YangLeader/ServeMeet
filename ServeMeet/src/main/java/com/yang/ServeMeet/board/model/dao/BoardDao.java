@@ -57,4 +57,6 @@ public interface BoardDao {
 	List<Map<String, Object>> myBoardList(String userName);
 
 	int selectMyBoardTotalContents(String userName);
+
+	List<Map<String, Object>> selectReportList();
 }

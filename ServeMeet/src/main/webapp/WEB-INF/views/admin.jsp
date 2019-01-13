@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminReport.do">
+                    <a href="${pageContext.request.contextPath}/admin/reportList.do">
                         <i class="ti-view-list-alt"></i>
                         <p>신고 관리</p>
                     </a>
