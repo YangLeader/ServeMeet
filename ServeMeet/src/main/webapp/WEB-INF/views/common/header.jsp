@@ -324,6 +324,8 @@ $(function() {
 		if(member!=""){
 			console.log(member);
 			sock=new SockJS("<c:url value='/echo'/>");
+			matsk=new SockJS("<c:url value='/matching'/>");
+			matsk.onmessage=matMessage;
 			sock.onmessage=onMessage;
 			sock.onclose=onClose;
 			
@@ -360,6 +362,14 @@ $(function() {
 					sock.send($("#chatTxt").val());
 				}
 			};
+			
+			function matMessage(evt) {
+				console.log("evt  :::: ");
+				console.log(evt);
+				if(evt.data=="new"){
+					matchingConCnt();
+				}
+			}
 			function onMessage(evt){
 				
 				var data=evt.data;//new text객체로 보내준 값을 받아옴.
