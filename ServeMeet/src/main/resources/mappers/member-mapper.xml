@@ -90,15 +90,15 @@
 	</select>
 	
 	<select id="totalUser" resultType="_int">
-		select count(*) from member where userstatus='Y'
+		select NVL(count(*),0) from member where userstatus='Y'
 	</select>
 		
 	<select id="todayUser" resultType="_int">
-		select count(*) from member where extract(month from entrydate) = (SELECT extract(month from sysdate) FROM dual)
+		select NVL(count(*),0) from member where TO_CHAR(to_date(entrydate,'YY-MM-DD'), 'yyyy/mm/dd') = (SELECT TO_CHAR(to_date(sysdate,'YY-MM-DD'), 'yyyy/mm/dd') FROM dual)
 	</select>
 		
 	<select id="deleteUser" resultType="_int">
-		select count(*) from member where userstatus='N' 
+		select NVL(count(*),0) from member where userstatus='N' 
 	</select>
 <!--
 

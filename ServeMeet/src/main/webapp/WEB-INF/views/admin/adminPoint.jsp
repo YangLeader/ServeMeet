@@ -36,7 +36,25 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+	
+	<style>
+	
+		
+	
+		.pInput{
+			padding-bottom :10px;
+			z-index : 1;
+		}
+		
+		.footer {
+			z-index : 0;
+			background-color : white;
+		}
+		
+		.importContent {
+			z-index : 1;
+		}
+	</style>
 </head>
 <body>
 
@@ -200,45 +218,22 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Revenue</p>
-                                            $1,345
+                                            <p>오늘 적립된 포인트</p>
+                                            <span id="plusPoint" class="counter">P</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
+                                        <i class="ti-calendar"></i> Today
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
-                    <!-- <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-danger text-center">
-                                            <i class="ti-pulse"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Errors</p>
-                                            23
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <hr />
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> In the last hour
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+                    
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
                             <div class="content">
@@ -250,8 +245,8 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Followers</p>
-                                            +45
+                                            <p>오늘 차감된 포인트</p>
+                                            <span id="minusPoint" class="counter">P</span>
                                         </div>
                                     </div>
                                 </div>
@@ -268,24 +263,16 @@
                 <div class="row">
 
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card" >
                             <div class="header">
-                                <h4 class="title">Users Behavior</h4>
-                                <p class="category">24 Hours performance</p>
+                                <h4 class="title">포인트 내역 조회</h4>
+                                <p class="category">전체 회원의 포인트 내역을 조회할 수 있습니다.</p>
                             </div>
                             <div class="content">
-                                <div id="chartHours" class="ct-chart"></div>
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Click
-                                        <i class="fa fa-circle text-warning"></i> Click Second Time
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-reload"></i> Updated 3 minutes ago
-                                    </div>
-                                </div>
+                            	<div class="importContent">
+	                                <c:import url="/point/totalPointList.do"></c:import>
+								</div>
+							
                             </div>
                         </div>
                     </div>
@@ -294,17 +281,54 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Email Statistics</h4>
-                                <p class="category">Last Campaign Performance</p>
+                                <h4 class="title">포인트 적립</h4>
+                                <p class="category">회원에게 포인트를 부여할 수 있습니다.</p>
                             </div>
+                            <form name="plusPointFrm" id ="pPointForm" action="plusPointAdmin.do" method="post">
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
+								<div id="plusIdInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="row">
+									<div class="col-md-2" align="center">
+				                      <label class=" control-label" for="pNo">회원번호 :</label>
+				                    </div>
+				                    <div class="col-md-9">
+				                    	<div id="userId-container">
+				                    		<input id="pNo" name="pNo" type="text" class="form-control" placeholder="회원번호를 입력하세요" required>
+				                    	</div>
+				                    </div>
+				                    </div>
+								</div>
+								<div id="plusPointInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="row">
+									<div class="col-md-2" align="center">
+				                      <label class=" control-label" for="pPoint">포인트 :</label>
+				                    </div>
+				                    <div class="col-md-9">
+				                    	<div id="userId-container">
+				                    		<input id="pPoint" name="pPoint" type="text" class="form-control" placeholder="포인트를 입력하세요" required>
+				                    	</div>
+				                    </div>
+				                    </div>
+								</div>
+								<div id="plusMemoInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="row">
+									<div class="col-md-2" align="center">
+				                      <label class=" control-label" for="pMemo">사유 :</label>
+				                    </div>
+				                    <div class="col-md-9">
+				                    	<div id="userId-container">
+				                    		<textarea id="pMemo" name="pMemo" class="form-control" required></textarea>
+				                    	</div>
+				                    </div>
+				                    </div>
+								</div>
+								<div class="pointButton" align = "center">
+	                            	<button id="pPoint" type="submit" onclick="pButton()" > 확인</button>
+	                            </div>
+								
                                 <div class="footer">
                                     <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                        
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -312,28 +336,68 @@
                                     </div>
                                 </div>
                             </div>
+                            </form>
+                            
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">2015 Sales</h4>
-                                <p class="category">All products including Taxes</p>
+                                <h4 class="title">포인트 회수</h4>
+                                <p class="category">회원에게 포인트를 회수할 수 있습니다.</p>
                             </div>
+                            <form name="minusPontFrm" id ="mPointForm" action="minusPointAdmin.do" method="post">
                             <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
-
+								<div id="minusIdInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="row">
+									<div class="col-md-2" align="center">
+				                      <label class=" control-label" for="mNo">회원번호 :</label>
+				                    </div>
+				                    <div class="col-md-9">
+				                    	<div id="userId-container">
+				                    		<input id="mNo" name="mNo" type="text" class="form-control" placeholder="회원번호를 입력하세요" required>
+				                    	</div>
+				                    </div>
+				                    </div>
+								</div>
+								<div id="minusPointInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="row">
+									<div class="col-md-2" align="center">
+				                      <label class=" control-label" for="mPoint">포인트 :</label>
+				                    </div>
+				                    <div class="col-md-9">
+				                    	<div id="userId-container">
+				                    		<input id="mPoint" name="mPoint" type="text" class="form-control" placeholder="회수할 포인트를 입력하세요" required>
+				                    	</div>
+				                    </div>
+				                    </div>
+								</div>
+								<div id="plusMemoInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								 <div class="row">
+									<div class="col-md-2" align="center">
+				                      <label class=" control-label" for="mMemo">사유 :</label>
+				                    </div>
+				                    <div class="col-md-9">
+				                    	<div id="userId-container">
+				                    		<textarea id="mMemo" name="mMemo" class="form-control" required></textarea>
+				                    	</div>
+				                    </div>
+				                    </div>
+								</div>
+								<div class="pointButton" align = "center">
+	                            	<button id="mPoint" type="submit" onclick="mButton()" > 확인</button>
+	                            </div>
                                 <div class="footer">
                                     <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
+                                        
                                     </div>
                                     <hr>
                                     <div class="stats">
-                                        <i class="ti-check"></i> Data information certified
+                                        <i class="ti-timer"></i> Campaign sent 2 days ago
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -378,10 +442,10 @@
 	<script type="text/javascript">
     	$(document).ready(function(){
 
-    		
     		totalPoint();
+    		plusPoint();
+    		minusPoint();
     		
-        	demo.initChartist();
 
         	$.notify({
             	icon: 'ti-gift',
@@ -403,7 +467,7 @@
 	            data : {},
 	            success : function(data){
 	            	console.log("point : " +data);
-	                $("#totalPoint").html(data+"p");
+	                $("#totalPoint").html(data+"P");
 	            }, error : function(jqxhr, textStatus, errorThrown){
 	                console.log("ajax 처리 실패");
 	                //에러로그
@@ -413,7 +477,45 @@
 	            }
         	});
     		
-    	} 
+    	}
+    	
+		function plusPoint() {
+		    		
+		    		$.ajax({
+			            url  : "${pageContext.request.contextPath}/point/todayPlusPoint.do",
+			            data : {},
+			            success : function(data){
+			            	console.log("point : " +data);
+			                $("#plusPoint").html(data+"P");
+			            }, error : function(jqxhr, textStatus, errorThrown){
+			                console.log("ajax 처리 실패");
+			                //에러로그
+			                console.log(jqxhr);
+			                console.log(textStatus);
+			                console.log(errorThrown);
+			            }
+		        	});
+		    		
+		    	} 
+    	
+		function minusPoint() {
+			
+			$.ajax({
+		        url  : "${pageContext.request.contextPath}/point/todayMinusPoint.do",
+		        data : {},
+		        success : function(data){
+		        	console.log("point : " +data);
+		            $("#minusPoint").html(data+"P");
+		        }, error : function(jqxhr, textStatus, errorThrown){
+		            console.log("ajax 처리 실패");
+		            //에러로그
+		            console.log(jqxhr);
+		            console.log(textStatus);
+		            console.log(errorThrown);
+		        }
+			});
+			
+		} 
     	
 
 	</script>

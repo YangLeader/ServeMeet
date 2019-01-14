@@ -21,7 +21,7 @@
         <div class="get-in-touch">
           <h1 class="mb30">회원가입</h1>
           <div class="row">
-            <form name="memberEnrollFrm" id ="enrollFrom" action="memberEnrollEnd.do" method="post">
+            <form name="memberEnrollFrm" id ="enrollForm" action="memberEnrollEnd.do" method="post">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!-- Text input-->
                 <div class="row">

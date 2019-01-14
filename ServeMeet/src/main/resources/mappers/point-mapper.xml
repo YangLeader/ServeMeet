@@ -70,5 +70,28 @@
 		select sum(point) from member
 	</select>
 	
+	<!-- 오늘 추가된 포인트 조회 -->
+	<select id="todayPlusPoint" resultType="_int">
+		
+		select NVL(sum(increasepoint),0) from point where TO_CHAR(to_date(pdate,'YY-MM-DD'), 'yyyy/mm/dd') = (SELECT TO_CHAR(to_date(sysdate,'YY-MM-DD'), 'yyyy/mm/dd') FROM dual) and increasepoint>0
+	</select>
+	
+	<!-- 오늘 차감된 포인트 조회 -->
+	<select id="todayMinusPoint" resultType="_int">
+		select NVL(sum(increasepoint),0) from point where TO_CHAR(to_date(pdate,'YY-MM-DD'), 'yyyy/mm/dd') = (SELECT TO_CHAR(to_date(sysdate,'YY-MM-DD'), 'yyyy/mm/dd') FROM dual) and 0>increasepoint
+	</select>
+	
+	<select id="totalPointList" resultType="point">
+		SELECT * FROM POINT
+		ORDER BY PDATE DESC
+	</select>
+	
+	
+	<select id="pointTotalContents" resultType="_int">
+		SELECT COUNT(*)
+		FROM POINT
+	</select>
+	
+	
 </mapper>
 

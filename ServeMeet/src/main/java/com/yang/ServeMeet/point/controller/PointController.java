@@ -232,5 +232,81 @@ public class PointController {
 		return result;
 	}
 	
+	@RequestMapping("/point/todayPlusPoint")
+	@ResponseBody
+	public int todayPlusPoint() {
+		if(logger.isDebugEnabled()) logger.debug("오늘 획득한 포인트 조회");
+		
+		int result = pointService.todayPlusPoint();
+		
+		return result;
+	}
 	
+	@RequestMapping("/point/todayMinusPoint")
+	@ResponseBody
+	public int todayMinusPoint() {
+		if(logger.isDebugEnabled()) logger.debug("오늘 차감된 포인트 조회");
+		
+		int result = pointService.todayMinusPoint();
+		
+		
+		return result;
+	}
+	
+	@RequestMapping("admin/plusPointAdmin.do")
+	public String pPointAdmin(@RequestParam int pNo,@RequestParam int pPoint,  @RequestParam String pMemo) {
+	if(logger.isDebugEnabled()) logger.debug("포인트 부여 완료");
+			
+			Point p = new Point();
+			p.setUserNo(pNo);
+			p.setIncreasePoint(pPoint);
+			p.setpContent(pMemo);
+			
+			memberService.updatePoint(pNo,pPoint);
+			pointService.insertPoint(p);
+			
+			return "admin/adminPoint";
+	}
+	
+	@RequestMapping("admin/minusPointAdmin.do")
+	public String mPointAdmin(@RequestParam int mNo,@RequestParam int mPoint,  @RequestParam String mMemo) {
+	if(logger.isDebugEnabled()) logger.debug("포인트 차감 완료");
+			mPoint = -(mPoint);
+	
+			Point p = new Point();
+			p.setUserNo(mNo);
+			p.setIncreasePoint(mPoint);
+			p.setpContent(mMemo);
+			
+			memberService.updatePoint(mNo,mPoint);
+			pointService.insertPoint(p);
+			
+			return "admin/adminPoint";
+	}
+	
+	@RequestMapping(value="point/totalPointList.do", method= RequestMethod.GET)
+	public String totalPointList(
+			@RequestParam(value="cPage", required=false, defaultValue="1")
+			int cPage, Model model) {
+		
+		int numPerPage = 10; // 한 페이지당 게시글 수
+		
+		// 1. 현재 페이지 게시글 목록 가져오기
+		ArrayList<Map<String, String>> list = 
+				new ArrayList<Map<String, String>>(pointService.totalPointList(cPage, numPerPage));
+		
+		
+		// 2. 전체 게시글 개수 가져오기
+		int totalContents = pointService.pointTotalContents();
+		
+		// 3. 페이지 계산 후 작성할 HTML 추가
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "pointList.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		
+		return "point/totalPointList";
+	}
 }
