@@ -100,5 +100,15 @@
 	<insert id="matchingRequest">
 		INSERT INTO MATCHINGCONDITION VALUES (SEQ_MCONID.NEXTVAL, #{matchingId}, #{mWriter}, #{mGuest}, #{mContent}, DEFAULT)
 	</insert>
-
+	
+	<select id="matchingSearch" parameterType="Map" resultType="MatchingObj">
+		SELECT * FROM MATCHING
+		JOIN LOCATION USING (LOCATIONID)
+		JOIN CATEGORY USING (CATEGORYID)
+		WHERE CATEGORYID = (SELECT CATEGORYID FROM CATEGORY WHERE BIGCATEGORY = #{bigcategory} AND MIDCATEGORY= #{category})
+		AND MPEOPLENUM BETWEEN #{firstPeople} AND #{lastPeople}
+		AND TO_DATE(SUBSTR(MATCHING.MTIME, 1, 10), 'YYYY-MM-DD') BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{finishDate}, 'YYYY-MM-DD')
+		
+		
+	</select>
 </mapper>

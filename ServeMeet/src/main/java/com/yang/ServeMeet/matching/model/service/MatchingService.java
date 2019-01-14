@@ -39,4 +39,6 @@ public interface MatchingService {
 	int countMatchingCon(String userName);
 
 	List<MatchingListObj> topMatchingList(String category);
+	
+	List<MatchingListObj> searchMatching(Map map);
 }

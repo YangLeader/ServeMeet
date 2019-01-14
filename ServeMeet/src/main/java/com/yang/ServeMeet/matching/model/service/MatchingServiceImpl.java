@@ -111,5 +111,11 @@ public class MatchingServiceImpl implements MatchingService {
 		// TODO Auto-generated method stub
 		return matchingDao.topMatchingList(category);
 	}
+
+	@Override
+	public List<MatchingListObj> searchMatching(Map map) {
+		// TODO Auto-generated method stub
+		return matchingDao.searchMatching(map);
+	}
 	
 }

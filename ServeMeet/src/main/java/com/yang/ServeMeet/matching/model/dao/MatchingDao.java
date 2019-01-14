@@ -38,4 +38,6 @@ public interface MatchingDao {
 	int countMatchingCon(String userName);
 
 	List<MatchingListObj> topMatchingList(String category);
+	
+	List<MatchingListObj> searchMatching(Map map);
 }

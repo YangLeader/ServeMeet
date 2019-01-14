@@ -116,4 +116,11 @@ public class MatchingDaoImpl implements MatchingDao {
 		System.out.println("list : "+list);
 		return list;
 	}
+
+	@Override
+	public List<MatchingListObj> searchMatching(Map map) {
+		System.out.println("DAO Map : " + map);
+		
+		return session.selectList("Matching.matchingSearch", map);
+	}
 }
