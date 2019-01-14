@@ -153,18 +153,14 @@ $(function() {
 	                                        <li><a href="${pageContext.request.contextPath }/matching/matchingList.ma?type=M"  title="소모임">소모임</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/matching/matchingList.ma?type=S" title="스포츠">스포츠</a></li>
 	                                        <li><a href="${pageContext.request.contextPath }/matching/matchingList.ma?type=E" title="E-스포츠">E-스포츠</a></li>
-	                                        <li><a href="${pageContext.request.contextPath }/matching/mHistoryList.ma" title="매칭후기">매칭후기</a></li>
 		                                </ul>
 									</li>
 
-									<li><a
-										href="${pageContext.request.contextPath }/board/boardList.do"
-										title="Contact Us"><span class="mainNav">게시판</a>
-									</li>
-									
-									<li><a
-										href="${pageContext.request.contextPath }/admin/admin.do"
-										title="Contact Us"><span class="mainNav">관리자페이지</a>
+									<li class="has-sub"><a href="${pageContext.request.contextPath }/board/boardList.do" title="batting"><span class="mainNav">커뮤니티</span><span></a>
+										<ul>
+											<li><a href="${pageContext.request.contextPath }/board/boardList.do" title="batting">자유 게시판</a></li>
+											<li><a href="${pageContext.request.contextPath }/matching/mHistoryList.ma" title="매칭후기">매칭 후기</a></li>
+										</ul>
 									</li>
 									
 		  							<li class="has-sub"><a href="${pageContext.request.contextPath }/point/point.do" title="batting"><span class="mainNav">이벤트<span></a>
@@ -200,8 +196,12 @@ $(function() {
 												title="내정보보기">내정보보기</a></li>
 												<li><a href="${pageContext.request.contextPath}/board/myBoardList.do?userName=${member.userName}" title="내 게시글">내가 작성한 게시글</a></li>
 												<%-- <li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="등록중인 매칭">매칭 히스토리</a></li> --%>
-												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="매칭 히스토리">매칭 히스토리</a>
-												<li><a href="${pageContext.request.contextPath}/batting/myBattingList.ba?userName=${member.userName}" title="배팅히스토리">배팅 히스토리</a>
+												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="매칭 히스토리">매칭 히스토리</a></li>
+												<li><a href="${pageContext.request.contextPath}/batting/myBattingList.ba?userName=${member.userName}" title="배팅히스토리">배팅 히스토리</a></li>
+												
+												<c:if test="${member.userId eq 'admin' }">
+												<li><a href="${pageContext.request.contextPath}/admin/admin.do" title="관리자페이지">관리자 페이지</a></li>
+												</c:if>
 												<li ><a href ="${pageContext.request.contextPath}/member/memberLogout.do">LOG
 													OUT</a></li>
 											</ul>

@@ -25,6 +25,7 @@ import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
+import com.yang.ServeMeet.matching.model.vo.MatchingCondition;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
 import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 import com.yang.ServeMeet.member.model.vo.Member;
@@ -241,13 +242,22 @@ public class MatchingController {
 	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
 	public String mDatail(@RequestParam("matNum") int matNum, Model model,HttpSession session) {
 		System.out.println("조회할 매칭 matNum : " + matNum);
+		String userId = ((Member)session.getAttribute("member")).getUserName();
 		Map map = new HashMap();
 		map.put("matNum", matNum);
-		map.put("userName",( (Member)session.getAttribute("member")).getUserName() );
+		map.put("userName", userId );
 		MatchingListObj mo = new MatchingListObj();
-		mo = matchingService.matchingDetail(map);
+		List<MatchingCondition> list = new ArrayList<MatchingCondition>();
 		
+		mo = matchingService.matchingDetail(map);
 		model.addAttribute("mDetail", mo);
+		System.out.println(userId +" ::: "+mo.getmWriter());
+		if(userId.equals(mo.getmWriter()) ) {
+			System.out.println("같음 ::: "+userId +" ::: "+mo.getmWriter());
+			list = matchingService.matchingConditions(mo.getMatchingId());
+			System.out.println("list::::: "+list);
+			model.addAttribute("mConditions", list);
+		}
 		
 		return "/matching/matchingDetail";
 	}
@@ -362,5 +372,23 @@ public class MatchingController {
 		
 		
 		return null;
+
+	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
+	@ResponseBody
+	public String matchingAccept(@RequestParam int conId) {
+		String result="";
+		
+		result=matchingService.matchingAccept(conId);
+		
+		return result;
+	}
+	@RequestMapping(value="/matching/matchingDecline.ma",method=RequestMethod.POST)
+	@ResponseBody
+	public String matchingDecline(@RequestParam int conId) {
+		String result="";
+		
+		result=matchingService.matchingDecline(conId);
+		
+		return result;
 	}
 }

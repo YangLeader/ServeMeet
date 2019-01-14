@@ -8,6 +8,7 @@ import java.util.Map;
 import com.yang.ServeMeet.category.model.vo.Category;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.vo.Matching;
+import com.yang.ServeMeet.matching.model.vo.MatchingCondition;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
 import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 
@@ -39,6 +40,13 @@ public interface MatchingService {
 	int countMatchingCon(String userName);
 
 	List<MatchingListObj> topMatchingList(String category);
-	
+
 	List<MatchingListObj> searchMatching(Map map);
+
+	List<MatchingCondition> matchingConditions(int matchingId);
+
+	String matchingAccept(int conId);
+
+	String matchingDecline(int conId);
+
 }

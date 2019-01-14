@@ -94,7 +94,11 @@
 		AND M.MATCHINGID = #{matNum}
 	</select>
 	<select id="countMatchingCon" parameterType="String" resultType="_int">
-		 select count(*) from Matchingcondition where Mwriter=#{userName}  and MSTATUS='WAITING' 
+		 select count(*) from Matchingcondition where Mwriter=#{userName}  and MSTATUS='1WAITING' 
+	</select>
+	
+	<select id="matchingConditions" parameterType="_int" resultType="MatchingCondition">
+		select * from matchingcondition where matchingid= #{matchingId} order by MSTATUS
 	</select>
 	
 	<insert id="matchingRequest">
@@ -107,8 +111,14 @@
 		JOIN CATEGORY USING (CATEGORYID)
 		WHERE CATEGORYID = (SELECT CATEGORYID FROM CATEGORY WHERE BIGCATEGORY = #{bigcategory} AND MIDCATEGORY= #{category})
 		AND MPEOPLENUM BETWEEN #{firstPeople} AND #{lastPeople}
-		AND TO_DATE(SUBSTR(MATCHING.MTIME, 1, 10), 'YYYY-MM-DD') BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{finishDate}, 'YYYY-MM-DD')
-		
-		
+		AND TO_DATE(SUBSTR(MATCHING.MTIME, 1, 10), 'YYYY-MM-DD') BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{finishDate}, 'YYYY-MM-DD')		
 	</select>
+
+	<update id="matchingAccept" parameterType="_int">
+		update matchingcondition set mstatus='3ACCECPT' where mconid=#{conId}
+	</update>
+	<update id="matchingDecline" parameterType="_int">
+		update matchingcondition set mstatus='2DECLINE' where mconid=#{conId}
+	</update>
+
 </mapper>
