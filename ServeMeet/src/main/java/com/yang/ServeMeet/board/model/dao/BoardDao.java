@@ -61,4 +61,8 @@ public interface BoardDao {
 	List<Map<String, Object>> selectReportList();
 
 	int selectReportCount();
+
+	void updateRestoreBoard(int boardNo);
+
+	List<Map<String, Object>> selectBlindList();
 }

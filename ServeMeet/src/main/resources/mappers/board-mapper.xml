@@ -143,4 +143,19 @@
 		WHERE B.BOARDSTATUS = 'Y' AND R.BOARDNO = B.BOARDNO
 		GROUP BY R.BOARDNO
 	</select>
+	
+	<update id="updateRestoreBoard" parameterType="_int">
+		UPDATE BOARD SET BOARDSTATUS = 'Y'
+		WHERE BOARDNO = #{boardNo} 
+	</update>
+	
+	<select id="selectBlindList" resultType="board">
+		SELECT A.*, (SELECT COUNT(*) FROM BOARD_COMMENT 
+					 WHERE BOARDNO = A.BOARDNO AND COMMENTSTATUS = 'Y') COMMENTCOUNT,			 
+					 (SELECT COUNT(*) FROM REPORT WHERE BOARDNO = A.BOARDNO) REPORTCOUNT
+		FROM
+		BOARD A
+		WHERE BOARDSTATUS = 'N'
+		ORDER BY REPORTCOUNT DESC, BOARDNO DESC, BOARDDATE DESC
+	</select>
 </mapper>

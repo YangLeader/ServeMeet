@@ -168,4 +168,17 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.selectReportCount");
 	}
 
+	@Override
+	public void updateRestoreBoard(int boardNo) {
+		
+		sqlSession.update("board.updateRestoreBoard", boardNo);
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> selectBlindList() {
+		
+		return sqlSession.selectList("board.selectBlindList");
+	}
+
 }

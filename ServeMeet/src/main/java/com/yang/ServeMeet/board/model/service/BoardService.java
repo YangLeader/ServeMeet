@@ -56,4 +56,8 @@ public interface BoardService {
 
 	int reportCount();
 
+	void restoreBoard(int boardNo);
+
+	List<Map<String, Object>> blindList();
+
 }

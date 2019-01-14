@@ -228,5 +228,18 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectReportCount();
 	}
 
+	@Override
+	public void restoreBoard(int boardNo) {
+		
+		boardDao.updateRestoreBoard(boardNo);
+		
+	}
+
+	@Override
+	public List<Map<String, Object>> blindList() {
+		
+		return boardDao.selectBlindList();
+	}
+
 
 }
