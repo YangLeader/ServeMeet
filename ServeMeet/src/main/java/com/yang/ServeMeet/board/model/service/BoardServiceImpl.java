@@ -222,5 +222,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectReportList();
 	}
 
+	@Override
+	public int reportCount() {
+		
+		return boardDao.selectReportCount();
+	}
+
 
 }

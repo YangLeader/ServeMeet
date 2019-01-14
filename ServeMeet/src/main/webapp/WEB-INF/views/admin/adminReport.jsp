@@ -19,6 +19,47 @@
     line-height: 16px;
     padding-right: 1px;
 }
+
+.myBtn{
+	cursor: pointer;
+}
+
+/* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
 </style>
 
 <head>
@@ -93,13 +134,13 @@
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-text"></i>
+                        <i class="ti-heart"></i>
                         <p>매칭 관리</p>
                     </a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/adminPoint.do">
-                        <i class="ti-pencil-alt2"></i>
+                        <i class="ti-money"></i>
                         <p>포인트 관리</p>
                     </a>
                 </li>
@@ -174,11 +215,31 @@
 
                 </div>
             </div>
-        </nav>
-
+        </nav>   
 
         <!-- CONTENTS -->
 		<div id="content" class="loginlist">
+		<div class="col-lg-3 col-sm-6" style="margin-left:auto; margin-right:auto;">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-danger text-center">
+                                            <i class="ti-alert"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>신고된 게시글 수</p>
+                                            	<span id="totalUser">${reportCount } 개</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                     <br /><br /><br /><br /><br />
 		<div class="c_header">
 			<h2>게시글 신고 목록</h2>
 			<p class="contxt">신고된 게시글을 블라인드 처리하세요.</p>
@@ -193,22 +254,22 @@
 		<div class="section">
 	        <!-- <div class="all_logout"><a href="javascript:;" class="btn_model" onclick="logoutAll();"><span class="btn6">전체 로그아웃</span></a></div> -->
 			<table border="1" class="tbl_row">
-			<col width="95"><col width="89"><col width="95"><col width="89"><col width="*"><col width="103"><col width="92">
+			<col width="700"><col width="110"><col width="95"><col width="70"><col width="70"><col width="70"><col width="90">
 				<thead>
 					<tr>
-						<th scope="col" style="width:700px;">제목</th>
-						<th scope="col" style="width:110px;">작성자</th>
+						<th scope="col">제목 (클릭시 내용 확인)</th>
+						<th scope="col">작성자</th>
 						<th scope="col">작성일</th>
-						<th scope="col" style="width:70px;">조회수</th>
-						<th scope="col" style="width:70px;">신고 횟수</th>
+						<th scope="col">조회수</th>
+						<th scope="col">신고 횟수</th>
 						<th scope="col">블라인드 처리</th>
 					</tr>
 				</thead>
 				<tbody>
 	        		<c:forEach items="${list}" var="b" >
 	        		<c:if test="${b.reportCount ne 0 }">
-					<tr id="row_1" style="display:">
-						<td>${b.boardTitle }<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+ ${b.commentCount  }</span></c:if></td>
+					<tr >
+						<td><a class="myBtn" name='${b.boardContent }'>${b.boardTitle }<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+ ${b.commentCount  }</span></c:if></a></td>
 						<td>${b.userName }</td>	
 						<td>${b.boardDate }</td>
 						<td>${b.boardCount }</td>	
@@ -216,41 +277,36 @@
 						<td><input type="button" name="blind" id="${b.boardNo }" value="블라인드" /></td>
 					</tr>		
 					</c:if>
+					<!-- The Modal -->
+					    <div id="myModal" class="modal">
+					 
+					      <!-- Modal content -->
+					      <div class="modal-content">
+					        <span class="close">&times;</span>                                                 
+					        <pre></pre>
+					      </div>
+					 
+					    </div>
 					</c:forEach>
 	        	</tbody> 
 	    	</table> 
 		</div> 
 
 	</div>
+    
+ 
+    
+	
         
 
 
         <footer class="footer">
-            <div class="container-fluid">
-                <nav class="pull-left">
-                    <ul>
-
-                        <li>
-                            <a href="http://www.creative-tim.com">
-                                Creative Tim
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://blog.creative-tim.com">
-                               Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.creative-tim.com/license">
-                                Licenses
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+            
+                
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="${pageContext.request.contextPath}">Serve Meet</a>
                 </div>
-            </div>
+            
         </footer>
 
     </div>
@@ -272,8 +328,8 @@
     <!--  Notifications Plugin    -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <!--   Google Maps Plugin    
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
@@ -292,15 +348,44 @@
                  
     			 location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
     			 
-    			 
-    			
             } else {
                 
             	return false;
             }
     		
-    		 
+    		
     	});
+    	
+    	// Get the modal
+        var modal = document.getElementById('myModal');
+ 
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];                                          
+ 
+        // When the user clicks on the button, open the modal 
+        $('.myBtn').click(function() {
+        	
+        	var content = $(this).attr('name');
+        	
+        	console.log(content);
+        	
+        	$('.modal-content pre').html(content);
+        	
+            modal.style.display = "block";
+        });
+ 
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+ 
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
     	
 	</script>
 

@@ -54,4 +54,6 @@ public interface BoardService {
 
 	List<Map<String, Object>> reportList();
 
+	int reportCount();
+
 }

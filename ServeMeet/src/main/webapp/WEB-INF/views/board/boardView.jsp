@@ -184,21 +184,21 @@ $(document).ready(function(){
 		
         <!-- 본문 내용 시작 { -->
         <div id="bo_v_con">
+        	<pre style="background-color: white; white-space: pre-wrap; padding: 0px 10px;">
         	<c:forEach items="${boardFileList}" var="bf">
         	<c:if test="${bf.extension eq '.png' or bf.extension eq '.bmp' or bf.extension eq '.jpg' or bf.extension eq '.jpeg' or bf.extension eq '.gif'}">
-        	<p>
+        	
         		<a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" onclick="window.open(this.href,'_blank','width=700,height=700');return false;">
         		
-        			<img src="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" alt="${bf.originName }" style="width: 70%;"/>
-        			<br />
+        			<img src="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" alt="${bf.originName }" style="width: 100%;"/>
         		</a>
-        		<br style="clear:both;" />
-        	</p>
+        	
         	</c:if>
         	</c:forEach>
-        	<p><br /></p>
-        	<pre style="background-color: white; white-space: pre-wrap; padding: 30px 15px;"><p>${board.boardContent}</p></pre>
-        	<p><br /></p>
+        	
+        	<p>${board.boardContent}</p>
+        	
+        	</pre>
         </div>
                 <!-- } 본문 내용 끝 -->
 

@@ -501,7 +501,10 @@ public class BoardController {
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(boardService.reportList());
 		
-		model.addAttribute("list",list);
+		int result = boardService.reportCount();
+		
+		model.addAttribute("list",list)
+		.addAttribute("reportCount", result);
 		
 		
 		return "admin/adminReport";
