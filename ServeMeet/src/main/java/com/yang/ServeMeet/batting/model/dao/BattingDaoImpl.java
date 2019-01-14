@@ -104,6 +104,12 @@ public class BattingDaoImpl implements BattingDao {
 		return sqlSession.selectList("Batting_Mapper.myBattingList",userName);
 	}
 	
+	@Override
+	public List<Map<String,Object>> topBattingList(){
+		
+		return sqlSession.selectList("Batting_Mapper.topBattingList");
+	
+	}
 	
 
 }

@@ -71,6 +71,18 @@
         where rnum<![CDATA[<]]>5
 	</select>
 	
+	<select id="selectMhTop7List" resultType="Map">
+		SELECT A.*
+		FROM
+		(SELECT * FROM MATCHINGHISTORY 
+        JOIN MATCHING USING(MATCHINGID)
+        WHERE MHSTATUS = 'Y'
+        ORDER BY MATCHINGID DESC) A
+        <![CDATA[
+		WHERE ROWNUM < 11
+		]]>
+	</select>
+	
 	<insert id="mHistoryInsert">
 		INSERT INTO MATCHINGHISTORY VALUES(SEQ_MHISTORYID.NEXTVAL , #{matchingId} ,#{userName} ,#{mhContent}, DEFAULT , DEFAULT)
 	</insert>

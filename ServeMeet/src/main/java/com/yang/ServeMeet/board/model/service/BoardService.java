@@ -22,7 +22,7 @@ public interface BoardService {
 
 	Board selectOneBoard(int boardNo);
 
-	List<BoardFile> selectBoardFileList(int boardNo);
+	List<BoardFile> selectBoardFileList(int boardNo,String type);
 	
 	int updateBoard(Board board, List<BoardFile> fileList);
 	

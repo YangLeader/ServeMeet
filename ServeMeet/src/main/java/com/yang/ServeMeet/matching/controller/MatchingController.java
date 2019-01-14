@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yang.ServeMeet.batting.model.service.BattingService;
+import com.yang.ServeMeet.board.model.service.BoardService;
+import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
@@ -37,6 +42,9 @@ public class MatchingController {
 	
 	@Autowired
 	private BattingService battingService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping("matching/matchingInsertView.ma")
 	public String matchingInsertView(){
@@ -197,14 +205,63 @@ public class MatchingController {
 	}
 	
 	
+	@RequestMapping(value="/ajax/mhTop7.do", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> boardTop7(HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		
+		list = matchingService.selectMhTop7List();
+		
+		return list;
+		
+	}
+	
+	
 	@RequestMapping("matching/mHistorySelectOne.ma")
-	public String mHistorySelectOne(@RequestParam("no") int mHistoryId , Model model ) {
+	public String mHistorySelectOne(@RequestParam(value="cPage", required=false , defaultValue ="1") int cPage , @RequestParam("no") int mHistoryId , Model model ) {
 		
 		Map<String,String> mHistory = matchingService.mHistorySelectOne(mHistoryId);
 		
-		model.addAttribute("mHistory",mHistory);
+//		int numPerPage = 10;
+//		
+//		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "mHistoryList.ma");
+		
+		model.addAttribute("mHistory",mHistory).addAttribute("boardFileList",boardService.selectBoardFileList(mHistoryId,"M"));
 		
 		return "/matching/matchingHistoryView";
+		
+		/*
+		
+		@RequestParam(value="cPage", required=false, defaultValue="1")
+		int cPage, @RequestParam int no, Model model) {
+			
+			int totalContents = boardService.selectBoardTotalContents();
+			
+			int numPerPage = 10; // 한 페이지당 게시글 수
+			
+			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardList.do");
+			
+			boardService.updateViewCount(no);
+			
+			model.addAttribute("board", boardService.selectOneBoard(no))
+			.addAttribute("boardFileList", boardService.selectBoardFileList(no))
+			.addAttribute("list", boardService.selectBoardList(cPage, numPerPage))
+			.addAttribute("pageBar", pageBar)
+			.addAttribute("cList", boardService.selectCommentList(no));
+			
+			return "board/boardView";
+		*/	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	@RequestMapping("matching/matchingList.ma")

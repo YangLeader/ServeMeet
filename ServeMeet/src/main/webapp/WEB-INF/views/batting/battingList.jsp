@@ -56,11 +56,11 @@
 								<span class="subject" > 
 									<span class="subject_text"> 
 										<!-- <span class="glyphicon glyphicon-tag"></span>매칭 제목</span> -->
-										<span class="glyphicon"></span>매칭 제목</span>
+										<span class="glyphicon"></span>배팅 제목</span>
 								</span> 
 								<span class="dec"> 
 									<span class="w45 wr_name"> 
-										<span class="glyphicon"></span>매칭유저
+										<span class="glyphicon"></span>배팅 유저
 									</span> 
 									<span class="w45 wr_date" style="width:6.5em"> 
 										<!-- <span class="glyphicon  glyphicon-user"></span> A팀 인원 -->

@@ -52,8 +52,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardFile> selectBoardFileList(int boardNo) {
-		return sqlSession.selectList("board.selectBoardFileList", boardNo);
+	public List<BoardFile> selectBoardFileList(int boardNo,String type) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("boardNo", boardNo);
+		map.put("type", type);
+		return sqlSession.selectList("board.selectBoardFileList", map);
 	}
 
 	@Override

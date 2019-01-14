@@ -49,6 +49,12 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 	
 	@Override
+	public List<Map<String,Object>> selectMhTop7List(){
+		
+		return matchingDao.selectMhTop7List();
+	}
+	
+	@Override
 	public Matching matchingSelectOne(int matchingId) {
 		
 		return matchingDao.matchingSelectOne(matchingId);

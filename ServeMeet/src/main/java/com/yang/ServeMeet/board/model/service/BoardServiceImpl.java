@@ -72,15 +72,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardFile> selectBoardFileList(int boardNo) {
-		return boardDao.selectBoardFileList(boardNo);
+	public List<BoardFile> selectBoardFileList(int boardNo, String type) {
+		return boardDao.selectBoardFileList(boardNo,type);
 	}
 
 	@Override
 	public int updateBoard(Board board, List<BoardFile> fileList) {
 		int result = 0;
 		
-		List<BoardFile> originList = boardDao.selectBoardFileList(board.getBoardNo());
+		List<BoardFile> originList = boardDao.selectBoardFileList(board.getBoardNo(),"B");
 		
 		try{
 			result = boardDao.updateBoard(board);
@@ -110,7 +110,7 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoard(int boardNo) {
 		int result = boardDao.deleteBoard(boardNo);
 		
-		if(result > BOARD_SERVICE_ERROR && boardDao.selectBoardFileList(boardNo).size() > 0)
+		if(result > BOARD_SERVICE_ERROR && boardDao.selectBoardFileList(boardNo,"B").size() > 0)
 			result = boardDao.deleteBoardFile(boardNo);
 		else if(result > BOARD_SERVICE_ERROR) result = 1;
 		else throw new BoardException("게시글 삭제 실패!");

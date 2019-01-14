@@ -117,6 +117,27 @@ background-color: gray!important;
 .sb_btn_cmp:hover{
 background-color: gray!important;
 }
+
+.mh_btn{
+		margin-top: 20px;
+		width: 21%;
+		color: #fff;
+	    background: #5e73de;
+	    font-size: 13pt;
+	    font-weight:400;
+	    margin-left: 0.3em;
+	    padding: 0 8px;
+	    height: 50px;
+	    line-height: 34px;
+	    border-radius: 0.3em;
+	    border: 0;
+	    text-align: center;
+	  
+}
+
+.mHistory{
+	align-items : right;
+}
 </style>
 </head>
 <body>
@@ -156,9 +177,12 @@ background-color: gray!important;
 				</div>
 				<div class="report">신고하기</div>
 			</div>
-			
+		
 			<br /><br />
 			<c:choose>
+				<c:when test="${mDetail.mWriter eq member.userName}">
+					<button class="mh_btn" onclick='location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
+				</c:when>
 				<c:when test="${mDetail.mWriter eq member.userName}">
 					<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
 				
@@ -194,6 +218,11 @@ function popupOpen(){
 
 	openwin = window.open(popUrl,"",popOption);
 	
+}
+
+function mHistoryInsert(){
+	
+	locationg.href="${pageContext.request.contextPath }/matching/matcingHistoryInsert.ma";
 }
 
 

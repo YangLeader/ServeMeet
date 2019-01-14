@@ -60,6 +60,12 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 	
 	@Override
+	public List<Map<String,Object>> selectMhTop7List(){
+		
+		return session.selectList("Matching.selectMhTop7List");
+	}
+	
+	@Override
 	public int insertMHistoryFile(BoardFile boardFile) {
 		
 		return session.insert("Matching.insertmHistoryFile", boardFile);
@@ -106,12 +112,10 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 	@Override
 	public int countMatchingCon(String userName) {
-		// TODO Auto-generated method stub
 		return session.selectOne("Matching.countMatchingCon",userName);
 	}
 	@Override
 	public List<MatchingListObj> topMatchingList(String category) {
-		// TODO Auto-generated method stub
 		List<MatchingListObj> list = session.selectList("Matching.topMatchingList",category);
 		System.out.println("list : "+list);
 		return list;

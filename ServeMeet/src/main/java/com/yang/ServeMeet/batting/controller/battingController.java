@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.batting.model.vo.Batting;
 import com.yang.ServeMeet.batting.model.vo.BattingUser;
 import com.yang.ServeMeet.common.util.Utils;
+import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 import com.yang.ServeMeet.point.model.service.PointService;
 import com.yang.ServeMeet.point.model.service.PointServiceImpl;
 
@@ -213,4 +215,20 @@ public class battingController {
 		
 		return "batting/myBattingList";
 	}
+	
+	
+	@RequestMapping("/ajax/topBattingList.ba")
+	@ResponseBody
+	public List<Map<String,Object>> topBattingList() {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		
+		System.out.println("실행");
+		
+		list=battingService.topBattingList();
+		
+		System.out.println("topBattingList : "+list);
+		
+		return list;
+	} 
 }
