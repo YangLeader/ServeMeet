@@ -83,4 +83,24 @@ public class PointServiceImpl implements PointService {
 		return pointDao.totalPoint();
 	}
 
+	@Override
+	public int todayPlusPoint() {
+		return pointDao.todayPlusPoint();
+	}
+
+	@Override
+	public int todayMinusPoint() {
+		return pointDao.todayMinusPoint();
+	}
+
+	@Override
+	public List<Map<String, String>> totalPointList(int cPage, int numPerPage) {
+		return pointDao.totalPointList(cPage, numPerPage);
+	}
+
+	@Override
+	public int pointTotalContents() {
+		return pointDao.pointTotalContents();
+	}
+
 }

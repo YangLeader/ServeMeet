@@ -87,6 +87,27 @@ public class PointDaoImpl implements PointDao {
 	public int totalPoint() {
 		return sqlSession.selectOne("point.totalPoint");
 	}
+
+	@Override
+	public int todayPlusPoint() {
+		return sqlSession.selectOne("point.todayPlusPoint");
+	}
+
+	@Override
+	public int todayMinusPoint() {
+		return sqlSession.selectOne("point.todayMinusPoint");
+	}
+
+	@Override
+	public List<Map<String, String>> totalPointList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("point.totalPointList",null,rowBounds);
+	}
+
+	@Override
+	public int pointTotalContents() {
+		return sqlSession.selectOne("point.pointTotalContents");
+	}
 	
 
 }

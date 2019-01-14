@@ -31,4 +31,12 @@ public interface PointDao {
 	int selectPointTotalContents(int userNo);
 
 	int totalPoint();
+	
+	int todayPlusPoint();
+	
+	int todayMinusPoint();
+	
+	List<Map<String, String>> totalPointList(int cPage, int numPerPage);
+
+	int pointTotalContents();
 }
