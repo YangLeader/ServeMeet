@@ -126,7 +126,8 @@ public class WebSocketChattingController {
 		list.add(myName);
 		list.add(userName);
 		nameMap.put("userNameList", list);
-				
+		System.out.println("userNamas:::::: "+list);
+		System.out.println("userNamas:::::: "+nameMap.get("userNameList"));
 		Chatting chat = cs.isChat(userNameMap);
 		
 		if(chat==null) {

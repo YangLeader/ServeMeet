@@ -94,11 +94,21 @@
 		AND M.MATCHINGID = #{matNum}
 	</select>
 	<select id="countMatchingCon" parameterType="String" resultType="_int">
-		 select count(*) from Matchingcondition where Mwriter=#{userName}  and MSTATUS='WAITING' 
+		 select count(*) from Matchingcondition where Mwriter=#{userName}  and MSTATUS='1WAITING' 
+	</select>
+	
+	<select id="matchingConditions" parameterType="_int" resultType="MatchingCondition">
+		select * from matchingcondition where matchingid= #{matchingId} order by MSTATUS
 	</select>
 	
 	<insert id="matchingRequest">
 		INSERT INTO MATCHINGCONDITION VALUES (SEQ_MCONID.NEXTVAL, #{matchingId}, #{mWriter}, #{mGuest}, #{mContent}, DEFAULT)
 	</insert>
+	<update id="matchingAccept" parameterType="_int">
+		update matchingcondition set mstatus='3ACCECPT' where mconid=#{conId}
+	</update>
+	<update id="matchingDecline" parameterType="_int">
+		update matchingcondition set mstatus='2DECLINE' where mconid=#{conId}
+	</update>
 
 </mapper>
