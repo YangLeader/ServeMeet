@@ -241,8 +241,8 @@
                     
                      <br /><br /><br /><br /><br />
 		<div class="c_header">
-			<h2>게시글 신고 목록</h2>
-			<p class="contxt">신고된 게시글을 블라인드 처리하세요.</p>
+			<h2>게시글 블라인드 목록</h2>
+			<p class="contxt">게시글을 블라인드 해제하세요.</p>
 		</div>
 				
 		<ul class="tab_viewrecord" style="margin-bottom: -1px;">
@@ -254,15 +254,15 @@
 		<div class="section">
 	        <!-- <div class="all_logout"><a href="javascript:;" class="btn_model" onclick="logoutAll();"><span class="btn6">전체 로그아웃</span></a></div> -->
 			<table border="1" class="tbl_row">
-			<col width="700"><col width="110"><col width="95"><col width="70"><col width="70"><col width="70"><col width="70">
+			<col width="700"><col width="110"><col width="80"><col width="80"><col width="80"><col width="80">
 				<thead>
 					<tr>
-						<th scope="col">제목 (클릭시 내용 확인)</th>
-						<th scope="col">작성자</th>
-						<th scope="col">작성일</th>
-						<th scope="col">조회수</th>
-						<th scope="col">신고 횟수</th>
-						<th scope="col">블라인드 해제</th>
+						<th scope="col" class="ti-menu-alt"> 제목 (클릭시 내용 확인)</th>
+						<th scope="col" class="ti-user"> 작성자</th>
+						<th scope="col" class="ti-alarm-clock"> 작성일</th>
+						<th scope="col" class="ti-eye"> 조회수</th>
+						<th scope="col" class="ti-bell"> 신고 횟수</th>
+						<th scope="col" class="ti-eraser"> 블라인드 해제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -350,6 +350,8 @@
         	console.log(content);
         	
         	$('.modal-content pre').html(content);
+        	
+        	$('#myModal').addClass('animated pulse');
         	
             modal.style.display = "block";
         });
