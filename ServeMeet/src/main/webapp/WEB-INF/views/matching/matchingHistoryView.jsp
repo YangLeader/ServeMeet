@@ -9,51 +9,66 @@
 <head>
 <c:import url="../common/header.jsp" />
 
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-<title>매칭 후기</title>
+<title>매칭 후기 게시판</title>
 
+<style>
+#bo_v_con span{
+
+	cursor : text;
+}
+
+#bo_v_con img{
+
+	cursor : default;
+}
+</style>
 </head>
 <body>
 
 <script>
 		
 	$(function(){
-		$("span.subject.text").on("click",function(){
-			var mHistoryId = $(this).children().attr("id");
+		$('[data-mytext=getNo]').on("click",function(){
+			var mHistoryId = $(this).attr("id");
 			console.log("mHistoryId="+mHistoryId);
 			location.href = "${pageContext.request.contextPath}/matching/mHistorySelectOne.ma?no="+mHistoryId;
 		});
+		
+		var count = $('input[name="reportCount"]').val();
+		
+		console.log("이 후기의 신고 횟수 : " + count);
 	});
 </script>
 
 <div id="wrapper">
-	<div class="container">
 
+	<div class="container" style="background-color:white; border-radius: 20px;">
+	<br />
 <!-- 게시물 읽기 시작 { -->
 <article id="bbs-view" style="width:auto;">
 
 	<div class="bbs_title_wrap" style="">
-		<a class="bbs_title" href="${pageContext.request.contextPath }/matching/myMatchingList.ma">매칭 후기</a>
+		<a class="bbs_title" href="${pageContext.request.contextPath }/matching/mHistoryList.ma">매칭 후기 게시판</a>
 	</div>
 	
 	<!-- 게시물 상단 버튼 시작 { -->
 	<div id="bbs-view-top-btn" class="bbs_view_btn_wrap">
 		<div class="button_box">
 		   
-			<a href="${pageContext.request.contextPath }/matcinh/myMatchingList.do" class="bbs_btn btn_list">
+			<a href="${pageContext.request.contextPath }/matching/mHistoryList.ma" class="bbs_btn btn_list">
 				<span class="glyphicon glyphicon-list-alt"></span> 목록
 			</a>
 			
 			<c:if test="${board.userName eq member.userName}">
 			<div class="button_box_right">
-								<a href="${pageContext.request.contextPath }/board/boardUpdateView.do?no=${board.boardNo}" class="bbs_btn">
+								<a href="${pageContext.request.contextPath }/board/boardUpdateView.do?no=${board.boardNo }" class="bbs_btn">
 					<span class="glyphicon glyphicon-edit" ></span> 수정
 				</a>
 				
-								<a href="${pageContext.request.contextPath}/board/boardDelete.do?no=${board.boardNo}" class="bbs_btn">
+								<a href="${pageContext.request.contextPath}/board/boardDelete.do?no=${board.boardNo}" class="bbs_btn" onclick="return delete_board();">
 					<span class="glyphicon glyphicon-trash"></span> 삭제
 				</a>
 			
@@ -66,19 +81,21 @@
 	<div id="bbs-view-subject">
 		<header>
 			<h2 id="bbs-view-title">
-								${board.boardTitle }		</h2>
+								${mHistory.MTITLE}		</h2>
 		</header>
 
 		<section id="bbs-view-info">
-			<span class="write_user"><span class="sv_guest">${mHistory.USERNAME}</span></span>
+			<span class="write_user"><span class="sv_guest">${mHistory.userName }</span></span>
 			<span></span>
 			<span>
-				<span class="glyphicon glyphicon-time"></span> ${mHistory.MTITLE}		</span>
-			
+				<span class="glyphicon glyphicon-time"></span> ${mHistory.MTIME }	</span>
+			<%-- 
+			<span>
+				<span class="glyphicon glyphicon-eye-open"></span> ${mHistory.boardCount }	</span> --%>
 		</section>
 	</div>
 
-    <%-- <!-- 첨부파일 시작 { -->
+    <!-- 첨부파일 시작 { -->
     <c:forEach items="${boardFileList}" var="bf">
     <div id="bo_v_file">
         <span>
@@ -89,7 +106,7 @@
 		</span>
     </div>
     </c:forEach>
-    <!-- } 첨부파일 끝 --> --%>
+    <!-- } 첨부파일 끝 -->
     
     
     <section id="bo_v_atc">
@@ -99,37 +116,24 @@
         <!-- 본문 내용 시작 { -->
         <div id="bo_v_con">
         	<c:forEach items="${boardFileList}" var="bf">
+        	<c:if test="${bf.extension eq '.png' or bf.extension eq '.bmp' or bf.extension eq '.jpg' or bf.extension eq '.jpeg' or bf.extension eq '.gif'}">
         	<p>
-        		<a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" onclick="window.open(this.href,'_blank','width=700,height=700');return false;">
-        		<%-- <a href="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" target="_blank" class="view_image"> --%>
-        			<img src="${pageContext.request.contextPath }/resources/upload/board/${bf.changeName}" alt="${bf.originName }" style="width: 70%;"/>
+        		<a href="${pageContext.request.contextPath }/resources/upload/mHistory/${bf.changeName}" onclick="window.open(this.href,'_blank','width=700,height=700');return false;">
+        		
+        			<img src="${pageContext.request.contextPath }/resources/upload/mHistory/${bf.changeName}" alt="${bf.originName }" style="width: 70%;"/>
         			<br />
         		</a>
         		<br style="clear:both;" />
         	</p>
+        	</c:if>
         	</c:forEach>
         	<p><br /></p>
-        	<pre><p>${mHistory.MHCONTENT}</p></pre>
+        	<pre style="background-color: white; white-space: pre-wrap; padding: 30px 15px;"><p>${mHistory.MHCONTENT}</p></pre>
         	<p><br /></p>
         </div>
                 <!-- } 본문 내용 끝 -->
 
         		
-		
-		<!-- 스크랩 추천 비추천 시작 { -->
-				<!-- <div id="bo_v_act">
-					<a href="./good.php?bo_table=free&amp;wr_id=111&amp;good=good&amp;" id="good_button" class="btn_bg btn">
-						<span class="glyphicon glyphicon-thumbs-up"></span> 추천 지금은 안됨ㅋ
-						<span id="bo_v_act_good" class="wr_count wr_good_cnt">0</span>
-					</a>
-					
-					<a href="./scrap_popin.php?bo_table=free&amp;wr_id=111" target="_blank"  class="btn_bg" onclick="win_scrap(this.href); return false;" title="신고">
-					<span class="glyphicon glyphicon-bell"></span> 신고 지금은 안됨ㅋ
-					</a>
-			
-		</div> -->
-				<!-- } 스크랩 추천 비추천 끝 -->
-		
     </section>
 
 	
@@ -139,9 +143,6 @@
 // 글자수 제한
 var char_min = parseInt(0); // 최소
 var char_max = parseInt(0); // 최대
-</script>
-
-<script>
 var save_before = '';
 var save_html = document.getElementById('bo_vc_w').innerHTML;
 
@@ -155,6 +156,22 @@ function good_and_write()
         f.is_good.value = 0;
     }
 }
+
+function report_board()
+{
+    return confirm("이 게시글을 신고 하시겠습니까?");
+}
+
+function delete_board()
+{
+    return confirm("정말 게시글을 삭제 하시겠습니까?");
+}
+
+
+</script>
+
+</article>
+<!-- } 게시판 읽기 끝 -->
 
 <script>
 
@@ -228,12 +245,12 @@ function excute_good(href, $el, $tx)
 
 <!-- } 게시글 읽기 끝 -->
 <!-- 게시판 목록 시작 { -->
-<%-- <div id="bbs-list-wrap">
+<div id="bbs-list-wrap">
 
 	<div id="bbs-list-top">
 		<!-- 게시판 타이틀 -->
 		<div class="bbs_title_wrap">
-			<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">자유게시판</a>
+			<a class="bbs_title" href="${pageContext.request.contextPath }/matching/mHistoryList.ma">매칭 후기 게시판</a>
 		</div>
 	</div>
 
@@ -258,40 +275,47 @@ function excute_good(href, $el, $tx)
 					</span>
 				</span>
 			</li>
-			<c:forEach items="${list}" var="b">
+			<form id="chatting" method="post">
+			<c:forEach items="${list}" var="item">
 			<li class="bbs_list_basic">
 				<span class="subject text">
-					<a id="${b.boardNo }"><b>${b.boardTitle }</b></a> 
+					<a data-mytext="getNo" id="${item.MHISTORYID}">
+						<b>${item.MTITLE}</b>
+					</a>  
 						<span class="w45 icon"> </span>
 				</span> 
 				<span class="dec"> 
-					<span class="w45 wr_name"> 
+					<span class="w45 wr_name" id="dropdownlist"> 
 						<span class="glyphicon glyphicon-user"></span> 
-								${b.userName }
+							<ul style="padding-inline-start: 0px;">
+								<li class="dropdown"><a class="drop">${item.USERNAME }</a>
+									<ul style="width: auto; dispaly:none;" id="downlist">
+									
+										<c:if test="${member.userName ne item.USERNAME }">
+											<li><input type="button" value="1:1 채팅" onclick="chatting('${item.USERNAME}');"></li>
+										</c:if>
+									
+									</ul>
+								</li>
+							</ul>
 					</span> 
 					<span class="w45 wr_date" style="width:6.5em"> 
 						<span class="glyphicon glyphicon-time"></span> 
-								${b.boardDate }
+								${item.MDATE}
 					</span> 
-					<span class="w45 wr_hit"> 
-						<span class="glyphicon glyphicon-eye-open"></span> 
-								${b.boardCount }
-					</span> 
-									<!-- <span class="w45 wr_good gdtxt"> 
-										<span class="glyphicon glyphicon-thumbs-up"></span> 
-									 		추천수
-									</span> -->
+								
 				</span>
 							
 			</li>
 			</c:forEach>
+			</form>
 		</ul>
 	</div>
 
 	
 	<div class="bbs_action_box">
 		<!-- 게시판 검색 시작 { -->
-		<fieldset id="bbs_sch">
+		<!-- <fieldset id="bbs_sch">
 			<div class="bo_sch">
 
 				<select name="sfl" id="sfl" class="form-control">
@@ -308,45 +332,42 @@ function excute_good(href, $el, $tx)
 
 			</div>
 
-		</fieldset>
+		</fieldset> -->
 		<!-- } 게시판 검색 끝 -->
 
 	</div>
 
-	<div class="button_box" style="float:unset;">
-		
-				<a href="${pageContext.request.contextPath }/board/boardList.do" class="bbs_btn btn_write" style="float:left; margin-left:0;">
-			<span class="glyphicon glyphicon-list-alt"></span> 목록
-		</a>
-		
-				<a href="${pageContext.request.contextPath}/board/boardForm.do" class="bbs_btn btn_write">
-			<span class="glyphicon glyphicon-pencil"></span> 글쓰기
-		</a>
-			</div>
 
 	<div class="pager">
 					<c:out value="${pageBar}" escapeXml="false"/>
-					<!-- <nav class="pg_wrap">
-						<span class="pg">
-							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a> 
-							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page">1<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=2" class="pg_page">2<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=3" class="pg_page">3<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=4" class="pg_page">4<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=5" class="pg_page">5<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=6" class="pg_page">6<span class="sound_only">페이지</span></a> 
-								<span class="sound_only">열린</span><strong class="pg_current">7</strong>
-								<span class="sound_only">페이지</span>
-							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page">8<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a> 
-						</span>
-					</nav> -->
+				
 				</div>
 
-</div> --%>
+</div>
 
 
 <script>
+$('.dropdown').click(function(){
+	
+	/* $(this).children('#downlist').css('display', 'block'); */
+	$(this).children('#downlist').toggle('fast');										
+	
+$('html').click(function(e) {
+	
+	if(!$(e.target).hasClass("drop")) { 
+			
+		$('.dropdown').children('#downlist').css('display', 'none');
+	}
+								
+})
+										
+});
+
+function chatting(userName){
+	$('#chatting').attr('action', "/ServeMeet/chat/chattingRoom.do/"+userName);
+	
+	$('#chatting').submit();
+}
 
 function search(){
 	location.href="searchBoard.do?con="+$('#sfl').val()+"&keyword="+$('#stx').val();
@@ -402,8 +423,6 @@ function view_link_type_m(get_url){
 	}
 }
 </script>
-<!-- } 게시판 목록 끝 -->			<!--</div>--><!-- .rightBox -->
-		<!--</div>--><!-- .row -->
 	</div><!-- .container -->
 </div><!-- .wrapper -->
 <c:import url="../common/footer.jsp" />

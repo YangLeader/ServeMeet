@@ -34,4 +34,6 @@ public interface BattingService {
 	List<Map<String,Object>> myBattingList(String userName);
 	
 	int battingTotalContents();
+	
+	List<Map<String,Object>> topBattingList();
 }

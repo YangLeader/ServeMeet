@@ -159,7 +159,7 @@ public class BoardController {
 		boardService.updateViewCount(no);
 		
 		model.addAttribute("board", boardService.selectOneBoard(no))
-		.addAttribute("boardFileList", boardService.selectBoardFileList(no))
+		.addAttribute("boardFileList", boardService.selectBoardFileList(no,"B"))
 		.addAttribute("list", boardService.selectBoardList(cPage, numPerPage))
 		.addAttribute("pageBar", pageBar)
 		.addAttribute("cList", boardService.selectCommentList(no));
@@ -172,7 +172,7 @@ public class BoardController {
 	public void boardUpdateView(@RequestParam("no") int boardNo, Model model) {
 		
 		model.addAttribute("board",boardService.selectOneBoard(boardNo))
-		.addAttribute("boardFileList", boardService.selectBoardFileList(boardNo));
+		.addAttribute("boardFileList", boardService.selectBoardFileList(boardNo,"B"));
 		
 	}
 	
@@ -189,7 +189,7 @@ public class BoardController {
 		// 1. 파일을 저장할 경로 생성
 		String saveDir = session.getServletContext().getRealPath("/resources/upload/board");
 		
-		List<BoardFile> boardFileList = boardService.selectBoardFileList(boardNo);
+		List<BoardFile> boardFileList = boardService.selectBoardFileList(boardNo,"B");
 		if(boardFileList == null) boardFileList = new ArrayList<BoardFile>();
 		
 		// 2. 폴더 유무 확인 후 생성
@@ -262,7 +262,7 @@ public class BoardController {
 	@RequestMapping("/board/boardDelete.do")
 	public String boardDelete(@RequestParam("no") int boardNo, HttpSession session, Model model) {
 		
-		List<BoardFile> delList = boardService.selectBoardFileList(boardNo);
+		List<BoardFile> delList = boardService.selectBoardFileList(boardNo,"B");
 		String saveDir = session.getServletContext().getRealPath("/resources/upload/board");
 		
 		// 첨부 파일 삭제

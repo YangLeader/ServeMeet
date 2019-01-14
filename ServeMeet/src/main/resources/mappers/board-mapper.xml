@@ -46,9 +46,11 @@
 		VALUES (SEQ_FILEID.NEXTVAL, #{boardNo}, DEFAULT, #{originName}, #{changeName})
 	</insert>
 
-	<select id="selectBoardFileList" parameterType="_int"
+	<select id="selectBoardFileList" parameterType="map"
 		resultMap="boardFile">
-		SELECT FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME,substr(changename, instr(changename,'.')) extension FROM BOARDFILE WHERE BOARDNO = #{boardNo}
+		SELECT FILEID,BOARDNO,MHISTORYID,ORIGINNAME,CHANGENAME,lower(substr(changename, instr(changename,'.'))) extension FROM BOARDFILE WHERE 
+		<if test='type == "B"'>BOARDNO = #{boardNo}</if>
+		<if test='type == "M"'>MHISTORYID = #{boardNo}</if>
 	</select>
 	<update id="updateBoard" parameterType="Board">
 		UPDATE BOARD SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}, BOARDDATE = DEFAULT

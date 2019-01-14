@@ -120,7 +120,7 @@ font-size: 18px;
 			            </a>
 			          </div>
 			          <div class="sList">
-			            <div class="sList" id="meeting">
+			            <div class="sList" id="batting">
 			
 			            </div>
 			          </div>
@@ -146,10 +146,15 @@ font-size: 18px;
 					</div>
 					<div class="sContent conList">
 						<div class="midTitle">
-							<a> <span class="midTitleName"><b>후기게시판</b></span> <span>+</span>
+							<a href="${pageContext.request.contextPath}/matching/matchingHistoryList.ma"> 
+								<span class="midTitleName"><b>후기게시판</b></span> <span>+</span>
 							</a>
 						</div>
-						<div class="sList"></div>
+						<div class="sList">
+							<div style="padding: 15px 0px;">
+								<ul class="mh-list" style = " list-style: none; padding: 10px 0px;">
+								</ul>
+						</div>
 					</div>
 
 				</div>
@@ -166,6 +171,7 @@ font-size: 18px;
 			topMatchingList("1");
 			topMatchingList("2");
 			topMatchingList("3");
+			topBattingList();
 			$
 					.ajax({
 
@@ -193,6 +199,51 @@ font-size: 18px;
 
 								$('.post-list').html(
 										$('.post-list').html() + li);
+
+								//$('#spanname').html();
+
+								//$('#inserttitle').append();
+
+							}
+
+						},
+						error : function(data) {
+
+							console.log("top7 조회 실패!");
+						}
+					});
+
+			
+		});
+		
+		$(function() {
+			
+			$
+					.ajax({
+
+						url : "${pageContext.request.contextPath}/ajax/mhTop7.do",
+						type : "GET",
+						dataType : "json",
+						contentType : "application/json",
+						success : function(data) {
+
+							for ( var i in data) {
+
+								var li = '<li class="ellipsis">'
+										+ '<a href="${pageContext.request.contextPath}/matching/mHistorySelectOne.ma?no='
+										+ data[i].MHISTORYID
+										+ '" id="inserttitle">'
+										+ '<span class="pull-right gray font-12" id="spanname"><span class="count orangered">'
+										+ '</span>&nbsp;'
+										+ formatDate(new Date(data[i].MHDATE))
+										+ '</span>'
+										+ '<span class="wr-icon wr-new">'
+										+ '<img src="${pageContext.request.contextPath }/resources/images/icon_new.png" class="icon_new">'
+										+ '</span>&nbsp;' + data[i].MTITLE
+										+ '</a>' + '</li>';
+
+								$('.mh-list').html(
+										$('.mh-list').html() + li);
 
 								//$('#spanname').html();
 
@@ -251,8 +302,45 @@ font-size: 18px;
 				}
 			});
 		}
-	
-	</script>
+		
+		function topBattingList(){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/ajax/topBattingList.ba",
+				type : "GET",
+				dataType : "json",
+				contentType : "application/json",
+				success : function(data) {
+					console.log(data);
+					for( var i in data) {
+						var battingBox = $("<a>").append(
+								$("<div>").append(
+										$("<div>").text("[ "+data[i].MIDCATEGORY+" ]").attr("class","category"))
+										 .append($("<div>").text(data[i].MTITLE).attr("class","mtitle"))
+										 .append($("<div>").text("A팀  : "+data[i].BATTINGPNUMA +"명 / B팀 : " + data[i].BATTINGPNUMB+"명")).attr("class","location")
+										 .append($("<div>").text(data[i].MTIME).attr("class","time"))
+										 .attr("class","matchingBox")
+								).attr("href","${pageContext.request.contextPath}/batting/battingInfo.ba?no=" + data[i].BATTINGID)
+						$("#batting").append(battingBox);
+						}
+				},
+					error : function(data) {
+						console.log("batting조회 실패!");
+					
+					}
+				});
+			};
+		
+			function formatDate(date) {
+			    var d = new Date(date),
+			        month = '' + (d.getMonth() + 1),
+			        day = '' + d.getDate(),
+			        year = d.getFullYear();
+
+			    if (month.length < 2) month = '0' + month;
+			    if (day.length < 2) day = '0' + day;
+
+			    return [year, month, day].join('-');
+			}	
 	</script>
 
 </body>

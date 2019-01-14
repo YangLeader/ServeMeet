@@ -39,10 +39,10 @@ public interface MatchingDao {
 	int countMatchingCon(String userName);
 
 	List<MatchingListObj> topMatchingList(String category);
-
 	
-	List<MatchingListObj> searchMatching(Map map);
+	List<Map<String,Object>> selectMhTop7List();
 
+	List<MatchingListObj> searchMatching(Map map);
 
 	List<MatchingCondition> matchingConditions(int matchingId);
 
