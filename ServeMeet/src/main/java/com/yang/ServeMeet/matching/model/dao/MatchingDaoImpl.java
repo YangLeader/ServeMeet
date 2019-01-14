@@ -118,6 +118,12 @@ public class MatchingDaoImpl implements MatchingDao {
 		return list;
 	}
 	@Override
+	public List<MatchingListObj> searchMatching(Map map) {
+		System.out.println("DAO Map : " + map);
+		
+		return session.selectList("Matching.matchingSearch", map);
+
+	@Override
 	public List<MatchingCondition> matchingConditions(int matchingId) {
 		// TODO Auto-generated method stub
 		return session.selectList("Matching.matchingConditions",matchingId);
@@ -134,5 +140,6 @@ public class MatchingDaoImpl implements MatchingDao {
 		int resutl = session.update("Matching.matchingDecline",conId);
 		String str=String.valueOf(resutl);
 		return str;
+
 	}
 }

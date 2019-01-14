@@ -315,6 +315,64 @@ public class MatchingController {
 		return list;
 	} 
 	
+	@RequestMapping("/matching/searchMatching.do")
+	@ResponseBody
+	public List<MatchingListObj> searchMathing(@RequestParam String[] locArr, @RequestParam String category,
+											   @RequestParam String people, @RequestParam String date){
+		List<MatchingListObj> list = new ArrayList<MatchingListObj>();
+		List<String> searchlist = new ArrayList<String>();
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		for(int i=0; i<locArr.length; i++) {
+			System.out.println("locArr : " + locArr[i]);
+			searchlist.add(locArr[i]);
+		}
+		
+		System.out.println("category : " + category);
+		System.out.println("people : " + people);
+
+		String firstPeople = "";
+		String lastPeople = "";
+		
+		if(people.equals("인원수 무관")) {
+			firstPeople = "1";
+			lastPeople = "999";
+		}else {
+			String peopleArr[] = people.split("~");
+			firstPeople = peopleArr[0];
+			lastPeople = peopleArr[1].replace("명", "");
+		}
+	
+		System.out.println("date : " + date);
+		String dateArr[] = date.split("~"); 
+		System.out.println("length: " +dateArr.length);
+		String startDate = dateArr[0].trim();
+		String finishDate = dateArr[0].trim();
+		if(dateArr.length >= 2) {
+			finishDate = dateArr[1].trim();			
+		}
+	
+		System.out.println("list:" + searchlist);
+		System.out.println("firstPeople : " + firstPeople);
+		System.out.println("lastPeople : " + lastPeople);
+		System.out.println("startDate : " + startDate);
+		System.out.println("finishDate : " + finishDate);
+		
+		map.put("firstPeople", Integer.parseInt(firstPeople));
+		map.put("lastPeople", Integer.parseInt(lastPeople));
+		map.put("startDate", startDate);
+		map.put("finishDate", finishDate);
+		map.put("searchlist", searchlist);
+		map.put("bigcategory", "소모임");
+		map.put("category", category);
+		
+		System.out.println("map : " + map);
+		
+		list = matchingService.searchMatching(map);
+		
+		
+		return null;
+
 	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
 	@ResponseBody
 	public String matchingAccept(@RequestParam int conId) {

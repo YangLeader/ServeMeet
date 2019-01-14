@@ -41,9 +41,12 @@ public interface MatchingService {
 
 	List<MatchingListObj> topMatchingList(String category);
 
+	List<MatchingListObj> searchMatching(Map map);
+
 	List<MatchingCondition> matchingConditions(int matchingId);
 
 	String matchingAccept(int conId);
 
 	String matchingDecline(int conId);
+
 }

@@ -29,7 +29,10 @@
 	
 	</typeAliases>
 	
-
+	
+	<typeHandlers>
+		<typeHandler handler="com.yang.ServeMeet.common.CLOBHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+	</typeHandlers>
 
 </configuration>
 
