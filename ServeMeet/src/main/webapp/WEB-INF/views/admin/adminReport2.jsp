@@ -247,8 +247,8 @@
 				
 		<ul class="tab_viewrecord" style="margin-bottom: -1px;">
 		<!-- [D] 탭 링크 선택시 class 에 on" 추가 -->
-			<li class="item1" style="margin-top:2px"><a href="#" class="on">신고 목록</a></li>
-			<li class="item2" style="margin-top:2px"><a href="${pageContext.request.contextPath}/admin/blindList.do">블라인드 목록</a></li>
+			<li class="item1" style="margin-top:2px"><a href="${pageContext.request.contextPath}/admin/reportList.do">신고 목록</a></li>
+			<li class="item2" style="margin-top:2px"><a href="#" class="on">블라인드 목록</a></li>
 		</ul>
 		
 		<div class="section">
@@ -262,7 +262,7 @@
 						<th scope="col">작성일</th>
 						<th scope="col">조회수</th>
 						<th scope="col">신고 횟수</th>
-						<th scope="col">블라인드 처리</th>
+						<th scope="col">블라인드 해제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -274,7 +274,7 @@
 						<td>${b.boardDate }</td>
 						<td>${b.boardCount }</td>	
 						<td>${b.reportCount }</td>		
-						<td><input type="button" name="blind" id="${b.boardNo }" value="블라인드" /></td>
+						<td><input type="button" name="restore" id="${b.boardNo }" value="블라인드 해제" /></td>
 					</tr>		
 					</c:if>
 					<!-- The Modal -->
@@ -335,26 +335,6 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<script type="text/javascript">
-	
-    	$('input[name="blind"]').click(function(){
-    		
-    		var boardNo = $(this).attr("id");
-    		
-    		console.log(boardNo);
-    		
-    		var msg = boardNo+'번 글을 블라인드 처리 하시겠습니까?';
-    		
-    		if (confirm(msg)!=0) {
-                 
-    			 location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
-    			 
-            } else {
-                
-            	return false;
-            }
-    		
-    		
-    	});
     	
     	// Get the modal
         var modal = document.getElementById('myModal');
@@ -386,7 +366,27 @@
             }
         }
         
-		
+		$('input[name="restore"]').click(function(){
+    		
+    		var boardNo = $(this).attr("id");
+    		
+    		console.log(boardNo);
+    		
+    		var msg = boardNo+'번 글을 블라인드 해제 하시겠습니까?';
+    		
+    		if (confirm(msg)!=0) {
+                 
+    			 location.href="${pageContext.request.contextPath}/admin/restoreBoard.do?boardNo="+boardNo;
+    			 
+            } else {
+                
+            	return false;
+            }
+    		
+    		
+    	});
+
+    	
 	</script>
 
 </html>

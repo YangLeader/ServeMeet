@@ -17,9 +17,8 @@
 }
 .detailIn{
 	background: white;
-	padding-bottom: 30px;
-	padding-top: 30px;
-	padding-left: 30px;
+	padding: 30px;
+
 	width: 80%;
 	margin: auto;
 }
@@ -117,7 +116,6 @@ background-color: gray!important;
 .sb_btn_cmp:hover{
 background-color: gray!important;
 }
-
 .mh_btn{
 		margin-top: 20px;
 		width: 21%;
@@ -132,11 +130,26 @@ background-color: gray!important;
 	    border-radius: 0.3em;
 	    border: 0;
 	    text-align: center;
-	  
 }
-
 .mHistory{
 	align-items : right;
+.conList{
+border: 1px #5e73de solid;
+border-radius: 5px;
+}
+.cdOne{
+display: inline-block;
+
+}
+.cdTitle{
+width: 200px;
+height: 100%;
+text-align: center;
+
+}
+.cdBody{
+	width: 900px;
+	height: 100%;
 }
 </style>
 </head>
@@ -199,7 +212,32 @@ background-color: gray!important;
 				</c:otherwise>
 
 			</c:choose>
+			<div class="conditions" style="padding: 30px;">
+				<c:if test="${mDetail.mWriter eq member.userName}">
+					<form method="post" id = "accChatRoom">
+					<c:forEach items="${mConditions}" var="item">
+						<div class="conList"  style="width: 100%; height: 100px; margin-bottom: 10px;">
+							<div class = "cdOne cdTitle"><span>${item.mguest }</span></div>
+							<div class = "cdOne cdBody"><span>${item.mmsg }</span></div>
+							<c:choose>
+								<c:when test="${item.mstatus eq '3ACCECPT'}">							
+									<span class="acceptIcon">승락</span>
+								</c:when>
+								<c:when test="${item.mstatus eq '2DECLINE'}">
+									<span class="cancelIcon">거절</span>
+								</c:when>
+								<c:otherwise>
+									<span class="cdComfim cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.mconid },'${item.mguest }');">수락</span>
+									<span class="cdComfim cdCancel" id="cdCancel${item.mconid }" onclick="cdDecline(${item.mconid });">거절</span>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:forEach>
+					</form>
+				</c:if>
+			</div>
 		</div>
+		
 	</div>
 	
 <br /><br />
@@ -210,9 +248,12 @@ background-color: gray!important;
 <script>
 var openwin; 
 function popupOpen(){
+	var pWidth=window.screen.width;
+	var pHeight=window.screen.height;
+	
 	var popUrl = "${pageContext.request.contextPath}/matching/matchingApply.ma";	//팝업창에 출력될 페이지 URL
-	var popupX = (window.screen.width / 2) - (500 / 2);
-	var popupY= (window.screen.height /2) - (360 / 2);
+	var popupX = ( pWidth/ 2) - (500 / 2);
+	var popupY= (	pHeight /2) - (360 / 2);
 	
 	var popOption = "width=500, height=360, left="+popupX+", top="+popupY+", screenX="+ popupX + ", screenY= "+ popupY+",resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
 
@@ -220,11 +261,41 @@ function popupOpen(){
 	
 }
 
-function mHistoryInsert(){
-	
-	locationg.href="${pageContext.request.contextPath }/matching/matcingHistoryInsert.ma";
+function cdAccept(conId,userName) {
+	$.ajax({
+		url:"${pageContext.request.contextPath}/matching/matchingAccept.ma",
+		data:{conId:conId},
+		type:"post",
+		success:function(data) {
+			accChatRoom(userName);
+		},
+		error:function(){
+			console.log("승락 실패");
+		}
+	});
 }
-
+function cdDecline(conId) {
+	
+	var $cancleConId = "#cdCancel"+conId;
+	var $acceptConId = "#cdAccept"+conId;
+	$.ajax({
+		url:"${pageContext.request.contextPath}/matching/matchingDecline.ma",
+		data:{conId:conId},
+		type:"post",
+		success:function(data) {
+			$($cancleConId).removeClass("cdComfim cdCancel").remove("id",$cancleConId).attr("class","cancelIcon");
+			$($acceptConId).remove();
+			
+		},
+		error:function(){
+			console.log("승락 실패");
+		}
+	});
+}
+function accChatRoom(userName) {
+	$('#accChatRoom').attr('action', "${pageContext.request.contextPath}/chat/chattingRoom.do/"+userName);
+	$('#accChatRoom').submit();
+}
 
 </script>
 </body>

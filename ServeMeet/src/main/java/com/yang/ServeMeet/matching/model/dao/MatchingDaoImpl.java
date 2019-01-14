@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.matching.model.vo.Matching;
+import com.yang.ServeMeet.matching.model.vo.MatchingCondition;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
 import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 
@@ -119,5 +120,30 @@ public class MatchingDaoImpl implements MatchingDao {
 		List<MatchingListObj> list = session.selectList("Matching.topMatchingList",category);
 		System.out.println("list : "+list);
 		return list;
+	}
+	@Override
+	public List<MatchingListObj> searchMatching(Map map) {
+		System.out.println("DAO Map : " + map);
+		
+		return session.selectList("Matching.matchingSearch", map);
+
+	@Override
+	public List<MatchingCondition> matchingConditions(int matchingId) {
+		// TODO Auto-generated method stub
+		return session.selectList("Matching.matchingConditions",matchingId);
+	}
+	@Override
+	public String matchingAccept(int conId) {
+		// TODO Auto-generated method stub
+		int resutl = session.update("Matching.matchingAccept",conId);
+		String str=String.valueOf(resutl);
+		return str;
+	}
+	@Override
+	public String matchingDecline(int conId) {
+		int resutl = session.update("Matching.matchingDecline",conId);
+		String str=String.valueOf(resutl);
+		return str;
+
 	}
 }

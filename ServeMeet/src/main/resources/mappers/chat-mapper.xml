@@ -113,7 +113,7 @@
 		CHATTINGLIST VALUES(seq_chat.nextval ,null,default)
 		<foreach collection="userNameList" item="item">
 		into CHATTING_GROUP
-		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}))
+		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}),default)
 		</foreach>
 		select *
 		from dual

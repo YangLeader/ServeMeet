@@ -134,7 +134,17 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
-
+	var arr = new Array();
+	//var compareArr = new Array();
+	var arrkd = new Array();
+	var cnt = 0;
+	var locId = "";
+	var fullName = "";
+	var locName = "";
+	var textkd = "소모임";
+	var	textDetailkd = "";
+	var textps = "";
+	var date = "";
 		$("#mydate").flatpickr({
 			  
 			  inline: true,	
@@ -143,7 +153,7 @@
 			  minDate: "today",
 			  onChange: function(selectedDates, dateStr, instance) {
 			        //...
-			        var date = dateStr;
+			        date = dateStr;
         			date = date.replace("to", "~");
         			$('#kindsDiv').show().css('border', '1px solid #DDE7EB');
         			$('#personDiv').show().css('border', '1px solid #DDE7EB');
@@ -158,14 +168,6 @@
 
 		//
 	
-	var arr = new Array();
-	//var compareArr = new Array();
-	var arrkd = new Array();
-	var cnt = 0;
-	var locId = "";
-	var fullName = "";
-	var locName = "";
-	var textkd = "소모임";
 	$(function() {
 	
 		$(".item").click(function() {
@@ -178,6 +180,7 @@
 			$('#loc').addClass('on');
 			$('#loc').siblings().removeClass('on');
 			$("div #smallDiv").children().remove();
+			
 			var locId = $(this).attr('id');
 			
 			locName = $(this).text();
@@ -370,6 +373,10 @@
 							fullName = locName + locId + $(this).val();
 							console.log("디스:" + $(this).val());
 							console.log("locId : " + locId);
+							if(arr[0] == "지역없음"){
+								arr.splice(0, 1);
+								console.log("arr:" + arr);
+							}
 							if ($(this).is(":checked")) {
 
 								if ($(this).val() == (locId + " 전체")) {
@@ -604,6 +611,8 @@
 					$("a").remove(":contains(" + arr[i] + ")");
 				}
 		 		arr.length = 0;
+		 		arr[0] = "지역없음";
+		 		console.log("arr : " +arr);
 		 	}
 
 			/* $("#bottomDiv").find('a').each(function () {
@@ -617,7 +626,7 @@
 		});
 		
 		$('.item2in1').click(function () {
-			var textDetailkd = $(this).find('.dekd').val();
+			textDetailkd = $(this).find('.dekd').val();
 			
 			console.log( textkd +" + " +textDetailkd);
 			
@@ -632,7 +641,7 @@
 		
 		$('.item3').click(function() {
 			selectpersonCategory();
-		 	var textps = $(this).find('.ps').text();
+		 	textps = $(this).find('.ps').text();
 		 	
 			$("#bottomDiv").find('a').each(function () {
 				if($(this).find('#ckps')){
@@ -666,7 +675,30 @@
 				console.log("에러");
 			}
 		}) */
-		alert("아직 준비 중 입니다.");
+		alert("지역 조건 : " + arr);
+		alert("모임 조건 : " + textDetailkd);
+		alert("인원 조건 : " + textps);
+		alert("날짜 조건 : " + date);
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath}/matching/searchMatching.do",
+			type : "GET",
+			traditional : true,
+			data : {
+				locArr : arr,
+				category : textDetailkd,
+				people : textps,
+				date : date
+			},
+			success : function(data) {
+				alert("성공");
+			}, error : function(data) {
+				alert("에러");
+			}
+		});
+		
+		
+
 	}
  	
 </script>

@@ -59,4 +59,10 @@ public interface BoardDao {
 	int selectMyBoardTotalContents(String userName);
 
 	List<Map<String, Object>> selectReportList();
+
+	int selectReportCount();
+
+	void updateRestoreBoard(int boardNo);
+
+	List<Map<String, Object>> selectBlindList();
 }

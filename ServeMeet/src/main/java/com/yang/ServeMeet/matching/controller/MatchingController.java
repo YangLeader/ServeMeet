@@ -30,6 +30,7 @@ import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
+import com.yang.ServeMeet.matching.model.vo.MatchingCondition;
 import com.yang.ServeMeet.matching.model.vo.MatchingHistory;
 import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
 import com.yang.ServeMeet.member.model.vo.Member;
@@ -298,13 +299,22 @@ public class MatchingController {
 	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
 	public String mDatail(@RequestParam("matNum") int matNum, Model model,HttpSession session) {
 		System.out.println("조회할 매칭 matNum : " + matNum);
+		String userId = ((Member)session.getAttribute("member")).getUserName();
 		Map map = new HashMap();
 		map.put("matNum", matNum);
-		map.put("userName",( (Member)session.getAttribute("member")).getUserName() );
+		map.put("userName", userId );
 		MatchingListObj mo = new MatchingListObj();
-		mo = matchingService.matchingDetail(map);
+		List<MatchingCondition> list = new ArrayList<MatchingCondition>();
 		
+		mo = matchingService.matchingDetail(map);
 		model.addAttribute("mDetail", mo);
+		System.out.println(userId +" ::: "+mo.getmWriter());
+		if(userId.equals(mo.getmWriter()) ) {
+			System.out.println("같음 ::: "+userId +" ::: "+mo.getmWriter());
+			list = matchingService.matchingConditions(mo.getMatchingId());
+			System.out.println("list::::: "+list);
+			model.addAttribute("mConditions", list);
+		}
 		
 		return "/matching/matchingDetail";
 	}
@@ -361,4 +371,81 @@ public class MatchingController {
 		System.out.println("topMatchingList : "+list);
 		return list;
 	} 
+	
+	@RequestMapping("/matching/searchMatching.do")
+	@ResponseBody
+	public List<MatchingListObj> searchMathing(@RequestParam String[] locArr, @RequestParam String category,
+											   @RequestParam String people, @RequestParam String date){
+		List<MatchingListObj> list = new ArrayList<MatchingListObj>();
+		List<String> searchlist = new ArrayList<String>();
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		for(int i=0; i<locArr.length; i++) {
+			System.out.println("locArr : " + locArr[i]);
+			searchlist.add(locArr[i]);
+		}
+		
+		System.out.println("category : " + category);
+		System.out.println("people : " + people);
+
+		String firstPeople = "";
+		String lastPeople = "";
+		
+		if(people.equals("인원수 무관")) {
+			firstPeople = "1";
+			lastPeople = "999";
+		}else {
+			String peopleArr[] = people.split("~");
+			firstPeople = peopleArr[0];
+			lastPeople = peopleArr[1].replace("명", "");
+		}
+	
+		System.out.println("date : " + date);
+		String dateArr[] = date.split("~"); 
+		System.out.println("length: " +dateArr.length);
+		String startDate = dateArr[0].trim();
+		String finishDate = dateArr[0].trim();
+		if(dateArr.length >= 2) {
+			finishDate = dateArr[1].trim();			
+		}
+	
+		System.out.println("list:" + searchlist);
+		System.out.println("firstPeople : " + firstPeople);
+		System.out.println("lastPeople : " + lastPeople);
+		System.out.println("startDate : " + startDate);
+		System.out.println("finishDate : " + finishDate);
+		
+		map.put("firstPeople", Integer.parseInt(firstPeople));
+		map.put("lastPeople", Integer.parseInt(lastPeople));
+		map.put("startDate", startDate);
+		map.put("finishDate", finishDate);
+		map.put("searchlist", searchlist);
+		map.put("bigcategory", "소모임");
+		map.put("category", category);
+		
+		System.out.println("map : " + map);
+		
+		list = matchingService.searchMatching(map);
+		
+		
+		return null;
+
+	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
+	@ResponseBody
+	public String matchingAccept(@RequestParam int conId) {
+		String result="";
+		
+		result=matchingService.matchingAccept(conId);
+		
+		return result;
+	}
+	@RequestMapping(value="/matching/matchingDecline.ma",method=RequestMethod.POST)
+	@ResponseBody
+	public String matchingDecline(@RequestParam int conId) {
+		String result="";
+		
+		result=matchingService.matchingDecline(conId);
+		
+		return result;
+	}
 }

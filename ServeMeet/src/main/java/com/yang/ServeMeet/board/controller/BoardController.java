@@ -501,7 +501,10 @@ public class BoardController {
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(boardService.reportList());
 		
-		model.addAttribute("list",list);
+		int result = boardService.reportCount();
+		
+		model.addAttribute("list",list)
+		.addAttribute("reportCount", result);
 		
 		
 		return "admin/adminReport";
@@ -516,6 +519,31 @@ public class BoardController {
 		
 		return "admin/adminReport";
 		
+	}
+	
+	@RequestMapping("/admin/restoreBoard.do")
+	public String restoreBoard(@RequestParam("boardNo") int boardNo, Model model) {
+		
+		boardService.restoreBoard(boardNo);
+		
+		reportList(model);
+		
+		return "admin/adminReport";
+		
+	}
+	
+	@RequestMapping("admin/blindList.do")
+	public String blindList(Model model) {
+		
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(boardService.blindList());
+		
+		int result = boardService.reportCount();
+		
+		model.addAttribute("list",list)
+		.addAttribute("reportCount", result);
+		
+		
+		return "admin/adminReport2";
 	}
 	
 }
