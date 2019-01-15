@@ -308,6 +308,7 @@ public class MatchingController {
 		List<MatchingCondition> list = new ArrayList<MatchingCondition>();
 		
 		mo = matchingService.matchingDetail(map);
+		System.out.println("moasdasdasd : " +mo);
 		model.addAttribute("mDetail", mo);
 		System.out.println(userId +" ::: "+mo.getmWriter());
 		if(userId.equals(mo.getmWriter()) ) {

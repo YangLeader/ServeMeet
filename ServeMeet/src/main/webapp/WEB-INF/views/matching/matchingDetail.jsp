@@ -227,8 +227,9 @@ text-align: center;
 									<span class="cancelIcon">거절</span>
 								</c:when>
 								<c:otherwise>
-									<span class="cdComfim cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.matchingId },${item.mconid },'${item.mguest }');">수락</span>
+									<span class="cdComfim cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.matchingid},${item.mconid },'${item.mguest }');">수락</span>
 									<span class="cdComfim cdCancel" id="cdCancel${item.mconid }" onclick="cdDecline(${item.mconid });">거절</span>
+									
 								</c:otherwise>
 							</c:choose>
 						</div>
