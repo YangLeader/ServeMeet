@@ -128,7 +128,7 @@
 			AND (LOCATIONID IN (
 			<foreach item="item" index="index" collection="searchList"  separator="))OR LOCATIONID IN(" close=")">
 				<choose>
-					<when test="item.smallCategory == null and item.midLocation == null">
+					<when test="item.smallCategory == null and item.midLocation == ''">
 						(SELECT LOCATIONID FROM LOCATION WHERE BIGLOCATION = #{item.bigLocation}
 					</when>
 					<when test="item.bigLocation != null and item.smallCategory == null">

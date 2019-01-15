@@ -12,7 +12,7 @@
 
 
 <div class="out">
-	<div class="schDiv">
+	<!-- <div class="schDiv">
 		<div class="schListDiv">
 			<div class="schObj">
 				<div class="schCat">소모임 - 여행</div>
@@ -51,8 +51,8 @@
 			<button class="backbtn">다른 조건으로 검색하기</button>
 		
 		</div>
-	</div>
-<%-- 	<div class="category">
+	</div> -->
+	<div class="category">
 		<div class="condition on" id="loc" onclick="selectlocCategory()">
 			<span>지역</span>
 		</div>
@@ -167,7 +167,7 @@
 		<div style=" width: 20%; height:100%; float: right; text-align: center; vertical-align: middle;">
 			<input type="button" class="sb_btn" value="검색" onclick="searchMatching()" />
 		</div>
-	</div> --%>
+	</div>
 </div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -716,12 +716,27 @@
 			textkd = "E스포츠";
 		}
 		
-		alert("지역 : " + middleLoc);
+/* 		alert("지역 : " + middleLoc);
 		alert("인원수 : " + textps);
 		alert("날짜 : " + date);
 		alert("카테고리 : " + textDetailkd);
+		 */
+		/* <div class="schDiv">
+		<div class="schListDiv">
+			<div class="schObj">
+				<div class="schCat">소모임 - 여행</div>
+				<div class="greyRule"></div>
+				<div class="schTit">새로운 타이틀입니다~~~~</div>
+
+				<div class="schLoc">경기도 고양시 덕양구 화정동</div>
+				<div class="schTime">2019-01-01 12:00</div>
+			</div>
+		</div>
+		<div class="backDiv">
+			<button class="backbtn">다른 조건으로 검색하기</button>
 		
-		
+		</div>
+	</div> */
 		
 		if(textps == ""){
 			alert("인원수를 선택해주세요.");
@@ -744,7 +759,39 @@
 					date : date
 				},
 				success : function(data) {
-					$('.out ').empty();
+					$('.out').empty();
+					var html = " <div class='schDiv'>";
+					html += "<div class='schListDiv'>";
+					$.each(data, function(idx, val) {
+						console.log(idx + " " + val.mTitle);
+						html += '<div class="schObj">';
+						html += '<div class="schCat">'+ val.bigCategory + ' - ' + val.midCategory +'</div>';
+						html += '<div class="greyRule"></div>';
+						html += '<input type="hidden" id="matId" value='+val.matchingId+'>';
+						html += '<div class="schTit">'+ val.mTitle +'</div>';
+						if(val.bigLocation != "지역없음"){
+							html += '<div class="schLoc">'+ val.bigLocation + ' ' + val.midLocation + ' ' + val.smallCategory +'</div>';							
+						}else{
+							html += '<div class="schLoc">'+ val.bigLocation +'</div>';
+						}
+						html += '<div class="schTime">' + val.mtime + '</div>';
+						html += '</div>';
+					});
+					html += '</div>';
+					html += '<div class="backDiv">';
+					html += '<button class="backbtn">다른 조건으로 검색하기</button>';
+					html += '</div>';
+					html += '</div>';
+					
+					$('.out').html(html);
+					
+					backClick();
+					// $('.out ').empty();
+					/* var html = " <div class='schDiv'>";
+					html += "<div class='schListDiv'>";
+					html += '<div class="schObj">';
+					html += '<div class="schCat">소모임 - 여행</div>'; */
+					
 				}, error : function(data) {
 					alert("에러");
 				}
@@ -752,6 +799,18 @@
 			
 		}
 
+	}
+ 	
+ 	function backClick(obj) {
+		$('.backbtn').click(function () {
+
+			 location.reload();
+		});
+		
+		$('.schObj').click(function () {
+			var matNum = $(this).find('#matId').val();
+			location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + matNum;
+		});
 	}
  	
 </script>

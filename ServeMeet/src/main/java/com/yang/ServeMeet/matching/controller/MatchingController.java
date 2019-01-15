@@ -454,6 +454,7 @@ public class MatchingController {
 		list = matchingService.searchMatching(map);
 		
 		System.out.println("결과값 : " + list);
+		
 		return list;
 	}
 	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
