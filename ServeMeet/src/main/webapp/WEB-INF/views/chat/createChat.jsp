@@ -12,7 +12,7 @@
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4 class="modal-title" >채팅방 만들기</h4>
 	        </div>
-	        <div style="width:100%;padding: 5px; border-bottom: 3px #5e73de solid;"> <input style="width:100%;border:none;padding: 0px 10px;" class="chatName" placeholder="채팅방 제목믈 입력하세요"></div>
+	        <div  style="width:100%;padding: 5px; border-bottom: 3px #5e73de solid;"> <input style="width:100%;border:none;padding: 0px 10px;" class="madal-chatName" placeholder="채팅방 제목을 정하세요"></div>
 	        <div class="modal-body"style="height:400px;">
 	       
 	          <div class="col-lg-7" style="height:100%;border-right:1px #cdcdcd solid; padding-right: 15px;">

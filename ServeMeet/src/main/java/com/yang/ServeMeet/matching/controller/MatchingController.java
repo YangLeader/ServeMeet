@@ -299,6 +299,7 @@ public class MatchingController {
 	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
 	public String mDatail(@RequestParam("matNum") int matNum, Model model,HttpSession session) {
 		System.out.println("조회할 매칭 matNum : " + matNum);
+		
 		String userId = ((Member)session.getAttribute("member")).getUserName();
 		Map map = new HashMap();
 		map.put("matNum", matNum);
@@ -429,14 +430,16 @@ public class MatchingController {
 		
 		
 		return null;
-
+	}
 	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
 	@ResponseBody
-	public String matchingAccept(@RequestParam int conId) {
+	public String matchingAccept(@RequestParam int conId,@RequestParam int matchingId) {
 		String result="";
-		
+		Map<String,Integer> map = new HashMap<String,Integer>(); 
 		result=matchingService.matchingAccept(conId);
-		
+		map.put("conId", conId);
+		map.put("matchingId", matchingId);
+		result+=matchingService.matchingDeclineAll(map);
 		return result;
 	}
 	@RequestMapping(value="/matching/matchingDecline.ma",method=RequestMethod.POST)

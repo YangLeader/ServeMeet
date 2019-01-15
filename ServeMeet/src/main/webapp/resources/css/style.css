@@ -152,6 +152,7 @@ article{
  .chatList .chatBox {
 	text-overflow: ellipsis;
 	overflow:hidden;
+    white-space: nowrap;
 	padding: 15px 10px;
 	z-index:9999; 
 }

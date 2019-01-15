@@ -124,7 +124,7 @@ public class MatchingServiceImpl implements MatchingService {
 	public List<MatchingListObj> searchMatching(Map map) {
 		// TODO Auto-generated method stub
 		return matchingDao.searchMatching(map);
-
+	}
 	@Override
 	public List<MatchingCondition> matchingConditions(int matchingId) {
 		// TODO Auto-generated method stub
@@ -140,6 +140,11 @@ public class MatchingServiceImpl implements MatchingService {
 		// TODO Auto-generated method stub
 		return matchingDao.matchingDecline(conId);
 
+	}
+	@Override
+	public String matchingDeclineAll(Map<String,Integer> map) {
+		// TODO Auto-generated method stub
+		return matchingDao.matchingDeclineAll(map);
 	}
 	
 }

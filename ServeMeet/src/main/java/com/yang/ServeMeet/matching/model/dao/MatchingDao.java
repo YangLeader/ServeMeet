@@ -50,4 +50,6 @@ public interface MatchingDao {
 
 	String matchingDecline(int conId);
 
+	String matchingDeclineAll(Map<String,Integer> map);
+
 }
