@@ -127,4 +127,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.deleteUser();
 	}
 
+	@Override
+	public List<Map<String, String>> memberList(int cPage, int numPerPage) {
+		return memberDao.memberList(cPage, numPerPage);
+	}
+
+	@Override
+	public int memberTotalContents() {
+		return memberDao.memberTotalContents();
+	}
+
+	@Override
+	public int returnMember(int userNo) {
+		return memberDao.returnMember(userNo);
+	}
+
 }
