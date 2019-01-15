@@ -1161,12 +1161,12 @@ form, h1 {margin:0;}
 #captcha_mp3 {background:url('./img/captcha_mp3.png') no-repeat;}
 
 #dropdownlist .dropdown ul {
-background: #d5ffd5;
+background: #5e73de;
 display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
 height:auto;
 padding:0px;
-margin-top: -7px;
-margin-left: 50px;
+margin-top: -40px;
+margin-left: 60px;
 border-radius: 10px;
 position:absolute;
 width:200px;

@@ -209,21 +209,7 @@
 
 				<div class="pager">
 					<c:out value="${pageBar}" escapeXml="false"/>
-					<!-- <nav class="pg_wrap">
-						<span class="pg">
-							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page pg_start"></a> 
-							<a href="./board.php?bo_table=funny&amp;page=1" class="pg_page">1<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=2" class="pg_page">2<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=3" class="pg_page">3<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=4" class="pg_page">4<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=5" class="pg_page">5<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=6" class="pg_page">6<span class="sound_only">페이지</span></a> 
-								<span class="sound_only">열린</span><strong class="pg_current">7</strong>
-								<span class="sound_only">페이지</span>
-							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page">8<span class="sound_only">페이지</span></a> 
-							<a href="./board.php?bo_table=funny&amp;page=8" class="pg_page pg_end"></a> 
-						</span>
-					</nav> -->
+					
 				</div>
 
 			</div>

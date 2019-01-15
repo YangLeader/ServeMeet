@@ -73,6 +73,8 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/board_style.css">
 
 	<link href="${pageContext.request.contextPath}/resources/css/adminMember.css"
 	rel="stylesheet">
@@ -218,7 +220,7 @@
         </nav>   
 
         <!-- CONTENTS -->
-		<div id="content" class="loginlist">
+		<div id="content" class="content">
 		<div class="col-lg-3 col-sm-6" style="margin-left:auto; margin-right:auto;">
                         <div class="card">
                             <div class="content">
@@ -240,11 +242,17 @@
                     </div>
                     
                      <br /><br /><br /><br /><br />
+                     
+        
+		<div class="col-md-12">
+                        <div class="card">
+				<div class="content">
 		<div class="c_header">
 			<h2>게시글 신고 목록</h2>
 			<p class="contxt">신고된 게시글을 블라인드 처리하세요.</p>
 		</div>
-				
+		
+		
 		<ul class="tab_viewrecord" style="margin-bottom: -1px;">
 		<!-- [D] 탭 링크 선택시 class 에 on" 추가 -->
 			<li class="item1" style="margin-top:2px"><a href="#" class="on">신고 목록</a></li>
@@ -262,7 +270,7 @@
 						<th scope="col" class="ti-alarm-clock"> 작성일</th>
 						<th scope="col" class="ti-eye"> 조회수</th>
 						<th scope="col" class="ti-bell"> 신고 횟수</th>
-						<th scope="col" class="ti-eraser"> 블라인드 처리</th>
+						<th scope="col" class="ti-lock"> 블라인드 처리</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -273,8 +281,8 @@
 						<td>${b.userName }</td>	
 						<td>${b.boardDate }</td>
 						<td>${b.boardCount }</td>	
-						<td>${b.reportCount }</td>		
-						<td><input type="button" name="blind" id="${b.boardNo }" value="블라인드" /></td>
+						<td>${b.reportCount }</td>
+						<td><button type="button" name="blind" id="${b.boardNo }" class="btn btn-info btn-sm"><span class="ti-lock"></span> 블라인드 처리</button></td>
 					</tr>		
 					</c:if>
 					<!-- The Modal -->
@@ -291,8 +299,21 @@
 	        	</tbody> 
 	    	</table> 
 		</div> 
-
+		<div class="pager">
+			<c:out value="${pageBar}" escapeXml="false"/>
+					
+		</div>
+		
 	</div>
+	</div>
+	
+	</div>
+	</div>
+	
+	
+	
+	
+	
     
  
     
@@ -310,7 +331,9 @@
         </footer>
 
     </div>
+    
 </div>
+
 
 
 </body>
@@ -336,7 +359,7 @@
 
 	<script type="text/javascript">
 	
-    	$('input[name="blind"]').click(function(){
+    	$('button[name="blind"]').click(function(){
     		
     		var boardNo = $(this).attr("id");
     		
@@ -371,7 +394,7 @@
         	
         	$('.modal-content pre').html(content);
         	
-        	$('#myModal').addClass('animated pulse');
+        	$('#myModal').addClass('animated fadeIn');
         	
             modal.style.display = "block";
         });
