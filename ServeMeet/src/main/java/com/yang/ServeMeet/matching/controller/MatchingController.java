@@ -82,9 +82,9 @@ public class MatchingController {
 
 	@RequestMapping("matching/matchingHistoryForm.ma")
 	public String matchingHistoryForm(@RequestParam int matchingId, Model model) {
-		
 		Matching matching = matchingService.matchingSelectOne(matchingId);
 		
+		System.out.println("뗴려뿌셔라"+matching);
 		model.addAttribute("matching",matching);
 		
 		return "matching/matchingHistoryForm";
