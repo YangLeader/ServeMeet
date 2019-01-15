@@ -56,7 +56,7 @@
 	</update>
 	
 	<insert id="battingInsert" parameterType="_int">
-		INSERT INTO BATTING VALUES(SEQ_BATTING.NEXTVAL,SEQ_MATCHINGID.CURRVAL,0,0,DEFAULT)
+		INSERT INTO BATTING VALUES(SEQ_BATTING.NEXTVAL,SEQ_MATCHINGID.CURRVAL,0,0,DEFAULT,'N')
 	</insert>
 	
 	<select id="battingWinner" parameterType="map" resultType="map">
@@ -69,6 +69,14 @@
 	
 	<select id="myBattingList" resultType="map">
 		SELECT * FROM (SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID)JOIN BATTINGUSER USING(BATTINGID)) JOIN CATEGORY USING(CATEGORYID) WHERE userName= #{userName}
+	</select>
+	
+	<update id="winnerUpdate" parameterType="map">
+		UPDATE BATTING SET WIN = #{winnerChk} WHERE battingID = #{battingId}
+	</update>
+	
+	<select id="checkBattingId" resultType="_int">
+		SELECT * FROM BATTING WHERE matchingId = #{matchingId}
 	</select>
 
 </mapper>

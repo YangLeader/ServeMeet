@@ -51,24 +51,8 @@
 	</div>
 	
 	<br><br><br>
-	
-	<div>
-		<input type="button" value="배팅 종료" onclick="location.href='${pageContext.request.contextPath}/batting/battingAllocation.ba?battingId=${batting.BATTINGID}';" />
-	</div>
 
-	<!-- <div class="progress">
-		<div class="progress-bar progress-bar-warning" role="progressbar"
-			aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-			style="width: 60%">60% Complete (warning)</div>
-	</div>
-
-	<div class="progress">
-		<div class="progress-bar progress-bar-danger" role="progressbar"
-			aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-			style="width: 70%">70% Complete (danger)</div>
-	</div> -->
-
-	<script>
+		<script>
 		function button1_click(battingType) {
 			var result = confirm("한번 선택한 배팅은 취소나 변경이 불가능 합니다. 선택하신 팀이 맞습니까? ");
 			
