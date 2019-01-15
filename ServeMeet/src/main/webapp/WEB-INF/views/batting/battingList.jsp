@@ -19,7 +19,6 @@
 
 </head>
 <body>
-
 	<script>	
 		$(function(){
 			$('[data-mytext=getNo]').on("click",function(){
@@ -45,9 +44,6 @@
 						<p>총 ${totalContents }건의 배팅이 있습니다.</p>
 						</c:if>
 					</div>
-
-
-
 				</div>
 
 					<div class="bbs-list">
@@ -101,17 +97,10 @@
 							</form>
 						</ul>
 					</div>
-
-
-
-
 				<div class="pager">
 					<c:out value="${pageBar}" escapeXml="false"/>
 				</div>
-
 			</div>
-
-
 			<script>
 			
 			$('.drop').click(function(){

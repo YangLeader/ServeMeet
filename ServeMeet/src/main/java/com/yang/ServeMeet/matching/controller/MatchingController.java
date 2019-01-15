@@ -92,7 +92,7 @@ public class MatchingController {
 	}
 	
 	@RequestMapping("matching/matcingHistoryInsert.ma")
-	public String matchingHistoryInsert(MatchingHistory mHistory, Model model, HttpSession session,
+	public String matchingHistoryInsert(@RequestParam String winnerChk , MatchingHistory mHistory, Model model, HttpSession session,
 			@RequestParam(value="upFile", required = false) MultipartFile[] upFile) {
 
 		String saveDir = session.getServletContext().getRealPath("/resources/upload/mHistory");
@@ -131,9 +131,13 @@ public class MatchingController {
 				System.out.println("바뀐 이름 : " + bf.getChangeName());
 						
 				boardFileList.add(bf);
-			}
+				
+				}
 		}
 		
+		int battingId = battingService.checkBattingId(mHistory.getMatchingId());
+		
+		battingService.battingWinnerUpdate(winnerChk, battingId);
 				
 		int result;
 				
@@ -149,17 +153,15 @@ public class MatchingController {
 				
 		String msg = "";
 		String loc = "/";		
-		
-		if(result > 0) {
-			msg = "매칭 후기 등록 성공!";
-					
-		} else {
+		String path = "redirect:/batting/battingAllocation.ba?battingId="+battingId+"&winnerChk="+winnerChk;
+		if(result <= 0) {
 			msg = "매칭 후기 등록 실패!";
+			path ="common/msg";
 		}
 			
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 				
-		return "common/msg";
+		return path;
 		
 	}
 	

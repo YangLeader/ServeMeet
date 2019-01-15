@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.batting.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -109,6 +110,23 @@ public class BattingDaoImpl implements BattingDao {
 		
 		return sqlSession.selectList("Batting_Mapper.topBattingList");
 	
+	}
+	
+	@Override
+	public int battingWinnerUpdate(String winnerChk,int battingId) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("winnerChk", winnerChk);
+		map.put("battingId", battingId);
+		
+		return sqlSession.update("Batting_Mapper.winnerUpdate",map);
+	}
+	
+	@Override
+	public int checkBattingId(int matchingId) {
+		
+		return sqlSession.selectOne("Batting_Mapper.checkBattingId",matchingId);
 	}
 	
 

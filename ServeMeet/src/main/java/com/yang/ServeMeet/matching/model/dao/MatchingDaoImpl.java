@@ -127,7 +127,7 @@ public class MatchingDaoImpl implements MatchingDao {
 		
 		return session.selectList("Matching.matchingSearch", map);
 	}
-	@Override
+@Override
 	public List<MatchingCondition> matchingConditions(int matchingId) {
 		// TODO Auto-generated method stub
 		return session.selectList("Matching.matchingConditions",matchingId);
