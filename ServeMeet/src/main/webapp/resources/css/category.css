@@ -74,7 +74,7 @@
 	display: inline-block;
 	background: white;
 	width: 20%;
-	height: 300px;
+	height: 308px;
 	overflow: auto;
 	margin: auto;
 }
@@ -223,3 +223,86 @@ label {
 	vertical-align: middle;
 }
 
+.schDiv{
+	padding-top: 15px;
+	background: white;
+	margin: auto;
+	height: 100%;
+	width: 100%;
+}
+
+.schListDiv{
+	border: 1px solid #e4e4e4;
+	background: white;
+	margin:  auto;
+	width: 95%;
+	height: 80%;
+	padding: 20px;
+	padding-left: 60px;	
+	overflow: auto;
+}
+
+.schObj{
+	border: 1px solid #e4e4e4;
+	display: inline-block;
+	background: #F5FCFF;
+	width: 300px;
+	height: 200px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	border-radius: 7px;
+}
+
+.schCat{
+	margin-left: 10px;
+	width: 180px;
+	height: 20px;
+	margin-bottom: 10px;
+	font-size: 13pt;
+}
+
+.schTit{
+	
+	margin-top: 5px;
+	width: 100%;
+	height: 60px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15pt;
+    text-align: center;
+}
+.schLoc{
+	
+	margin-top: 10px;
+	width: 100%;
+	height: 30px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15pt;
+    padding-left: 15px;
+}
+
+.schTime{
+	padding-left: 15px;
+
+	margin-top: 10px;
+	width: 100%;
+	height: 30px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15pt;
+}
+
+.greyRule { 
+	background: #CECECE; 
+	width: 100%;	
+	height: 1px; 
+	padding: 0; 
+	margin: 0; 
+}
+
+.backDiv{
+	margin: auto;
+	width: 80%;
+	text-align: center;
+}

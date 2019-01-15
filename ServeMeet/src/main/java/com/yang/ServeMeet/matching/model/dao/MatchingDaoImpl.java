@@ -124,7 +124,25 @@ public class MatchingDaoImpl implements MatchingDao {
 	@Override
 	public List<MatchingListObj> searchMatching(Map map) {
 		System.out.println("DAO Map : " + map);
-		
+		ArrayList<MatchingListObj> list = new ArrayList<MatchingListObj>();
+		list = (ArrayList<MatchingListObj>) map.get("searchList");
+		System.out.println("dd : " + list);
+		for(int i=0; i<list.size(); i++) {
+			String str1 = list.get(i).getBigLocation();
+			String str2 = list.get(i).getMidLocation();
+			String str3 = list.get(i).getSmallCategory();
+			if(list.get(i).getMidLocation() == null && list.get(i).getSmallCategory() == null) {
+				System.out.println("biglocation : " + str1 + " ,midlocation : " + str2 + ", smallcategory : " + str3 );
+				System.out.println("전체 지역");
+			}else if(list.get(i).getBigLocation() != null && list.get(i).getSmallCategory() == null) {
+				System.out.println("biglocation : " + str1 + " ,midlocation : " + str2 + ", smallcategory : " + str3 );
+				System.out.println("전체지역 + 중간지역");
+			}else if(list.get(i).getBigLocation() != null && list.get(i).getSmallCategory() != null) {
+				System.out.println("biglocation : " + str1 + " ,midlocation : " + str2 + ", smallcategory : " + str3 );
+				System.out.println("전체지역 + 중간지역 + 마지막지역");
+			}
+			
+		}
 		return session.selectList("Matching.matchingSearch", map);
 	}
 

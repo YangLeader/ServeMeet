@@ -117,13 +117,30 @@
 		INSERT INTO MATCHINGCONDITION VALUES (SEQ_MCONID.NEXTVAL, #{matchingId}, #{mWriter}, #{mGuest}, #{mContent}, DEFAULT)
 	</insert>
 	
-	<select id="matchingSearch" parameterType="Map" resultType="MatchingObj">
+	<select id="matchingSearch" parameterType="Map" resultMap="MatchingList">
 		SELECT * FROM MATCHING
 		JOIN LOCATION USING (LOCATIONID)
 		JOIN CATEGORY USING (CATEGORYID)
-		WHERE CATEGORYID = (SELECT CATEGORYID FROM CATEGORY WHERE BIGCATEGORY = #{bigcategory} AND MIDCATEGORY= #{category})
+		WHERE CATEGORYID = (SELECT CATEGORYID FROM CATEGORY WHERE BIGCATEGORY = #{firstCate} AND MIDCATEGORY= #{category})
 		AND MPEOPLENUM BETWEEN #{firstPeople} AND #{lastPeople}
-		AND TO_DATE(SUBSTR(MATCHING.MTIME, 1, 10), 'YYYY-MM-DD') BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{finishDate}, 'YYYY-MM-DD')		
+		AND TO_DATE(SUBSTR(MATCHING.MTIME, 1, 10), 'YYYY-MM-DD') BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') AND TO_DATE(#{finishDate}, 'YYYY-MM-DD')
+		<if test="searchList.size != 0">
+			AND (LOCATIONID IN (
+			<foreach item="item" index="index" collection="searchList"  separator="))OR LOCATIONID IN(" close=")">
+				<choose>
+					<when test="item.smallCategory == null and item.midLocation == null">
+						(SELECT LOCATIONID FROM LOCATION WHERE BIGLOCATION = #{item.bigLocation}
+					</when>
+					<when test="item.bigLocation != null and item.smallCategory == null">
+						(SELECT LOCATIONID FROM LOCATION WHERE BIGLOCATION = #{item.bigLocation} AND MIDLOCATION = #{item.midLocation}
+					</when>
+					<otherwise>
+						 (SELECT LOCATIONID FROM LOCATION WHERE BIGLOCATION = #{item.bigLocation} AND SMALLCATEGORY = #{item.smallCategory}
+					</otherwise>
+				</choose>
+			</foreach>
+			))			
+		</if>
 	</select>
 
 	<update id="matchingAccept" parameterType="_int">
