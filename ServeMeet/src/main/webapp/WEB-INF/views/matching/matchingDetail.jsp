@@ -289,6 +289,7 @@ function cdDecline(conId) {
 		success:function(data) {
 			$($cancleConId).removeClass("cdComfim cdCancel").remove("id",$cancleConId).attr("class","cancelIcon");
 			$($acceptConId).remove();
+			matchingConCnt();
 			
 		},
 		error:function(){
