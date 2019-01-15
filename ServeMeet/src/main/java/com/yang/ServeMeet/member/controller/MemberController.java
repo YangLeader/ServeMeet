@@ -81,7 +81,7 @@ public class MemberController {
 			String loc = "/";
 			String msg = "";
 			
-			if(result > 0) msg = "회원 가입 성공!";
+			if(result > 0) msg = "회원가입이 완료되었습니다!";
 			else msg = "회원 가입 실패!";
 			
 			model.addAttribute("loc", loc);
@@ -205,7 +205,7 @@ public class MemberController {
 		String msg = "";
 		
 		if(result > 0) {
-			msg = "회원 탈퇴 성공!";
+			msg = "탈퇴되었습니다.";
 			sessionStatus.setComplete();
 		} else {
 			msg = "회원 탈퇴 실패!";

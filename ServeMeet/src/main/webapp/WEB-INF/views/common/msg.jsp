@@ -24,7 +24,7 @@ if("${msg}" !="login"){
 		    	  location.href="${pageContext.request.contextPath}/member/memberView.do";
 		      });
 		    });
-	}else if("${msg}" == "회원 가입 성공!"){
+	}else if("${msg}" == "회원가입이 완료되었습니다!" ){
 		document.addEventListener("DOMContentLoaded", function(event) {
 		      swal({
 		    	  text : "${msg}",
@@ -33,7 +33,79 @@ if("${msg}" !="login"){
 		    	  location.href="${pageContext.request.contextPath}${loc}";
 		      });
 		    });
-	}else if("${msg}" == "게시글 등록 성공!"){
+	}else if("${msg}" == "탈퇴되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "게시글이 등록되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "매칭이 등록 되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "댓글이 등록되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "댓글이 수정되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "댓글이 삭제되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "댓글이 삭제되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "신고가 처리되었습니다."){
+		document.addEventListener("DOMContentLoaded", function(event) {
+		      swal({
+		    	  text : "${msg}",
+		    	  icon: "success" 
+		      }).then((doc) => {
+		    	  location.href="${pageContext.request.contextPath}${loc}";
+		      });
+		    });
+	}else if("${msg}" == "게시글이 삭제되었습니다."){
 		document.addEventListener("DOMContentLoaded", function(event) {
 		      swal({
 		    	  text : "${msg}",
