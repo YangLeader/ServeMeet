@@ -12,6 +12,46 @@
 
 
 <div class="out">
+	<!-- <div class="schDiv">
+		<div class="schListDiv">
+			<div class="schObj">
+				<div class="schCat">소모임 - 여행</div>
+				<div class="greyRule"></div>
+				<div class="schTit">새로운 타이틀입니다~~~~</div>
+
+				<div class="schLoc">경기도 고양시 덕양구 화정동</div>
+				<div class="schTime">2019-01-01 12:00</div>
+			</div>
+			<div class="schObj">
+				<div class="schCat">소모임 - 여행</div>
+				<div class="greyRule"></div>
+				<div class="schTit">새로운 타이틀입니다~~~~</div>
+
+				<div class="schLoc">경기도 고양시 덕양구 화정동</div>
+				<div class="schTime">2019-01-01 12:00</div>
+			</div>
+			<div class="schObj">
+				<div class="schCat">소모임 - 여행</div>
+				<div class="greyRule"></div>
+				<div class="schTit">새로운 타이틀입니다~~~~</div>
+
+				<div class="schLoc">경기도 고양시 덕양구 화정동</div>
+				<div class="schTime">2019-01-01 12:00</div>
+			</div>
+			<div class="schObj">
+				<div class="schCat">소모임 - 여행</div>
+				<div class="greyRule"></div>
+				<div class="schTit">새로운 타이틀입니다~~~~</div>
+
+				<div class="schLoc">경기도 고양시 덕양구 화정동</div>
+				<div class="schTime">2019-01-01 12:00</div>
+			</div>
+		</div>
+		<div class="backDiv">
+			<button class="backbtn">다른 조건으로 검색하기</button>
+		
+		</div>
+	</div> -->
 	<div class="category">
 		<div class="condition on" id="loc" onclick="selectlocCategory()">
 			<span>지역</span>
@@ -653,52 +693,124 @@
 		});
 		
 	});
-	/* 
-	$(function () {
-		$("#testDatepicker").datepicker();
-	});
 
- */
  	function searchMatching() {
-		/* $.ajax({
-			url : "${pageContext.request.contextPath }/matching/searchMatching.do",
-			type : "GET",
-			datatype : "JSON",
-			data : {
-				bloc : locId
-			},
-			async : false,
-			success : function(data) {
-
-			},
-			error : function(data) {
-				console.log("에러");
-			}
-		}) */
-		alert("지역 조건 : " + arr);
-		alert("모임 조건 : " + textDetailkd);
-		alert("인원 조건 : " + textps);
-		alert("날짜 조건 : " + date);
 		
-		$.ajax({
-			url : "${pageContext.request.contextPath}/matching/searchMatching.do",
-			type : "GET",
-			traditional : true,
-			data : {
-				locArr : arr,
-				category : textDetailkd,
-				people : textps,
-				date : date
-			},
-			success : function(data) {
-				alert("성공");
-			}, error : function(data) {
-				alert("에러");
-			}
+		var firstLoc = new Array();
+		var middleLoc = new Array();
+		var lastLoc = new Array();
+		var fullLoc = new Array();
+		if(arr.length != 0){
+			for(var i=0; i<arr.length; i++){
+				firstLoc[i] = arr[i].substring(0, arr[i].indexOf(" "));
+				middleLoc[i] = arr[i].substring(arr[i].indexOf(" ")+1, arr[i].lastIndexOf(" "));
+				lastLoc[i] = arr[i].substr(arr[i].lastIndexOf(" ")+1);
+			}			
+		}else{
+			firstLoc = null;
+			middleLoc = null;
+			lastLoc = null;
+		}
+		
+		if(textkd == "E-스포츠"){
+			textkd = "E스포츠";
+		}
+		
+/* 		alert("지역 : " + middleLoc);
+		alert("인원수 : " + textps);
+		alert("날짜 : " + date);
+		alert("카테고리 : " + textDetailkd);
+		 */
+		/* <div class="schDiv">
+		<div class="schListDiv">
+			<div class="schObj">
+				<div class="schCat">소모임 - 여행</div>
+				<div class="greyRule"></div>
+				<div class="schTit">새로운 타이틀입니다~~~~</div>
+
+				<div class="schLoc">경기도 고양시 덕양구 화정동</div>
+				<div class="schTime">2019-01-01 12:00</div>
+			</div>
+		</div>
+		<div class="backDiv">
+			<button class="backbtn">다른 조건으로 검색하기</button>
+		
+		</div>
+	</div> */
+		
+		if(textps == ""){
+			alert("인원수를 선택해주세요.");
+		}else if(date == ""){
+			alert("날짜를 선택해주세요.");
+		}else if(textDetailkd == ""){
+			alert("매칭 종류를 선택해주세요.")
+		}else{
+			$.ajax({
+				url : "${pageContext.request.contextPath}/matching/searchMatching.do",
+				type : "GET",
+				traditional : true,
+				data : {
+					locArrOne : firstLoc,
+					locArrTwo : lastLoc,
+					locArrThree : middleLoc,
+					firstCate : textkd,
+					category : textDetailkd,
+					people : textps,
+					date : date
+				},
+				success : function(data) {
+					$('.out').empty();
+					var html = " <div class='schDiv'>";
+					html += "<div class='schListDiv'>";
+					$.each(data, function(idx, val) {
+						console.log(idx + " " + val.mTitle);
+						html += '<div class="schObj">';
+						html += '<div class="schCat">'+ val.bigCategory + ' - ' + val.midCategory +'</div>';
+						html += '<div class="greyRule"></div>';
+						html += '<input type="hidden" id="matId" value='+val.matchingId+'>';
+						html += '<div class="schTit">'+ val.mTitle +'</div>';
+						if(val.bigLocation != "지역없음"){
+							html += '<div class="schLoc">'+ val.bigLocation + ' ' + val.midLocation + ' ' + val.smallCategory +'</div>';							
+						}else{
+							html += '<div class="schLoc">'+ val.bigLocation +'</div>';
+						}
+						html += '<div class="schTime">' + val.mtime + '</div>';
+						html += '</div>';
+					});
+					html += '</div>';
+					html += '<div class="backDiv">';
+					html += '<button class="backbtn">다른 조건으로 검색하기</button>';
+					html += '</div>';
+					html += '</div>';
+					
+					$('.out').html(html);
+					
+					backClick();
+					// $('.out ').empty();
+					/* var html = " <div class='schDiv'>";
+					html += "<div class='schListDiv'>";
+					html += '<div class="schObj">';
+					html += '<div class="schCat">소모임 - 여행</div>'; */
+					
+				}, error : function(data) {
+					alert("에러");
+				}
+			});
+			
+		}
+
+	}
+ 	
+ 	function backClick(obj) {
+		$('.backbtn').click(function () {
+
+			 location.reload();
 		});
 		
-		
-
+		$('.schObj').click(function () {
+			var matNum = $(this).find('#matId').val();
+			location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + matNum;
+		});
 	}
  	
 </script>

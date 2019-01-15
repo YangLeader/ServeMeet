@@ -378,15 +378,28 @@ public class MatchingController {
 	
 	@RequestMapping("/matching/searchMatching.do")
 	@ResponseBody
-	public List<MatchingListObj> searchMathing(@RequestParam String[] locArr, @RequestParam String category,
+	public List<MatchingListObj> searchMathing(@RequestParam String[] locArrOne, @RequestParam String[] locArrTwo, @RequestParam String[] locArrThree,
+												@RequestParam String firstCate,@RequestParam String category,
 											   @RequestParam String people, @RequestParam String date){
 		List<MatchingListObj> list = new ArrayList<MatchingListObj>();
-		List<String> searchlist = new ArrayList<String>();
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		for(int i=0; i<locArr.length; i++) {
-			System.out.println("locArr : " + locArr[i]);
-			searchlist.add(locArr[i]);
+		List<MatchingListObj> searchList = new ArrayList<MatchingListObj>();
+		
+		Map<String, Object> map = new HashMap<String, Object>(); 
+		System.out.println("들어옴.");
+		
+		for(int i=0; i<locArrOne.length; i++) {
+			MatchingListObj mlo = new MatchingListObj();
+			System.out.println("locArrOne : " + locArrOne[i]);
+			System.out.println("locArrTwo : " + locArrTwo[i]);
+			System.out.println("locArrThree : " + locArrThree[i]);
+			mlo.setBigLocation(locArrOne[i]);
+			if(!locArrTwo[i].equals("전체")) {
+				mlo.setSmallCategory(locArrTwo[i]);				
+			}
+			if(!locArrThree[i].equals(" ")) {
+				mlo.setMidLocation(locArrThree[i]);
+			}
+			searchList.add(mlo);
 		}
 		
 		System.out.println("category : " + category);
@@ -413,26 +426,36 @@ public class MatchingController {
 			finishDate = dateArr[1].trim();			
 		}
 	
-		System.out.println("list:" + searchlist);
+		System.out.println("searchList : " + searchList);
 		System.out.println("firstPeople : " + firstPeople);
 		System.out.println("lastPeople : " + lastPeople);
 		System.out.println("startDate : " + startDate);
 		System.out.println("finishDate : " + finishDate);
 		
+		for(int i=0; i<searchList.size(); i++) {
+			String str1 = searchList.get(i).getBigLocation();
+			String str2 = searchList.get(i).getMidLocation();
+			String str3 = searchList.get(i).getSmallCategory();
+			System.out.println("꺼내기1 : " + str1);
+			System.out.println("꺼내기2 : " + str2);
+			System.out.println("꺼내기3 : " + str3);
+		}
+		
 		map.put("firstPeople", Integer.parseInt(firstPeople));
 		map.put("lastPeople", Integer.parseInt(lastPeople));
 		map.put("startDate", startDate);
 		map.put("finishDate", finishDate);
-		map.put("searchlist", searchlist);
-		map.put("bigcategory", "소모임");
+		map.put("searchList", searchList);
+		map.put("firstCate", firstCate);
 		map.put("category", category);
 		
 		System.out.println("map : " + map);
 		
 		list = matchingService.searchMatching(map);
 		
+		System.out.println("결과값 : " + list);
 		
-		return null;
+		return list;
 	}
 	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
 	@ResponseBody
