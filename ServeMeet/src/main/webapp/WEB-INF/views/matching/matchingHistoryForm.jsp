@@ -109,8 +109,9 @@ function pasteHTML(filepath){
 						<div class="wr_option wr_content">
 							<label>매칭승리 팀 : </label>&nbsp;&nbsp;&nbsp;&nbsp;
 							<td>
-								<label for="batTrue"><input type="radio" name="winnerChk" id="batTrue" value="A"/>A팀</label>
-								<label for="batFalse"><input type="radio" name="winnerChk" id="batFalse" value="B" checked="checked"/>B팀</label>
+								<label for="batTrue"><input type="radio" name="winnerChk" class="winner" value="A"/>A팀</label>
+								<label for="batFalse"><input type="radio" name="winnerChk" class = "winner" value="B" checked="checked"/>B팀</label>
+								<c:if test="$('.winner').val() !=null"><input type="hidden" name="winnerChk" value="N" /></c:if>
 							</td>
 						</div>
 					</c:if> 

@@ -94,6 +94,8 @@ public class MatchingController {
 	@RequestMapping("matching/matcingHistoryInsert.ma")
 	public String matchingHistoryInsert(@RequestParam String winnerChk , MatchingHistory mHistory, Model model, HttpSession session,
 			@RequestParam(value="upFile", required = false) MultipartFile[] upFile) {
+		
+		System.out.println("winnerChk : "+winnerChk);
 
 		String saveDir = session.getServletContext().getRealPath("/resources/upload/mHistory");
 				
