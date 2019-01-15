@@ -240,19 +240,15 @@
                     </div>
                     
                      <br /><br /><br /><br /><br />
-                     
-        <div class="col-md-12">
-                        <div class="card">
-				<div class="content">
 		<div class="c_header">
-			<h2>게시글 블라인드 목록</h2>
-			<p class="contxt">게시글을 블라인드 해제하세요.</p>
+			<h2>게시글 신고 목록</h2>
+			<p class="contxt">신고된 게시글을 블라인드 처리하세요.</p>
 		</div>
 				
 		<ul class="tab_viewrecord" style="margin-bottom: -1px;">
 		<!-- [D] 탭 링크 선택시 class 에 on" 추가 -->
-			<li class="item1" style="margin-top:2px"><a href="${pageContext.request.contextPath}/admin/reportList.do">신고 목록</a></li>
-			<li class="item2" style="margin-top:2px"><a href="#" class="on">블라인드 목록</a></li>
+			<li class="item1" style="margin-top:2px"><a href="#" class="on">신고 목록</a></li>
+			<li class="item2" style="margin-top:2px"><a href="${pageContext.request.contextPath}/admin/blindList.do">블라인드 목록</a></li>
 		</ul>
 		
 		<div class="section">
@@ -266,7 +262,7 @@
 						<th scope="col" class="ti-alarm-clock"> 작성일</th>
 						<th scope="col" class="ti-eye"> 조회수</th>
 						<th scope="col" class="ti-bell"> 신고 횟수</th>
-						<th scope="col" class="ti-unlock"> 블라인드 해제</th>
+						<th scope="col" class="ti-eraser"> 블라인드 처리</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -278,7 +274,7 @@
 						<td>${b.boardDate }</td>
 						<td>${b.boardCount }</td>	
 						<td>${b.reportCount }</td>		
-						<td><button type="button" name="restore" id="${b.boardNo }" class="btn btn-info btn-sm"><span class="ti-unlock"></span> 블라인드 해제</button></td>
+						<td><input type="button" name="blind" id="${b.boardNo }" value="블라인드" /></td>
 					</tr>		
 					</c:if>
 					<!-- The Modal -->
@@ -296,9 +292,6 @@
 	    	</table> 
 		</div> 
 
-	</div>
-	</div>
-	</div>
 	</div>
     
  
@@ -342,6 +335,26 @@
 	<script src="${pageContext.request.contextPath}/resources/assets/js/paper-dashboard.js"></script>
 
 	<script type="text/javascript">
+	
+    	$('input[name="blind"]').click(function(){
+    		
+    		var boardNo = $(this).attr("id");
+    		
+    		console.log(boardNo);
+    		
+    		var msg = boardNo+'번 글을 블라인드 처리 하시겠습니까?';
+    		
+    		if (confirm(msg)!=0) {
+                 
+    			 location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
+    			 
+            } else {
+                
+            	return false;
+            }
+    		
+    		
+    	});
     	
     	// Get the modal
         var modal = document.getElementById('myModal');
@@ -375,27 +388,7 @@
             }
         }
         
-		$('button[name="restore"]').click(function(){
-    		
-    		var boardNo = $(this).attr("id");
-    		
-    		console.log(boardNo);
-    		
-    		var msg = boardNo+'번 글을 블라인드 해제 하시겠습니까?';
-    		
-    		if (confirm(msg)!=0) {
-                 
-    			 location.href="${pageContext.request.contextPath}/admin/restoreBoard.do?boardNo="+boardNo;
-    			 
-            } else {
-                
-            	return false;
-            }
-    		
-    		
-    	});
-
-    	
+		
 	</script>
 
 </html>

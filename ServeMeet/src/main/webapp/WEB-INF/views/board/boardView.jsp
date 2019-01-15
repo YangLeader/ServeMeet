@@ -64,6 +64,20 @@
 
 	cursor : default;
 }
+
+#dropdownlist .dropdown ul {
+background: #5e73de;
+display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
+height:auto;
+padding:0px;
+margin-top: -40px;
+margin-left: 60px;
+border-radius: 10px;
+position:absolute;
+width:200px;
+z-index:200;
+}
+
 </style>
 </head>
 <body>
@@ -146,8 +160,19 @@ $(document).ready(function(){
 		</header>
 
 		<section id="bbs-view-info">
-			<span class="write_user"><span class="sv_guest">${board.userName }</span></span>
-			<span></span>
+			<span class="write_user" id="dropdownlist"><span class="sv_guest">
+										<form id="chatting1" method="post">
+											<ul style="padding-inline-start: 0px;">
+												<li class="dropdown"><a class="drop">${board.userName }</a>
+										        	<ul style="width: auto; dispaly:none;" id="downlist">
+										         		<c:if test="${member.userName ne board.userName }">
+										            	<li><input type="button" value="1:1 채팅" onclick="chatting1('${board.userName}');"></li>
+										            	</c:if>
+										         	</ul>
+										    	</li>
+										    </ul></form></span></span>
+			
+			
 			<span>
 				<span class="glyphicon glyphicon-time"></span> ${board.boardDate }		</span>
 			
@@ -364,7 +389,7 @@ var char_max = parseInt(0); // 최대
 				<div class="wr_option">
 					
 				
-				<textarea id="wr_content" name="commentCon" class="form-control" title="내용"  rows="5" maxlength="10000" style="resize:none;" required ></textarea>
+				<textarea id="wr_content" name="commentCon" class="form-control" title="내용"  rows="5" maxlength="1000" style="resize:none;" required ></textarea>
 
 								</div>
 
@@ -575,44 +600,40 @@ function report_board()
 
 function delete_board()
 {
-    return confirm("정말 게시글을 삭제 하시겠습니까?");
+	var no = ${board.boardNo};
+	
+    swal({
+		  title: "게시글 삭제",
+		  text: "이 게시글을 삭제 하시겠습니까?",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		}).then((willDelete) => {
+			location.href="${pageContext.request.contextPath}/board/boardDelete.do?no="+no;
+		});
 }
 
 
 comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
 
-
-/*
-var emoarr = new Array("(ㅠ_ㅠ)","√(´∀`√)","(O_O)","(^3^)","(@_@)","(-_-;;)","(￣∇￣)∂","(X.X)","(ㅡㅡ)","(^_^)_b","(*｀Д´)/","(｀へ´)","s(─━┘Д└━─)z","ㄴ( ºДºㆀ)ㄱ","づºДº)つ","?(*￣ .￣)a","OTL","-(_\"_)-","(♥_♥)","(-ㅠ-)","(-_-)zz","(ㅡ,.ㅡ)","z(o_o)z");	
+$('.drop').click(function(){
 	
-function c_inp_emo(i){
-	var yzt = $("#wr_content");
-	var val = yzt.val();
-	val += emoarr[i];
-	yzt.val(val);
-}
-
-$(document).ready(function () {
-	$('p.cmt_content').each(function(h){
-		var t = $(this);
-		var html = t.html();
-		console.log(html);
-		var j = emoarr.length;
-		for(var i = 0;i<j;i++){
-			html = html.replaceAll(emoarr[i],"<img src='http://cfs.tistory.com/custom/blog/151/1510464/skin/images/em_"+i+".gif' alt='"+emoarr[i]+"' class='emoi' />");
-		}
-		t.html(html);
-	});
+	/* $(this).children('#downlist').css('display', 'block'); */
+	$(this).siblings('#downlist').show('fast');
+	
+$('html').click(function(e) {
+	
+	if(!$(e.target).hasClass("drop")) { 
+			
+		$('.dropdown').siblings('#downlist').hide('fast');
+	}
+								
+})
+										
 });
 
-if(!String.prototype.replaceAll) {
-	String.prototype.replaceAll = function(source, target) {
-		source = source.replace(new RegExp("(\\W)", "g"), "\\$1");
-		target = target.replace(new RegExp("\\$", "g"), "$$$$");
-		return this.replace(new RegExp(source, "gm"), target);
-	}
-}
-*/
+
+
 </script>
 <!-- } 댓글 쓰기 끝 -->
     <!-- 링크 버튼 시작 { -->
@@ -727,7 +748,7 @@ function excute_good(href, $el, $tx)
 					</span>
 				</span>
 			</li>
-			<form id="chatting" method="post">
+			<form id="chatting2" method="post">
 			<c:forEach items="${list}" var="b">
 			<li class="bbs_list_basic">
 				<span class="subject text">
@@ -745,7 +766,7 @@ function excute_good(href, $el, $tx)
 									<ul style="width: auto; dispaly:none;" id="downlist">
 									
 										<c:if test="${member.userName ne b.userName }">
-											<li><input type="button" value="1:1 채팅" onclick="chatting('${b.userName}');"></li>
+											<li><input type="button" value="1:1 채팅" onclick="chatting2('${b.userName}');"></li>
 										</c:if>
 									
 									</ul>
@@ -834,7 +855,10 @@ function excute_good(href, $el, $tx)
 $('.dropdown').click(function(){
 	
 	/* $(this).children('#downlist').css('display', 'block'); */
-	$(this).children('#downlist').toggle('fast');										
+	$(this).children('#downlist').toggle('fast');		
+	
+	
+});
 	
 $('html').click(function(e) {
 	
@@ -843,14 +867,20 @@ $('html').click(function(e) {
 		$('.dropdown').children('#downlist').css('display', 'none');
 	}
 								
-})
-										
 });
+										
 
-function chatting(userName){
-	$('#chatting').attr('action', "/ServeMeet/chat/chattingRoom.do/"+userName);
+
+function chatting1(userName){
+	$('#chatting1').attr('action', "/ServeMeet/chat/chattingRoom.do/"+userName);
 	
-	$('#chatting').submit();
+	$('#chatting1').submit();
+}
+
+function chatting2(userName){
+	$('#chatting2').attr('action', "/ServeMeet/chat/chattingRoom.do/"+userName);
+	
+	$('#chatting2').submit();
 }
 
 function search(){

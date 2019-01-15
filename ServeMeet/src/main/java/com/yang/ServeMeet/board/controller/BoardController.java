@@ -497,36 +497,46 @@ public class BoardController {
 	}
 	
 	@RequestMapping("admin/reportList.do")
-	public String reportList(Model model) {
+	public String reportList(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage, Model model) {
+		
+		int numPerPage = 10; // 한 페이지당 게시글 수
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(boardService.reportList());
 		
 		int result = boardService.reportCount();
 		
+		// 3. 페이지 계산 후 작성할 HTML 추가
+		String pageBar = Utils.getPageBar(result, cPage, numPerPage, "reportList.do");
+		
 		model.addAttribute("list",list)
-		.addAttribute("reportCount", result);
+		.addAttribute("reportCount", result)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
 		
 		
 		return "admin/adminReport";
 	}
 	
 	@RequestMapping("/admin/blindBoard.do")
-	public String boardDelete(@RequestParam("boardNo") int boardNo, Model model) {
+	public String boardDelete(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage, @RequestParam("boardNo") int boardNo, Model model) {
 		
 		boardService.deleteBoard(boardNo);
 		
-		reportList(model);
+		reportList(cPage, model);
 		
 		return "admin/adminReport";
 		
 	}
 	
 	@RequestMapping("/admin/restoreBoard.do")
-	public String restoreBoard(@RequestParam("boardNo") int boardNo, Model model) {
+	public String restoreBoard(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage, @RequestParam("boardNo") int boardNo, Model model) {
 		
 		boardService.restoreBoard(boardNo);
 		
-		reportList(model);
+		reportList(cPage, model);
 		
 		return "admin/adminReport";
 		
