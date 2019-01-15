@@ -8,207 +8,198 @@
 <html lang="ko">
 <head>
 <c:import url="../common/header.jsp" />
-<meta charset="UTF-8" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-109178580-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-109178580-1');
+</script>
+
+<!-- Smart Editor -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+ 
+ 
+<!-- Smart Editor -->
+<script type="text/javascript">
+
+var oEditors = [];
+$(function(){
+nhn.husky.EZCreator.createInIFrame({
+oAppRef: oEditors,
+elPlaceHolder: "wr_content",
+sSkinURI: "${pageContext.request.contextPath }/resources/se2/SmartEditor2Skin.html",
+fCreator: "createSEditor2"
+});
+});
+ 
+//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+function submitContents(elClickedObj) {
+    // 에디터의 내용이 textarea에 적용된다.
+    oEditors.getById["wr_content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+ 
+    // 에디터의 내용에 대한 값 검증은 이곳에서
+    // document.getElementById("wr_content").value를 이용해서 처리한다.
+  
+    try {
+        elClickedObj.form.submit();
+    } catch(e) {
+     
+    }
+}
+ 
+// textArea에 이미지 첨부
+function pasteHTML(filepath){
+    var sHTML = '<img src="${pageContext.request.contextPath }/resources/upload/board/'+filepath+'">';
+    oEditors.getById["wr_content"].exec("PASTE_HTML", [sHTML]);
+}
+ 
+</script>
+
+
+
+<meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 
-
-<title>배팅 게시판</title>
+<title>게시글 작성</title>
 
 
 
 </head>
 <body>
 
-	<script>	
-		$(function(){
-			$('[data-mytext=getNo]').on("click",function(){
-				var battingId = $(this).attr("id");
-				console.log("battingId="+battingId);
-				location.href = "${pageContext.request.contextPath}/batting/battingInfo.ba?no="+battingId;
-			});
-		});
-	</script>
-
+	
 	<div id="wrapper">
 	
 		<div class="container" style="background-color:white; border-radius: 20px;">
 		<br />
-			<!-- 게시판 목록 시작 { -->
-			<div id="bbs-list-wrap">
-
-				<div id="bbs-list-top">
-					<!-- 게시판 타이틀 -->
-					<div class="bbs_title_wrap">
-						<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">배팅 게시판</a>
-						<c:if test="${!empty totalContents }">
-						<p>총 ${totalContents }건의 배팅이 있습니다.</p>
-						</c:if>
-					</div>
-
-
-
+		
+			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/matching/matcingHistoryInsert.ma"
+					 method="post" enctype="multipart/form-data">
+				<div class="bbs_title_wrap">
+					<a class="bbs_title">후기 글 작성 </a> 
 				</div>
 
-					<div class="bbs-list">
-						<ul id="bbs-list-ul">
-							<li class="bbs_list_top">
-								<span class="subject" > 
-									<span class="subject_text"> 
-										<!-- <span class="glyphicon glyphicon-tag"></span>매칭 제목</span> -->
-										<span class="glyphicon"></span>배팅 제목</span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon"></span>배팅 유저
-									</span> 
-									<span class="w45 wr_date" style="width:6.5em"> 
-										<!-- <span class="glyphicon  glyphicon-user"></span> A팀 인원 -->
-										<span class="glyphicon"></span> A팀 인원
-										</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon"></span> B팀 인원
-									</span> 
-								</span>
-							</li>
-							<form id="chatting" method="post">
-							<c:forEach items="${list}" var="m">
-							<li class="bbs_list_basic">
-								<span class="subject text" align="center">
-									<a data-mytext="getNo" id="${m.BATTINGID}">
-										<b>${m.MTITLE }</b>
-									</a>  
-									<span class="w45 icon"> </span>
-								</span> 
-								<span class="dec"> 
-									<span class="w45 wr_name" id="dropdownlist"> 
-										<span class="glyphicon glyphicon-user"></span> ${m.MWRITER }
-											
-		         					</span> 
-									<span class="w45 wr_date" style="width:6.5em"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											${m.BATTINGPNUMA }
-									</span> 
-									<span class="w45 wr_hit"> 
-										<span class="glyphicon glyphicon-eye-open"></span> 
-											${m.BATTINGPNUMB }
-									</span> 
+				<div class="bbs_write_content">
+
+					<script>
+					$(document).ready(function() {
+						for (var i = 0; i < $('#ca_name option').size(); i++) {
+							$('#ca_name option:eq('+ i + ')').html(
+								$('#ca_name option:eq('+ i + ')').text() + "&nbsp;&nbsp;");
+						}
+					});
+					</script>
+
+					<div class="wr_option wr_subject">
+						<label>제목</label> 
+						<input type="hidden" name="matchingId" value="${matching.matchingId}"/>
+						<input type="text" name="mTitle" id="wr_subject" class="form-control" value="${matching.mTitle} &nbsp; 의 후기" readonly required />
+						<label>작성자</label>
+						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
+					</div>
+					<c:if test="${matching.categoryId>200}">
+						<div class="wr_option wr_content">
+							<label>매칭승리 팀 : </label>&nbsp;&nbsp;&nbsp;&nbsp;
+							<td>
+								<label for="batTrue"><input type="radio" name="winnerChk" id="batTrue" value="A"/>A팀</label>
+								<label for="batFalse"><input type="radio" name="winnerChk" id="batFalse" value="B" checked="checked"/>B팀</label>
+							</td>
+						</div>
+					</c:if> 
+					<div class="wr_option wr_content">
+						<label>내용</label>
+						<div>
+							<textarea id="wr_content" name="mhContent"
+							class="smarteditor2 form-control" maxlength="65536"
+							style="width: 100%; height: 300px; resize: none;"></textarea>
 								
-								</span>
-							
-							</li>
-							</c:forEach>
-							</form>
-						</ul>
+						</div>
+
+						<div class="wr_option">
+							<label>첨부파일 1</label> <input type="file" name="upFile"
+								title="파일첨부 1 : 용량 10MB 이하만 업로드 가능">
+						</div>
+						<div class="wr_option">
+							<label>첨부파일 2</label> <input type="file" name="upFile"
+								title="파일첨부 2 : 용량 10MB 이하만 업로드 가능">
+						</div>
+						<div class="wr_option">
+							<label>첨부파일 3</label> <input type="file" name="upFile"
+								title="파일첨부 3 : 용량 10MB 이하만 업로드 가능">
+						</div>
+
 					</div>
-
-
-
-
-				<div class="pager">
-					<c:out value="${pageBar}" escapeXml="false"/>
+					<div class="wr_submit">
+						<input type="submit" class="btn btn-info" name="submitButton" value="확인" />
+						<a href="${pageContext.request.contextPath }/matching/mHistoryList.ma" class="btn btn-default">취소</a>
+					</div>
 				</div>
+				<br /><br /><br /><br />
+			</form>
 
-			</div>
+				<script>
+					$('#fwrite').submit(function(){
+						
+						oEditors.getById["wr_content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+						
+						var wr_content = $('#wr_content').val();
+						
+						console.log(wr_content);
 
-
-			<script>
-			
-			$('.drop').click(function(){
-									
-					/* $(this).children('#downlist').css('display', 'block'); */
-					$(this).siblings('#downlist').toggle('fast');
-					
-				$('html').click(function(e) {
-					
-					if(!$(e.target).hasClass("drop")) { 
+						if( wr_content == ""  || wr_content == null || wr_content == '&nbsp;' || wr_content == '<p>&nbsp;</p>' || wr_content == '<br>')  {
+					             alert("내용을 입력하세요.");
+					             
+					             oEditors.getById["wr_content"].exec("FOCUS"); //포커싱
+						
+						}else {
 							
-						$('.drop').siblings('#downlist').hide('fast');
-					}
-												
-				})
-														
-			});
-			
-			function search(){
-				
-				if($('#stx').val() !== ''){
-					location.href="searchBoard.do?con="+$('#sfl').val()+"&keyword="+$('#stx').val();
-				} else {
-					alert('내용입력');
-				}
-				
-				
-			}
-			
-			function chatting(userName){
-				
-				$('#chatting').attr('action', "/ServeMeet/chat/chattingRoom.do/"+userName);
-				
-				$('#chatting').submit();
-			}
-			
-				function put_tags(a) {
-					$("#stx").val(a).focus();
-					$("#sfl").val("wr_1");
-				}
-
-				$(function() {
-					var stx = $('#stx');
-					stx.focus(function() {
-						$("#sfl").removeClass("dno");
+							$('#fwrite').submit();
+							
+							$.ajax({
+								url : "${pageContext.request.contextPath}/point/updatePoint.do",
+								data : {increasePoint : 10,
+										pContent : "후기글 작성 포인트"
+										},
+								success : function(){
+									
+									
+									
+					            }, error : function(jqxhr, textStatus, errorThrown){
+					                console.log("ajax 처리 실패");
+					                //에러로그
+					                console.log(jqxhr);
+					                console.log(textStatus);
+					                console.log(errorThrown);
+					            }
+							});
+						}
+						
+						return false;
 					});
-
-					bbs_list_width_fixed();
-
-					setTimeout(function() {
-						bbs_list_width_fixed();
-					}, 100);
-
-					$(window).resize(function() {
-						bbs_list_width_fixed();
-					});
-
-				});
-
-				// 리스트 제목 부분 width 자동조절
-				function bbs_list_width_fixed() {
-					$('#bbs-list-ul .subject_text').css(
-							'max-width',
-							$('#bbs-list-ul li').innerWidth()
-									- $('#bbs-list-ul li .dec').innerWidth()
-									- 170);
-
-					if (($(window).innerWidth() + 17) > 767) {
-						$('.bbs_list_basic .subject').width(
-								$('#bbs-list-ul li').width()
-										- $('#bbs-list-ul .dec').width() - 20);
-					} else {
-						$('.bbs_list_basic .subject').css('width', '100%');
+					
+					function html_auto_br(obj) {
+						if (obj.checked) {
+							result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
+							if (result)
+								obj.value = "html2";
+							else
+								obj.value = "html1";
+						} else
+							obj.value = "";
 					}
-
-					$('.bbs_list_top .subject')
-							.css(
-									'width',
-									($('#bbs-list-ul li').innerWidth() - $(
-											'.bbs_list_top .dec').innerWidth()) / 2 + 20);
-				}
-
-				// 모바일 게시판 리스트에서 제목 부분 (넓은 영역) 터치시 글 읽기 활성화
-				function view_link_type_m(get_url) {
-					if (window.innerWidth < 768) {
-						location.href = get_url;
-					}
-				}
-			</script>
-			<!-- } 게시판 목록 끝 -->
+				</script>
 		</div>
-		<!-- .container -->
 	</div>
-	<!-- .wrapper -->
-
-
-<c:import url="../common/footer.jsp"/>
+	
+<c:import url="../common/footer.jsp" />
 
 </body>
 </html>
