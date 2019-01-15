@@ -82,9 +82,9 @@ public class MatchingController {
 
 	@RequestMapping("matching/matchingHistoryForm.ma")
 	public String matchingHistoryForm(@RequestParam int matchingId, Model model) {
-		
 		Matching matching = matchingService.matchingSelectOne(matchingId);
 		
+		System.out.println("뗴려뿌셔라"+matching);
 		model.addAttribute("matching",matching);
 		
 		return "matching/matchingHistoryForm";
@@ -92,7 +92,7 @@ public class MatchingController {
 	}
 	
 	@RequestMapping("matching/matcingHistoryInsert.ma")
-	public String matchingHistoryInsert(MatchingHistory mHistory, Model model, HttpSession session,
+	public String matchingHistoryInsert(@RequestParam String winnerChk , MatchingHistory mHistory, Model model, HttpSession session,
 			@RequestParam(value="upFile", required = false) MultipartFile[] upFile) {
 
 		String saveDir = session.getServletContext().getRealPath("/resources/upload/mHistory");
@@ -131,9 +131,13 @@ public class MatchingController {
 				System.out.println("바뀐 이름 : " + bf.getChangeName());
 						
 				boardFileList.add(bf);
-			}
+				
+				}
 		}
 		
+		int battingId = battingService.checkBattingId(mHistory.getMatchingId());
+		
+		battingService.battingWinnerUpdate(winnerChk, battingId);
 				
 		int result;
 				
@@ -149,17 +153,15 @@ public class MatchingController {
 				
 		String msg = "";
 		String loc = "/";		
-		
-		if(result > 0) {
-			msg = "매칭 후기 등록 성공!";
-					
-		} else {
+		String path = "redirect:/batting/battingAllocation.ba?battingId="+battingId+"&winnerChk="+winnerChk;
+		if(result <= 0) {
 			msg = "매칭 후기 등록 실패!";
+			path ="common/msg";
 		}
 			
 		model.addAttribute("loc", loc).addAttribute("msg", msg);
 				
-		return "common/msg";
+		return path;
 		
 	}
 	
@@ -299,6 +301,7 @@ public class MatchingController {
 	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
 	public String mDatail(@RequestParam("matNum") int matNum, Model model,HttpSession session) {
 		System.out.println("조회할 매칭 matNum : " + matNum);
+		
 		String userId = ((Member)session.getAttribute("member")).getUserName();
 		Map map = new HashMap();
 		map.put("matNum", matNum);
@@ -307,6 +310,7 @@ public class MatchingController {
 		List<MatchingCondition> list = new ArrayList<MatchingCondition>();
 		
 		mo = matchingService.matchingDetail(map);
+		System.out.println("moasdasdasd : " +mo);
 		model.addAttribute("mDetail", mo);
 		System.out.println(userId +" ::: "+mo.getmWriter());
 		if(userId.equals(mo.getmWriter()) ) {
@@ -452,14 +456,15 @@ public class MatchingController {
 		System.out.println("결과값 : " + list);
 		return list;
 	}
-
 	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
 	@ResponseBody
-	public String matchingAccept(@RequestParam int conId) {
+	public String matchingAccept(@RequestParam int conId,@RequestParam int matchingId) {
 		String result="";
-		
+		Map<String,Integer> map = new HashMap<String,Integer>(); 
 		result=matchingService.matchingAccept(conId);
-		
+		map.put("conId", conId);
+		map.put("matchingId", matchingId);
+		result+=matchingService.matchingDeclineAll(map);
 		return result;
 	}
 	@RequestMapping(value="/matching/matchingDecline.ma",method=RequestMethod.POST)

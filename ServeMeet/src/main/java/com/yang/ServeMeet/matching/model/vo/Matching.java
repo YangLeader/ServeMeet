@@ -17,12 +17,43 @@ public class Matching {
 	private String mGuest;
 	private String mtime;
 	private String mStatus;
+	private String mApplicant;
 	
 	public Matching() {
 		super();
 	}
 	
 	
+
+	public String getmApplicant() {
+		return mApplicant;
+	}
+
+
+
+	public void setmApplicant(String mApplicant) {
+		this.mApplicant = mApplicant;
+	}
+
+
+
+	public Matching(int matchingId, String mTitle, String mContent, int mPeoplenum, String locationId, int categoryId,
+			String mWriter, String mGuest, String mtime, String mStatus, String mApplicant) {
+		super();
+		this.matchingId = matchingId;
+		this.mTitle = mTitle;
+		this.mContent = mContent;
+		this.mPeoplenum = mPeoplenum;
+		this.locationId = locationId;
+		this.categoryId = categoryId;
+		this.mWriter = mWriter;
+		this.mGuest = mGuest;
+		this.mtime = mtime;
+		this.mStatus = mStatus;
+		this.mApplicant = mApplicant;
+	}
+
+
 
 	public Matching(int matchingId, String mTitle, String mContent, int mPeoplenum, String locationId, int categoryId,
 			String mWriter, String mGuest, String mtime, String mStatus) {
@@ -168,8 +199,11 @@ public class Matching {
 	public String toString() {
 		return "Matching [matchingId=" + matchingId + ", mTitle=" + mTitle + ", mContent=" + mContent + ", mPeoplenum="
 				+ mPeoplenum + ", locationId=" + locationId + ", categoryId=" + categoryId + ", mWriter=" + mWriter
-				+ ", mGuest=" + mGuest + ", mtime=" + mtime + ", mStatus=" + mStatus + "]";
+				+ ", mGuest=" + mGuest + ", mtime=" + mtime + ", mStatus=" + mStatus + ", mApplicant=" + mApplicant
+				+ "]";
 	}
+
+
 
 
 	

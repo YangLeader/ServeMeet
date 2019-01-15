@@ -62,78 +62,25 @@ function pasteHTML(filepath){
  
 </script>
 
-<!--
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-2755471938797797",
-    enable_page_level_ads: true
-  });
-</script>
--->
+
 
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
-<!--
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-2755471938797797",
-          enable_page_level_ads: true
-     });
-</script>
--->
+
 <title>게시글 작성</title>
 
-<!--[if lte IE 8]>
-<script src="http://aq23r1gt.iwinv.net/js/html5.js"></script>
-<![endif]-->
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-<script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-<!--
-<script src="http://aq23r1gt.iwinv.net/js/jquery-1.8.3.min.js"></script>
--->
 
 
 </head>
 <body>
 
-	<!-- preloader (화면 전환 효과) -->
-
-	<!-- <div class="preloader"></div>
-
-	<script>
-		$(document).ready(function() {
-			// 화면 전환 효과
-			$('.preloader').fadeOut(150);
-
-			$('.navbar-brand').width($('.navbar-brand > img').width());
-			$(window).resize(function() {
-				$('.navbar-brand').width($('.navbar-brand > img').width());
-			});
-		});
-	</script> -->
+	
 	<div id="wrapper">
 	
 		<div class="container" style="background-color:white; border-radius: 20px;">
 		<br />
-			<!--
-		<div class="row">	
-			
-			<div class="leftBox col-md-3">
-				로그인 박스
-			</div>
-			
-
-			<div class="rightBox col-md-9">
-			-->
-			<!-- skin : _basic -->
+		
 			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/matching/matcingHistoryInsert.ma"
 					 method="post" enctype="multipart/form-data">
 				<div class="bbs_title_wrap">
@@ -158,7 +105,15 @@ function pasteHTML(filepath){
 						<label>작성자</label>
 						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
 					</div>
-
+					<c:if test="${matching.categoryId>200}">
+						<div class="wr_option wr_content">
+							<label>매칭승리 팀 : </label>&nbsp;&nbsp;&nbsp;&nbsp;
+							<td>
+								<label for="batTrue"><input type="radio" name="winnerChk" id="batTrue" value="A"/>A팀</label>
+								<label for="batFalse"><input type="radio" name="winnerChk" id="batFalse" value="B" checked="checked"/>B팀</label>
+							</td>
+						</div>
+					</c:if> 
 					<div class="wr_option wr_content">
 						<label>내용</label>
 						<div>

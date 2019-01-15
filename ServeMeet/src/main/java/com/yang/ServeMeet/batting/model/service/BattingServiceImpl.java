@@ -118,5 +118,17 @@ public class BattingServiceImpl implements BattingService {
 		
 		return battingDao.topBattingList();
 	}
+	
+	@Override
+	public int battingWinnerUpdate(String winnerChk, int battingId) {
+		
+		return battingDao.battingWinnerUpdate(winnerChk,battingId);
+	}
+	
+	@Override
+	public int checkBattingId(int matchingId) {
+		
+		return battingDao.checkBattingId(matchingId);
+	}
 
 }

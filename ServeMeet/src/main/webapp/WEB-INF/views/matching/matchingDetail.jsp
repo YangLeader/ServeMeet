@@ -194,7 +194,7 @@ text-align: center;
 			<br /><br />
 			<c:choose>
 				<c:when test="${mDetail.mWriter eq member.userName}">
-					<button class="mh_btn" onclick='location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
+					<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
 				</c:when>
 				<c:when test="${mDetail.mWriter eq member.userName}">
 					<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
@@ -202,7 +202,7 @@ text-align: center;
 				</c:when>
 				<c:otherwise>
 					<c:choose>
-						<c:when test="${mDetail.mGuest eq member.userName}">
+						<c:when test="${mDetail.mApplicant eq member.userName}">
 							<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">신청 완료</button></center>
 						</c:when>
 						<c:otherwise>
@@ -227,8 +227,9 @@ text-align: center;
 									<span class="cancelIcon">거절</span>
 								</c:when>
 								<c:otherwise>
-									<span class="cdComfim cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.mconid },'${item.mguest }');">수락</span>
+									<span class="cdComfim cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.matchingid},${item.mconid },'${item.mguest }');">수락</span>
 									<span class="cdComfim cdCancel" id="cdCancel${item.mconid }" onclick="cdDecline(${item.mconid });">거절</span>
+									
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -261,10 +262,13 @@ function popupOpen(){
 	
 }
 
-function cdAccept(conId,userName) {
+function cdAccept(matchingId,conId,userName) {
 	$.ajax({
 		url:"${pageContext.request.contextPath}/matching/matchingAccept.ma",
-		data:{conId:conId},
+		data:{
+				conId:conId,
+				matchingId: matchingId
+		},
 		type:"post",
 		success:function(data) {
 			accChatRoom(userName);
@@ -285,6 +289,7 @@ function cdDecline(conId) {
 		success:function(data) {
 			$($cancleConId).removeClass("cdComfim cdCancel").remove("id",$cancleConId).attr("class","cancelIcon");
 			$($acceptConId).remove();
+			matchingConCnt();
 			
 		},
 		error:function(){

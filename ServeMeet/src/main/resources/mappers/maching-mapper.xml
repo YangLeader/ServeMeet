@@ -99,7 +99,7 @@
 	
 	<select id="matchingDetail" parameterType="Map" resultType="MatchingObj">
 		SELECT  M.MATCHINGID,C.BIGCATEGORY, C.MIDCATEGORY , M.MTITLE,  L.BIGLOCATION, L.MIDLOCATION, L.SMALLCATEGORY,
-        M.MPEOPLENUM, M.CATEGORYID, M.MWRITER,(select MC.MGUEST from Matchingcondition MC where MC.MATCHINGID= M.MATCHINGID and MC.MGUEST=#{userName}) MGUEST, M.MTIME, M.MSTATUS, M.MCONTENT
+        M.MPEOPLENUM, M.CATEGORYID, M.MWRITER,(select MC.MGUEST from Matchingcondition MC where MC.MATCHINGID= M.MATCHINGID and MC.MGUEST=#{userName}) MApplicant, M.MTIME, M.MSTATUS, M.MCONTENT
 		FROM MATCHING M, LOCATION L, CATEGORY C
 		WHERE M.LOCATIONID = L.LOCATIONID
 		AND M.CATEGORYID = C.CATEGORYID
@@ -148,6 +148,9 @@
 	</update>
 	<update id="matchingDecline" parameterType="_int">
 		update matchingcondition set mstatus='2DECLINE' where mconid=#{conId}
+	</update>
+	<update id="matchingDeclineAll" parameterType="_int">
+		update matchingcondition set mstatus='2DECLINE' where mconid!=#{conId} AND matchingId=#{matchingId}
 	</update>
 
 </mapper>
