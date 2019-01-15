@@ -154,16 +154,13 @@ public class battingController {
 		
 	}*/
 	@RequestMapping("/batting/battingAllocation.ba")
-	public String battingAllocation(@RequestParam int battingId, Model model) {
+	public String battingAllocation(@RequestParam int battingId,@RequestParam String winnerChk, Model model) {
 		
 		Batting batting = battingService.battingSelect(battingId);
 		
-		
-		// 임의값 지정, 종료 시 매칭후기에서 이긴팀을 받아 넘겨줄 예정.
-		String battingType = batting.getBattingPNumA() > batting.getBattingPNumB() ? "A" : "B";
-		
+				
 		// 배팅에서 이긴 사람의 목록을 불러오기
-		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(battingService.battingAllocation(battingId,battingType));
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(battingService.battingAllocation(battingId,winnerChk));
 		
 		System.out.println(list);
 		
@@ -172,9 +169,9 @@ public class battingController {
 		
 		System.out.println("aNum : "+aNum+"\nbNum : "+bNum);
 		
-		System.out.println("battingType = "+battingType);
+		System.out.println("battingType = "+winnerChk);
 		
-		float pct = battingType.equals("A") ? aNum/(aNum+bNum)*100 : bNum/(bNum+aNum)*100; // 인원수 퍼센트 계산식
+		float pct = winnerChk.equals("A") ? aNum/(aNum+bNum)*100 : bNum/(bNum+aNum)*100; // 인원수 퍼센트 계산식
 		
 		int alloc = Math.round(((100 - pct) *15/1000 + 1) * 100); // 배당계산식 중 반올림을 위해 100을 곱해 int형으로 저장
 		// 배당만을 보기 위해서는 float alloc = alloc/100 을 해줘야 배율이 나오지만, 포인트를 100점 걸었다는 가정 하에 int값만 보냄. 추후 배팅 포인트 선택 가능 시 추가요망.
@@ -198,11 +195,14 @@ public class battingController {
 			
 			if(pointDate == pointResult) System.out.println("포인트 기록 성공.");
 			
+			model.addAttribute("msg","매칭후기 등록 성공!");
+			
 		} else {
 			System.out.println("포인트 지급 실패");
+			model.addAttribute("msg","매칭후기 등록 실패!");
 		}
 		
-		return "redirect:/batting/battingClose.ba?battingId="+battingId;
+		return "common/msg";
 	}
 	
 	@RequestMapping("batting/myBattingList.ba")

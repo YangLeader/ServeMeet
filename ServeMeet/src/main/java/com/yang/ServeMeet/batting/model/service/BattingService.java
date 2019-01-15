@@ -36,4 +36,8 @@ public interface BattingService {
 	int battingTotalContents();
 	
 	List<Map<String,Object>> topBattingList();
+	
+	int battingWinnerUpdate(String winnerChk,int battingId);
+	
+	int checkBattingId(int matchingId);
 }
