@@ -140,7 +140,7 @@ public class MatchingController {
 		System.out.println("winnerChk = "+winnerChk);
 		String path = "common/msg";
 		
-		if(!winnerChk.equals("A")) {
+		if(!winnerChk.equals("N")) {
 			int battingId = battingService.checkBattingId(mHistory.getMatchingId());
 			
 			battingService.battingWinnerUpdate(winnerChk, battingId);
