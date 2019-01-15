@@ -20,7 +20,7 @@ public interface MatchingService {
 	
 	int matchingHistoryInsert(MatchingHistory mHistory);
 	
-	List<Map<String,String>> myMatchingList(String userName,String type);
+	List<Map<String,String>> myMatchingList(Map<String,String> map);
 
 	Map<String,String> mHistorySelectOne(int mHistoryId);
 

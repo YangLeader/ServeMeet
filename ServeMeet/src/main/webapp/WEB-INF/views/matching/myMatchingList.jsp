@@ -26,11 +26,14 @@
 		<br>
 		<div id="topMenu">
 			<div class="category">
-				<div class="condition on" id="loc" onclick="ingMatching()">
+				<div class="condition on" id="loc" onclick="MatchingList('ing')">
 					<span>진행중인 매칭</span>
 				</div>
-				<div class="condition" id="cate" onclick="endMatching()">
+				<div class="condition" id="cate" onclick="MatchingList('end')">
 					<span>종료된 매칭</span>
+				</div>
+				<div class="condition" id="apply" onclick="MatchingList('apply')">
+					<span>신청한 매칭</span>
 				</div>
 			</div>
 		</div>
@@ -83,21 +86,35 @@
 
 
 	<script>
+	$(function() {
+		MatchingList("ing");
+		
 		$('.con').click(function() {
 			var matNum = $(this).siblings().last().val();
 			location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum="
 					+ matNum;
 		});
-		function(ingMatching){
+		
+		function MatchingList(msts){
+			var userName =  '${member.userName}';
 			$.ajax({
 				type : "GET",
-				url : "/ServeMeet/matching/myMatchingList.ma",
-				datatype : "JSON",
-				data : { type = "P" },
-				success
+				url : "/ServeMeet/matching/myMatchingListType.ma",
+				datatype:"json",
+				data : { type : msts,
+						userName :userName
+				},
+				success : function(){
+					console.log(data);
+				},
+				error:function(){
+					console.log("에러났대요");
+				}
 				
-			})
+			});
+		
 		}
+	})
 	</script>
 </body>
 </html>

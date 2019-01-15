@@ -133,23 +133,56 @@ background-color: gray!important;
 }
 .mHistory{
 	align-items : right;
+	}
 .conList{
 border: 1px #5e73de solid;
 border-radius: 5px;
+display: flex;
+width: 100%; height: 100px; margin-bottom: 10px;
 }
 .cdOne{
 display: inline-block;
 
 }
 .cdTitle{
-width: 200px;
+flex-basis: 200px;
 height: 100%;
 text-align: center;
+padding: 10px 0px;
 
 }
 .cdBody{
-	width: 900px;
+    word-break: break-word;
+	flex-basis: 1000px;
 	height: 100%;
+	padding: 5px 0px;
+}
+.cdComfirm{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+.cdAccept{
+	background-image: url("${pageContext.request.contextPath }/resources/images/check2.png");
+	background-size:40px;
+}
+.cdCancel{
+	background-image: url("${pageContext.request.contextPath }/resources/images/cancle2.png");
+	background-size:40px;
+}
+.acceptIcon{
+ display: inline-block;
+  width: 100%;
+    height: 100%;
+background-image: url("${pageContext.request.contextPath }/resources/images/acc.png");
+background-size:cover;
+}
+.cancelIcon{
+ display: inline-block;
+  width: 100%;
+    height: 100%;
+background-image: url("${pageContext.request.contextPath }/resources/images/cancle.png");
+background-size:cover;
 }
 </style>
 </head>
@@ -193,45 +226,53 @@ text-align: center;
 		
 			<br /><br />
 			<c:choose>
-				<c:when test="${mDetail.mWriter eq member.userName}">
-					<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
-				</c:when>
-				<c:when test="${mDetail.mWriter eq member.userName}">
-					<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
-				
+				<c:when test="${mDetail.mStatus eq 'AFTER' }">
+					<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	
 				</c:when>
 				<c:otherwise>
 					<c:choose>
-						<c:when test="${mDetail.mApplicant eq member.userName}">
-							<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">신청 완료</button></center>
+						<c:when test="${mDetail.mWriter eq member.userName}">
+							<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
+						</c:when>
+						<c:when test="${mDetail.mWriter eq member.userName}">
+							<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
+						
 						</c:when>
 						<c:otherwise>
-							<center><button class="sb_btn" onclick="popupOpen()">매칭 신청</button></center>		
+							<c:choose>
+								<c:when test="${mDetail.mApplicant eq member.userName}">
+									<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">신청 완료</button></center>
+								</c:when>
+								<c:otherwise>
+									<center><button class="sb_btn" onclick="popupOpen()">매칭 신청</button></center>		
+								</c:otherwise>
+							</c:choose>	
 						</c:otherwise>
-					</c:choose>	
+					</c:choose>
 				</c:otherwise>
-
 			</c:choose>
 			<div class="conditions" style="padding: 30px;">
 				<c:if test="${mDetail.mWriter eq member.userName}">
 					<form method="post" id = "accChatRoom">
 					<c:forEach items="${mConditions}" var="item">
-						<div class="conList"  style="width: 100%; height: 100px; margin-bottom: 10px;">
+						<div class="conList">
 							<div class = "cdOne cdTitle"><span>${item.mguest }</span></div>
 							<div class = "cdOne cdBody"><span>${item.mmsg }</span></div>
-							<c:choose>
-								<c:when test="${item.mstatus eq '3ACCECPT'}">							
-									<span class="acceptIcon">승락</span>
-								</c:when>
-								<c:when test="${item.mstatus eq '2DECLINE'}">
-									<span class="cancelIcon">거절</span>
-								</c:when>
-								<c:otherwise>
-									<span class="cdComfim cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.matchingid},${item.mconid },'${item.mguest }');">수락</span>
-									<span class="cdComfim cdCancel" id="cdCancel${item.mconid }" onclick="cdDecline(${item.mconid });">거절</span>
-									
-								</c:otherwise>
-							</c:choose>
+							<div class="cdOne" style="flex-basis: 100px; padding: 3px 5px;">
+								<c:choose>
+								
+									<c:when test="${item.mstatus eq '3ACCECPT'}">							
+										<span class="acceptIcon"></span>
+									</c:when>
+									<c:when test="${item.mstatus eq '2DECLINE'}">
+										<span class="cancelIcon"></span>
+									</c:when>
+									<c:otherwise>
+										<span class="cdComfirm cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.matchingid},${item.mconid },'${item.mguest }');"></span>
+										<span class="cdComfirm cdCancel" id="cdCancel${item.mconid }" onclick="cdDecline(${item.mconid });"></span>
+									</c:otherwise>
+								</c:choose>
+							</div>	
 						</div>
 					</c:forEach>
 					</form>
@@ -287,7 +328,7 @@ function cdDecline(conId) {
 		data:{conId:conId},
 		type:"post",
 		success:function(data) {
-			$($cancleConId).removeClass("cdComfim cdCancel").remove("id",$cancleConId).attr("class","cancelIcon");
+			$($cancleConId).removeClass("cdComfirm cdCancel").remove("id",$cancleConId).attr("class","cancelIcon");
 			$($acceptConId).remove();
 			matchingConCnt();
 			

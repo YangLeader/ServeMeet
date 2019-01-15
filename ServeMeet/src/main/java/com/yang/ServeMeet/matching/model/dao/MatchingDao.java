@@ -17,7 +17,7 @@ public interface MatchingDao {
 	
 	public int matchingInsert(Matching matching);
 	
-	List<Map<String,String>> myMatchingList(String userName,String type);
+	List<Map<String,String>> myMatchingList(Map<String,String> map);
 
 
 	Map<String,String> mHistorySelectOne(int mHistoryId);

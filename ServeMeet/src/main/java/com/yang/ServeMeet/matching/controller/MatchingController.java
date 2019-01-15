@@ -24,9 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.board.model.service.BoardService;
-import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
-import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
@@ -289,13 +287,22 @@ public class MatchingController {
 	}
 	
 	@RequestMapping("matching/myMatchingList.ma")
-	public String myMatchingList(@RequestParam String userName , @RequestParam String type , Model model) {
-		
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.myMatchingList(userName,type));
-		
-		model.addAttribute("matchingList",list);
+	public String myMatchingList() {
 		
 		return "/matching/myMatchingList";
+	}
+	@RequestMapping("matching/myMatchingListType.ma")
+	
+	public @ResponseBody List<Map<String,String>> myMatchingListType(@RequestParam String userName , @RequestParam String type) {
+		Map<String,String> map = new HashMap<String,String>();
+		
+		map.put("userName", userName);
+		map.put("type", type);
+		
+		System.out.println("실행은 잘되냐요? "+map);
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.myMatchingList(map));
+		System.out.println("실행은 잘되냐요? "+list);
+		return list;
 	}
 	
 	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
