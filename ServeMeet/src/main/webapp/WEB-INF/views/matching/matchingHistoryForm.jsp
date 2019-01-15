@@ -1,205 +1,183 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html>
 <head>
-<c:import url="../common/header.jsp" />
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async
-	src="https://www.googletagmanager.com/gtag/js?id=UA-109178580-1"></script>
-<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag() {
-		dataLayer.push(arguments);
-	}
-	gtag('js', new Date());
-
-	gtag('config', 'UA-109178580-1');
-</script>
-
-<!-- Smart Editor -->
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
- 
- 
-<!-- Smart Editor -->
-<script type="text/javascript">
-
-var oEditors = [];
-$(function(){
-nhn.husky.EZCreator.createInIFrame({
-oAppRef: oEditors,
-elPlaceHolder: "wr_content",
-sSkinURI: "${pageContext.request.contextPath }/resources/se2/SmartEditor2Skin.html",
-fCreator: "createSEditor2"
-});
-});
- 
-//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
-function submitContents(elClickedObj) {
-    // 에디터의 내용이 textarea에 적용된다.
-    oEditors.getById["wr_content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
- 
-    // 에디터의 내용에 대한 값 검증은 이곳에서
-    // document.getElementById("wr_content").value를 이용해서 처리한다.
-  
-    try {
-        elClickedObj.form.submit();
-    } catch(e) {
-     
-    }
-}
- 
-// textArea에 이미지 첨부
-function pasteHTML(filepath){
-    var sHTML = '<img src="${pageContext.request.contextPath }/resources/upload/board/'+filepath+'">';
-    oEditors.getById["wr_content"].exec("PASTE_HTML", [sHTML]);
-}
- 
-</script>
-
-
-
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-
-<title>게시글 작성</title>
-
-
-
-</head>
-<body>
-
-	
-	<div id="wrapper">
-	
-		<div class="container" style="background-color:white; border-radius: 20px;">
-		<br />
+<style>
+	.listDiv{
 		
-			<form name="fwrite" id="fwrite" action="${pageContext.request.contextPath }/matching/matcingHistoryInsert.ma"
-					 method="post" enctype="multipart/form-data">
-				<div class="bbs_title_wrap">
-					<a class="bbs_title">후기 글 작성 </a> 
-				</div>
-
-				<div class="bbs_write_content">
-
-					<script>
-					$(document).ready(function() {
-						for (var i = 0; i < $('#ca_name option').size(); i++) {
-							$('#ca_name option:eq('+ i + ')').html(
-								$('#ca_name option:eq('+ i + ')').text() + "&nbsp;&nbsp;");
-						}
-					});
-					</script>
-
-					<div class="wr_option wr_subject">
-						<label>제목</label> 
-						<input type="hidden" name="matchingId" value="${matching.matchingId}"/>
-						<input type="text" name="mTitle" id="wr_subject" class="form-control" value="${matching.mTitle} &nbsp; 의 후기" readonly required />
-						<label>작성자</label>
-						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
+		border-radius: 30px;
+		margin: auto;
+		width: 95%;
+		text-align: center;
+	}
+	
+	.listDetailDiv{
+		
+	}
+	
+	ul{
+		list-style: none;
+	}
+	
+	.objM{
+		
+		border-radius: 10px;
+		margin: auto;
+		width: 80%;
+		height: 80px;
+		margin-bottom: 10px;
+		border: 1px solid #e0e0e0;	
+		font-size: 9pt;
+		cursor: pointer;
+	}
+	
+	.objM:hover{
+		border: 1px solid #DEEBFF;
+		background: #DEEBFF;
+	}
+	
+	.objTitle{
+		font-size: 9pt;
+		border: 1px solid #e0e0e0;
+		padding-top: 10px;
+		border-radius: 10px;
+		margin: auto;
+		width: 80%;
+		height: 50px;
+		margin-bottom: 10px;	
+		background: #f9f9f9;
+		font-weight: bold;
+		
+	}
+	
+	.con{
+		vertical-align: middle;
+		float: left;	
+		height: 100%;
+		padding-top: 25px;
+		
+	}
+	
+	.conTitle{
+		vertical-align: middle;
+		float: left;	
+		height: 100%;
+		
+		
+	}
+	
+	#catBName{
+		width: 7%;
+		
+	}
+	
+	#catSName{
+		width: 10%;
+	}
+	
+	#mtTitle{
+		width: 30%;
+	}
+	
+	#locName{
+		width: 20%;
+	}
+	
+	#mtwriter{
+		width: 10%;
+	}
+	
+	#mtTime{
+		padding-top: 15px;
+		width: 7%;
+	}
+	
+	#mpeople{
+		
+		width: 6%;
+	}
+	#mStatus{
+		width: 10%;
+	}
+	
+	
+	#mTimeTitle{
+		width: 7%;
+	}
+	
+	.cgr{
+		color: #45C21B;
+	}
+	
+	.cbl{
+		color: blue;
+	}
+	
+	.crd{
+		color: red;
+	}
+</style>
+<meta charset="UTF-8">
+<title>매칭 리스트</title>
+</head>
+<body style="background-color: white;">
+	<header>
+		<c:import url="../common/header.jsp" />
+	</header>
+	
+	<div class="listDiv">
+	<br /><br />
+		<h1>${lName } 리스트</h1>
+		<br /><br />
+		<div class="listDetailDiv">
+			<div class="objTitle">
+				<div class="conTitle" id="catBName">매칭 종류</div>
+				<div class="conTitle" id="catSName">분류</div>
+				<div class="conTitle" id="mtTitle">제목</div>
+				<div class="conTitle" id="locName">지역</div>
+				<div class="conTitle" id="mtwriter">등록자</div>
+				<div class="conTitle" id="mTimeTitle">날짜</div>
+				<div class="conTitle" id="mpeople">모집 인원</div>
+			</div>
+				<c:forEach items="${matchingList}" var="m">
+					<div class="objM" onclick="showMatching()">
+						<div class="con" id="catBName">${m.BIGCATEGORY }</div>
+						<div class="con" id="catSName">${m.MIDCATEGORY }</div>
+						<div class="con" id="mtTitle"><strong>${m.MTITLE }</strong></div>
+						<div class="con" id="locName">${m.BIGLOCATION } ${m.MIDLOCATION } ${m.SMALLCATEGORY }</div>
+						<div class="con" id="mtwriter">${m.MWRITER }</div>
+						<div class="con" id="mtTime">${m.MTIME}</div>
+						<div class="con" id="mpeople">${m.MPEOPLENUM }명</div>
+						<input type="hidden" id="mid" value="${m.MATCHINGID }" />
 					</div>
-					<c:if test="${matching.categoryId>200}">
-						<div class="wr_option wr_content">
-							<label>매칭승리 팀 : </label>&nbsp;&nbsp;&nbsp;&nbsp;
-							<td>
-								<label for="batTrue"><input type="radio" name="winnerChk" id="batTrue" value="A"/>A팀</label>
-								<label for="batFalse"><input type="radio" name="winnerChk" id="batFalse" value="B" checked="checked"/>B팀</label>
-							</td>
-						</div>
-					</c:if> 
-					<div class="wr_option wr_content">
-						<label>내용</label>
-						<div>
-							<textarea id="wr_content" name="mhContent"
-							class="smarteditor2 form-control" maxlength="65536"
-							style="width: 100%; height: 300px; resize: none;"></textarea>
-								
-						</div>
-
-						<div class="wr_option">
-							<label>첨부파일 1</label> <input type="file" name="upFile"
-								title="파일첨부 1 : 용량 10MB 이하만 업로드 가능">
-						</div>
-						<div class="wr_option">
-							<label>첨부파일 2</label> <input type="file" name="upFile"
-								title="파일첨부 2 : 용량 10MB 이하만 업로드 가능">
-						</div>
-						<div class="wr_option">
-							<label>첨부파일 3</label> <input type="file" name="upFile"
-								title="파일첨부 3 : 용량 10MB 이하만 업로드 가능">
-						</div>
-
-					</div>
-					<div class="wr_submit">
-						<input type="submit" class="btn btn-info" name="submitButton" value="확인" />
-						<a href="${pageContext.request.contextPath }/matching/mHistoryList.ma" class="btn btn-default">취소</a>
-					</div>
-				</div>
-				<br /><br /><br /><br />
-			</form>
-
-				<script>
-					$('#fwrite').submit(function(){
-						
-						oEditors.getById["wr_content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
-						
-						var wr_content = $('#wr_content').val();
-						
-						console.log(wr_content);
-
-						if( wr_content == ""  || wr_content == null || wr_content == '&nbsp;' || wr_content == '<p>&nbsp;</p>' || wr_content == '<br>')  {
-					             alert("내용을 입력하세요.");
-					             
-					             oEditors.getById["wr_content"].exec("FOCUS"); //포커싱
-						
-						}else {
-							
-							$('#fwrite').submit();
-							
-							$.ajax({
-								url : "${pageContext.request.contextPath}/point/updatePoint.do",
-								data : {increasePoint : 10,
-										pContent : "후기글 작성 포인트"
-										},
-								success : function(){
-									
-									
-									
-					            }, error : function(jqxhr, textStatus, errorThrown){
-					                console.log("ajax 처리 실패");
-					                //에러로그
-					                console.log(jqxhr);
-					                console.log(textStatus);
-					                console.log(errorThrown);
-					            }
-							});
-						}
-						
-						return false;
-					});
-					
-					function html_auto_br(obj) {
-						if (obj.checked) {
-							result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
-							if (result)
-								obj.value = "html2";
-							else
-								obj.value = "html1";
-						} else
-							obj.value = "";
-					}
-				</script>
+				</c:forEach>
 		</div>
 	</div>
-	
-<c:import url="../common/footer.jsp" />
+	<br />
+	<br />
+	<footer>
+		<c:import url="../common/footer.jsp" />	
+	</footer>
 
+
+<script>
+/* 	function showMatching() {
+	 	var test = $(this).children('#mtTitle').text();
+		alert(test); 
+		 $('.objM').children('#catBName').css('border', '1px solid black');
+		
+		//
+	}  */
+	$('.con').click(function () {
+		var matNum = $(this).siblings().last().val();
+		
+		location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + matNum;
+	});
+</script>
 </body>
 </html>
