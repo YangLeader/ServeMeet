@@ -28,8 +28,8 @@
 	<br>
 	<div>
 	<c:if test='${batting.BSTATUS eq "N" }'>
-		<input type="button" onclick="button1_click('A');" value="A팀" /> 
-		<input type="button" onclick="button1_click('B');" value="b팀" />
+		<input type="button" onclick="btnBatting('A');" value="A팀" /> 
+		<input type="button" onclick="btnBatting('B');" value="b팀" />
 		</c:if>
 		<div class="progress">
 			<div class="progress-bar progress-bar-success" role="progressbar"
@@ -58,10 +58,143 @@
 			
 			if (result) {
 				location.href="${pageContext.request.contextPath}/batting/battingPick.ba?battingId="+${batting.BATTINGID}+"&battingType="+battingType+"&userName=${member.userName}";
-				alert("선택되었습니다.");
+				swal("선택되었습니다.");
 			} else {
 			}
 		}
+		
+		
+		
+		
+		
+/* 		function btnBatting(battingType){
+			swal({
+				  title: "10포인트가 차감됩니다.",
+				  text: "그래도 계속하시겠습니까?",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+					  if (willDelete) {
+						  $.ajax({
+	      					url : "${pageContext.request.contextPath}/point/getPoint.do",
+	      					success : function(point){
+	      						console.log("point : "+point);
+	    						if(point <10){
+	    							 alert("포인트가 모자랍니다.");
+	    							 location.reload(true);
+	    						 }else{
+	    							 $("#scratchBtn").attr("style","display:none");
+	    						 $.ajax({
+	    								url : "${pageContext.request.contextPath}/point/updatePoint.do",
+	    								data : {increasePoint : -10,
+	    										pContent : "스크래치 포인트 차감"
+	    										},
+	    								success : function(){
+	    									
+	    					            }, error : function(jqxhr, textStatus, errorThrown){
+	    					                console.log("차감 ajax 처리 실패");
+	    					                //에러로그
+	    					                console.log(jqxhr);
+	    					                console.log(textStatus);
+	    					                console.log(errorThrown);
+	    					            }
+	    							});
+	    						 
+	    							 
+	    						 }
+
+	      						
+	      		            }, error : function(jqxhr, textStatus, errorThrown){
+	      		                console.log("포인트 얻기ajax 처리 실패");
+	      		                //에러로그
+	      		                console.log(jqxhr);
+	      		                console.log(textStatus);
+	      		                console.log(errorThrown);
+	      		            }
+	      				});
+						  } else {
+						    return false;
+						  }
+						});
+		} */
+		
+		
+		
+		
+		
+		
+		
+		
+		function btnBatting(battingType){
+			swal({
+				  title: "100포인트가 차감됩니다.",
+				  text: "그래도 계속하시겠습니까?",
+				  icon: "warning",
+				  buttons: true,
+				  dangerMode: true,
+				}).then((willDelete) => {
+					  if (willDelete) {
+						  $.ajax({
+	      					url : "${pageContext.request.contextPath}/point/getPoint.do",
+	      					async : false,
+	      					success : function(point){
+	      						console.log("point : "+point);
+	    						if(point <100){
+	    							 alert("포인트가 모자랍니다.");
+	    							 location.reload(true);
+	    						 }else{
+	    							 $("#scratchBtn").attr("style","display:none");
+	    						 $.ajax({
+	    								url : "${pageContext.request.contextPath}/batting/battingPick.ba",
+	    								data : {battingId : "${batting.BATTINGID}",
+	    										battingType : battingType,
+	    										userName : "${member.userName}"
+	    										},
+	    								async : false,
+	    								success : function(){
+	    									location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent="배팅 포인트 차감"';
+	    									alert(battingType+"팀이 선택되었습니다.")
+	    					            }, error : function(jqxhr, textStatus, errorThrown){
+	    					                console.log("배팅 ajax 처리 실패");
+	    					                //에러로그
+	    					                console.log(jqxhr);
+	    					                console.log(textStatus);
+	    					                console.log(errorThrown);
+	    					                alert("이미 선택한 배팅입니다.")
+	    					            }
+	    							});
+	    						 
+	    							 
+	    						 }
+
+	      						
+	      		            }, error : function(jqxhr, textStatus, errorThrown){
+	      		                console.log("포인트 얻기ajax 처리 실패");
+	      		                //에러로그
+	      		                console.log(jqxhr);
+	      		                console.log(textStatus);
+	      		                console.log(errorThrown);
+	      		            }
+	      				});
+						  } else {
+						    return false;
+						  }
+						});
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 </body>
 </html>
