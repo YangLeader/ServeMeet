@@ -67,7 +67,7 @@
 	
 	<!-- 포인트 총액 조회 -->
 	<select id="totalPoint" resultType="_int">
-		select sum(point) from member
+		select sum(point) from member where userStatus = 'Y'
 	</select>
 	
 	<!-- 오늘 추가된 포인트 조회 -->
@@ -85,10 +85,9 @@
 		SELECT * FROM POINT
 		ORDER BY PDATE DESC
 	</select>
-	
-	
+
 	<select id="pointTotalContents" resultType="_int">
-		SELECT COUNT(*)
+		SELECT NVL(COUNT(*),0)
 		FROM POINT
 	</select>
 	

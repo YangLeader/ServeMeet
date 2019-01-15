@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -104,6 +105,22 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int deleteUser() {
 		return sqlSession.selectOne("member.deleteUser");
+	}
+
+	@Override
+	public List<Map<String, String>> memberList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("member.memberList",null,rowBounds);
+	}
+
+	@Override
+	public int memberTotalContents() {
+		return sqlSession.selectOne("member.memberTotalContents");
+	}
+
+	@Override
+	public int returnMember(int userNo) {
+		return sqlSession.selectOne("member.returnMember",userNo);
 	}
 
 	

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.member.model.service.MemberService;
 import com.yang.ServeMeet.member.model.vo.Member;
 
@@ -217,6 +218,31 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("/member/memberReturn.do")
+	public String memberReturn(SessionStatus sessionStatus, 
+			Member m, Model model) {
+		
+		if(logger.isDebugEnabled()) logger.debug("회원 복구 확인!");
+		
+		int result = memberService.returnMember(m.getUserNo());
+		
+		String loc = "/";
+		String msg = "";
+		
+		if(result > 0) {
+			msg = "회원 복구 성공!";
+			sessionStatus.setComplete();
+		} else {
+			msg = "회원 복구 실패!";
+		}
+		
+		model.addAttribute("loc", loc)
+		.addAttribute("msg", msg);
+		
+		return "common/msg";
+		
+	}
+	
 	@RequestMapping("/member/checkIdDuplicate.do")
 	@ResponseBody
 	public Map<String, Object> checkIdDuplicate(@RequestParam String userId){
@@ -379,6 +405,30 @@ public class MemberController {
 		return result;
 	}
 	
+	@RequestMapping(value="member/memberList.do", method= RequestMethod.GET)
+	public String memberList(
+			@RequestParam(value="cPage", required=false, defaultValue="1")
+			int cPage, Model model) {
+		
+		int numPerPage = 10; // 한 페이지당 게시글 수
+		
+		// 1. 현재 페이지 게시글 목록 가져오기
+		ArrayList<Map<String, String>> list = 
+				new ArrayList<Map<String, String>>(memberService.memberList(cPage, numPerPage));
+		
+		
+		// 2. 전체 게시글 개수 가져오기
+		int totalContents = memberService.memberTotalContents();
+		
+		// 3. 페이지 계산 후 작성할 HTML 추가
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminMember.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+		return "member/memberList";
+	}
 	
 	
 	

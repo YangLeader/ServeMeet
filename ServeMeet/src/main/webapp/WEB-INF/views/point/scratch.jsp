@@ -355,8 +355,8 @@ var image = new Image();
       					success : function(point){
       						console.log("point : "+point);
     						if(point <10){
-    							 alert("포인트가 모자랍니다.");
-    							 location.reload(true);
+    							 swal("포인트가 모자랍니다.");
+    							 //location.reload(true);
     						 }else{
     							 $("#scratchBtn").attr("style","display:none");
     						 $.ajax({

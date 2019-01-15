@@ -39,4 +39,6 @@ public interface PointDao {
 	List<Map<String, String>> totalPointList(int cPage, int numPerPage);
 
 	int pointTotalContents();
+	
+	
 }

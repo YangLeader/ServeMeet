@@ -182,7 +182,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
@@ -207,13 +207,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-success text-center">
-                                            <i class="ti-wallet"></i>
+                                            <i class="ti-plus"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
@@ -226,7 +226,7 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-calendar"></i> Today
+                                        <i class="ti-calendar"></i> Updated now
                                     </div>
                                 </div>
                             </div>
@@ -234,13 +234,13 @@
                         </div>
                     </div>
                     
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-info text-center">
-                                            <i class="ti-twitter-alt"></i>
+                                            <i class="ti-minus"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
@@ -272,7 +272,6 @@
                             	<div class="importContent">
 	                                <c:import url="/point/totalPointList.do"></c:import>
 								</div>
-							
                             </div>
                         </div>
                     </div>
@@ -331,9 +330,7 @@
                                         
                                     </div>
                                     <hr>
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> Campaign sent 2 days ago
-                                    </div>
+                                    
                                 </div>
                             </div>
                             </form>
@@ -392,9 +389,7 @@
                                         
                                     </div>
                                     <hr>
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> Campaign sent 2 days ago
-                                    </div>
+                                    
                                 </div>
                             </div>
                             </form>
@@ -447,14 +442,6 @@
     		minusPoint();
     		
 
-        	$.notify({
-            	icon: 'ti-gift',
-            	message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
-
-            },{
-                type: 'success',
-                timer: 4000
-            });
         	
         	
 
@@ -495,7 +482,6 @@
 			                console.log(errorThrown);
 			            }
 		        	});
-		    		
 		    	} 
     	
 		function minusPoint() {

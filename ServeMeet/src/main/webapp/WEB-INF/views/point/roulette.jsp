@@ -144,7 +144,6 @@
                                 						console.log("point : "+point);
                                 						if(point < 10){
                                 							 swal("포인트가 모자랍니다.");
-                                							 location.reload(true);
                                 						 }else{
                                 						
                                 						 $.ajax({
@@ -218,7 +217,7 @@
       		                console.log(textStatus);
       		                console.log(errorThrown);
       		            }
-                	})
+                	});
                 	
                 }
             }

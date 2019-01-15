@@ -37,4 +37,11 @@ int insertMember(Member member);
 	int todayUser();
 
 	int deleteUser();
+	
+	List<Map<String, String>> memberList(int cPage, int numPerPage);
+
+	int memberTotalContents();
+	
+	int returnMember(int userNo);
+
 }

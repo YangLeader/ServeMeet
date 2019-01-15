@@ -300,13 +300,12 @@ public class PointController {
 		int totalContents = pointService.pointTotalContents();
 		
 		// 3. 페이지 계산 후 작성할 HTML 추가
-		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "pointList.do");
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "adminPoint.do");
 		
 		model.addAttribute("list", list)
 		.addAttribute("totalContents", totalContents)
 		.addAttribute("numPerPage", numPerPage)
 		.addAttribute("pageBar", pageBar);
-		
 		return "point/totalPointList";
 	}
 }

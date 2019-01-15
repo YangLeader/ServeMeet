@@ -36,8 +36,13 @@
 		WHERE USERNO = #{userNo}
 	</update>
 	
-	<delete id="deleteMember" parameterType="_int">
+	<update id="deleteMember" parameterType="_int">
 		UPDATE MEMBER SET USERSTATUS = 'N'
+		WHERE USERNO = #{userNo} 
+	</update>
+	
+	<delete id="returnMember" parameterType="_int">
+		UPDATE MEMBER SET USERSTATUS = 'Y'
 		WHERE USERNO = #{userNo} 
 	</delete>
 	
@@ -100,6 +105,16 @@
 	<select id="deleteUser" resultType="_int">
 		select NVL(count(*),0) from member where userstatus='N' 
 	</select>
+	
+	<select id="memberList" resultType="member">
+		SELECT * FROM MEMBER
+	</select>
+
+	<select id="memberTotalContents" resultType="_int">
+		SELECT NVL(COUNT(*),0)
+		FROM MEMBER
+	</select>
+	
 <!--
 
 // 아이디 체크 프로시저

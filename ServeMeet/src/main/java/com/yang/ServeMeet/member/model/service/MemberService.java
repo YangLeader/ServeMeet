@@ -1,5 +1,6 @@
 package com.yang.ServeMeet.member.model.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,12 @@ public interface MemberService {
 	int todayUser();
 
 	int deleteUser();
+
+	List<Map<String, String>> memberList(int cPage, int numPerPage);
+
+	int memberTotalContents();
+
+	int returnMember(int userNo);
 
 
 }

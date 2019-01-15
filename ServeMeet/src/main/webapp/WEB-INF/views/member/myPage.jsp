@@ -161,7 +161,7 @@
 								<b>닉네임</b>
 							</h3>
 							<h4 class="nic_txt"> ${member.userName}</h4>
-							<h4 style="color:#5e73de"><b>${member.point}p</b></h4>
+							<h4 style="color:#5e73de" ><span id="getPoint" class="counter"></span></h4>
 							<a href="${pageContext.request.contextPath}/point/pointList.do">>포인트 내역</a>
 						</div>
 					</div>
@@ -230,6 +230,10 @@
 
 <script>
 
+	$(document).ready(function(){
+		getPoint();
+	})
+
 	function deleteUser(){
 		
 		swal({
@@ -238,10 +242,32 @@
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,
+			  closeOnClickOutside: false
 			}).then((willDelete) => {
+				if(willDelete){
 				location.href="${pageContext.request.contextPath}/member/memberDelete.do";
+				}else {
+				    return false;
+				 }
 			});
 		
+	}
+	
+	function getPoint(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/point/getPoint.do",
+			success : function(point){
+				console.log("포인트 : " + point);
+				$("#getPoint").html(point+"p");
+				
+            }, error : function(jqxhr, textStatus, errorThrown){
+                console.log("포인트 얻기ajax 처리 실패");
+                //에러로그
+                console.log(jqxhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+		});
 	}
 	
 	

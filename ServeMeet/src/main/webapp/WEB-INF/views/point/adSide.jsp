@@ -16,19 +16,38 @@
     <script>
     	function adClick(){
     		$.ajax({
-				url : "${pageContext.request.contextPath}/point/updatePoint.do",
-				data : {increasePoint : 1,
-						pContent : "광고 시청 포인트"
-						},
-				success : function(){
-					window.open("http://www.naver.net", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
-	            }, error : function(jqxhr, textStatus, errorThrown){
-	                console.log("ajax 처리 실패");
-	                //에러로그
-	                console.log(jqxhr);
-	                console.log(textStatus);
-	                console.log(errorThrown);
-	            }
-			});
+        		url : "${pageContext.request.contextPath}/point/getCount.do",
+        		data : {pContent : "광고 시청 포인트"},
+        		success : function(data){
+        			console.log("count : " +data )
+        			if(data>=10){
+
+        			}else{
+        				$.ajax({
+        					url : "${pageContext.request.contextPath}/point/updatePoint.do",
+        					data : {increasePoint : 1,
+        							pContent : "광고 시청 포인트"
+        							},
+        					success : function(){
+        						window.open("http://www.naver.net", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+        		            }, error : function(jqxhr, textStatus, errorThrown){
+        		                console.log("ajax 처리 실패");
+        		                //에러로그
+        		                console.log(jqxhr);
+        		                console.log(textStatus);
+        		                console.log(errorThrown);
+        		            }
+        				});
+        				
+        			}
+        				
+        		}, error : function(jqxhr, textStatus, errorThrown){
+		                console.log("포인트 얻기ajax 처리 실패");
+		                //에러로그
+		                console.log(jqxhr);
+		                console.log(textStatus);
+		                console.log(errorThrown);
+		            }
+        	});
     	}
     </script>

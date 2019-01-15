@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-md-9">
                       <div id="userName-container txtdiv">
-                      		<span class="txtSpan">&nbsp;${member.point}p</span>
+                      		<span class="txtSpan" id="getPoint">&nbsp;</span>
                       </div>
                     
                     </div>
@@ -190,7 +190,7 @@
 	var emailFlag = false;
 	
 	$(document).ready(function(){
-		
+		getPoint();
         checkPswd1();
    
         checkPswd2();
@@ -285,6 +285,23 @@
 	function cancel(){
 		location.href="${pageContext.request.contextPath}/member/memberView.do";
 		
+	}
+	
+	function getPoint(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/point/getPoint.do",
+			success : function(point){
+				console.log("포인트 : " + point);
+				$("#getPoint").html(point+"p");
+				
+            }, error : function(jqxhr, textStatus, errorThrown){
+                console.log("포인트 얻기ajax 처리 실패");
+                //에러로그
+                console.log(jqxhr);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+		});
 	}
 
 </script>
