@@ -136,10 +136,18 @@ public class MatchingController {
 				
 				}
 		}
+				
+		System.out.println("winnerChk = "+winnerChk);
+		String path = "common/msg";
 		
-		int battingId = battingService.checkBattingId(mHistory.getMatchingId());
+		if(!winnerChk.equals("A")) {
+			int battingId = battingService.checkBattingId(mHistory.getMatchingId());
+			
+			battingService.battingWinnerUpdate(winnerChk, battingId);
+			
+			path = "redirect:/batting/battingAllocation.ba?battingId="+battingId+"&winnerChk="+winnerChk;
+		}
 		
-		battingService.battingWinnerUpdate(winnerChk, battingId);
 				
 		int result;
 				
@@ -153,9 +161,9 @@ public class MatchingController {
 					
 		}
 				
-		String msg = "";
+		String msg = "매칭 후기 등록 성공!";
 		String loc = "/";		
-		String path = "redirect:/batting/battingAllocation.ba?battingId="+battingId+"&winnerChk="+winnerChk;
+		
 		if(result <= 0) {
 			msg = "매칭 후기 등록 실패!";
 			path ="common/msg";
