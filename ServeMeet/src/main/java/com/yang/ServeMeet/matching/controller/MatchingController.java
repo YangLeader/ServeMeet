@@ -429,6 +429,7 @@ public class MatchingController {
 		
 		
 		return null;
+	}
 
 	@RequestMapping(value="/matching/matchingAccept.ma",method=RequestMethod.POST)
 	@ResponseBody
