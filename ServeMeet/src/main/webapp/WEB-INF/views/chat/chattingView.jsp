@@ -194,9 +194,9 @@
 	}
 	function createChatRoom(){
 		if(memberName.length>1){
-			
-			if($(".modal-content .chatName").val()!=null){
-				createChatGroup();
+			var cChatName = $(".madal-chatName").val();
+			if(cChatName!=""){
+				createChatGroup(cChatName);
 			}else{
 				 swal("방 이름을 입력해주세요");
 			}
@@ -204,9 +204,9 @@
 			 swal("함께할 회원을 선택해주세요");
 		}
 	}
-  	function createChatGroup(){
+  	function createChatGroup(cChatName){
 		var jArray=JSON.stringify(memberName);
-		var cChatName = $(".modal-content .chatName").val();
+		
 		/* console.log("jArray+++");	
 		console.log(jArray);	
 		$.ajax({
