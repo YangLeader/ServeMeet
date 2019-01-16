@@ -32,6 +32,8 @@ public interface ChattingService {
 
 	void insertChatGroup(ChatCreateInfo chatInfo);
 
+	List<String> selectChatMember(int chattingId);
+
 	
 
 }

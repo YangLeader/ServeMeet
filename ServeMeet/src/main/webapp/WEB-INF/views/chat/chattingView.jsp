@@ -34,6 +34,7 @@
 			
 			$("#chatTxt").attr("disabled", "disabled");
 			$(".outBtn").prop('id', 'noneBtn');
+			$(".chatMember").prop('id', 'noneBtn');
 			console.log("1");
 		}
 		$.ajax({
@@ -45,6 +46,9 @@
 			},
 		 	datatype:"json",
 		 	success : function(data) {
+		 		
+		 		//자리
+		 		
 				//console.log(data);
 				for(var i in data){
 					
@@ -101,12 +105,25 @@
 	});
 	$(function() {
 		$("#outBtn").click(function() {
-			if (confirm("채팅방을 나가시겠습니까?") == true){    //확인
+			/* if (confirm("채팅방을 나가시겠습니까?") == true){    //확인
 				location.href="${pageContext.request.contextPath}/chat/chatOut.do/"+chatNo;
 			}else{   //취소
 			    return;
-			}
-			
+			} */
+			swal({
+				  title: "정말 나가시겠습니까?",
+				  text: "다시는 이 채팅방에 들어올 수 업습니다.",
+				  icon: "warning",
+				  buttons: ["취소", "확인"],
+				  dangerMode: true,
+				})
+				.then((willDelete) => {
+				  if (willDelete) {
+					    location.href="${pageContext.request.contextPath}/chat/chatOut.do/"+chatNo;
+				  } else {
+				   
+				  }
+				});
 		})
 		
 	})
@@ -250,10 +267,51 @@
   	  		
   		}
 	})
+	$(document).on("click","#chatMember",function() {
+			
+		$('.chatMemberList').toggle();
+	});
+  	$('html').click(function(e) {
+		
+		if(!$(e.target).hasClass("chatMember")) { 
+			console.log((e.target) );
+			$(".chatMemberList").hide();
+		}
+		
+		
+	})
 
 </script>
 <style>
-
+.chatMemberList{
+	display :none;
+	padding: 10px;
+    width: 110px;
+    height: auto;
+    position: absolute;
+    border:1px #aaa solid;
+    background-color: #fff;
+    z-index: 9998;
+    top: 60px;
+    left: 669px;
+    
+}
+#chatMemberTop{
+position: absolute;
+width: 20px;
+height: 11px;
+    left: 42px;
+    top: -20px;
+}
+.chatMemBox{
+text-align:center;
+margin-bottom:5px;
+height: 30px;
+width: 100%;}
+.chatMemBox:hover {
+	background-color: #5e73de;
+	color: #fff;
+}
 </style>
 </head>
 <body>
@@ -269,7 +327,16 @@
 		<div  class= 'col-lg-8 col-md-8 col-sm-8 col-xs-8 chatName'>
 			<h2>${chatName}</h2>
 			<span><img class="outBtn" id="outBtn" alt="채팅방 나가기" src="${pageContext.request.contextPath}/resources/images/out.png"></span> 
+			<span><img class="chatMember" id="chatMember" alt="채팅방 인원" src="${pageContext.request.contextPath}/resources/images/member.png"></span>
+			<div class="chatMemberList">
+				<img id="chatMemberTop"  src="${pageContext.request.contextPath}/resources/images/chatMember.png">
 			
+				<c:forEach items="${memberList}" var="mem">
+					<div class="chatMemBox">
+						${mem}
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 chatList scrollbar-primary" >

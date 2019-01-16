@@ -34,4 +34,6 @@ public interface ChattingDao {
 	void deletechatRoom(Map<String, Integer> map);
 
 	void insertChatGroup(ChatCreateInfo chatInfo);
+
+	List<String> selectChatMember(int chattingId);
 }
