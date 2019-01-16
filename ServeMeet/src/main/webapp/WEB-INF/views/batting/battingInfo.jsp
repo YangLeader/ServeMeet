@@ -69,7 +69,7 @@
 	      					success : function(point){
 	      						console.log("point : "+point);
 	    						if(point <100){
-	    							 alert("포인트가 모자랍니다.");
+	    							 swal("포인트가 모자랍니다.");
 	    							 location.reload(true);
 	    						 }else{
 	    							 $("#scratchBtn").attr("style","display:none");
@@ -82,11 +82,15 @@
 	    								async : false,
 	    								success : function(data){
 	    									if(data == 'success'){
+	    										
+	    										// 여기 고쳐주세요
+	    										// 팀이 선택되었습니다. 뜨고 바로 꺼져요
+	    										
 	    										location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
-	    										alert(battingType+"팀이 선택되었습니다.")
+	    										swal(battingType+"팀이 선택되었습니다.");
 	    										location.href='${pageContext.request.contextPath}/batting/battingInfo.ba?no=${batting.BATTINGID}';
 	    									} else{
-	    										alert("이미 선택한 배팅입니다.")
+	    										swal("이미 선택한 배팅입니다.")
 	    									}
 	    									
 	    					            }, error : function(jqxhr, textStatus, errorThrown){
@@ -95,7 +99,7 @@
 	    					                console.log(jqxhr);
 	    					                console.log(textStatus);
 	    					                console.log(errorThrown);
-	    					                alert("이미 선택한 배팅입니다.")
+	    					                swal("이미 선택한 배팅입니다.")
 	    					            }
 	    							});
 	    						 

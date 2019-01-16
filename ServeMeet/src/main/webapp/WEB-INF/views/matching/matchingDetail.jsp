@@ -232,7 +232,9 @@ background-size:cover;
 				<c:otherwise>
 					<c:choose>
 						<c:when test="${mDetail.mWriter eq member.userName}">
-							<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
+							<c:when test='${mDetail.mhStatus eq "AFTER" }'>
+								<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
+							</c:when>
 						</c:when>
 						<c:when test="${mDetail.mWriter eq member.userName}">
 							<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
