@@ -158,19 +158,22 @@
 		
 		if(idFlag==false){
 			swal("아이디를 다시 확인해주세요.");
+			return false;
 		}else if(pwdFlag==false){
 			swal("비밀번호를 다시 확인해주세요.");
+			return false;
 		}else if(pwdFlag2==false){
 			swal("비밀번호 확인이 일치하지 않습니다.");
+			return false;
 		}else if(nameFlag==false){
 			swal("이름을 다시 확인해주세요.");
 			$("name").focus();
 		}else if(emailFlag==false){
 			swal("이메일을 다시 확인해주세요.");
 			$("#email").focus();
+			return false;
 		}else{
 			$("#enrollForm").submit();
-			location.href="${pageContext.request.contextPath}/member/memberEnrollEnd.do";
 		}
 		
 	}

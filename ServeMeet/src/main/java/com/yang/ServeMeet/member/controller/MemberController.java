@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.member.model.service.MemberService;
 import com.yang.ServeMeet.member.model.vo.Member;
+import com.yang.ServeMeet.point.model.service.PointService;
+import com.yang.ServeMeet.point.model.vo.Point;
 
 @SessionAttributes(value= {"member"})
 @Controller
@@ -34,6 +36,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -77,7 +80,7 @@ public class MemberController {
 			System.out.println("비밀번호 암호화 후 : "+member.getUserPwd());
 			
 			int result = memberService.insertMember(member);
-			
+			memberService.updatePoint(member.getUserNo(), 300);
 			String loc = "/";
 			String msg = "";
 			
