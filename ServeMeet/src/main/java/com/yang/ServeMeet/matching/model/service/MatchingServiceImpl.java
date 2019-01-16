@@ -31,7 +31,7 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 	
 	@Override
-	public List<Map<String,String>> myMatchingList(Map<String,String> map){
+	public List<MatchingListObj> myMatchingList(Map<String,String> map){
 		
 		return matchingDao.myMatchingList(map);
 	}

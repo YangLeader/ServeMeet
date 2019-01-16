@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -10,6 +9,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/matching.css"
 	type="text/css">
+	
 <meta charset="UTF-8">
 <title>매칭 리스트</title>
 </head>
@@ -98,14 +98,18 @@
 		function MatchingList(msts){
 			var userName =  '${member.userName}';
 			$.ajax({
-				type : "GET",
-				url : "/ServeMeet/matching/myMatchingListType.ma",
-				datatype:"json",
-				data : { type : msts,
+				url : "${pageContext.request.contextPath}/matching/myMatchingListType.do",
+			 	data : { type : msts,
 						userName :userName
 				},
-				success : function(){
+				type : "get",
+				dataType : "json",
+				success : function(data){
 					console.log(data);
+					
+					for(var i in data){
+						console.log(data[i].bigCategory);
+					}
 				},
 				error:function(){
 					console.log("에러났대요");

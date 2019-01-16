@@ -21,7 +21,7 @@
 		<result property="smallCategory" column="SMALLCATEGORY"></result>
 	</resultMap>
 
-	<select id="myMatchingList" parameterType="Map" resultType="Map">
+	<select id="myMatchingList" parameterType="map" resultType="MatchingObj">
 	<if test="type=='ing'">
 		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE (MSTATUS = 'BEFORE' or MSTATUS = 'ING' )AND MWRITER = #{userName}
 	</if>

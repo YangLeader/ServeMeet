@@ -28,7 +28,7 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 	
 	@Override
-	public List<Map<String,String>> myMatchingList(Map<String,String> map){
+	public List<MatchingListObj> myMatchingList(Map<String,String> map){
 
 		return session.selectList("Matching.myMatchingList",map);
 	}
