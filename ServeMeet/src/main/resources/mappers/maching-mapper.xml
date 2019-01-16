@@ -121,6 +121,10 @@
 		select * from matchingcondition where matchingid= #{matchingId} order by MSTATUS
 	</select>
 	
+	<select id="mHistoryContentCount" resultType="_int" >
+		SELECT COUNT(*) FROM MATCHINGHISTORY WHERE MHSTATUS = 'Y'
+	</select>
+	
 	<insert id="matchingRequest">
 		INSERT INTO MATCHINGCONDITION VALUES (SEQ_MCONID.NEXTVAL, #{matchingId}, #{mWriter}, #{mGuest}, #{mContent}, DEFAULT)
 	</insert>
@@ -160,5 +164,6 @@
 	<update id="matchingDeclineAll" parameterType="_int">
 		update matchingcondition set mstatus='2DECLINE' where mconid!=#{conId} AND matchingId=#{matchingId}
 	</update>
+	
 
 </mapper>

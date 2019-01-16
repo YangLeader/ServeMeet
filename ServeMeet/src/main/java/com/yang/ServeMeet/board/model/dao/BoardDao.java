@@ -65,4 +65,5 @@ public interface BoardDao {
 	void updateRestoreBoard(int boardNo);
 
 	List<Map<String, Object>> selectBlindList();
+	
 }
