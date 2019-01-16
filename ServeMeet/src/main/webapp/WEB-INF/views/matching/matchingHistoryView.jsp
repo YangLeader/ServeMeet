@@ -62,18 +62,6 @@
 				<span class="glyphicon glyphicon-list-alt"></span> 목록
 			</a>
 			
-			<c:if test="${board.userName eq member.userName}">
-			<div class="button_box_right">
-								<a href="${pageContext.request.contextPath }/board/boardUpdateView.do?no=${board.boardNo }" class="bbs_btn">
-					<span class="glyphicon glyphicon-edit" ></span> 수정
-				</a>
-				
-								<a href="${pageContext.request.contextPath}/board/boardDelete.do?no=${board.boardNo}" class="bbs_btn" onclick="return delete_board();">
-					<span class="glyphicon glyphicon-trash"></span> 삭제
-				</a>
-			
-			</div>
-			</c:if>
 		</div>
 	</div>
 	<!-- } 게시물 상단 버튼 끝 -->
@@ -115,6 +103,7 @@
 		
         <!-- 본문 내용 시작 { -->
         <div id="bo_v_con">
+        <pre style="background-color: white; white-space: pre-wrap; padding: 0px 10px;">
         	<c:forEach items="${boardFileList}" var="bf">
         	<c:if test="${bf.extension eq '.png' or bf.extension eq '.bmp' or bf.extension eq '.jpg' or bf.extension eq '.jpeg' or bf.extension eq '.gif'}">
         	<p>
@@ -127,9 +116,10 @@
         	</p>
         	</c:if>
         	</c:forEach>
-        	<p><br /></p>
-        	<pre style="background-color: white; white-space: pre-wrap; padding: 30px 15px;"><p>${mHistory.MHCONTENT}</p></pre>
-        	<p><br /></p>
+        	
+        	<p>${mHistory.MHCONTENT}</p>
+        	
+        </pre>
         </div>
                 <!-- } 본문 내용 끝 -->
 

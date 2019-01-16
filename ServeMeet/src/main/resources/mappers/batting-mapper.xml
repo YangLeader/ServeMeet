@@ -38,8 +38,11 @@
 	</select>
 	
 	
-	<select id="battingTotalContents" resultType="_int">
-		SELECT COUNT(*) FROM BATTING WHERE BSTATUS = 'Y'
+	<select id="battingTotalContents" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM BATTING 
+		<where>
+			<if test='_parameter != "A"'> BSTATUS = #{bstatus}</if>
+		</where>
 	</select>
 	
 
@@ -68,7 +71,7 @@
 	</update>
 	
 	<select id="myBattingList" resultType="map">
-		SELECT * FROM (SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID)JOIN BATTINGUSER USING(BATTINGID)) JOIN CATEGORY USING(CATEGORYID) WHERE userName= #{userName}
+		SELECT * FROM (SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID)JOIN BATTINGUSER USING(BATTINGID)) JOIN CATEGORY USING(CATEGORYID) WHERE userName= #{userName} ORDER BY BATTINGID
 	</select>
 	
 	<update id="winnerUpdate" parameterType="map">

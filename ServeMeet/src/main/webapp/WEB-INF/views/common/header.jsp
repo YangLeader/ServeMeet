@@ -93,14 +93,14 @@ float: right;
 						<a href="${pageContext.request.contextPath}/"><img
 							src="${pageContext.request.contextPath}/resources/images/logo.png"
 							alt=""></a>
-						<div id = "search" >
+						<%-- <div id = "search" >
 							<input type="text"  name="search" id = "searchTxt"/>
 							<span class = "a">
 								<button class="searchBtn">
 									<img class="searchImg" src="${pageContext.request.contextPath}/resources/images/search2.png">
 								</button>
 							</span>
-						</div>
+						</div> --%>
 					</div>
 				</div>
 			</div>
@@ -196,7 +196,7 @@ $(function() {
 												title="내정보보기">내정보보기</a></li>
 												<li><a href="${pageContext.request.contextPath}/board/myBoardList.do?userName=${member.userName}" title="내 게시글">내가 작성한 게시글</a></li>
 												<%-- <li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="등록중인 매칭">매칭 히스토리</a></li> --%>
-												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma?userName=${member.userName}&type=P" title="매칭 히스토리">매칭 히스토리</a></li>
+												<li><a href="${pageContext.request.contextPath}/matching/myMatchingList.ma" title="매칭 히스토리">매칭 히스토리</a></li>
 												<li><a href="${pageContext.request.contextPath}/batting/myBattingList.ba?userName=${member.userName}" title="배팅히스토리">배팅 히스토리</a></li>
 												
 												<c:if test="${member.userId eq 'admin' }">

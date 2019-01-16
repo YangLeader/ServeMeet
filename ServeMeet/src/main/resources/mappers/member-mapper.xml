@@ -16,6 +16,10 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="Member">
+		<selectKey keyProperty="userNo" resultType="_int"
+			order="AFTER">
+			SELECT SEQ_MEMBER.CURRVAL FROM DUAL
+		</selectKey>
 		INSERT INTO MEMBER VALUES(
 			SEQ_MEMBER.NEXTVAL,#{userId}, #{userPwd}, #{userName},#{email},0,default,default
 		)

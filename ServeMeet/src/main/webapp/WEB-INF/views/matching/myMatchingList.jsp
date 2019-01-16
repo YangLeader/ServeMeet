@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -10,6 +10,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/matching.css"
 	type="text/css">
+	
 <meta charset="UTF-8">
 <title>매칭 리스트</title>
 </head>
@@ -17,8 +18,6 @@
 	<header>
 		<c:import url="../common/header.jsp" />
 	</header>
-
-
 	<div class="listDiv">
 		<br>
 		<br>
@@ -26,11 +25,14 @@
 		<br>
 		<div id="topMenu">
 			<div class="category">
-				<div class="condition on" id="loc" onclick="ingMatching()">
+				<div class="condition on" id="loc">
 					<span>진행중인 매칭</span>
 				</div>
-				<div class="condition" id="cate" onclick="endMatching()">
+				<div class="condition" id="cate">
 					<span>종료된 매칭</span>
+				</div>
+				<div class="condition" id="apply">
+					<span>신청한 매칭</span>
 				</div>
 			</div>
 		</div>
@@ -47,57 +49,89 @@
 			<div class="conTitle" id="mpeople">모집 인원</div>
 			<div class="conTitle" id="mStatus">매칭 상태</div>
 		</div>
-		<c:forEach items="${matchingList}" var="m">
-			<div class="objM" onclick="showMatching()">
-				<div class="con" id="catBName">${m.BIGCATEGORY}</div>
-				<div class="con" id="catSName">${m.MIDCATEGORY }</div>
-				<div class="con" id="mtTitle">
-					<strong>${m.MTITLE }</strong>
-				</div>
-				<div class="con" id="locName">${m.BIGLOCATION }
-					${m.MIDLOCATION} ${m.SMALLLOCATION}</div>
-				<div class="con" id="mtwriter">${m.MWRITER }</div>
-				<div class="con" id="mtTime">${m.MTIME}</div>
-				<div class="con" id="mpeople">${m.MPEOPLENUM}명</div>
-				<c:choose>
-					<c:when test="${m.MSTATUS eq 'BEFORE'}">
-						<div class="con cgr" id="mStatus">● 매칭 대기</div>
-					</c:when>
-					<c:when test="${m.MSTATUS eq 'ING'}">
-						<div class="con cbl" id="mStatus">매칭 중</div>
-					</c:when>
-					<c:otherwise>
-						<div class="con crd" id="mStatus">매칭 종료</div>
-					</c:otherwise>
-				</c:choose>
-				<input type="hidden" id="mid" value="${m.MATCHINGID }" />
-			</div>
-		</c:forEach>
-	</div>
 	</div>
 	<br />
 	<br />
 	<footer>
-		<c:import url="../common/footer.jsp" />
+		<c:import url="../common/footer.jsp"/>
 	</footer>
 
-
 	<script>
+	$(function() {
+		MatchingList("ing");
+		$("#loc").click(function() {
+			MatchingList('ing');
+			onController("#loc");
+		});
+		$("#cate").click(function() {
+			MatchingList('end');
+			onController("#cate");
+		});
+		$("#apply").click(function() {
+			MatchingList('apply');
+			onController("#apply");
+		});
+		function onController(ck) {
+			$(".on").removeClass("on");
+			$(ck).attr("class","condition on");
+		}
+		
 		$('.con').click(function() {
 			var matNum = $(this).siblings().last().val();
 			location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum="
 					+ matNum;
 		});
-		function(ingMatching){
+		
+		function MatchingList(msts){
+			var userName =  '${member.userName}';
+			$(".objM").remove();
 			$.ajax({
-				type : "GET",
-				url : "/ServeMeet/matching/myMatchingList.ma",
-				datatype : "JSON",
-				data : { type = "P" },
-				success
+				url : "${pageContext.request.contextPath}/matching/myMatchingListType.do",
+			 	data : { type : msts,
+						userName :userName
+				},
+				type : "get",
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					
+					for(var i in data){
+						
+						
+						var divList = "<div class='objM' onclick='showMatching()'>";
+						divList+= "<div class='con' id='catBName'>"+data[i].bigCategory+"</div>";
+						divList+= "<div class='con' id='catSName'>"+data[i].midCategory+"</div>";
+						divList+= "	<div class='con' id='mtTitle'>";
+						divList+= "	<strong>"+data[i].mTitle+"</strong></div>";
+						if(data[i].bigLocation=='지역없음'){
+							divList+= "	<div class='con' id='locName'>"+data[i].bigLocation+"</div>";
+						}else{
+							divList+= "	<div class='con' id='locName'>"+data[i].bigLocation+" "+data[i].midLocation+" "+data[i].smallCategory+"</div>";
+						}
+						divList+= "	<div class='con' id='mtwriter'>"+data[i].mWriter+"</div>";
+						divList+= "	<div class='con' id='mtTime'>"+data[i].mtime+"</div>";
+						divList+= "	<div class='con' id='mpeople'>"+data[i].mPeoplenum+"명</div>";
+						if(data[i].mStatus=="BEFORE"){
+							divList+= "<div class='con cgr' id='mStatus'>● 매칭 대기</div>";
+						}else if(data[i].mStatus=="ING"){
+							divList+= "<div class='con cbl' id='mStatus'>매칭 중</div>";
+						}else{
+							divList+= "<div class='con crd' id='mStatus'>매칭 종료</div>";
+						}
+						divList+= "	<input type='hidden' id='mid' value='"+data[i].matchingId+"' /></div>";
+						$(".listDetailDiv").append(divList);
+					}
+					console.log(divList);
+					
+				},
+				error:function(){
+					console.log("에러났대요");
+				}
 				
-			})
+			});
+		
 		}
+	})
 	</script>
 </body>
 </html>

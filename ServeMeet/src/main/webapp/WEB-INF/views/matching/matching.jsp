@@ -69,7 +69,7 @@
 			<span>날짜</span>
 		</div>
 		<input type="hidden" id="mName" value="${member.userName }"/>
-		<a href="${pageContext.request.contextPath }/matching/matchingInsertView.ma"  class="submit_btn">+ 매칭등록</a>
+		<a href="${pageContext.request.contextPath }/matching/matchingInsertView.ma"  class="submit_btn">+ 새 매칭등록</a>
 
 	</div>
 	<div class="in scrollbar-primary scrollbar" id="location" style="position: relative;">
@@ -211,6 +211,10 @@
 	$(function() {
 	
 		$(".item").click(function() {
+			$(this).css({'color':'#5e73de', 'font-weight':'900'});
+			$(this).css('background-color', '#e2f5fc');
+			$(this).siblings().css({'color':'black', 'font-weight':'300'});
+			$(this).siblings().css('background-color', 'white');
 			$('#midDiv').show();
 			$('#smallDiv').show();
 			$('#kindsDiv').hide();
@@ -273,6 +277,10 @@
 	function midSelect(obj) {
 		$("#midDiv").children("ul").children("li").click(
 			function() {
+				$(this).css({'color':'#5e73de', 'font-weight':'900'});
+				$(this).css('background-color', '#e2f5fc');
+				$(this).siblings().css({'color':'black', 'font-weight':'300'});
+				$(this).siblings().css('background-color', 'white');
 			locId = $(this).text();
 			console.log("midlocId : " + locId);
 			//repleId = locId.replace(/ /g, '');
@@ -281,7 +289,15 @@
 				$('#smallDiv *').remove();
 
 				$("a").remove(":contains(" + locName + ")");
-
+				
+				while(true){
+					var search = arr.indexOf("지역없음");
+					if(search != -1){
+						arr.splice(search, 1);
+					}else{
+						break;
+					}
+				}
 				var arr2 = arr.filter(function(n) {
 					return n.match(locName);
 				});
@@ -406,20 +422,26 @@
 
 	function lastSelect(obj) {
 	
-			
-		$(".locCkbx")
+
+			$(".locCkbx")
 				.change(
 						function() {
+							
 							fullName = locName + locId + $(this).val();
 							console.log("디스:" + $(this).val());
 							console.log("locId : " + locId);
 							if(arr[0] == "지역없음"){
 								arr.splice(0, 1);
 								console.log("arr:" + arr);
-							}
+							}	
 							if ($(this).is(":checked")) {
+								$(this).parent().css({'color':'#5e73de', 'font-weight':'900'});
+								$(this).parent().parent().css('background-color', '#e2f5fc');
 
 								if ($(this).val() == (locId + " 전체")) {
+									$('input[id^="locCk"]').parent().css({'color':'black', 'font-weight':'300'});
+									$('input[id^="locCk"]').parent().parent().css('background-color', 'transparent ');
+									
 									console.log("전체선택");
 									console.log("1번 : " + $(this).val());
 									console.log("locName : " + locName);
@@ -485,8 +507,9 @@
 									console.log("locName:" + locName);
 									console.log("$(this).val():"
 											+ $(this).val());
-									$('input[id="locAll"]').prop('checked',
-											false);
+									$('input[id="locAll"]').prop('checked',false);
+									$('input[id="locAll"]').parent().css({'color':'black', 'font-weight':'300'});
+									$('input[id="locAll"]').parent().parent().css('background-color', 'white');
 									$("a[id='" + locId + "']").remove();
 									console.log("locName : " + locName);
 									$("a[id='" + locName + " 전체']").remove();
@@ -517,6 +540,8 @@
 								}
 
 							} else {
+								$(this).parent().css({'color':'black', 'font-weight':'300'});
+								$(this).parent().parent().css('background-color', 'white');
 								console.log("클릭해체한값 : " + $(this).val());
 								console.log("현재 arr : " + arr);
 								console.log("locName : " + locName);
@@ -532,20 +557,26 @@
 							console.log("arr2:" + arr2);
 
 							//divClickEvent();
+							
 						});
+		
 	}
 
 	// 내일 여기서부터 작업
 	function check(obj) {
 		var delAtag = $(obj).text();
-
+		console.log("delAtag : " + delAtag)
 		$("a").remove(":contains(" + delAtag + ")");
+		
 		arr.splice(arr.indexOf(delAtag), 1);
 
 		var delCkbx = delAtag.substring(delAtag.indexOf(" ") + 1);
+		
 		console.log(delCkbx);
 
 		$('.locCkbx[value="' + delCkbx + '"]').prop('checked', false);
+		$('.locCkbx[value="' + delCkbx + '"]').parent().css({'color':'black', 'font-weight':'300'});
+		$('.locCkbx[value="' + delCkbx + '"]').parent().parent().css('background-color', 'transparent ');
 
 	}
 
@@ -570,9 +601,12 @@
 	}
 
 	function selectkindsCategory() {
+		
 		$('#midDiv').hide();
 		$('#smallDiv').hide();
 		$('#kindsDiv').show();
+		$('#kd1').parent().css({'color':'#5e73de', 'font-weight':'900'});
+		$('#kd1').parent().parent().css('background-color', '#e2f5fc');
 		
 		$('#kindsDiv').css('border', '1px solid black');
 	/* 	$('#detailKindsDiv').show().css('border', '1px solid #DDE7EB');
@@ -631,17 +665,40 @@
 		 	textkd = $(this).find('.kd').val();
 			
 		 	console.log(textkd);
+			
 		 	if(textkd == "소모임"){
+		 		$('#kd1').parent().css({'color':'#5e73de', 'font-weight':'900'});
+				$('#kd1').parent().parent().css('background-color', '#e2f5fc');
+				
+				$('#kd2').parent().css({'color':'black', 'font-weight':'300'});
+				$('#kd2').parent().parent().css('background-color', 'white');
+				$('#kd3').parent().css({'color':'black', 'font-weight':'300'});
+				$('#kd3').parent().parent().css('background-color', 'white');
+				
 		 		$('#dekd1').show();
 		 		$('#dekd2').hide();
 		 		$('#dekd3').hide();
 		 		$('.over').hide();
 		 	}else if(textkd == "스포츠"){
+		 		$('#kd2').parent().css({'color':'#5e73de', 'font-weight':'900'});
+				$('#kd2').parent().parent().css('background-color', '#e2f5fc');
+				$('#kd2').parent().parent().siblings().css('background-color', 'white');
+				$('#kd1').parent().css({'color':'black', 'font-weight':'300'});
+				$('#kd1').parent().parent().css('background-color', 'white');
+				$('#kd3').parent().css({'color':'black', 'font-weight':'300'});
+				$('#kd3').parent().parent().css('background-color', 'white');
 		 		$('#dekd1').hide();
 		 		$('#dekd2').show();
 		 		$('#dekd3').hide();
 		 		$('.over').hide();
 		 	}else{
+		 		$('#kd3').parent().css({'color':'#5e73de', 'font-weight':'900'});
+				$('#kd3').parent().parent().css('background-color', '#e2f5fc');
+				$('#kd3').parent().parent().siblings().css('background-color', 'white');
+				$('#kd1').parent().css({'color':'black', 'font-weight':'300'});
+				$('#kd1').parent().parent().css('background-color', 'white');
+				$('#kd2').parent().css({'color':'black', 'font-weight':'300'});
+				$('#kd2').parent().parent().css('background-color', 'white');
 		 		$('#dekd1').hide();
 		 		$('#dekd2').hide();
 		 		$('#dekd3').show();
@@ -667,6 +724,13 @@
 		
 		$('.item2in1').click(function () {
 			textDetailkd = $(this).find('.dekd').val();
+			$('#detailKindsDiv').css("border", "1px solid black");
+			$('#kindsDiv').show().css('border', '1px solid #DDE7EB');
+			
+			$(this).children().css({'color':'#5e73de', 'font-weight':'900'});
+			$(this).siblings().children().css({'color':'black', 'font-weight':'300'});
+			$(this).css('background-color', '#e2f5fc');
+			$(this).siblings().css('background-color', 'white');
 			
 			console.log( textkd +" + " +textDetailkd);
 			
@@ -682,6 +746,11 @@
 		$('.item3').click(function() {
 			selectpersonCategory();
 		 	textps = $(this).find('.ps').text();
+		 	
+			$(this).children().css({'color':'#5e73de', 'font-weight':'600'});
+			$(this).siblings().children().css({'color':'black', 'font-weight':'300'});
+			$(this).css('background-color', '#e2f5fc');
+			$(this).siblings().css('background-color', 'white');
 		 	
 			$("#bottomDiv").find('a').each(function () {
 				if($(this).find('#ckps')){
@@ -764,7 +833,7 @@
 					html += "<div class='schListDiv'>";
 					$.each(data, function(idx, val) {
 						console.log(idx + " " + val.mTitle);
-						html += '<div class="schObj">';
+						html += '<div class="schObj ">';
 						html += '<div class="schCat">'+ val.bigCategory + ' - ' + val.midCategory +'</div>';
 						html += '<div class="greyRule"></div>';
 						html += '<input type="hidden" id="matId" value='+val.matchingId+'>';
@@ -779,7 +848,7 @@
 					});
 					html += '</div>';
 					html += '<div class="backDiv">';
-					html += '<button class="backbtn">다른 조건으로 검색하기</button>';
+					html += '<button class="backbtn sb_btn">다른 조건으로 검색하기</button>';
 					html += '</div>';
 					html += '</div>';
 					

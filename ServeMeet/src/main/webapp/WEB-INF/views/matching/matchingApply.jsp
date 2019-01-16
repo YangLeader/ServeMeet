@@ -8,6 +8,7 @@
 <html>
 <head>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .applyBigDiv{
 
@@ -169,12 +170,17 @@ $('#requestMatching').click(function(){
 			console.log("data : "+data);
 			opener.parent.matsk.send(writer);
 			opener.parent.location.reload();
+			swal({
+		   			text : "매칭 신청이 완료되었습니다.",
+		   			closeOnClickOutside: false
+		   			})
+                .then((value) =>{
 			window.close();
-
+            });
+               
 		}, error : function(data){
-			alert("에러가 발생했습니다!");
+			swal("내용을 입력해주세요.");
 			
-			self.close();
 		}
 	});
 	

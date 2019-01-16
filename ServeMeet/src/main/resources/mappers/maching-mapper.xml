@@ -21,9 +21,17 @@
 		<result property="smallCategory" column="SMALLCATEGORY"></result>
 	</resultMap>
 
-	<select id="myMatchingList" resultType="Map">
-
-		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'BEFORE' AND MWRITER = #{userName}
+	<select id="myMatchingList" parameterType="map" resultType="MatchingObj">
+	<if test="type=='ing'">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE (MSTATUS = 'BEFORE' or MSTATUS = 'ING' )AND MWRITER = #{userName}
+	</if>
+	<if test="type=='end'">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER' AND MWRITER = #{userName}
+	</if>
+	<if test="type=='apply'">
+		select M.MATCHINGID,M.MTITLE,M.MCONTENT,M.MPEOPLENUM,M.MWRITER,M.MGUEST,M.MTIME,M.MSTATUS,M.BIGCATEGORY,M.MIDCATEGORY,M.BIGLOCATION,M.MIDLOCATION,M.SMALLCATEGORY 
+		from (select Matchingid from Matchingcondition where Mguest=#{userName})t1 join (select * from (SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID)) )m on M.Matchingid=t1.Matchingid
+	</if>
 	</select>
 
 	<select id="myMatchingEndList" resultType="Map">
@@ -31,7 +39,7 @@
 	</select>
 	
 	<select id="mHistoryList" resultType="Map">
-		SELECT * FROM (SELECT * FROM MATCHINGHISTORY JOIN MATCHING USING(MATCHINGID)) JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID)
+		SELECT * FROM (SELECT * FROM MATCHINGHISTORY JOIN MATCHING USING(MATCHINGID)) JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) ORDER BY MHISTORYID desc
 	</select>
 	
 
@@ -67,7 +75,7 @@
 		AND M.CATEGORYID = C.CATEGORYID
         AND M.CATEGORYID LIKE #{cat} || '%'
         and  M.MGUEST is null
-        order by MATCHINGID desc)
+        order by MATCHINGID)
         where rnum<![CDATA[<]]>5
 	</select>
 	
@@ -128,7 +136,7 @@
 			AND (LOCATIONID IN (
 			<foreach item="item" index="index" collection="searchList"  separator="))OR LOCATIONID IN(" close=")">
 				<choose>
-					<when test="item.smallCategory == null and item.midLocation == ''">
+					<when test="item.smallCategory == null and item.midLocation == null or item.midLocation == ''">
 						(SELECT LOCATIONID FROM LOCATION WHERE BIGLOCATION = #{item.bigLocation}
 					</when>
 					<when test="item.bigLocation != null and item.smallCategory == null">

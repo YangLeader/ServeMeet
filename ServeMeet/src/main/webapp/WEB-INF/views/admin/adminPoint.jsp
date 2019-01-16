@@ -37,6 +37,7 @@
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
 	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<style>
 	
 		
@@ -90,12 +91,6 @@
                     <a href="${pageContext.request.contextPath}/admin/reportList.do">
                         <i class="ti-view-list-alt"></i>
                         <p>신고 관리</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-heart"></i>
-                        <p>매칭 관리</p>
                     </a>
                 </li>
                 <li class="active">
@@ -289,7 +284,7 @@
                                 <h4 class="title">포인트 적립</h4>
                                 <p class="category">회원에게 포인트를 부여할 수 있습니다.</p>
                             </div>
-                            <form name="plusPointFrm" id ="pPointForm" action="plusPointAdmin.do" method="post">
+                            <div name="plusPointFrm" id ="pPointForm" >
                             <div class="content">
 								<div id="plusIdInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								 <div class="row">
@@ -328,7 +323,7 @@
 				                    </div>
 								</div>
 								<div class="pointButton" align = "center">
-	                            	<button id="pPoint" type="submit" onclick="pButton()" > 확인</button>
+	                            	<button id="pPoint" onclick="pButton()" > 확인</button>
 	                            </div>
 								
                                 <div class="footer">
@@ -339,7 +334,7 @@
                                     
                                 </div>
                             </div>
-                            </form>
+                            </div>
                             
                         </div>
                     </div>
@@ -349,7 +344,7 @@
                                 <h4 class="title">포인트 회수</h4>
                                 <p class="category">회원에게 포인트를 회수할 수 있습니다.</p>
                             </div>
-                            <form name="minusPontFrm" id ="mPointForm" action="minusPointAdmin.do" method="post">
+                            <div name="minusPontFrm" id ="mPointForm">
                             <div class="content">
 								<div id="minusIdInput" class="pInput col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								 <div class="row">
@@ -388,7 +383,7 @@
 				                    </div>
 								</div>
 								<div class="pointButton" align = "center">
-	                            	<button id="mPoint" type="submit" onclick="mButton()" > 확인</button>
+	                            	<button id="mPoint" onclick="mButton()" > 확인</button>
 	                            </div>
                                 <div class="footer">
                                     <div class="chart-legend">
@@ -398,7 +393,7 @@
                                     
                                 </div>
                             </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -508,6 +503,50 @@
 			});
 			
 		} 
+		
+		function pButton(){
+			$.ajax({
+		        url  : "${pageContext.request.contextPath}/admin/plusPointAdmin.do",
+		        data : { pNo : $('#pNo').val(),
+		        		 pPoint : $('#pPoint').val(),
+		        		 pMemo : $('#pMemo').val()
+		        		},
+		        success : function(data){
+		        	swal("포인트 지급이 완료되었습니다.");
+		        	$('#pNo').val("");
+		        	$('#pPoint').val("");
+		        	$('#pMemo').val("");
+		        }, error : function(jqxhr, textStatus, errorThrown){
+		            console.log("ajax 처리 실패");
+		            //에러로그
+		            console.log(jqxhr);
+		            console.log(textStatus);
+		            console.log(errorThrown);
+		        }
+			});
+		}
+		
+		function mButton(){
+			$.ajax({
+		        url  : "${pageContext.request.contextPath}/admin/minusPointAdmin.do",
+		        data : { mNo : $("#mNo").val(),
+		        		 mPoint : $("#mPoint").val(),
+		        		 mMemo : $("#mMemo").val()
+		        		},
+		        success : function(data){
+		        	swal("포인트 차감이 완료되었습니다.");
+		        	$("#mNo").val("");
+		        	$("#mPoint").val("");
+		        	$("#mMemo").val("");
+		        }, error : function(jqxhr, textStatus, errorThrown){
+		            console.log("ajax 처리 실패");
+		            //에러로그
+		            console.log(jqxhr);
+		            console.log(textStatus);
+		            console.log(errorThrown);
+		        }
+			});
+		}
     	
 
 	</script>

@@ -53,17 +53,7 @@
 	<br><br><br>
 
 		<script>
-		function button1_click(battingType) {
-			var result = confirm("한번 선택한 배팅은 취소나 변경이 불가능 합니다. 선택하신 팀이 맞습니까? ");
-			
-			if (result) {
-				location.href="${pageContext.request.contextPath}/batting/battingPick.ba?battingId="+${batting.BATTINGID}+"&battingType="+battingType+"&userName=${member.userName}";
-				swal("선택되었습니다.");
-			} else {
-			}
-		}
-		
-		
+				
 		function btnBatting(battingType){
 			swal({
 				  title: "100포인트가 차감됩니다.",
@@ -79,7 +69,7 @@
 	      					success : function(point){
 	      						console.log("point : "+point);
 	    						if(point <100){
-	    							 alert("포인트가 모자랍니다.");
+	    							 swal("포인트가 모자랍니다.");
 	    							 location.reload(true);
 	    						 }else{
 	    							 $("#scratchBtn").attr("style","display:none");
@@ -90,16 +80,26 @@
 	    										userName : "${member.userName}"
 	    										},
 	    								async : false,
-	    								success : function(){
-	    									location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
-	    									alert(battingType+"팀이 선택되었습니다.")
+	    								success : function(data){
+	    									if(data == 'success'){
+	    										
+	    										// 여기 고쳐주세요
+	    										// 팀이 선택되었습니다. 뜨고 바로 꺼져요
+	    										
+	    										location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
+	    										swal(battingType+"팀이 선택되었습니다.");
+	    										location.href='${pageContext.request.contextPath}/batting/battingInfo.ba?no=${batting.BATTINGID}';
+	    									} else{
+	    										swal("이미 선택한 배팅입니다.")
+	    									}
+	    									
 	    					            }, error : function(jqxhr, textStatus, errorThrown){
 	    					                console.log("배팅 ajax 처리 실패");
 	    					                //에러로그
 	    					                console.log(jqxhr);
 	    					                console.log(textStatus);
 	    					                console.log(errorThrown);
-	    					                alert("이미 선택한 배팅입니다.")
+	    					                swal("이미 선택한 배팅입니다.")
 	    					            }
 	    							});
 	    						 
@@ -120,19 +120,6 @@
 						  }
 						});
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	</script>
 </body>
 </html>
