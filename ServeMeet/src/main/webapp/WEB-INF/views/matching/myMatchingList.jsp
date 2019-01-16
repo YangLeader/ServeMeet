@@ -76,7 +76,7 @@
 			$(ck).attr("class","condition on");
 		}
 		
-		$('.con').click(function() {
+		$(document).on("click",".con",function() {
 			var matNum = $(this).siblings().last().val();
 			location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum="
 					+ matNum;
@@ -98,7 +98,7 @@
 					for(var i in data){
 						
 						
-						var divList = "<div class='objM' onclick='showMatching()'>";
+						var divList = "<div class='objM'>";
 						divList+= "<div class='con' id='catBName'>"+data[i].bigCategory+"</div>";
 						divList+= "<div class='con' id='catSName'>"+data[i].midCategory+"</div>";
 						divList+= "	<div class='con' id='mtTitle'>";
