@@ -168,4 +168,10 @@ public class MatchingDaoImpl implements MatchingDao {
 		String str=String.valueOf(resutl);
 		return str;
 	}
+	
+	@Override
+	public int mHistoryContentCount() {
+		
+		return session.selectOne("Matching.mHistoryContentCount");
+	}
 }

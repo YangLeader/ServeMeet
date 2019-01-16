@@ -52,5 +52,7 @@ public interface MatchingService {
 	String matchingDecline(int conId);
 
 	String matchingDeclineAll(Map<String,Integer> map);
+	
+	int mHistoryContentCount();
 
 }

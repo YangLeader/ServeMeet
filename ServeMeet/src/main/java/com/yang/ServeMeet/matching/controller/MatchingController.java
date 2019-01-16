@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.board.model.service.BoardService;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
+import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
@@ -83,7 +84,6 @@ public class MatchingController {
 	public String matchingHistoryForm(@RequestParam int matchingId, Model model) {
 		Matching matching = matchingService.matchingSelectOne(matchingId);
 		
-		System.out.println("뗴려뿌셔라"+matching);
 		model.addAttribute("matching",matching);
 		
 		return "matching/matchingHistoryForm";
@@ -213,11 +213,22 @@ public class MatchingController {
 //	}
 	
 	@RequestMapping("matching/mHistoryList.ma")
-	public String mHistoryList(Model model) {
+	public String mHistoryList(@RequestParam(value="cPage", required=false, defaultValue="1")
+	int cPage,Model model) {
 		
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.mHistoryList());
 		
-		model.addAttribute("list",list);
+		int numPerPage = 10; 
+		
+		int totalContents = matchingService.mHistoryContentCount();
+		
+		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "battingList.do");
+		
+		model.addAttribute("list", list)
+		.addAttribute("totalContents", totalContents)
+		.addAttribute("numPerPage", numPerPage)
+		.addAttribute("pageBar", pageBar);
+			
 				
 		return "/matching/matchingHistoryList";
 	}
