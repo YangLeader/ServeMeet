@@ -110,40 +110,31 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 	@Override
 	public int countMatchingCon(String userName) {
-		// TODO Auto-generated method stub
 		return matchingDao.countMatchingCon(userName);
 	}
 	@Override
 	public List<MatchingListObj> topMatchingList(String category) {
-		// TODO Auto-generated method stub
 		return matchingDao.topMatchingList(category);
 	}
-
-
 	@Override
 	public List<MatchingListObj> searchMatching(Map map) {
-		// TODO Auto-generated method stub
 		return matchingDao.searchMatching(map);
 	}
 	@Override
 	public List<MatchingCondition> matchingConditions(int matchingId) {
-		// TODO Auto-generated method stub
 		return matchingDao.matchingConditions(matchingId);
 	}
 	@Override
 	public String matchingAccept(int conId) {
-		// TODO Auto-generated method stub
 		return matchingDao.matchingAccept(conId);
 	}
 	@Override
 	public String matchingDecline(int conId) {
-		// TODO Auto-generated method stub
 		return matchingDao.matchingDecline(conId);
 
 	}
 	@Override
 	public String matchingDeclineAll(Map<String,Integer> map) {
-		// TODO Auto-generated method stub
 		return matchingDao.matchingDeclineAll(map);
 	}
 	

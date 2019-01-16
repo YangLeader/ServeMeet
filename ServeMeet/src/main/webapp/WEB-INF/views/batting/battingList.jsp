@@ -39,9 +39,9 @@
 				<div id="bbs-list-top">
 					<!-- 게시판 타이틀 -->
 					<div class="bbs_title_wrap">
-						<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">배팅 게시판</a>
+						<a class="bbs_title" href="${pageContext.request.contextPath }/batting/battingList.do">배팅 게시판</a>
 						<c:if test="${!empty totalContents }">
-						<p>총 ${totalContents }건의 배팅이 있습니다.</p>
+							<p>총 ${totalContents }건의 배팅이 있습니다.</p>
 						</c:if>
 					</div>
 				</div>

@@ -145,6 +145,12 @@ public class MatchingController {
 			
 			battingService.battingWinnerUpdate(winnerChk, battingId);
 			
+			int result = battingService.battingClose(battingId);
+			
+			String str = result >0 ? "배팅 종료 성공" : "배팅 종료 실패";
+			
+			System.out.println(str);
+			
 			path = "redirect:/batting/battingAllocation.ba?battingId="+battingId+"&winnerChk="+winnerChk;
 		}
 		

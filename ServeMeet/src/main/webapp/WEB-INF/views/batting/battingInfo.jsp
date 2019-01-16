@@ -53,17 +53,7 @@
 	<br><br><br>
 
 		<script>
-		function button1_click(battingType) {
-			var result = confirm("한번 선택한 배팅은 취소나 변경이 불가능 합니다. 선택하신 팀이 맞습니까? ");
-			
-			if (result) {
-				location.href="${pageContext.request.contextPath}/batting/battingPick.ba?battingId="+${batting.BATTINGID}+"&battingType="+battingType+"&userName=${member.userName}";
-				swal("선택되었습니다.");
-			} else {
-			}
-		}
-		
-		
+				
 		function btnBatting(battingType){
 			swal({
 				  title: "100포인트가 차감됩니다.",
@@ -90,9 +80,15 @@
 	    										userName : "${member.userName}"
 	    										},
 	    								async : false,
-	    								success : function(){
-	    									location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
-	    									alert(battingType+"팀이 선택되었습니다.")
+	    								success : function(data){
+	    									if(data == 'success'){
+	    										location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
+	    										alert(battingType+"팀이 선택되었습니다.")
+	    										location.href='${pageContext.request.contextPath}/batting/battingInfo.ba?no=${batting.BATTINGID}';
+	    									} else{
+	    										alert("이미 선택한 배팅입니다.")
+	    									}
+	    									
 	    					            }, error : function(jqxhr, textStatus, errorThrown){
 	    					                console.log("배팅 ajax 처리 실패");
 	    					                //에러로그
@@ -120,19 +116,6 @@
 						  }
 						});
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	</script>
 </body>
 </html>
