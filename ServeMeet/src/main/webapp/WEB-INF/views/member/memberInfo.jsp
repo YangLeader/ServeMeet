@@ -240,7 +240,7 @@
 		if(p1==""){
 			pwdFlag = true;
 		}else{
-			if((p1!="") || p1.length < 5 || !isPwd.test(p1)){
+			if(p1.length < 5 || !isPwd.test(p1)){
 				$("#pwdMsg").show();
 				pwdFlag = false;
 			}else{
@@ -272,12 +272,16 @@
 		var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	     var isHan = /[ㄱ-ㅎ가-힣]/g;
 		var email = $("#email").val();
+		if(email==""){
+			emailFlag = true;
+		}else{
 		if(!isEmail.test(email) || isHan.test(email)){
 			$("#emailMsg").show();
 			emailFlag = false;
 		}else{
 			$("#emailMsg").hide();
 			emailFlag = true;
+		}
 		}
 		
 	}

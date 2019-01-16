@@ -253,8 +253,9 @@ public class PointController {
 		return result;
 	}
 	
-	@RequestMapping("admin/plusPointAdmin.do")
-	public String pPointAdmin(@RequestParam int pNo,@RequestParam int pPoint,  @RequestParam String pMemo) {
+	@RequestMapping("/admin/plusPointAdmin.do")
+	@ResponseBody
+	public int pPointAdmin(@RequestParam int pNo,@RequestParam int pPoint,  @RequestParam String pMemo) {
 	if(logger.isDebugEnabled()) logger.debug("포인트 부여 완료");
 			
 			Point p = new Point();
@@ -263,13 +264,14 @@ public class PointController {
 			p.setpContent(pMemo);
 			
 			memberService.updatePoint(pNo,pPoint);
-			pointService.insertPoint(p);
+			int result = pointService.insertPoint(p);
 			
-			return "admin/adminPoint";
+			return result;
 	}
 	
-	@RequestMapping("admin/minusPointAdmin.do")
-	public String mPointAdmin(@RequestParam int mNo,@RequestParam int mPoint,  @RequestParam String mMemo) {
+	@RequestMapping("/admin/minusPointAdmin.do")
+	@ResponseBody
+	public int mPointAdmin(@RequestParam int mNo,@RequestParam int mPoint,  @RequestParam String mMemo) {
 	if(logger.isDebugEnabled()) logger.debug("포인트 차감 완료");
 			mPoint = -(mPoint);
 	
@@ -279,9 +281,9 @@ public class PointController {
 			p.setpContent(mMemo);
 			
 			memberService.updatePoint(mNo,mPoint);
-			pointService.insertPoint(p);
+			int result = pointService.insertPoint(p);
 			
-			return "admin/adminPoint";
+			return result;
 	}
 	
 	@RequestMapping(value="point/totalPointList.do", method= RequestMethod.GET)
