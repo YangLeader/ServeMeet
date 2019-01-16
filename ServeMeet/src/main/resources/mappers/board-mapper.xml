@@ -13,7 +13,7 @@
 		FROM
 		BOARD A
 		WHERE BOARDSTATUS = 'Y'
-		ORDER BY BOARDNO DESC, BOARDDATE DESC
+		ORDER BY ISANNOUNCE DESC, BOARDNO DESC, BOARDDATE DESC
 	</select>
 	<select id="selectBoardTotalContents" resultType="_int">
 		SELECT COUNT(*)
@@ -27,9 +27,9 @@
 		FROM BOARD A WHERE BOARDNO = #{boardNo} and boardstatus='Y'
 	</select>
 	<insert id="insertBoard">
-		INSERT INTO BOARD(BOARDNO, BOARDTITLE, BOARDCONTENT, USERNAME, BOARDCOUNT, BOARDDATE, BOARDSTATUS)
+		INSERT INTO BOARD(BOARDNO, BOARDTITLE, BOARDCONTENT, USERNAME, BOARDCOUNT, BOARDDATE, BOARDSTATUS, ISANNOUNCE)
 		VALUES
-		(SEQ_BOARDNO.NEXTVAL, #{boardTitle}, #{boardContent}, #{userName}, DEFAULT, DEFAULT, DEFAULT)
+		(SEQ_BOARDNO.NEXTVAL, #{boardTitle}, #{boardContent}, #{userName}, DEFAULT, DEFAULT, DEFAULT, #{isAnnounce})
 		<!-- 전달한 board객체의 boardNo 프로퍼티에 결과값을 담는다. -->
 		<selectKey keyProperty="boardNo" resultType="_int"
 			order="AFTER">

@@ -228,7 +228,7 @@ $(document).ready(function(){
                 <!-- } 본문 내용 끝 -->
 
         		
-		<c:if test="${member.userName ne board.userName }">
+		<c:if test="${member.userName ne board.userName}">
 		<!-- 스크랩 추천 비추천 시작 { -->
 		<div id="bo_v_act">
 					<%-- reportBoard.do?no=${board.boardNo }&name=${member.userName} --%>
@@ -750,7 +750,12 @@ function excute_good(href, $el, $tx)
 			</li>
 			<form id="chatting2" method="post">
 			<c:forEach items="${list}" var="b">
+			<c:if test="${b.isAnnounce eq 'Y' }">
+			<li class="bbs_list_basic" style="background-color: aliceblue;">
+			</c:if>
+			<c:if test="${b.isAnnounce ne 'Y' }">
 			<li class="bbs_list_basic">
+			</c:if>
 				<span class="subject text">
 					<a data-mytext="getNo" id="${b.boardNo }">
 						<b>${b.boardTitle }</b>
