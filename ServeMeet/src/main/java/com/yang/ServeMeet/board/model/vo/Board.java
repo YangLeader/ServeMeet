@@ -18,13 +18,14 @@ public class Board {
 	private String boardStatus;
 	private int commentCount;
 	private int reportCount;
+	private String isAnnounce;
 	
 	public Board() {
 		super();
 	}
 
 	public Board(int boardNo, String boardTitle, String boardContent, String userName, int boardCount, Date boardDate,
-			String boardStatus, int commentCount, int reportCount) {
+			String boardStatus, int commentCount, int reportCount, String isAnnounce) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
@@ -35,6 +36,7 @@ public class Board {
 		this.boardStatus = boardStatus;
 		this.commentCount = commentCount;
 		this.reportCount = reportCount;
+		this.isAnnounce = isAnnounce;
 	}
 
 	public int getBoardNo() {
@@ -109,12 +111,20 @@ public class Board {
 		this.reportCount = reportCount;
 	}
 
+	public String getIsAnnounce() {
+		return isAnnounce;
+	}
+
+	public void setIsAnnounce(String isAnnounce) {
+		this.isAnnounce = isAnnounce;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", userName=" + userName + ", boardCount=" + boardCount + ", boardDate=" + boardDate
 				+ ", boardStatus=" + boardStatus + ", commentCount=" + commentCount + ", reportCount=" + reportCount
-				+ "]";
+				+ ", isAnnounce=" + isAnnounce + "]";
 	}
-	
+
 }

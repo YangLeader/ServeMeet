@@ -99,6 +99,12 @@
                         <p>포인트 관리</p>
                     </a>
                 </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/adminAnnouncement.do">
+                        <i class="ti-announcement"></i>
+                        <p>공지 관리</p>
+                    </a>
+                </li>
                 <!-- <li>
                     <a href="maps.html">
                         <i class="ti-map"></i>

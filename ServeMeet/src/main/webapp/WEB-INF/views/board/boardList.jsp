@@ -105,7 +105,7 @@
 					<div class="bbs-list">
 						<ul id="bbs-list-ul">
 							<li class="bbs_list_top">
-								<span class="subject" > 
+								<span class="subject"  > 
 									<span class="subject_text"> 
 										<span class="glyphicon glyphicon-tag"></span> 
 											제목
@@ -132,8 +132,13 @@
 							</li>
 							<form id="chatting" method="post">
 							<c:forEach items="${list}" var="b">
+							<c:if test="${b.isAnnounce eq 'Y' }">
+							<li class="bbs_list_basic" style="background-color: aliceblue;">
+							</c:if>
+							<c:if test="${b.isAnnounce ne 'Y' }">
 							<li class="bbs_list_basic">
-								<span class="subject text" style="width: 815px;">
+							</c:if>
+								<span class="subject text" >
 									<a data-mytext="getNo" id="${b.boardNo }">
 										<b>${b.boardTitle }</b>
 										<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+ ${b.commentCount  }</span></c:if>
@@ -262,7 +267,7 @@
 						$("#sfl").removeClass("dno");
 					});
 
-					 bbs_list_width_fixed();
+					/*  bbs_list_width_fixed();
 
 					setTimeout(function() {
 						bbs_list_width_fixed();
@@ -271,7 +276,7 @@
 					$(window).resize(function() {
 						bbs_list_width_fixed();
 					}); 
-
+ */
 				});
 
 				// 리스트 제목 부분 width 자동조절

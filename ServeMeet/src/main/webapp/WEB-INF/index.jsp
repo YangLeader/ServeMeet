@@ -138,8 +138,7 @@ font-size: 18px;
 							<div style="padding: 15px 0px;">
 								<ul class="post-list"
 									style="list-style: none; padding: 10px 0px;">
-
-
+									
 								</ul>
 							</div>
 						</div>
@@ -172,8 +171,8 @@ font-size: 18px;
 			topMatchingList("2");
 			topMatchingList("3");
 			topBattingList();
-			$
-					.ajax({
+			
+					$.ajax({
 
 						url : "${pageContext.request.contextPath}/ajax/boardTop7.do",
 						type : "GET",
@@ -182,8 +181,10 @@ font-size: 18px;
 						success : function(data) {
 
 							for ( var i in data) {
-
-								var li = '<li class="ellipsis">'
+								
+								if(data[i].isAnnounce == 'N'){
+									
+									var li = '<li class="ellipsis">'
 										+ '<a href="${pageContext.request.contextPath}/board/boardView.do?no='
 										+ data[i].boardNo
 										+ '" id="inserttitle">'
@@ -199,6 +200,10 @@ font-size: 18px;
 
 								$('.post-list').html(
 										$('.post-list').html() + li);
+									
+								}
+
+								
 
 								//$('#spanname').html();
 
