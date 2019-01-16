@@ -22,14 +22,25 @@ public class SearchAllController {
 	public String searchAll(@RequestParam String keyword, Model model) {
 		
 		Map<String,String> map = new HashMap<String,String>();
-		map.put("keyword", keyword);
+		
+		/*map.put("keyword", keyword);
 		map.put("cat", "1");
 		List<MatchingListObj> meetList = new ArrayList<MatchingListObj>();
 		meetList=sas.searchMeet(map);
 		map.put("cat", "2");
 		List<MatchingListObj> eSportsList = new ArrayList<MatchingListObj>();
 		map.put("cat", "3");
-		List<MatchingListObj> sportsList = new ArrayList<MatchingListObj>();
+		List<MatchingListObj> sportsList = new ArrayList<MatchingListObj>();*/
+		
 		return "common/searchAll";
 	}
+	
+	/*@RequestMapping("/search/searchBoard.do")
+	public*/
+	
+	
+	
+	
+	
+	
 }
