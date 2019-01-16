@@ -39,9 +39,9 @@ public class BattingDaoImpl implements BattingDao {
 	}
 	
 	@Override
-	public int battingTotalContents() {
+	public int battingTotalContents(String bstatus) {
 		
-		return sqlSession.selectOne("Batting_Mapper.battingTotalContents");
+		return sqlSession.selectOne("Batting_Mapper.battingTotalContents",bstatus);
 	}
 	
 	@Override

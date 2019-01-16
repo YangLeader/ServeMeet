@@ -33,9 +33,9 @@ public class BattingServiceImpl implements BattingService {
 	}
 	
 	@Override
-	public int battingTotalContents() {
+	public int battingTotalContents(String type) {
 		
-		return battingDao.battingTotalContents();
+		return battingDao.battingTotalContents(type);
 	}
 	
 	@Override

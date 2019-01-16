@@ -49,7 +49,9 @@ public class battingController {
 	
 	ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList(type));
 	
-	int totalContents = battingService.battingTotalContents();
+	String type2 = type.equals("I") ? "N" : "I";
+	
+	int totalContents = battingService.battingTotalContents(type2);
 	
 	String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "battingList.do");
 	
@@ -63,37 +65,36 @@ public class battingController {
 	}
 	
 	@RequestMapping("/batting/battingPick.ba")
+	@ResponseBody
 	public String battingPick(@RequestParam int battingId ,@RequestParam("battingType") String battingSelect,@RequestParam String userName, Model model) {
 		
 		BattingUser check = battingService.battingPickCheck(battingId, userName);
 				
-		String path = "";
+		String result;
+		
+		System.out.println("check :" +check);
 		
 		if(check != null) {
-			
-			model.addAttribute("loc","/batting/battingList.ba?type=I");
-			
-			model.addAttribute("msg","한 배팅 당 한 번의 선택만 할 수 있습니다.");
-			
-			path = "common/msg";
+
+			result = "fail";
 			
 		} else {
-		
-		int result = battingService.battingPick(battingId, battingSelect);
-		
-		BattingUser bUser = new BattingUser(battingId,userName,battingSelect);
-		
-		int result2 = battingService.battingPickUser(bUser);
-		
-		ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList("I"));
-		
-		model.addAttribute("list",list);
-		
-		path = "batting/battingList";
+			
+			battingService.battingPick(battingId, battingSelect);
+			
+			BattingUser bUser = new BattingUser(battingId,userName,battingSelect);
+			
+			battingService.battingPickUser(bUser);
+			
+			ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingList("I"));
+			
+			model.addAttribute("list",list);
+			
+			result = "success";
 		
 		}
 		
-		return path;
+		return result;
 	}
 	
 	
@@ -106,7 +107,7 @@ public class battingController {
 		
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>(battingService.battingHistory());
 		
-		int totalContents = battingService.battingTotalContents();
+		int totalContents = battingService.battingTotalContents("A");
 		
 		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "battingList.do");
 		

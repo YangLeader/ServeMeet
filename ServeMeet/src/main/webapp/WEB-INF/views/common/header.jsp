@@ -93,14 +93,14 @@ float: right;
 						<a href="${pageContext.request.contextPath}/"><img
 							src="${pageContext.request.contextPath}/resources/images/logo.png"
 							alt=""></a>
-						<div id = "search" >
+						<%-- <div id = "search" >
 							<input type="text"  name="search" id = "searchTxt"/>
 							<span class = "a">
 								<button class="searchBtn">
 									<img class="searchImg" src="${pageContext.request.contextPath}/resources/images/search2.png">
 								</button>
 							</span>
-						</div>
+						</div> --%>
 					</div>
 				</div>
 			</div>

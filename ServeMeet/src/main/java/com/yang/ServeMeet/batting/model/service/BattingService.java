@@ -33,7 +33,7 @@ public interface BattingService {
 	
 	List<Map<String,Object>> myBattingList(String userName);
 	
-	int battingTotalContents();
+	int battingTotalContents(String type);
 	
 	List<Map<String,Object>> topBattingList();
 	

@@ -40,9 +40,9 @@
 				<div id="bbs-list-top">
 					<!-- 게시판 타이틀 -->
 					<div class="bbs_title_wrap">
-						<a class="bbs_title" href="${pageContext.request.contextPath }/board/boardList.do">배팅 히스토리</a>
+						<a class="bbs_title" href="${pageContext.request.contextPath }/batting/myBattingList.do">배팅 히스토리</a>
 						<c:if test="${!empty totalContents }">
-						<p>총 ${totalContents }개의 배팅기록이 있습니다.</p>
+							<p>총 ${totalContents }개의 배팅기록이 있습니다.</p>
 						</c:if>
 					</div>
 
