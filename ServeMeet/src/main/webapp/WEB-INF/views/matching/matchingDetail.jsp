@@ -171,18 +171,14 @@ padding: 10px 0px;
 	background-size:40px;
 }
 .acceptIcon{
- display: inline-block;
-  width: 100%;
-    height: 100%;
-background-image: url("${pageContext.request.contextPath }/resources/images/acc.png");
-background-size:cover;
+font-family: 'Sunflower', sans-serif;
+padding-top: 15px; 
+color: #5e73de;
 }
 .cancelIcon{
- display: inline-block;
-  width: 100%;
-    height: 100%;
-background-image: url("${pageContext.request.contextPath }/resources/images/cancle.png");
-background-size:cover;
+font-family: 'Sunflower', sans-serif;
+padding-top: 15px; 
+color: red;
 }
 </style>
 </head>
@@ -225,9 +221,24 @@ background-size:cover;
 			</div>
 		
 			<br /><br />
+			${mDetail.mApplicant} ::${member.userName}
 			<c:choose>
 				<c:when test="${mDetail.mStatus eq 'AFTER' }">
-					<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	
+					<c:choose>
+						<c:when test="${mDetail.mApplicant eq member.userName}">
+							<c:choose>
+								<c:when test="${mDetail.mApplicant eq mDetail.mGuest }">
+									<center><button class="sb_btn sb_btn_cmp" disabled="disabled">승락되었습니다.</button></center>	
+								</c:when>
+								<c:otherwise>
+									<center><button class="sb_btn sb_btn_cmp" disabled="disabled">거절되었습니다.</button></center>	
+								</c:otherwise>
+							</c:choose>
+						 </c:when>	
+						 <c:otherwise>
+							<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	
+						 </c:otherwise>
+					</c:choose>
 				</c:when>
 				<c:otherwise>
 					<c:choose>
@@ -264,10 +275,10 @@ background-size:cover;
 								<c:choose>
 								
 									<c:when test="${item.mstatus eq '3ACCECPT'}">							
-										<span class="acceptIcon"></span>
+										<h2 class="acceptIcon"><b>승락</b></h2>
 									</c:when>
 									<c:when test="${item.mstatus eq '2DECLINE'}">
-										<span class="cancelIcon"></span>
+										<h2 class="cancelIcon"><b>거절</b></h2>
 									</c:when>
 									<c:otherwise>
 										<span class="cdComfirm cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.matchingid},${item.mconid },'${item.mguest }');"></span>
