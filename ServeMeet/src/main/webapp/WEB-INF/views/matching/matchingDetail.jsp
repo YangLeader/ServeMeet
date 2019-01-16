@@ -188,7 +188,7 @@ text-align: center;
 						<li>등록자 이름 : <a id="liWriter">${mDetail.mWriter}</a></li>
 					</ul>
 				</div>
-				<div class="report">신고하기</div>
+				<div class="report"></div>
 			</div>
 		
 			<br /><br />

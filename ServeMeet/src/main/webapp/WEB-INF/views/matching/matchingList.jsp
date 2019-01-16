@@ -121,6 +121,12 @@
 	.crd{
 		color: red;
 	}
+	.insertBtn{
+		width: 80%;
+		height: 40px;
+		margin: auto;
+		text-align: right;	
+	}
 </style>
 <meta charset="UTF-8">
 <title>매칭 리스트</title>
@@ -135,6 +141,9 @@
 		<h1>${lName } 리스트</h1>
 		<br /><br />
 		<div class="listDetailDiv">
+			<div class="insertBtn">
+				<a href="${pageContext.request.contextPath }/matching/matchingInsertView.ma"  class="submit_btn">+ 새 매칭등록</a>
+			</div>
 			<div class="objTitle">
 				<div class="conTitle" id="catBName">매칭 종류</div>
 				<div class="conTitle" id="catSName">분류</div>
