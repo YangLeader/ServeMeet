@@ -11,13 +11,8 @@
 	border: 1px solid #DDE7EB;
 }
 
-#loc{
+#loc,#cate,#apply{
 	width: 20%;
-}
-
-#cate{
-
-	width: 16%;
 }
 
 #person{

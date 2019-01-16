@@ -61,13 +61,20 @@
 		MatchingList("ing");
 		$("#loc").click(function() {
 			MatchingList('ing');
+			onController("#loc");
 		});
 		$("#cate").click(function() {
 			MatchingList('end');
+			onController("#cate");
 		});
 		$("#apply").click(function() {
 			MatchingList('apply');
+			onController("#apply");
 		});
+		function onController(ck) {
+			$(".on").removeClass("on");
+			$(ck).attr("class","condition on");
+		}
 		
 		$('.con').click(function() {
 			var matNum = $(this).siblings().last().val();
