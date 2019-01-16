@@ -86,9 +86,14 @@
 	    										// 여기 고쳐주세요
 	    										// 팀이 선택되었습니다. 뜨고 바로 꺼져요
 	    										
-	    										location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
-	    										swal(battingType+"팀이 선택되었습니다.");
-	    										location.href='${pageContext.request.contextPath}/batting/battingInfo.ba?no=${batting.BATTINGID}';
+	    										
+	    										swal(battingType+"팀이 선택되었습니다.")
+	    										.then((value) => {
+	    											location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
+	    											location.href='${pageContext.request.contextPath}/batting/battingInfo.ba?no=${batting.BATTINGID}';
+	    										});
+	    										
+	    										
 	    									} else{
 	    										swal("이미 선택한 배팅입니다.")
 	    									}
