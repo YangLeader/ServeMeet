@@ -22,11 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.board.model.service.BoardService;
-import com.yang.ServeMeet.board.model.vo.Board;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
-import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.matching.model.exception.MatchingException;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.matching.model.vo.Matching;
@@ -299,14 +298,29 @@ public class MatchingController {
 	}
 	
 	@RequestMapping("matching/myMatchingList.ma")
-	public String myMatchingList(@RequestParam String userName , @RequestParam String type , Model model) {
-		
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.myMatchingList(userName,type));
-		
-		model.addAttribute("matchingList",list);
+	public String myMatchingList() {
 		
 		return "/matching/myMatchingList";
 	}
+	@RequestMapping(value="matching/myMatchingListType.do")
+	@ResponseBody
+	public List<MatchingListObj> myMatchingListType(@RequestParam String userName , @RequestParam String type) {
+		Map<String,String> map = new HashMap<String,String>();
+		
+		map.put("userName", userName);
+		map.put("type", type);
+		
+		System.out.println("실행은 잘되냐요? "+map);
+		List<MatchingListObj> list = new ArrayList<>();
+		list=matchingService.myMatchingList(map);
+		
+		List<String> jsonList = new ArrayList<>();
+		System.out.println("실행은 잘되냐요? "+list);
+		
+		//return new Gson().toJson(list);
+		return list;
+	}
+
 	
 	@RequestMapping("matching/matchingDetail.md") // ma로 수정해야함
 	public String mDatail(@RequestParam("matNum") int matNum, Model model,HttpSession session) {
@@ -315,7 +329,7 @@ public class MatchingController {
 		String userId = ((Member)session.getAttribute("member")).getUserName();
 		Map map = new HashMap();
 		map.put("matNum", matNum);
-		map.put("userName", userId );
+		map.put("userName", userId);
 		MatchingListObj mo = new MatchingListObj();
 		List<MatchingCondition> list = new ArrayList<MatchingCondition>();
 		

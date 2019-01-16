@@ -21,9 +21,17 @@
 		<result property="smallCategory" column="SMALLCATEGORY"></result>
 	</resultMap>
 
-	<select id="myMatchingList" resultType="Map">
-
-		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'BEFORE' AND MWRITER = #{userName}
+	<select id="myMatchingList" parameterType="map" resultType="MatchingObj">
+	<if test="type=='ing'">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE (MSTATUS = 'BEFORE' or MSTATUS = 'ING' )AND MWRITER = #{userName}
+	</if>
+	<if test="type=='end'">
+		SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID) WHERE MSTATUS = 'AFTER' AND MWRITER = #{userName}
+	</if>
+	<if test="type=='apply'">
+		select M.MATCHINGID,M.MTITLE,M.MCONTENT,M.MPEOPLENUM,M.MWRITER,M.MGUEST,M.MTIME,M.MSTATUS,M.BIGCATEGORY,M.MIDCATEGORY,M.BIGLOCATION,M.MIDLOCATION,M.SMALLCATEGORY 
+		from (select Matchingid from Matchingcondition where Mguest=#{userName})t1 join (select * from (SELECT * FROM MATCHING JOIN CATEGORY USING(CATEGORYID) JOIN LOCATION USING(LOCATIONID)) )m on M.Matchingid=t1.Matchingid
+	</if>
 	</select>
 
 	<select id="myMatchingEndList" resultType="Map">

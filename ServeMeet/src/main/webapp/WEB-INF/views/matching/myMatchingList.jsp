@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -10,6 +9,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/matching.css"
 	type="text/css">
+	
 <meta charset="UTF-8">
 <title>매칭 리스트</title>
 </head>
@@ -26,11 +26,14 @@
 		<br>
 		<div id="topMenu">
 			<div class="category">
-				<div class="condition on" id="loc" onclick="ingMatching()">
+				<div class="condition on" id="loc" onclick="MatchingList('ing')">
 					<span>진행중인 매칭</span>
 				</div>
-				<div class="condition" id="cate" onclick="endMatching()">
+				<div class="condition" id="cate" onclick="MatchingList('end')">
 					<span>종료된 매칭</span>
+				</div>
+				<div class="condition" id="apply" onclick="MatchingList('apply')">
+					<span>신청한 매칭</span>
 				</div>
 			</div>
 		</div>
@@ -83,21 +86,39 @@
 
 
 	<script>
+	$(function() {
+		MatchingList("ing");
+		
 		$('.con').click(function() {
 			var matNum = $(this).siblings().last().val();
 			location.href = "${pageContext.request.contextPath}/matching/matchingDetail.md?matNum="
 					+ matNum;
 		});
-		function(ingMatching){
+		
+		function MatchingList(msts){
+			var userName =  '${member.userName}';
 			$.ajax({
-				type : "GET",
-				url : "/ServeMeet/matching/myMatchingList.ma",
-				datatype : "JSON",
-				data : { type = "P" },
-				success
+				url : "${pageContext.request.contextPath}/matching/myMatchingListType.do",
+			 	data : { type : msts,
+						userName :userName
+				},
+				type : "get",
+				dataType : "json",
+				success : function(data){
+					console.log(data);
+					
+					for(var i in data){
+						console.log(data[i].bigCategory);
+					}
+				},
+				error:function(){
+					console.log("에러났대요");
+				}
 				
-			})
+			});
+		
 		}
+	})
 	</script>
 </body>
 </html>

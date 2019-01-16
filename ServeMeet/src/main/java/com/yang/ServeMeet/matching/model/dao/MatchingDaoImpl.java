@@ -28,11 +28,9 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 	
 	@Override
-	public List<Map<String,String>> myMatchingList(String userName,String type){
-		
-		String mapperPath = type.equals("P") ? "Matching.myMatchingList" : "Matching.myMatchingEndList";
-		
-		return session.selectList(mapperPath,userName);
+	public List<MatchingListObj> myMatchingList(Map<String,String> map){
+
+		return session.selectList("Matching.myMatchingList",map);
 	}
 	
 	@Override
