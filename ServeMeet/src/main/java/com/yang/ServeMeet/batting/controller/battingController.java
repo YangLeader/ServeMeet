@@ -18,6 +18,7 @@ import com.yang.ServeMeet.batting.model.vo.Batting;
 import com.yang.ServeMeet.batting.model.vo.BattingUser;
 import com.yang.ServeMeet.common.util.Utils;
 import com.yang.ServeMeet.matching.model.service.MatchingService;
+import com.yang.ServeMeet.matching.model.vo.Matching;
 import com.yang.ServeMeet.point.model.service.PointService;
 
 @Controller
@@ -37,8 +38,9 @@ public class battingController {
 	public String battingInfo(@RequestParam int no, Model model) {
 		
 		Batting batting = battingService.battingSelect(no);
+
+		model.addAttribute("batting",batting).addAttribute("matching",battingService.battingSelectOne(batting.getBattingId()));
 		
-		model.addAttribute("batting",batting).addAttribute("matching",matchingService.matchingSelectOne(batting.getMatchingId()));		
 		return "batting/battingInfo";
 	}
 	
@@ -212,8 +214,9 @@ public class battingController {
 	public String myBattingList(@RequestParam String userName , Model model) {
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(battingService.myBattingList(userName));
+		String type = (String) list.get(1).get("BSTATUS");
 		
-		model.addAttribute("list",list);
+		model.addAttribute("list",list).addAttribute("type",type);
 		
 		
 		return "batting/myBattingList";
