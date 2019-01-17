@@ -39,6 +39,7 @@ public class battingController {
 		Batting batting = battingService.battingSelect(no);
 		
 		model.addAttribute("batting",batting).addAttribute("matching",matchingService.matchingSelectOne(batting.getMatchingId()));		
+		
 		return "batting/battingInfo";
 	}
 	
