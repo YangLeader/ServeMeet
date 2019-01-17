@@ -226,7 +226,9 @@ color: red;
 						<c:when test="${mDetail.mApplicant eq member.userName}">
 							<c:choose>
 								<c:when test="${mDetail.mApplicant eq mDetail.mGuest }">
-									<center><button class="sb_btn sb_btn_cmp" disabled="disabled">승락되었습니다.</button></center>	
+								
+										<center><button class="sb_btn sb_btn_cmp" disabled="disabled">승락되었습니다.</button></center>	
+									
 								</c:when>
 								<c:otherwise>
 									<center><button class="sb_btn sb_btn_cmp" disabled="disabled">거절되었습니다.</button></center>	
@@ -236,7 +238,9 @@ color: red;
 						 <c:otherwise>
 							<c:choose>
 							 	<c:when test="${mDetail.mStatus eq 'AFTER'}">
-									<button class="mh_btn" onclick="javascript:location.href='${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}'"> 매칭 후기 쓰기</button>
+							 		<c:if test="${member.userName eq mDetail.mWriter }">
+										<button class="mh_btn" onclick="javascript:location.href='${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}'"> 매칭 후기 쓰기</button>
+									</c:if>
 								</c:when>
 								 <c:otherwise>
 									<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	

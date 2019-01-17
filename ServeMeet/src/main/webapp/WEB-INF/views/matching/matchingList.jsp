@@ -137,7 +137,7 @@
 		display: inline-block;
 
 		background:
-		url('/serveMeet/resources/images/batIcon.png')
+		url('/ServeMeet/resources/images/batIcon.png')
 		no-repeat 0 0;
 		width: 10px;
 		height: 10px;
