@@ -180,10 +180,7 @@ font-family: 'Sunflower', sans-serif;
 padding-top: 15px; 
 color: red;
 }
-
 </style>
-<c:set var = "pNumA">${batting.BATTINGPNUMA}</c:set>
-<c:set var = "pNumB">${batting.BATTINGPNUMB}</c:set>
 </head>
 <body>
 
@@ -222,7 +219,6 @@ color: red;
 				</div>
 				<div class="report"></div>
 			</div>
-		
 			<br /><br />
 			<c:choose>
 				<c:when test="${mDetail.mStatus eq 'AFTER' }">
@@ -238,20 +234,21 @@ color: red;
 							</c:choose>
 						 </c:when>	
 						 <c:otherwise>
-							<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	
+							<c:choose>
+							 	<c:when test="${mDetail.mStatus eq 'AFTER'}">
+									<button class="mh_btn" onclick="javascript:location.href='${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}'"> 매칭 후기 쓰기</button>
+								</c:when>
+								 <c:otherwise>
+									<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	
+								 </c:otherwise>
+							</c:choose>
 						 </c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
 					<c:choose>
 						<c:when test="${mDetail.mWriter eq member.userName}">
-							<c:when test="${mDetail.mStatus eq 'AFTER' }">
-								<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
-							</c:when>
-						</c:when>
-						<c:when test="${mDetail.mWriter eq member.userName}">
 							<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
-						
 						</c:when>
 						<c:otherwise>
 							<c:choose>
@@ -275,12 +272,11 @@ color: red;
 							<div class = "cdOne cdBody"><span>${item.mmsg }</span></div>
 							<div class="cdOne" style="flex-basis: 100px; padding: 3px 5px;">
 								<c:choose>
-								
 									<c:when test="${item.mstatus eq '3ACCECPT'}">							
-										<h2 class="acceptIcon"><b>매칭<br>완료</b></h2>
+										<h2 class="acceptIcon"><b>승락</b></h2>
 									</c:when>
 									<c:when test="${item.mstatus eq '2DECLINE'}">
-										<h2 class="cancelIcon"><b>매칭<br>거절</b></h2>
+										<h2 class="cancelIcon"><b>거절</b></h2>
 									</c:when>
 									<c:otherwise>
 										<span class="cdComfirm cdAccept"id ="cdAccept${item.mconid }" onclick="cdAccept(${item.matchingid},${item.mconid },'${item.mguest }');"></span>
@@ -344,7 +340,6 @@ function cdAccept(matchingId,conId,userName) {
 				});  
 		  }
 		});
-/* 	*/
 }
 function cdDecline(conId) {
 	
@@ -374,14 +369,11 @@ function cdDecline(conId) {
 				});
 		  }
 		});
-
 }
 function accChatRoom(userName) {
-
 	$('#accChatRoom').attr('action', "${pageContext.request.contextPath}/chat/chattingRoom.do/"+userName);
 	$('#accChatRoom').submit();
 }
-
 </script>
 </body>
 </html>
