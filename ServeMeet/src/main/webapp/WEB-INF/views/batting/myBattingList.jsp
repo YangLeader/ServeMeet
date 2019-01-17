@@ -62,14 +62,14 @@
 										<span class="glyphicon"></span> 매칭인
 									</span> 
 									<span class="w45 wr_name" style="width:80px;"> 
-										<span class="glyphicon"></span>인원수
+										<span class="glyphicon"></span>배당
 									</span> 
 									<span class="w45 wr_date" style="width:100px;"> 
-										<span class="glyphicon"></span> 카테고리
+										<span class="glyphicon"></span> 승리팀
 										</span> 
 									
 									<span class="w45 wr_hit" style="width:230px;"> 
-										<span class="glyphicon"></span> 지역
+										<span class="glyphicon"></span> 배팅결과
 									</span> 
 								</span>
 							</li>
@@ -92,11 +92,18 @@
 		         					</span> 
 									<span class="w45 wr_date" style="width:100px;"> 
 										<span class="glyphicon glyphicon-time"></span> 
-											${m.MIDCATEGORY }
+											<c:choose>
+												<c:when test='${m.WIN eq "N"}'>진행중</c:when>
+												<c:otherwise>${m.WIN}</c:otherwise>
+											</c:choose>
 									</span> 
 									<span class="w45 wr_hit" style="width:230px;"> 
 										<span class="glyphicon glyphicon-eye-open"></span> 
-											${m.BIGLOCATION } ${m.MIDLOCATION} ${m.SMALLCATEGORY }
+											<c:choose>
+												<c:when test='${m.WIN eq "N"}'>진행중</c:when>
+												<c:when test="${m.WIN eq m.BATTINGSELECT}">승리</c:when>
+												<c:otherwise>패배</c:otherwise>
+											</c:choose>
 									</span> 
 								
 								</span>
