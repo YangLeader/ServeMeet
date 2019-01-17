@@ -183,8 +183,8 @@
 	var locName = "";
 	var textkd = "소모임";
 	var	textDetailkd = "";
-	var textps = "";
-	var date = "";
+	var textps = "인원수 무관";
+	var date = "1900-01-01 ~ 9999-12-31";
 		$("#mydate").flatpickr({
 			  
 			  inline: true,	
@@ -806,14 +806,9 @@
 		
 		</div>
 	</div> */
-		
-		if(textps == ""){
-			alert("인원수를 선택해주세요.");
-		}else if(date == ""){
-			alert("날짜를 선택해주세요.");
-		}else if(textDetailkd == ""){
-			alert("매칭 종류를 선택해주세요.")
-		}else{
+		if(textDetailkd == ""){
+			alert("매칭 종류는 필수 선택사항입니다.");
+		}else{ 
 			$.ajax({
 				url : "${pageContext.request.contextPath}/matching/searchMatching.do",
 				type : "GET",
