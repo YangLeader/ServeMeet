@@ -559,7 +559,6 @@ function arrCheck() {
 	}
 	var chkContent = $('#content').val();
 	
-	alert(chkContent);
 	if(chkContent.trim().length == 0){
 		alert("세부 내용을 입력해주세요.");
 		$('#content').focus();
