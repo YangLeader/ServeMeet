@@ -98,7 +98,7 @@
 	</div>
 	
 	<div class="in scrollbar-primary scrollbar" id="midDiv">
-		<br /> &nbsp; ← 지역을 선택해주세요.
+		<br /> &nbsp;&nbsp; ← 지역을 선택해주세요.
 	</div>
 	<div class="in scrollbar-primary scrollbar" id="smallDiv"></div>
 	<div class="in" id="kindsDiv" style="display: none">
@@ -161,7 +161,7 @@
 
 	</div>
 	<div class="in scrollbar-primary scrollbar" id="bottomDiv" style="">
-		<div style=" width: 20%; height:100%; float: right; text-align: center; vertical-align: middle;">
+		<div style=" width: 15%; height:100%; float: right; text-align: center; vertical-align: middle;">
 			<input type="button" class="sb_btn" value="검색" onclick="searchMatching()" />
 		</div>
 	</div>
@@ -180,8 +180,8 @@
 	var locName = "";
 	var textkd = "소모임";
 	var	textDetailkd = "";
-	var textps = "";
-	var date = "";
+	var textps = "인원수 무관";
+	var date = "1900-01-01 ~ 9999-12-31";
 		$("#mydate").flatpickr({
 			  
 			  inline: true,	
@@ -806,6 +806,7 @@
 		
 		</div>
 	</div> */
+
 		
 		if(textps == ""){
 			swal({
@@ -823,6 +824,7 @@
 				icon : "warning"
 			})
 		}else{
+
 			$.ajax({
 				url : "${pageContext.request.contextPath}/matching/searchMatching.do",
 				type : "GET",

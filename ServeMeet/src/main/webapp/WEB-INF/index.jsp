@@ -145,7 +145,7 @@ font-size: 18px;
 					</div>
 					<div class="sContent conList">
 						<div class="midTitle">
-							<a href="${pageContext.request.contextPath}/matching/matchingHistoryList.ma"> 
+							<a href="${pageContext.request.contextPath}/matching/mHistoryList.ma"> 
 								<span class="midTitleName"><b>후기게시판</b></span> <span>+</span>
 							</a>
 						</div>
@@ -293,11 +293,11 @@ font-size: 18px;
 												 .attr("class","matchingBox")
 										).attr("href","${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + data[i].matchingId)
 						if(category=="1"){							
-							$("#meeting").append(matchingBox);
+							$("#meeting").prepend(matchingBox);
 						}else if(category=="2"){
-							$("#sports").append(matchingBox);
+							$("#sports").prepend(matchingBox);
 						}else if(category="3"){
-							$("#e_sports").append(matchingBox);
+							$("#e_sports").prepend(matchingBox);
 							$("#e_sports").children("a").children(".matchingBox").children(".location").remove();
 						}
 					}

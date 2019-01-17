@@ -120,9 +120,7 @@
 				.then((willDelete) => {
 				  if (willDelete) {
 					    location.href="${pageContext.request.contextPath}/chat/chatOut.do/"+chatNo;
-				  } else {
-				   
-				  }
+				  } 
 				});
 		})
 		
@@ -286,7 +284,7 @@
 .chatMemberList{
 	display :none;
 	padding: 10px;
-    width: 110px;
+    width: 150px;
     height: auto;
     position: absolute;
     border:1px #aaa solid;
@@ -348,7 +346,7 @@ width: 100%;}
 			<div id='chatdata' class='panel-body scrollbar-primary'></div>
 		</div>
 		<div id = "chatSend" >
-			<input type="text"  name="chatTxt" id = "chatTxt"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/chatSend3.png"></button></span>
+			<input type="text"  name="chatTxt" id = "chatTxt" maxlength="1000"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/chatSend3.png"></button></span>
 		</div>
 		
 	</div>

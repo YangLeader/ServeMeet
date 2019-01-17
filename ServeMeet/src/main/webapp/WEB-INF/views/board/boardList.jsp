@@ -42,7 +42,9 @@
 
 </head>
 <body>
-
+<div class="ad_side" style="position:fixed; top:10; left:3">
+         <c:import url="../point/adSide.jsp"/>
+      </div>
 	<!-- preloader (화면 전환 효과) -->
 	
 	<!-- <div class="preloader"></div>
@@ -152,9 +154,11 @@
 											<ul style="padding-inline-start: 0px;">
 												<li class="dropdown"><a class="drop">${b.userName }</a>
 										        	<ul style="width: auto; dispaly:none;" id="downlist">
+										        	<c:if test="${member.userName ne null }">
 										         		<c:if test="${member.userName ne b.userName }">
-										            	<li><input type="button" value="1:1 채팅" onclick="chatting('${b.userName}');"></li>
+										            	<a class="btn btn-default btn-sm" style="display: inherit;" onclick="chatting('${b.userName}');">'${b.userName }'와 채팅</a>
 										            	</c:if>
+										        	</c:if> 
 										         	</ul>
 										    	</li>
 										    </ul>

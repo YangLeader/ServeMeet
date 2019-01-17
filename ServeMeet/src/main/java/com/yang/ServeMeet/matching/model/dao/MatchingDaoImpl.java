@@ -35,7 +35,6 @@ public class MatchingDaoImpl implements MatchingDao {
 	
 	@Override
 	public Map<String,String> mHistorySelectOne(int mHistoryId) {
-		
 		return session.selectOne("Matching.mHistorySelectOne",mHistoryId);
 	}
 
@@ -48,7 +47,7 @@ public class MatchingDaoImpl implements MatchingDao {
 
 
 	public Matching matchingSelectOne(int matchingId) {
-		
+		System.out.println("뽑은 값 : " + session.selectOne("Matching.matchingSelectOne",matchingId));
 		return session.selectOne("Matching.matchingSelectOne",matchingId);
 	}
 	
@@ -95,7 +94,6 @@ public class MatchingDaoImpl implements MatchingDao {
 
 	@Override
 	public MatchingListObj matchingDetail(Map map) {
-		System.out.println("객체 : " + session.selectOne("Matching.matchingDetail", map));
 		return session.selectOne("Matching.matchingDetail", map);
 	}
 
@@ -173,5 +171,11 @@ public class MatchingDaoImpl implements MatchingDao {
 	public int mHistoryContentCount() {
 		
 		return session.selectOne("Matching.mHistoryContentCount");
+	}
+	
+	@Override
+	public int battingIdSelect(int matchingId) {
+		
+		return session.selectOne("Matching.battingIdSelect",matchingId);
 	}
 }

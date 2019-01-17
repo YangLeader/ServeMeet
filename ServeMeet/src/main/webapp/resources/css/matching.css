@@ -65,7 +65,7 @@ ul{
 }
 
 #catBName{
-	width: 7%;
+	width: 12%;
 	
 }
 
@@ -74,7 +74,7 @@ ul{
 }
 
 #mtTitle{
-	width: 30%;
+	width: 25%;
 }
 
 #locName{
@@ -86,7 +86,7 @@ ul{
 }
 
 #mtTime{
-	padding-top: 25px;
+	padding-top: 10px;
 	width: 7%;
 }
 
@@ -116,7 +116,7 @@ ul{
 }
 
 #detailKindsDiv{
-	width: 64%;
+	width: 60%;
 	
 }
 .item2in1{

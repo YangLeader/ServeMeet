@@ -482,7 +482,7 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping("board/myBoardList.do")
+	@RequestMapping("/board/myBoardList.do")
 	public String myBattingList(@RequestParam String userName, Model model) {
 		
 		int totalContents = boardService.selectMyBoardTotalContents(userName);
@@ -496,7 +496,7 @@ public class BoardController {
 		return "board/myBoardList";
 	}
 	
-	@RequestMapping("admin/reportList.do")
+	@RequestMapping("/admin/reportList.do")
 	public String reportList(@RequestParam(value="cPage", required=false, defaultValue="1")
 	int cPage, Model model) {
 		
@@ -542,7 +542,7 @@ public class BoardController {
 		
 	}
 	
-	@RequestMapping("admin/blindList.do")
+	@RequestMapping("/admin/blindList.do")
 	public String blindList(Model model) {
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(boardService.blindList());

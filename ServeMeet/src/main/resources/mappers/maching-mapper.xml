@@ -19,6 +19,7 @@
 		<result property="bigLocation" column="BIGLOCATION"></result>
 		<result property="midLocation" column="MIDLOCATION"></result>
 		<result property="smallCategory" column="SMALLCATEGORY"></result>
+		<result property="battingId" column="BATTINGID"></result>
 	</resultMap>
 
 	<select id="myMatchingList" parameterType="map" resultType="MatchingObj">
@@ -55,18 +56,22 @@
 		SELECT * FROM MATCHINGHISTORY JOIN MATCHING USING(MATCHINGID) WHERE MHISTORYID =#{mHistoryId}
 	</select>
 	
-	<select id="matchingSelectOne" resultType="Matching">
-		SELECT * FROM MATCHING WHERE MATCHINGID = #{matchingId}
+	<select id="matchingSelectOne" resultMap="MatchingList">
+		SELECT *
+		FROM MATCHING M, BATTING B
+		WHERE M.MATCHINGID = B.MATCHINGID(+)
+		AND M.MATCHINGID = #{matchingId}
 	</select>
 	
 	<select id="matchingSelectList" parameterType="string" resultMap="MatchingList">
 		<!-- SELECT * FROM MATCHING WHERE CATEGORYID LIKE #{cat} || '%' -->
 		SELECT  M.MATCHINGID,C.BIGCATEGORY, C.MIDCATEGORY , M.MTITLE,  L.BIGLOCATION, L.MIDLOCATION, L.SMALLCATEGORY,
-        M.MPEOPLENUM, M.CATEGORYID, M.MWRITER, M.MGUEST, M.MTIME, M.MSTATUS
-		FROM MATCHING M, LOCATION L, CATEGORY C
+        M.MPEOPLENUM, M.CATEGORYID, M.MWRITER, M.MGUEST, M.MTIME, M.MSTATUS, B.BATTINGID
+		FROM MATCHING M, LOCATION L, CATEGORY C, BATTING B
 		WHERE M.LOCATIONID = L.LOCATIONID
 		AND M.CATEGORYID = C.CATEGORYID
-		AND M.CATEGORYID LIKE #{cat} || '%'
+		AND M.MATCHINGID = B.MATCHINGID(+)
+		AND M.CATEGORYID LIKE #{cat} || '%' ORDER BY 1 DESC
 	</select>
 	<select id="topMatchingList" parameterType="String" resultType="MatchingObj">
 		 select * from (SELECT  ROWNUM rnum,M.MATCHINGID,C.BIGCATEGORY, C.MIDCATEGORY , M.MTITLE,  L.BIGLOCATION, L.MIDLOCATION, M.MWRITER, M.MTIME
@@ -123,6 +128,10 @@
 	
 	<select id="mHistoryContentCount" resultType="_int" >
 		SELECT COUNT(*) FROM MATCHINGHISTORY WHERE MHSTATUS = 'Y'
+	</select>
+	
+	<select id="battingIdSelect" resultType="_int">
+		SELECT BATTINGID FROM BATTING WHERE MATCHINGID =#{matchingId}
 	</select>
 	
 	<insert id="matchingRequest">

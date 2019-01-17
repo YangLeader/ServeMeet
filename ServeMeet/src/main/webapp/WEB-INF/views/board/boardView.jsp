@@ -65,19 +65,19 @@
 	cursor : default;
 }
 
-#dropdownlist .dropdown ul {
+/* #dropdownlist .dropdown ul {
 background: #5e73de;
 display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
 height:auto;
 padding:0px;
-margin-top: -40px;
+margin-top: -30px;
 margin-left: 60px;
 border-radius: 10px;
 position:absolute;
 width:200px;
 z-index:200;
 }
-
+ */
 </style>
 </head>
 <body>
@@ -143,7 +143,7 @@ $(document).ready(function(){
 					<span class="glyphicon glyphicon-edit" ></span> 수정
 				</a>
 				
-								<a href="${pageContext.request.contextPath}/board/boardDelete.do?no=${board.boardNo}" class="bbs_btn" onclick="return delete_board();">
+								<a class="bbs_btn" onclick="delete_board();">
 					<span class="glyphicon glyphicon-trash"></span> 삭제
 				</a>
 			
@@ -166,7 +166,7 @@ $(document).ready(function(){
 												<li class="dropdown"><a class="drop">${board.userName }</a>
 										        	<ul style="width: auto; dispaly:none;" id="downlist">
 										         		<c:if test="${member.userName ne board.userName }">
-										            	<li><input type="button" value="1:1 채팅" onclick="chatting1('${board.userName}');"></li>
+										            	<a class="btn btn-default btn-sm" style="display: inherit;" onclick="chatting1('${board.userName}');">'${board.userName }'와 채팅</a>
 										            	</c:if>
 										         	</ul>
 										    	</li>
@@ -228,7 +228,7 @@ $(document).ready(function(){
                 <!-- } 본문 내용 끝 -->
 
         		
-		<c:if test="${member.userName ne board.userName}">
+		<c:if test="${member.userName ne board.userName and board.isAnnounce eq 'N'}">
 		<!-- 스크랩 추천 비추천 시작 { -->
 		<div id="bo_v_act">
 					<%-- reportBoard.do?no=${board.boardNo }&name=${member.userName} --%>
@@ -275,7 +275,10 @@ var char_max = parseInt(0); // 최대
 					<p style="z-index:5" class="cmt_mb_info">
 
 						
-						<font class="write_user"><a>${cl.userName }</a></font>
+						<span>
+							<span class="glyphicon glyphicon-user"></span><font class="write_user"><a> ${cl.userName }</a></font>
+						</span>
+						
 
 						
 						<span>
@@ -303,7 +306,7 @@ var char_max = parseInt(0); // 최대
 							<span class="glyphicon glyphicon-edit"></span> 수정
 						</a>
 						
-						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/deleteComment.do?boardNo=${board.boardNo}&commentId=${cl.commentId}" onclick="return comment_delete();">
+						<a class="btn_cmt btn btn-default btn-xs" onclick="comment_delete();">
 							<span class="glyphicon glyphicon-trash"></span> 삭제
 						</a>
 						</c:if>
@@ -316,17 +319,43 @@ var char_max = parseInt(0); // 최대
 
 				</div>
 			</li>
+			<script>
+				function comment_delete()
+				{
+					var no = ${board.boardNo};
+					
+					var com = ${cl.commentId};
+					
+						swal({
+							  title: "댓글 삭제",
+							  text: "이 댓글을 삭제 하시겠습니까?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							  closeOnClickOutside: false
+							}).then((willDelete) => {
+								if(willDelete){
+									location.href = "${pageContext.request.contextPath }/board/deleteComment.do?boardNo="+no+"&commentId="+com;
+								}else {
+								    return false;
+								 }
+							});
+				}
+			</script>
 		<!-- </ul>
 	</div> -->
 	</c:if>
 	
 	<c:if test="${cl.refCid ne 0 }">
-			<li id="${cl.commentId }" style="padding-left:15px" >
+			<li id="${cl.commentId }" style="padding-left:20px" >
 				<div class="cmt_inner_wrap">
 					<p style="z-index:4" class="cmt_mb_info">
 						<img src="${pageContext.request.contextPath }/resources/images/icon_reply.gif" class="icon_reply" alt="댓글의 댓글">
 						
-						<font class="write_user"><a>${cl.userName } ▶ <b style="color:red;">${cl.getName}</b></a></font>
+						<span>
+							<span class="glyphicon glyphicon-user"></span><a> ${cl.userName } ▶ <b style="color:red;">${cl.getName}</b></a>
+						</span>
+						
 
 						<span>
 							<span class="glyphicon glyphicon-time"></span> ${cl.commentDate }
@@ -353,7 +382,7 @@ var char_max = parseInt(0); // 최대
 							<span class="glyphicon glyphicon-edit"></span> 수정
 						</a>
 						
-						<a class="btn_cmt btn btn-default btn-xs" href="${pageContext.request.contextPath }/board/deleteComment.do?boardNo=${board.boardNo}&commentId=${cl.commentId}" onclick="return comment_delete();">
+						<a class="btn_cmt btn btn-default btn-xs" onclick="comment_delete2();">
 							<span class="glyphicon glyphicon-trash"></span> 삭제
 						</a>
 						</c:if>
@@ -366,6 +395,29 @@ var char_max = parseInt(0); // 최대
 					
 				</div>
 			</li>
+			<script>
+				function comment_delete2()
+				{
+					var no = ${board.boardNo};
+					
+					var com = ${cl.commentId};
+					
+						swal({
+							  title: "댓글 삭제",
+							  text: "이 댓글을 삭제 하시겠습니까?",
+							  icon: "warning",
+							  buttons: true,
+							  dangerMode: true,
+							  closeOnClickOutside: false
+							}).then((willDelete) => {
+								if(willDelete){
+									location.href = "${pageContext.request.contextPath }/board/deleteComment.do?boardNo="+no+"&commentId="+com;
+								}else {
+								    return false;
+								 }
+							});
+				}
+			</script>
 	</c:if>
 	</c:forEach>
 </div>
@@ -587,50 +639,30 @@ function comment_box(commentId, work, orderList, isRecomment)
 }
 
 
-
-function comment_delete()
-{
-    return confirm("이 댓글을 삭제하시겠습니까?");
-}
-
-function report_board()
-{
-    return confirm("이 게시글을 신고 하시겠습니까?");
-}
-
 function delete_board()
 {
 	var no = ${board.boardNo};
 	
-    swal({
-		  title: "게시글 삭제",
-		  text: "이 게시글을 삭제 하시겠습니까?",
-		  icon: "warning",
-		  buttons: true,
-		  dangerMode: true,
-		}).then((willDelete) => {
-			location.href="${pageContext.request.contextPath}/board/boardDelete.do?no="+no;
-		});
+		swal({
+			  title: "게시글 삭제",
+			  text: "이 게시글을 삭제 하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			  closeOnClickOutside: false
+			}).then((willDelete) => {
+				if(willDelete){
+					location.href = "${pageContext.request.contextPath}/board/boardDelete.do?no="+no;
+				}else {
+				    return false;
+				 }
+			});
+	
 }
 
 
 comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
 
-$('.drop').click(function(){
-	
-	/* $(this).children('#downlist').css('display', 'block'); */
-	$(this).siblings('#downlist').show('fast');
-	
-$('html').click(function(e) {
-	
-	if(!$(e.target).hasClass("drop")) { 
-			
-		$('.dropdown').siblings('#downlist').hide('fast');
-	}
-								
-})
-										
-});
 
 
 
@@ -771,7 +803,7 @@ function excute_good(href, $el, $tx)
 									<ul style="width: auto; dispaly:none;" id="downlist">
 									
 										<c:if test="${member.userName ne b.userName }">
-											<li><input type="button" value="1:1 채팅" onclick="chatting2('${b.userName}');"></li>
+											<a class="btn btn-default btn-sm" style="display: inherit;" onclick="chatting2('${b.userName}');">'${b.userName }'와 채팅</a>
 										</c:if>
 									
 									</ul>

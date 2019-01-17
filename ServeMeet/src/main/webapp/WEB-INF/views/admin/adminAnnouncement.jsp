@@ -96,6 +96,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -249,7 +251,7 @@
 		<div class="section">
 	        <!-- <div class="all_logout"><a href="javascript:;" class="btn_model" onclick="logoutAll();"><span class="btn6">전체 로그아웃</span></a></div> -->
 			<table border="1" class="tbl_row">
-			<col width="700"><col width="110"><col width="80"><col width="80"><col width="80"><col width="80">
+			<col width="700"><col width="110"><col width="80"><col width="80"><col width="80"><col width="80"><col width="80">
 				<thead>
 					<tr>
 						<th scope="col" class="ti-menu-alt"> 제목 (클릭시 내용 확인)</th>
@@ -257,7 +259,8 @@
 						<th scope="col" class="ti-alarm-clock"> 작성일</th>
 						<th scope="col" class="ti-eye"> 조회수</th>
 						<th scope="col" class="ti-bell"> 신고 횟수</th>
-						<th scope="col" class="ti-lock"> 블라인드 처리</th>
+						<th scope="col" class="ti-pencil-alt"> 공지글 수정</th>
+						<th scope="col" class="ti-trash"> 공지글 삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -269,7 +272,8 @@
 						<td>${b.boardDate }</td>
 						<td>${b.boardCount }</td>	
 						<td>${b.reportCount }</td>
-						<td><button type="button" name="blind" id="${b.boardNo }" class="btn btn-info btn-sm"><span class="ti-lock"></span> 블라인드 처리</button></td>
+						<td><button type="button" name="update" id="${b.boardNo }" class="btn btn-info btn-sm"><span class="ti-pencil-alt"></span> 수정</button></td>
+						<td><button type="button" name="blind" id="${b.boardNo }" class="btn btn-info btn-sm"><span class="ti-trash"></span> 삭제</button></td>
 					</tr>		
 					
 					<!-- The Modal -->
@@ -351,19 +355,31 @@
     		
     		var boardNo = $(this).attr("id");
     		
-    		console.log(boardNo);
+    		var msg ='공지글을 삭제 하시겠습니까?';
     		
-    		var msg = boardNo+'번 글을 블라인드 처리 하시겠습니까?';
+    		swal({
+  			  title: "공지글 삭제",
+  			  text: msg,
+  			  icon: "warning",
+  			  buttons: true,
+  			  dangerMode: true,
+  			  closeOnClickOutside: false
+  			}).then((willDelete) => {
+  				if(willDelete){
+  					location.href="${pageContext.request.contextPath}/admin/announceDelete.do?boardNo="+boardNo;
+  				}else {
+  				    return false;
+  				 }
+  			});
     		
-    		if (confirm(msg)!=0) {
-                 
-    			 location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
-    			 
-            } else {
-                
-            	return false;
-            }
     		
+    	});
+    	
+    	$('button[name="update"]').click(function(){
+    		
+    		var boardNo = $(this).attr("id");
+    		
+    		location.href="${pageContext.request.contextPath}/admin/announceUpdateView.do?no="+boardNo;
     		
     	});
     	

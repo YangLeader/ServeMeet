@@ -54,5 +54,7 @@ public interface MatchingService {
 	String matchingDeclineAll(Map<String,Integer> map);
 	
 	int mHistoryContentCount();
+	
+	int battingIdSelect(int matchingId);
 
 }
