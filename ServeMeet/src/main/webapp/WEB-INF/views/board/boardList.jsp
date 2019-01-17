@@ -156,7 +156,7 @@
 										        	<ul style="width: auto; dispaly:none;" id="downlist">
 										        	<c:if test="${member.userName ne null }">
 										         		<c:if test="${member.userName ne b.userName }">
-										            	<li><input type="button" value="1:1 채팅" onclick="chatting('${b.userName}');"></li>
+										            	<a class="btn btn-default btn-sm" style="display: inherit;" onclick="chatting('${b.userName}');">'${b.userName }'와 채팅</a>
 										            	</c:if>
 										        	</c:if> 
 										         	</ul>

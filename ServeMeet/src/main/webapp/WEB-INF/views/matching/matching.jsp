@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <!-- 	<label for="ck1"><input type="checkbox" id="ck1" value="test">test</label>
@@ -59,9 +59,6 @@
 		<div class="condition" id="cate" onclick="selectkindsCategory()">
 			<span>매칭 종류</span>
 		</div>
-		<!-- <div class="condition" id="cate" onclick="selectDetailkindsCategory()">
-			<span>분류</span>
-		</div -->
 		<div class="condition" id="person" onclick="selectpersonCategory()">
 			<span>인원</span>
 		</div>
@@ -582,7 +579,10 @@
 
 	function selectlocCategory() {
 		if(textkd == "E-스포츠"){
-			alert("E-스포츠는 지역을 선택하실 수 없습니다.");
+			swal({
+				text : "E-스포츠는 지역을 선택하실 수 없습니다.",
+				icon : "warning"
+			});
 		}else{
 			$('#midDiv').show();
 			$('#smallDiv').show();
@@ -806,9 +806,25 @@
 		
 		</div>
 	</div> */
-		if(textDetailkd == ""){
-			alert("매칭 종류는 필수 선택사항입니다.");
-		}else{ 
+
+		
+		if(textps == ""){
+			swal({
+				text : "인원수를 선택해 주세요.",
+				icon : "warning"
+			});
+		}else if(date == ""){
+			swal({
+				text : "날짜를 선택해 주세요",
+				icon : "warning"
+			});
+		}else if(textDetailkd == ""){
+			swal({
+				text : "매칭 종류를 선택해 주세요",
+				icon : "warning"
+			})
+		}else{
+
 			$.ajax({
 				url : "${pageContext.request.contextPath}/matching/searchMatching.do",
 				type : "GET",
@@ -857,7 +873,7 @@
 					html += '<div class="schCat">소모임 - 여행</div>'; */
 					
 				}, error : function(data) {
-					alert("에러");
+					swal("에러");
 				}
 			});
 			

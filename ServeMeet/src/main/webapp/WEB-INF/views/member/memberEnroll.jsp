@@ -224,6 +224,7 @@
 	
 	
 	function checkPswd1(){
+
 	      $("#pwd").on("keyup",function(){
 	      var p1 = $("#pwd").val();
 	      var p2 = $("#pwd2").val();
@@ -246,6 +247,7 @@
 	      }
 	   });
 	   }
+
 	
 	function checkPswd2(){
 		$("#pwd2").on("keyup",function(){
