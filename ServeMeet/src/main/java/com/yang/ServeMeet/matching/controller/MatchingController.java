@@ -480,6 +480,7 @@ public class MatchingController {
 		map.put("conId", conId);
 		map.put("matchingId", matchingId);
 		result+=matchingService.matchingDeclineAll(map);
+		battingService.battingStartUpdate(matchingId);
 		return result;
 	}
 	@RequestMapping(value="/matching/matchingDecline.ma",method=RequestMethod.POST)

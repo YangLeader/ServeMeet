@@ -74,7 +74,7 @@
 		</header>
 
 		<section id="bbs-view-info">
-			<span class="write_user"><span class="sv_guest">${mHistory.userName }</span></span>
+			<span class="write_user"><span class="sv_guest">${mHistory.USERNAME }</span></span>
 			<span></span>
 			<span>
 				<span class="glyphicon glyphicon-time"></span> ${mHistory.MTIME }	</span>

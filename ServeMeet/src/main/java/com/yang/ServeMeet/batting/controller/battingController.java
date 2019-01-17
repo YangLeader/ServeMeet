@@ -17,9 +17,8 @@ import com.yang.ServeMeet.batting.model.service.BattingService;
 import com.yang.ServeMeet.batting.model.vo.Batting;
 import com.yang.ServeMeet.batting.model.vo.BattingUser;
 import com.yang.ServeMeet.common.util.Utils;
-import com.yang.ServeMeet.matching.model.vo.MatchingListObj;
+import com.yang.ServeMeet.matching.model.service.MatchingService;
 import com.yang.ServeMeet.point.model.service.PointService;
-import com.yang.ServeMeet.point.model.service.PointServiceImpl;
 
 @Controller
 public class battingController {
@@ -31,12 +30,15 @@ public class battingController {
 	@Autowired
 	private PointService pointService;	
 	
+	@Autowired
+	private MatchingService matchingService;
 	
 	@RequestMapping("/batting/battingInfo.ba")
 	public String battingInfo(@RequestParam int no, Model model) {
 		
-		model.addAttribute("batting",battingService.battingSelectOne(no));
+		Batting batting = battingService.battingSelect(no);
 		
+		model.addAttribute("batting",batting).addAttribute("matching",matchingService.matchingSelectOne(batting.getMatchingId()));		
 		return "batting/battingInfo";
 	}
 	
