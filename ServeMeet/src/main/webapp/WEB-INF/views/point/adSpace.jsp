@@ -6,10 +6,10 @@
 
 	<div class="ad-block">
 		  <c:if test="${!empty member}">
-          <img width="1200" height="150" onclick="adClick();" src="${pageContext.request.contextPath}/resources/images/AD_PICKME.PNG">
+          <img width="1200" height="150" onclick="adClick();" src="${pageContext.request.contextPath}/resources/images/pick_me.gif">
           </c:if>
           <c:if test="${empty member}">
-			 <img width="1200" height="150"  src="${pageContext.request.contextPath}/resources/images/AD_PICKME.PNG">         
+			 <img width="1200" height="150"  src="${pageContext.request.contextPath}/resources/images/pick_me.gif">         
           </c:if>
     </div>
     
