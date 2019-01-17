@@ -16,7 +16,7 @@
 
 <style>
 .sb_btn2{
-	width: 30%;
+	width: 49%;
     height: 100%;
     color: #fff;
     background: #5e73de;
@@ -75,7 +75,7 @@
 	<div id="bbs-view-subject">
 		<header>
 			<h2 id="bbs-view-title" align="center">
-								${matching.mTitle} 의 배팅	</h2>
+								${matching.MTITLE} 의 배팅	</h2>
 		</header>
 
 	</div>
@@ -89,28 +89,35 @@
         <!-- 본문 내용 시작 { -->
         <div id="bo_v_con">
         <pre style="background-color: white; white-space: pre-wrap; padding: 0px 10px;">
-        	
-        	<h2 id="bbs-view-title">A팀 대표 : ${matching.mWriter}</h2>
-			<h2 id="bbs-view-title">B팀 대표 : ${matching.mGuest}</h2> 
+        	<h2 id="bbs-view-title">배팅 종목 : ${matching.MIDCATEGORY}</h2>
+        	<h2 id="bbs-view-title">A팀 대표 : ${matching.MWRITER}</h2>
+			<h2 id="bbs-view-title">B팀 대표 : ${matching.MGUEST}</h2> 
+			<h2 id="bbs-view-title">A팀 배당 : <fmt:formatNumber value="${(100-batting.battingPNumA/(batting.battingPNumA + batting.battingPNumB)*100)*15/1000 + 1}" pattern=".00"/>배                                       B팀 배당 : <fmt:formatNumber value="${(100-batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB)*100)*15/1000 + 1}" pattern=".00"/>배</h2>
         </pre>
+         
+        <c:if test="${batting.battingPNumA + batting.battingPNumB eq 0}">
+        	<div>아무도 배팅을 걸지 않았습니다.</div>
+        </c:if>
+        <c:if test="${batting.battingPNumA + batting.battingPNumB ne 0}">
         <div class="progress">
 			<div class="progress-bar progress-bar-success" role="progressbar"
 				aria-valuenow="100" aria-valuemin="0" aria-valuemax="<10></10>0"
-				style="width: ${(batting.battingPNumA/(batting.battingPNumA + batting.battingPNumB))*100}%"><fmt:formatNumber value="${(batting.battingPNumA/(batting.battingPNumA + batting.battingPNumB))*100}" pattern=".00"/>% Complete (success)</div>
-
+				style="width: ${(batting.battingPNumA/(batting.battingPNumA + batting.battingPNumB))*100}%">A팀 선택률 : <fmt:formatNumber value="${(batting.battingPNumA/(batting.battingPNumA + batting.battingPNumB))*100}" pattern=".00"/>%</div>
 
 			<div class="progress-bar progress-bar-info" role="progressbar"
 				aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-				style="width: ${(batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB))*100}%"><fmt:formatNumber value="${(batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB))*100}" pattern=".00"/>% Complete (info)</div>
+				style="width: ${(batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB))*100}%">B팀 선택률 : <fmt:formatNumber value="${(batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB))*100}" pattern=".00"/>%</div>
 		</div>
+		</c:if>
 		<div>
 			
 		</div>
+		<c:if test='${batting.bStatus eq "N" }'>
 		<div>
-			<input type="button" class="sb_btn2" onclick="btnBatting('A');" value="A팀 배팅" /> 
-			<input type="button" class="sb_btn2" onclick="btnBatting('B');" value="b팀 배팅" />
+			<input type="button" class="sb_btn2" onclick="btnBatting('A');" value="A팀 배팅(<fmt:formatNumber value="${(100-batting.battingPNumA/(batting.battingPNumA + batting.battingPNumB)*100)*15/1000 + 1}" pattern=".00"/>)" /> 
+			<input type="button" class="sb_btn2" onclick="btnBatting('B');" value="b팀 배팅(<fmt:formatNumber value="${(100-batting.battingPNumB/(batting.battingPNumA + batting.battingPNumB)*100)*15/1000 + 1}" pattern=".00"/>)" />
 		</div>
-        
+        </c:if>
         </div>
 
       </section>
@@ -144,7 +151,7 @@ function btnBatting(battingType){
 							 $("#scratchBtn").attr("style","display:none");
 						 $.ajax({
 								url : "${pageContext.request.contextPath}/batting/battingPick.ba",
-								data : {battingId : "${batting.BATTINGID}",
+								data : {battingId : "${batting.battingId}",
 										battingType : battingType,
 										userName : "${member.userName}"
 										},
@@ -155,7 +162,7 @@ function btnBatting(battingType){
 										swal(battingType+"팀이 선택되었습니다.")
 										.then((value) => {
 											location.href='${pageContext.request.contextPath}/point/updatePoint.do?increasePoint=-100&pContent=배팅 포인트 차감';
-											location.href='${pageContext.request.contextPath}/batting/battingInfo.ba?no=${batting.BATTINGID}';
+											location.href='${pageContext.request.contextPath}/batting/battingInfo.ba?no=${batting.battingId}';
 										});
 										
 										
