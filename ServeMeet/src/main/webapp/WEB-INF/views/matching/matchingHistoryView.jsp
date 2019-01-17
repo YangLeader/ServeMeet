@@ -40,6 +40,7 @@
 		var count = $('input[name="reportCount"]').val();
 		
 		console.log("이 후기의 신고 횟수 : " + count);
+		
 	});
 </script>
 
@@ -129,36 +130,6 @@
 	
     
     
-<script>
-// 글자수 제한
-var char_min = parseInt(0); // 최소
-var char_max = parseInt(0); // 최대
-var save_before = '';
-var save_html = document.getElementById('bo_vc_w').innerHTML;
-
-function good_and_write()
-{
-    var f = document.fviewcomment;
-    if (fviewcomment_submit(f)) {
-        f.is_good.value = 1;
-        f.submit();
-    } else {
-        f.is_good.value = 0;
-    }
-}
-
-function report_board()
-{
-    return confirm("이 게시글을 신고 하시겠습니까?");
-}
-
-function delete_board()
-{
-    return confirm("정말 게시글을 삭제 하시겠습니까?");
-}
-
-
-</script>
 
 </article>
 <!-- } 게시판 읽기 끝 -->
@@ -246,60 +217,59 @@ function excute_good(href, $el, $tx)
 
 	<div class="bbs-list">
 		<ul id="bbs-list-ul">
-			<li class="bbs_list_top">
-				<span class="subject"> 
-					<span class="subject_text"> 
-						<span class="glyphicon glyphicon-tag"></span> 
-											제목
-					</span>
-				</span> 
-				<span class="dec">
-					<span class="w45 wr_name">
-						<span class="glyphicon glyphicon-user"></span> 글쓴이
-					</span>
-					<span class="w45 wr_date">
-						<span class="glyphicon glyphicon-time"></span> 날짜
-					</span>
-					<span class="w45 wr_hit">
-						<span class="glyphicon glyphicon-eye-open"></span> 조회
-					</span>
-				</span>
-			</li>
-			<form id="chatting" method="post">
-			<c:forEach items="${list}" var="item">
-			<li class="bbs_list_basic">
-				<span class="subject text">
-					<a data-mytext="getNo" id="${item.MHISTORYID}">
-						<b>${item.MTITLE}</b>
-					</a>  
-						<span class="w45 icon"> </span>
-				</span> 
-				<span class="dec"> 
-					<span class="w45 wr_name" id="dropdownlist"> 
-						<span class="glyphicon glyphicon-user"></span> 
-							<ul style="padding-inline-start: 0px;">
-								<li class="dropdown"><a class="drop">${item.USERNAME }</a>
-									<ul style="width: auto; dispaly:none;" id="downlist">
+							<li class="bbs_list_top">
+								<span class="subject" > 
+									<span class="subject_text"> 
+										<span class="glyphicon"></span>매칭 후기 제목</span>
+								</span> 
+								<span class="dec">
+									<span class="w45 wr_name" style="width:100px;"> 
+										<span class="glyphicon"></span> 매칭인
+									</span> 
+									<span class="w45 wr_name" style="width:80px;"> 
+										<span class="glyphicon"></span>인원수
+									</span> 
+									<span class="w45 wr_date" style="width:100px;"> 
+										<span class="glyphicon"></span> 카테고리
+										</span> 
 									
-										<c:if test="${member.userName ne item.USERNAME }">
-											<li><input type="button" value="1:1 채팅" onclick="chatting('${item.USERNAME}');"></li>
-										</c:if>
-									
-									</ul>
-								</li>
-							</ul>
-					</span> 
-					<span class="w45 wr_date" style="width:6.5em"> 
-						<span class="glyphicon glyphicon-time"></span> 
-								${item.MDATE}
-					</span> 
+									<span class="w45 wr_hit" style="width:230px;"> 
+										<span class="glyphicon"></span> 지역
+									</span> 
+								</span>
+							</li>
+							<form id="chatting" method="post">
+							<c:forEach items="${list}" var="m">
+							<li class="bbs_list_basic">
+								<span class="subject text" align="center">
+									<a data-mytext="getNo" id="${m.MHISTORYID}">
+										<b>${m.MTITLE }</b>
+									</a>  
+									<span class="w45 icon"> </span>
+								</span> 
+								<span class="dec"> 
+								<span class="w45 wr_name" style="width:100px;"> 
+										<span class="glyphicon"></span> ${m.MWRITER }
+									</span> 
+									<span class="w45 wr_name" style="width:80px;"> 
+										<span class="glyphicon glyphicon-user"></span> ${m.MPEOPLENUM }
+											
+		         					</span> 
+									<span class="w45 wr_date" style="width:100px;"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											${m.MIDCATEGORY }
+									</span> 
+									<span class="w45 wr_hit" style="width:230px;"> 
+										<span class="glyphicon glyphicon-eye-open"></span> 
+											${m.BIGLOCATION } ${m.MIDLOCATION} ${m.SMALLCATEGORY }
+									</span> 
 								
-				</span>
+								</span>
 							
-			</li>
-			</c:forEach>
-			</form>
-		</ul>
+							</li>
+							</c:forEach>
+							</form>
+						</ul>
 	</div>
 
 	

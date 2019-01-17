@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.yang.ServeMeet.batting.model.service.BattingService;
+import com.yang.ServeMeet.batting.model.vo.Batting;
 import com.yang.ServeMeet.board.model.service.BoardService;
 import com.yang.ServeMeet.board.model.vo.BoardFile;
 import com.yang.ServeMeet.common.util.Utils;
@@ -84,7 +84,9 @@ public class MatchingController {
 	public String matchingHistoryForm(@RequestParam int matchingId, Model model) {
 		Matching matching = matchingService.matchingSelectOne(matchingId);
 		
-		model.addAttribute("matching",matching);
+		int battingId = matchingService.battingIdSelect(matchingId);
+		
+		model.addAttribute("matching",matching).addAttribute("battingId",battingId);
 		
 		return "matching/matchingHistoryForm";
 		
@@ -252,44 +254,15 @@ public class MatchingController {
 		
 		Map<String,String> mHistory = matchingService.mHistorySelectOne(mHistoryId);
 		
-//		int numPerPage = 10;
-//		
-//		String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "mHistoryList.ma");
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>(matchingService.mHistoryList());
 		
-		model.addAttribute("mHistory",mHistory).addAttribute("boardFileList",boardService.selectBoardFileList(mHistoryId,"M"));
+		System.out.println("엠 히스토리 셀렉트 "+list);
+		
+		model.addAttribute("mHistory",mHistory).addAttribute("boardFileList",boardService.selectBoardFileList(mHistoryId,"M")).addAttribute("list",list);		
 		
 		return "/matching/matchingHistoryView";
 		
-		/*
-		
-		@RequestParam(value="cPage", required=false, defaultValue="1")
-		int cPage, @RequestParam int no, Model model) {
-			
-			int totalContents = boardService.selectBoardTotalContents();
-			
-			int numPerPage = 10; // 한 페이지당 게시글 수
-			
-			String pageBar = Utils.getPageBar(totalContents, cPage, numPerPage, "boardList.do");
-			
-			boardService.updateViewCount(no);
-			
-			model.addAttribute("board", boardService.selectOneBoard(no))
-			.addAttribute("boardFileList", boardService.selectBoardFileList(no))
-			.addAttribute("list", boardService.selectBoardList(cPage, numPerPage))
-			.addAttribute("pageBar", pageBar)
-			.addAttribute("cList", boardService.selectCommentList(no));
-			
-			return "board/boardView";
-		*/	
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
 		
 	}
 	
