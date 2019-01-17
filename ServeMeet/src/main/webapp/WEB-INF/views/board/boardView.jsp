@@ -65,7 +65,7 @@
 	cursor : default;
 }
 
-#dropdownlist .dropdown ul {
+/* #dropdownlist .dropdown ul {
 background: #5e73de;
 display:none;  /* 평상시에는 서브메뉴가 안보이게 하기 */
 height:auto;
@@ -77,7 +77,7 @@ position:absolute;
 width:200px;
 z-index:200;
 }
-
+ */
 </style>
 </head>
 <body>

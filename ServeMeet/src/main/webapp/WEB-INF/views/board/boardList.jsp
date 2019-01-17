@@ -154,9 +154,11 @@
 											<ul style="padding-inline-start: 0px;">
 												<li class="dropdown"><a class="drop">${b.userName }</a>
 										        	<ul style="width: auto; dispaly:none;" id="downlist">
+										        	<c:if test="${member.userName ne null }">
 										         		<c:if test="${member.userName ne b.userName }">
 										            	<li><input type="button" value="1:1 채팅" onclick="chatting('${b.userName}');"></li>
 										            	</c:if>
+										        	</c:if> 
 										         	</ul>
 										    	</li>
 										    </ul>
