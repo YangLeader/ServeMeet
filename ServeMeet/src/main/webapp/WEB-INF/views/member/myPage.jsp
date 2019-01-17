@@ -184,7 +184,7 @@
 					</p>
 				</div>
 				<div class="btn_area">
-					<a href="#" class = "sb_btn" onclick="ingMatching();">조회하기</a>
+					<a href="${pageContext.request.contextPath}/matching/myMatchingList.ma" class = "sb_btn" onclick="ingMatching();">조회하기</a>
 				</div>
 			</div>
 		</div>
