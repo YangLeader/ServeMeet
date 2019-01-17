@@ -13,6 +13,11 @@
 	
 <meta charset="UTF-8">
 <title>매칭 리스트</title>
+<style type="text/css">
+.listDiv #loc,#cate,#apply{
+	width: 33%;
+}
+</style>
 </head>
 <body style="background-color: white;">
 	<header>
