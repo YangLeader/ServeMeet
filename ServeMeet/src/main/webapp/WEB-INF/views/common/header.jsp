@@ -88,10 +88,10 @@ float: right;
 	<div class="mid-header">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-10">
+				<div class="col-lg-12">
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/"><img
-							src="${pageContext.request.contextPath}/resources/images/logo.png"
+							src="${pageContext.request.contextPath}/resources/images/logoGif.gif"
 							alt=""></a>
 						<%-- <div id = "search" >
 							<input type="text"  name="search" id = "searchTxt"/>
