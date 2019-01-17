@@ -55,7 +55,7 @@
                     <div class="footer-widget mb30">
                         <h2 class="footer-title">Subscribe ServeMeet</h2>
                         <p>ServeMeet만의 특별한 이벤트와 소식을 받아보세요!</p>
-                        <input type="text" placeholder="Your Email" class="form-control" id="emailBox">
+                        <input type="email" placeholder="Your Email" class="form-control" id="emailBox">
                         <a onclick="sub();" class="btn btn-primary">Subscribe</a> </div>
                 </div>
             </div>

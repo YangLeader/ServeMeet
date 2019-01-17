@@ -219,9 +219,7 @@ color: red;
 				</div>
 				<div class="report"></div>
 			</div>
-		
 			<br /><br />
-			${mDetail.mApplicant} ::${member.userName}
 			<c:choose>
 				<c:when test="${mDetail.mStatus eq 'AFTER' }">
 					<c:choose>
@@ -236,20 +234,21 @@ color: red;
 							</c:choose>
 						 </c:when>	
 						 <c:otherwise>
-							<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	
+							<c:choose>
+							 	<c:when test="${mDetail.mStatus eq 'AFTER'}">
+									<button class="mh_btn" onclick="javascript:location.href='${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}'"> 매칭 후기 쓰기</button>
+								</c:when>
+								 <c:otherwise>
+									<center><button class="sb_btn sb_btn_cmp" disabled="disabled">매칭 종료</button></center>	
+								 </c:otherwise>
+							</c:choose>
 						 </c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
 					<c:choose>
 						<c:when test="${mDetail.mWriter eq member.userName}">
-							<c:when test='${mDetail.mhStatus eq "AFTER" }'>
-								<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
-							</c:when>
-						</c:when>
-						<c:when test="${mDetail.mWriter eq member.userName}">
 							<center><button class="sb_btn sb_btn_cmp" onclick="popupOpen()" disabled="disabled">매칭 신청</button></center>
-						
 						</c:when>
 						<c:otherwise>
 							<c:choose>
@@ -273,7 +272,6 @@ color: red;
 							<div class = "cdOne cdBody"><span>${item.mmsg }</span></div>
 							<div class="cdOne" style="flex-basis: 100px; padding: 3px 5px;">
 								<c:choose>
-								
 									<c:when test="${item.mstatus eq '3ACCECPT'}">							
 										<h2 class="acceptIcon"><b>승락</b></h2>
 									</c:when>
@@ -317,45 +315,65 @@ function popupOpen(){
 }
 
 function cdAccept(matchingId,conId,userName) {
-	$.ajax({
-		url:"${pageContext.request.contextPath}/matching/matchingAccept.ma",
-		data:{
-				conId:conId,
-				matchingId: matchingId
-		},
-		type:"post",
-		success:function(data) {
-			accChatRoom(userName);
-		},
-		error:function(){
-			console.log("승락 실패");
-		}
-	});
+	swal({
+		  title: "매칭 상대를 정하시겠습니까?",
+		  text: "채팅방으로 이동합니다.",
+		  icon: "success",
+		  buttons: ["취소", "확인"],
+		 
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  $.ajax({
+					url:"${pageContext.request.contextPath}/matching/matchingAccept.ma",
+					data:{
+							conId:conId,
+							matchingId: matchingId
+					},
+					type:"post",
+					success:function(data) {
+						accChatRoom(userName);
+					},
+					error:function(){
+						console.log("승락 실패");
+					}
+				});  
+		  }
+		});
 }
 function cdDecline(conId) {
 	
 	var $cancleConId = "#cdCancel"+conId;
 	var $acceptConId = "#cdAccept"+conId;
-	$.ajax({
-		url:"${pageContext.request.contextPath}/matching/matchingDecline.ma",
-		data:{conId:conId},
-		type:"post",
-		success:function(data) {
-			$($cancleConId).removeClass("cdComfirm cdCancel").remove("id",$cancleConId).attr("class","cancelIcon");
-			$($acceptConId).remove();
-			matchingConCnt();
-			
-		},
-		error:function(){
-			console.log("승락 실패");
-		}
-	});
+	swal({
+		  title: "신청을 거절하시겠습니까?",
+		  icon: "warning",
+		  buttons: ["취소", "확인"],
+		 
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  $.ajax({
+					url:"${pageContext.request.contextPath}/matching/matchingDecline.ma",
+					data:{conId:conId},
+					type:"post",
+					success:function(data) {
+						$($cancleConId).removeClass("cdComfirm cdCancel").remove("id",$cancleConId).attr("class","cancelIcon");
+						$($acceptConId).remove();
+						matchingConCnt();
+						
+					},
+					error:function(){
+						console.log("승락 실패");
+					}
+				});
+		  }
+		});
 }
 function accChatRoom(userName) {
 	$('#accChatRoom').attr('action', "${pageContext.request.contextPath}/chat/chattingRoom.do/"+userName);
 	$('#accChatRoom').submit();
 }
-
 </script>
 </body>
 </html>

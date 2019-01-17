@@ -34,6 +34,7 @@ ul{
 }
 
 .objTitle{
+	    text-align: center;
 	font-size: 9pt;
 	border: 1px solid #e0e0e0;
 	padding-top: 10px;
@@ -52,7 +53,7 @@ ul{
 	float: left;	
 	height: 100%;
 	padding-top: 25px;
-	
+	text-align: center;
 }
 
 .conTitle{
@@ -85,7 +86,7 @@ ul{
 }
 
 #mtTime{
-	padding-top: 15px;
+	padding-top: 25px;
 	width: 7%;
 }
 
@@ -177,4 +178,7 @@ ul{
     line-height: 300px;
     background-color: rgba( 0, 0, 0, 0.6 );
     color: white;
+}
+#topMenu{
+	margin: 0 20%;
 }

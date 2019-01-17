@@ -138,4 +138,9 @@ public class MatchingServiceImpl implements MatchingService {
 		return matchingDao.matchingDeclineAll(map);
 	}
 	
+	@Override
+	public int mHistoryContentCount() {
+		return matchingDao.mHistoryContentCount();
+	}
+	
 }

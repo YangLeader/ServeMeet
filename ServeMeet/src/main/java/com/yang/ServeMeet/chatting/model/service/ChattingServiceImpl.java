@@ -76,4 +76,9 @@ public class ChattingServiceImpl implements ChattingService {
 		// TODO Auto-generated method stub
 		cDao.insertChatGroup(chatInfo);
 	}
+	@Override
+	public List<String> selectChatMember(int chattingId) {
+		// TODO Auto-generated method stub
+		return cDao.selectChatMember(chattingId);
+	}
 }

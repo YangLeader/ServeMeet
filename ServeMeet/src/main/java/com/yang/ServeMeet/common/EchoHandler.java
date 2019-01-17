@@ -25,9 +25,9 @@ public class EchoHandler extends TextWebSocketHandler {
 	private ChattingService cs;
 //웹 소켓에서 특정 사용자가 센션을 연결하여 주고받는 데이터를 처리하는 객체
 	// 접속 사용자 리스트
-	//private List<WebSocketSession> sessionList = new ArrayList();
+	//사용자 닉네음,WebSocketSession 저장할 map
 	private Map<String,WebSocketSession> mSessionMap= new HashMap<String,WebSocketSession>();
-	//private Map<Integer, List> rMap = new HashedMap();
+	//채팅방 번호, 채팅방에 속한 유저의 닉네임을 담은 list 저장할 map
 	private Map<Integer, List> rMap = new HashMap<Integer, List>();
 	// 에러가 났을 때 로거
 	private Logger logger = LoggerFactory.getLogger(EchoHandler.class);
@@ -46,9 +46,11 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		String userName = ((Member)(session.getAttributes().get("member"))).getUserName();
 		int userNo=((Member)(session.getAttributes().get("member"))).getUserNo();
+		
 		List<ChatUser> chatUser= new ArrayList<ChatUser>();
-		List<String> users=new ArrayList<String>();
 		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		List<String> users=new ArrayList<String>();
 		
 		map.put("chatNo", chatNo);
 		map.put("userNo", userNo);
@@ -65,7 +67,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		for(ChatUser c:chatUser) {
 			users.add(c.getUserName());
 		}
-		
 		rMap.put(chatNo, users);
 		
 		System.out.println("users : "+users);
@@ -116,23 +117,20 @@ public class EchoHandler extends TextWebSocketHandler {
 		System.out.println("session주소 : " + session.getRemoteAddress());
 		System.out.println(userName);
 		List<String> list = new ArrayList<String>();
+		//현재 사용자가 접속해있는 채팅방의 방 번호
 		list=rMap.get(chatNo);
 		System.out.println(list);
-	
-//		List<WebSocketSession> rSessionList = new ArrayList<WebSocketSession>();
-//		rSessionList = rMap.get(chatNo);
-//		System.out.println("rSessionList : " + rSessionList);
 
 		ChattingLog chatLog = new ChattingLog(chatNo, userNo, message.getPayload(),list);
 		System.out.println(chatLog);
 		if (message.getPayload() != null) {
 			if(list.contains(m.getUserName())) {
-				System.out.println("있음 "+ list);
+				
 				list.remove(m.getUserName());
 				int result = cs.ChatLogInsert(chatLog);
-				System.out.println("지웠음 "+ list);
+				
 				list.add(m.getUserName());
-				System.out.println("추가함 "+ list);
+			
 				if (result > 0) {
 					// 사용자 모두에게 데이터를 전달하는 반복문
 					for (String userId : list) {

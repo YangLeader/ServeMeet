@@ -54,6 +54,7 @@ public class WebSocketChattingController {
 		ModelAndView mv = new ModelAndView();
 		Map<String,Integer> map = new HashMap<String,Integer>();
 		
+		
 		map.put("chatNo", chatNo);
 		map.put("userNo", ((Member)session.getAttribute("member")).getUserNo());
 		
@@ -64,11 +65,11 @@ public class WebSocketChattingController {
 		String ipAddr = req.getRemoteAddr();
 		
 		
-		
 		if(chat!=null) {
 			mv.addObject("chatName", chat.getChattingName());
 			mv.addObject("chatNo", chat.getChattingId());
 			mv.addObject("host", ipAddr);
+			
 		}else {
 			mv.addObject("chatName", null);
 			mv.addObject("chatNo", -1);
@@ -81,7 +82,8 @@ public class WebSocketChattingController {
 
 		ModelAndView mv = new ModelAndView();
 		Map<String,Integer> map = new HashMap<String,Integer>();
-	
+		List<String> memberList = new ArrayList<String>();
+		
 		req.setCharacterEncoding("utf-8");
 
 		String ipAddr = req.getRemoteAddr();
@@ -93,9 +95,13 @@ public class WebSocketChattingController {
 		ChatUser chatuser = new ChatUser(chatNo,((Member)session.getAttribute("member")).getUserName());
 		cs.updateStatus(chatuser);
 		
+		memberList=cs.selectChatMember(chat.getChattingId());
+		System.out.println("memberList :::: "+memberList);
+		
 		mv.addObject("chatName", chat.getChattingName());
 		mv.addObject("chatNo", chat.getChattingId());
 		mv.addObject("host", ipAddr);
+		mv.addObject("memberList", memberList);
 		mv.setViewName("chat/chattingView");
 
 		return mv;
@@ -115,6 +121,8 @@ public class WebSocketChattingController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		Map<String,List> nameMap = new HashMap<String,List>();
 		List<String> list =new ArrayList<String>();
+		List<String> memberList = new ArrayList<String>();
+		
 		String myName = ((Member)session.getAttribute("member")).getUserName();
 		String ipAddr = req.getRemoteAddr();
 	
@@ -141,9 +149,13 @@ public class WebSocketChattingController {
 		ChatUser chatuser = new ChatUser(chat.getChattingId(),((Member)session.getAttribute("member")).getUserName());
 		cs.updateStatus(chatuser);
 		
+		memberList=cs.selectChatMember(chat.getChattingId());
+		System.out.println("memberList :::: "+memberList);
+		
 		mv.addObject("chatName", chat.getChattingName());
 		mv.addObject("chatNo", chat.getChattingId());
 		mv.addObject("host", ipAddr);
+		mv.addObject("memberList", memberList);
 		mv.setViewName("chat/chattingView");
 		
 		
@@ -155,6 +167,8 @@ public class WebSocketChattingController {
 		List<String> jsonToObj = new Gson().fromJson(memberName, List.class);
 		List<String> list = new ArrayList<String>();
 		Map<String,Integer> map = new HashMap<String,Integer>();
+		
+		List<String> memberList = new ArrayList<String>();
 
 		ModelAndView mv = new ModelAndView();
 		ChatCreateInfo chatInfo = new ChatCreateInfo();
@@ -175,9 +189,13 @@ public class WebSocketChattingController {
 		Chatting chat=cs.getChatName(map);
 		session.setAttribute("chat", chat);	
 		
+		memberList=cs.selectChatMember(chat.getChattingId());
+		System.out.println("memberList :::: "+memberList);
+		
 		mv.addObject("chatName", chat.getChattingName());
 		mv.addObject("chatNo", chat.getChattingId());
 		mv.addObject("host", ipAddr);
+		mv.addObject("memberList", memberList);
 		mv.setViewName("chat/chattingView");
 		return mv;		
 	}

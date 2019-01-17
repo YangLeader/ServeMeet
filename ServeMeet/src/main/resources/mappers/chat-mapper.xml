@@ -25,7 +25,7 @@
 		    where mindate=Chdate <!-- and Chcontent is not null -->
 		     Order by mindate desc)LD
 		on G.Chattingid=Ld.Chattingid
-		where G.Userno=#{userNo} and G.STATUS='Y' <!-- and Chcontent is not null -->
+		where G.Userno=#{userNo} and G.STATUS='Y' and Chcontent is not null 
 		
 	</sql>
 
@@ -93,6 +93,9 @@
 		)
 		where rownum=1
 	</select>
+	<select id="selectChatMember" parameterType="_int" resultType="String">
+		select (select M.Username from Member M  where M.Userno = G.Userno) userName from Chatting_Group G where Chattingid=#{chatId} and Status='Y'  order by  userName
+	</select>
 
 
 	<insert id="insertChatLog" parameterType="ChattingLog">
@@ -115,6 +118,8 @@
 		into CHATTING_GROUP
 		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}),default)
 		</foreach>
+		into
+		CHATTINGLIST VALUES(seq_chat.nextval ,null,default)
 		select *
 		from dual
 	</insert>

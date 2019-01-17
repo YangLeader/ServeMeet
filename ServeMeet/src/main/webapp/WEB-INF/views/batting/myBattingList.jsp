@@ -52,58 +52,58 @@
 
 					<div class="bbs-list">
 						<ul id="bbs-list-ul">
-							<li class="bbs_list_top"><!-- 
-								<span class="subject" >  -->
-									<span class="w45 wr_count"  style="width:6.5em"> 
-										<span class="glyphicon"></span>배팅번호</span>
-								<!-- </span>  -->
-								
+							<li class="bbs_list_top">
+								<span class="subject" > 
 									<span class="subject_text"> 
-										<span class="glyphicon"></span>카테고리
+										<span class="glyphicon"></span>매칭 후기 제목</span>
+								</span> 
+								<span class="dec">
+									<span class="w45 wr_name" style="width:100px;"> 
+										<span class="glyphicon"></span> 매칭인
 									</span> 
-									<span class="dec"> 
-									<span class="subject_text"> 
-										<span class="glyphicon"></span> 제목
-										</span> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon"></span> 고른 배팅
-									</span> 
-									<span class="w45 wr_name"> 
+									<span class="w45 wr_name" style="width:80px;"> 
 										<span class="glyphicon"></span>배당
 									</span> 
-									<span class="w45 wr_name" style="width:6.5em"> 
-										<span class="glyphicon"></span> 진행 여부
+									<span class="w45 wr_date" style="width:100px;"> 
+										<span class="glyphicon"></span> 승리팀
 										</span> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon"></span> 승리 여부
+									
+									<span class="w45 wr_hit" style="width:230px;"> 
+										<span class="glyphicon"></span> 배팅결과
 									</span> 
 								</span>
 							</li>
 							<form id="chatting" method="post">
 							<c:forEach items="${list}" var="m">
-							
-							<c:set var = "pNumA">${mybatting.BATTINGPNUMA}</c:set>
-							<c:set var = "pNumB">${mybatting.BATTINGPNUMB}</c:set>
-							
 							<li class="bbs_list_basic">
 								<span class="subject text" align="center">
-									<a data-mytext="getNo" id="${m.BATTINGID}">
+									<a data-mytext="getNo" id="${m.MHISTORYID}">
 										<b>${m.MTITLE }</b>
 									</a>  
 									<span class="w45 icon"> </span>
 								</span> 
 								<span class="dec"> 
-									<span class="w45 wr_name" id="dropdownlist"> 
-										<span class="glyphicon glyphicon-user"></span> ${m.MWRITER }
+								<span class="w45 wr_name" style="width:100px;"> 
+										<span class="glyphicon"></span> ${m.MWRITER }
+									</span> 
+									<span class="w45 wr_name" style="width:80px;"> 
+										<span class="glyphicon glyphicon-user"></span> ${m.MPEOPLENUM }
 											
 		         					</span> 
-									<span class="w45 wr_date" style="width:6.5em"> 
+									<span class="w45 wr_date" style="width:100px;"> 
 										<span class="glyphicon glyphicon-time"></span> 
-											${m.BATTINGPNUMA }
+											<c:choose>
+												<c:when test='${m.WIN eq "N"}'>진행중</c:when>
+												<c:otherwise>${m.WIN}</c:otherwise>
+											</c:choose>
 									</span> 
-									<span class="w45 wr_hit"> 
+									<span class="w45 wr_hit" style="width:230px;"> 
 										<span class="glyphicon glyphicon-eye-open"></span> 
-											${m.BATTINGPNUMB }
+											<c:choose>
+												<c:when test='${m.WIN eq "N"}'>진행중</c:when>
+												<c:when test="${m.WIN eq m.BATTINGSELECT}">승리</c:when>
+												<c:otherwise>패배</c:otherwise>
+											</c:choose>
 									</span> 
 								
 								</span>

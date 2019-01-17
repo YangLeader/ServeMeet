@@ -79,7 +79,10 @@ public class ChattingDaoImpl implements ChattingDao {
 	public void insertChatGroup(ChatCreateInfo chatInfo) {
 		// TODO Auto-generated method stub
 		sst.insert("chat.insertChatGroup",chatInfo);
-		
-		
+	}
+	@Override
+	public List<String> selectChatMember(int chattingId) {
+		// TODO Auto-generated method stub
+		return sst.selectList("chat.selectChatMember",chattingId);
 	}
 }

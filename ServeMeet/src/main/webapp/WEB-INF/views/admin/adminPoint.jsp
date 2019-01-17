@@ -105,24 +105,6 @@
                         <p>공지 관리</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="notifications.html">
-                        <i class="ti-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="ti-export"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li> -->
             </ul>
     	</div>
     </div>
@@ -141,27 +123,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-								<p>Stats</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
+                        
 						<li>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-settings"></i>
@@ -170,7 +132,6 @@
                               </a>
                               <ul class="dropdown-menu">
                                 <li><a href="${pageContext.request.contextPath}/member/memberLogout.do">로그아웃</a></li>
-                                <li><a href="#">Notification 2</a></li>
                               </ul>
                         </li>
                     </ul>
