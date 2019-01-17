@@ -120,9 +120,7 @@
 				.then((willDelete) => {
 				  if (willDelete) {
 					    location.href="${pageContext.request.contextPath}/chat/chatOut.do/"+chatNo;
-				  } else {
-				   
-				  }
+				  } 
 				});
 		})
 		
