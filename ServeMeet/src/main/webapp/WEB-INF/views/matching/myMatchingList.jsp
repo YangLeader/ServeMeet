@@ -14,8 +14,9 @@
 <meta charset="UTF-8">
 <title>매칭 리스트</title>
 <style type="text/css">
-.listDiv #loc,#cate,#apply{
-	width: 33%;
+.listDiv #loc, #cate, #apply{
+	width: 33%!important;
+	padding: 5px 0!important;
 }
 </style>
 </head>

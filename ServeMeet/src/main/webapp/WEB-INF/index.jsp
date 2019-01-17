@@ -145,7 +145,7 @@ font-size: 18px;
 					</div>
 					<div class="sContent conList">
 						<div class="midTitle">
-							<a href="${pageContext.request.contextPath}/matching/matchingHistoryList.ma"> 
+							<a href="${pageContext.request.contextPath}/matching/mHistoryList.ma"> 
 								<span class="midTitleName"><b>후기게시판</b></span> <span>+</span>
 							</a>
 						</div>
