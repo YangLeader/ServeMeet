@@ -69,8 +69,12 @@
 	      					success : function(point){
 	      						console.log("point : "+point);
 	    						if(point <100){
-	    							 swal("포인트가 모자랍니다.");
-	    							 location.reload(true);
+	    							 swal("포인트가 모자랍니다.")
+	    							 .then((cancel) => {
+	    								 if(cancel){
+	    	    							 location.reload(true);
+	    								 }
+	    							 });
 	    						 }else{
 	    							 $("#scratchBtn").attr("style","display:none");
 	    						 $.ajax({

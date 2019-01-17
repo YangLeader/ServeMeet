@@ -226,14 +226,21 @@
 	function checkPswd1(){
 		$("#pwd").on("keyup",function(){
 		var p1 = $("#pwd").val();
+		var p2 = $("#pwd2").val();
 		
 		var isPwd = /^[A-Za-z0-9_-]{6,18}$/; 
 		if(p1.length < 5 || !isPwd.test(p1)){
 			$("#pwdMsg").show();
 			pwdFlag1 = false;
 		}else{
-			$("#pwdMsg").hide();
-			pwdFlag1 = true;
+			if(p1 != p2){
+				$("#pwdMsg2").show();
+				pwdFlag2 = false;
+			}else{
+				$("#pwdMsg").hide();
+				pwdFlag1 = true;
+			}
+			
 		}
 	});
 	}
