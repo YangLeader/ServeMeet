@@ -143,4 +143,9 @@ public class MatchingServiceImpl implements MatchingService {
 		return matchingDao.mHistoryContentCount();
 	}
 	
+	@Override
+	public int battingIdSelect(int matchingId) {
+		return matchingDao.battingIdSelect(matchingId);
+	}
+	
 }

@@ -174,4 +174,10 @@ public class MatchingDaoImpl implements MatchingDao {
 		
 		return session.selectOne("Matching.mHistoryContentCount");
 	}
+	
+	@Override
+	public int battingIdSelect(int matchingId) {
+		
+		return session.selectOne("Matching.battingIdSelect",matchingId);
+	}
 }

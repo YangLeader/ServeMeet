@@ -180,7 +180,10 @@ font-family: 'Sunflower', sans-serif;
 padding-top: 15px; 
 color: red;
 }
+
 </style>
+<c:set var = "pNumA">${batting.BATTINGPNUMA}</c:set>
+<c:set var = "pNumB">${batting.BATTINGPNUMB}</c:set>
 </head>
 <body>
 
@@ -242,7 +245,7 @@ color: red;
 				<c:otherwise>
 					<c:choose>
 						<c:when test="${mDetail.mWriter eq member.userName}">
-							<c:when test='${mDetail.mhStatus eq "AFTER" }'>
+							<c:when test="${mDetail.mStatus eq 'AFTER' }">
 								<button class="mh_btn" onclick='javascript:location.href="${pageContext.request.contextPath }/matching/matchingHistoryForm.ma?matchingId=${mDetail.matchingId}"'> 매칭 후기 쓰기</button>
 							</c:when>
 						</c:when>

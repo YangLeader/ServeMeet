@@ -15,8 +15,6 @@
 
 <title>내가 한 배팅들</title>
 
-
-
 </head>
 <body>
 
@@ -53,13 +51,13 @@
 					<div class="bbs-list">
 						<ul id="bbs-list-ul">
 							<li class="bbs_list_top">
-								<span class="subject" > 
+								<span class="subject" style="padding-right: 13px;"> 
 									<span class="subject_text"> 
-										<span class="glyphicon"></span>매칭 후기 제목</span>
+										<span class="glyphicon"></span>배팅 제목</span>
 								</span> 
 								<span class="dec">
 									<span class="w45 wr_name" style="width:100px;"> 
-										<span class="glyphicon"></span> 매칭인
+										<span class="glyphicon"></span>매칭유저
 									</span> 
 									<span class="w45 wr_name" style="width:80px;"> 
 										<span class="glyphicon"></span>배당
@@ -68,7 +66,7 @@
 										<span class="glyphicon"></span> 승리팀
 										</span> 
 									
-									<span class="w45 wr_hit" style="width:230px;"> 
+									<span class="w45 wr_hit" style="width:130px;"> 
 										<span class="glyphicon"></span> 배팅결과
 									</span> 
 								</span>
@@ -78,7 +76,7 @@
 							<li class="bbs_list_basic">
 								<span class="subject text" align="center">
 									<a data-mytext="getNo" id="${m.MHISTORYID}">
-										<b>${m.MTITLE }</b>
+										<b>${m.MTITLE}</b>
 									</a>  
 									<span class="w45 icon"> </span>
 								</span> 
@@ -86,9 +84,13 @@
 								<span class="w45 wr_name" style="width:100px;"> 
 										<span class="glyphicon"></span> ${m.MWRITER }
 									</span> 
+									
+									<c:set var = "pNumA">${m.BATTINGPNUMA}</c:set>
+									<c:set var = "pNumB">${m.BATTINGPNUMB}</c:set>
 									<span class="w45 wr_name" style="width:80px;"> 
-										<span class="glyphicon glyphicon-user"></span> ${m.MPEOPLENUM }
-											
+										<span class="glyphicon glyphicon-user"></span>
+										<c:if test='${m.BATTINGSELECT eq "A"}'><fmt:formatNumber value="${(100-pNumA/(pNumA + pNumB)*100)*15/1000 + 1}" pattern=".00"/>배</c:if>
+										<c:if test='${m.BATTINGSELECT eq "B"}'><fmt:formatNumber value="${(100-pNumB/(pNumA + pNumB)*100)*15/1000 + 1}" pattern=".00"/>배</c:if>
 		         					</span> 
 									<span class="w45 wr_date" style="width:100px;"> 
 										<span class="glyphicon glyphicon-time"></span> 
@@ -97,7 +99,7 @@
 												<c:otherwise>${m.WIN}</c:otherwise>
 											</c:choose>
 									</span> 
-									<span class="w45 wr_hit" style="width:230px;"> 
+									<span class="w45 wr_hit" style="width:130px;"> 
 										<span class="glyphicon glyphicon-eye-open"></span> 
 											<c:choose>
 												<c:when test='${m.WIN eq "N"}'>진행중</c:when>
