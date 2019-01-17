@@ -237,6 +237,7 @@
 	            $("#pwdMsg2").show();
 	            $("#pwdMsg").hide();
 	            pwdFlag2 = false;
+	            pwdFlag1 = true;
 	         }else{
 	            $("#pwdMsg").hide();
 	            pwdFlag1 = true;
