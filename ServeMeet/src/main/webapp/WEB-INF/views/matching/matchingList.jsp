@@ -81,27 +81,32 @@
 	}
 	
 	#mtTitle{
-		width: 30%;
+
+		width: 20%;
 	}
 	
 	#locName{
+
 		width: 20%;
 	}
 	
 	#mtwriter{
+
 		width: 10%;
 	}
 	
 	#mtTime{
-		padding-top: 15px;
+
+		padding-top: 8px;
 		width: 7%;
 	}
 	
 	#mpeople{
-		
+
 		width: 6%;
 	}
 	#mStatus{
+
 		width: 10%;
 	}
 	
@@ -126,6 +131,19 @@
 		height: 40px;
 		margin: auto;
 		text-align: right;	
+	}
+	
+	.bat{
+		display: inline-block;
+
+		background:
+		url('/serveMeet/resources/images/batIcon.png')
+		no-repeat 0 0;
+		width: 10px;
+		height: 10px;
+			vertical-align: middle;
+			background-size: cover;
+		margin-bottom: 3px;
 	}
 </style>
 <meta charset="UTF-8">
@@ -156,9 +174,17 @@
 			</div>
 				<c:forEach items="${matchingList}" var="m">
 					<div class="objM" onclick="showMatching()">
-						<div class="con" id="catBName">${m.bigCategory }</div>
-						<div class="con" id="catSName">${m.midCategory }</div>
-						<div class="con" id="mtTitle"><strong>${m.mTitle }</strong></div>
+						<div class="con" id="catBName">${m.bigCategory }&nbsp;
+						</div>
+						<div class="con" id="catSName">
+							${m.midCategory }
+						</div>
+						<div class="con" id="mtTitle">
+							<c:if test="${m.battingId != null }">
+								<span class="bat"></span>							
+							</c:if>
+							<strong>${m.mTitle }</strong>
+						</div>
 						<div class="con" id="locName">${m.bigLocation } ${m.midLocation } ${m.smallCategory }</div>
 						<div class="con" id="mtwriter">${m.mWriter }</div>
 						<div class="con" id="mtTime">${m.mtime}</div>
@@ -168,10 +194,10 @@
 								<div class="con cgr" id="mStatus">● 매칭 대기</div>
 							</c:when>
 							<c:when test="${m.mStatus eq 'ING'}">
-								<div class="con cbl" id="mStatus">매칭 중</div>
+								<div class="con cbl" id="mStatus">- 매칭 중</div>
 							</c:when>
 							<c:otherwise>
-								<div class="con crd" id="mStatus">매칭 종료</div>
+								<div class="con crd" id="mStatus">x 매칭 종료</div>
 							</c:otherwise>
 						</c:choose>
 						<input type="hidden" id="mid" value="${m.matchingId }" />
