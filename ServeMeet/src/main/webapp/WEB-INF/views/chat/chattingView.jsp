@@ -284,7 +284,7 @@
 .chatMemberList{
 	display :none;
 	padding: 10px;
-    width: 110px;
+    width: 150px;
     height: auto;
     position: absolute;
     border:1px #aaa solid;
