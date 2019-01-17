@@ -346,7 +346,7 @@ width: 100%;}
 			<div id='chatdata' class='panel-body scrollbar-primary'></div>
 		</div>
 		<div id = "chatSend" >
-			<input type="text"  name="chatTxt" id = "chatTxt"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/chatSend3.png"></button></span>
+			<input type="text"  name="chatTxt" id = "chatTxt" maxlength="1000"/><span class = "a"><button class="chatSendBtn"><img class="chatSendImg" src="${pageContext.request.contextPath}/resources/images/chatSend3.png"></button></span>
 		</div>
 		
 	</div>
