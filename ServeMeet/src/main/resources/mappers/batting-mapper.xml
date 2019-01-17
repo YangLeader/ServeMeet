@@ -5,7 +5,7 @@
 <mapper namespace="Batting_Mapper">
 	
 	<select id="battingSelectOne" resultType="map">
-		SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID) WHERE BATTINGID = #{battingId}
+		SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID) JOIN CATEGORY USING(CATEGORYID) WHERE BATTINGID = #{battingId}
 	</select>
 	
 	<select id="battingSelect" resultType="Batting">
