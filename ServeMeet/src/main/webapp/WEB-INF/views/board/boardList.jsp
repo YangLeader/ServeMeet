@@ -42,7 +42,9 @@
 
 </head>
 <body>
-
+<div class="ad_side" style="position:fixed; top:10; left:3">
+         <c:import url="../point/adSide.jsp"/>
+      </div>
 	<!-- preloader (화면 전환 효과) -->
 	
 	<!-- <div class="preloader"></div>

@@ -206,7 +206,10 @@ public class MemberController {
 		
 		if(result > 0) {
 			msg = "탈퇴되었습니다.";
-			sessionStatus.setComplete();
+			if(!(m.getUserId()).equals("admin")) {
+				
+				sessionStatus.setComplete();
+			}
 		} else {
 			msg = "회원 탈퇴 실패!";
 		}

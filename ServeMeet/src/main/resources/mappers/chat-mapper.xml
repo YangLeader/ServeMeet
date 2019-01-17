@@ -118,8 +118,6 @@
 		into CHATTING_GROUP
 		VALUES(seq_chat.currval ,(select userno from MEMBER	where username=#{item}),default)
 		</foreach>
-		into
-		CHATTINGLIST VALUES(seq_chat.nextval ,null,default)
 		select *
 		from dual
 	</insert>

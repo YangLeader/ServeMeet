@@ -67,7 +67,7 @@ public class adminController {
 		model.addAttribute("loc", loc);
 		model.addAttribute("msg", msg);
 		
-		
+		System.out.println("m.getUserId() :::"+m.getUserId());
 		if(!(m.getUserId().equals("admin"))) {
 			return "common/msg";
 		}else {
