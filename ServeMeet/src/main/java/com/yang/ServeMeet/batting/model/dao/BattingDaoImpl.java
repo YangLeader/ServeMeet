@@ -129,5 +129,10 @@ public class BattingDaoImpl implements BattingDao {
 		return sqlSession.selectOne("Batting_Mapper.checkBattingId",matchingId);
 	}
 	
+	@Override
+	public int battingStartUpdate(int matchingId) {
+		
+		return sqlSession.update("Batting_Mapper.battingStartUpdate",matchingId);
+	}
 
 }

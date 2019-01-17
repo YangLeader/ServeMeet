@@ -40,4 +40,6 @@ public interface BattingService {
 	int battingWinnerUpdate(String winnerChk,int battingId);
 	
 	int checkBattingId(int matchingId);
+	
+	int battingStartUpdate(int matchingId);
 }
