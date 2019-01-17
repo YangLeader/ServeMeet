@@ -600,8 +600,10 @@ label { }
 /*--------------------
     5.1 Header Regular 
    ----------------------*/
-.logo > a >img { width: 250px;margin-bottom: 10px;}
-
+.logo > a >img { width: 200px; }
+.logo {
+	text-align: center;
+}
 #searchImg{padding: 0px !important;}
 .header { -webkit-transition: background-color .8s ease-out; -moz-transition: background-color .8s ease-out; 
   background-color: #ffffff; -o-transition: background-color .8s ease-out; 
