@@ -135,12 +135,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-heart"></i>
-                        <p>매칭 관리</p>
-                    </a>
-                </li>
-                <li>
                     <a href="${pageContext.request.contextPath}/admin/adminPoint.do">
                         <i class="ti-money"></i>
                         <p>포인트 관리</p>
@@ -227,25 +221,7 @@
 
         <!-- CONTENTS -->
 		<div id="content" class="content">
-		<div class="col-lg-3 col-sm-6" style="margin-left:auto; margin-right:auto;">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-danger text-center">
-                                            <i class="ti-alert"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>공지글 수</p>
-                                            	<span id="totalUser">${reportCount } 개</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+		
                     
                      <br /><br /><br /><br /><br />
                      
@@ -369,23 +345,6 @@
 							
 							$('#fwrite').submit();
 							
-							$.ajax({
-								url : "${pageContext.request.contextPath}/point/updatePoint.do",
-								data : {increasePoint : 2,
-										pContent : "게시글 작성 포인트"
-										},
-								success : function(){
-									
-									
-									
-					            }, error : function(jqxhr, textStatus, errorThrown){
-					                console.log("ajax 처리 실패");
-					                //에러로그
-					                console.log(jqxhr);
-					                console.log(textStatus);
-					                console.log(errorThrown);
-					            }
-							});
 						}
 						
 						return false;

@@ -94,6 +94,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -130,12 +132,6 @@
                     <a href="${pageContext.request.contextPath}/admin/reportList.do">
                         <i class="ti-view-list-alt"></i>
                         <p>신고 관리</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-heart"></i>
-                        <p>매칭 관리</p>
                     </a>
                 </li>
                 <li>
@@ -364,7 +360,7 @@
         	
         	$('.modal-content pre').html(content);
         	
-        	$('#myModal').addClass('animated pulse');
+        	$('#myModal').addClass('animated fadeIn');
         	
             modal.style.display = "block";
         });
@@ -385,18 +381,22 @@
     		
     		var boardNo = $(this).attr("id");
     		
-    		console.log(boardNo);
-    		
     		var msg = boardNo+'번 글을 블라인드 해제 하시겠습니까?';
     		
-    		if (confirm(msg)!=0) {
-                 
-    			 location.href="${pageContext.request.contextPath}/admin/restoreBoard.do?boardNo="+boardNo;
-    			 
-            } else {
-                
-            	return false;
-            }
+    		swal({
+    			  title: "블라인드 해제",
+    			  text: msg,
+    			  icon: "warning",
+    			  buttons: true,
+    			  dangerMode: true,
+    			  closeOnClickOutside: false
+    			}).then((willDelete) => {
+    				if(willDelete){
+    					location.href="${pageContext.request.contextPath}/admin/restoreBoard.do?boardNo="+boardNo;
+    				}else {
+    				    return false;
+    				 }
+    			});
     		
     		
     	});

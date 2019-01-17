@@ -75,12 +75,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-heart"></i>
-                        <p>매칭 관리</p>
-                    </a>
-                </li>
-                <li>
                     <a href="${pageContext.request.contextPath}/admin/adminPoint.do">
                         <i class="ti-money"></i>
                         <p>포인트 관리</p>

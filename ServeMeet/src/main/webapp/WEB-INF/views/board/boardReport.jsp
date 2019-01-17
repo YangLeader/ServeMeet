@@ -87,9 +87,13 @@
 	    // 내용
 	    	if("${msg}" == "이미 신고한 게시글 입니다."){
 	    		
-	    		alert('${msg}');
+	    	document.addEventListener("DOMContentLoaded", function(event) {
+	  		      swal("${msg}").then((close) => {
+	  		    	window.close();
+	  		      });
+	  		});
 	    		
-	    		window.close();
+	    		
 	    	}
 	    
 		})()
@@ -109,16 +113,17 @@
 				success : function(data)
 						{		
 							
-								alert(name+'님, 신고 처리 됐습니다.');
 							
-									
-									window.close();
+					  		      swal(name +"님, 신고 처리 됐습니다.").then((close) => {
+					  		    	window.close();
+					  		      });
+					  		
 						},
 				error : function() {
 	                         // 에러 발생시 처리할 부분 
-						alert('신고 실패.');
+						swal("신고 사유를 선택해주세요.");
 	                         
-						window.close();
+						
 					
 	            }
 
