@@ -212,8 +212,9 @@ public class battingController {
 	public String myBattingList(@RequestParam String userName , Model model) {
 		
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(battingService.myBattingList(userName));
+		String type = (String) list.get(1).get("BSTATUS");
 		
-		model.addAttribute("list",list);
+		model.addAttribute("list",list).addAttribute("type",type);
 		
 		
 		return "batting/myBattingList";
