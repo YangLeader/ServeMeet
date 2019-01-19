@@ -131,4 +131,9 @@ public class BattingServiceImpl implements BattingService {
 		return battingDao.checkBattingId(matchingId);
 	}
 
+	@Override
+	public int battingStartUpdate(int matchingId) {
+		
+		return battingDao.battingStartUpdate(matchingId);
+	}
 }

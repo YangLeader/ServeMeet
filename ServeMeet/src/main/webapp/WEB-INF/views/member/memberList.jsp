@@ -66,76 +66,79 @@
 			</div> 
 		</div>
 		
-		
 <script>
-		
+      
 
-		function deleteM(userNo){
-			
-			console.log(userNo);
-			
-			swal({
-				  title: "정말로 탈퇴 처리 하시겠습니까?",
-				  icon: "warning",
-				  buttons: true,
-				  dangerMode: true,
-				  closeOnClickOutside: false
-				}).then((willDelete) => {
-					if(willDelete){
-						$.ajax({
-				            url  : "${pageContext.request.contextPath}/member/memberDelete.do",
-				            data : {userNo : userNo},
-				            success : function(data){
-				            	swal("회원탈퇴가 완료되었습니다.");
-				            }, error : function(jqxhr, textStatus, errorThrown){
-				                console.log("ajax 처리 실패");
-				                //에러로그
-				                console.log(jqxhr);
-				                console.log(textStatus);
-				                console.log(errorThrown);
-				            }
-			        	});
+      function deleteM(userNo){
+         
+         console.log(userNo);
+         
+         swal({
+              title: "정말로 탈퇴 처리 하시겠습니까?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+              closeOnClickOutside: false
+            }).then((willDelete) => {
+               if(willDelete){
+                  $.ajax({
+                        url  : "${pageContext.request.contextPath}/member/otherMemberDel.do",
+                        data : {userNo : userNo},
+                        success : function(data){
+                           swal("회원탈퇴가 완료되었습니다.")
+                           .then((value) => {
+                              location.reload(true);
+                           });
+                        }, error : function(jqxhr, textStatus, errorThrown){
+                            console.log("ajax 처리 실패");
+                            //에러로그
+                            console.log(jqxhr);
+                            console.log(textStatus);
+                            console.log(errorThrown);
+                        }
+                    });
 
-						location.reload(true);
-					}else {
-					    return false;
-					 }
-				});
-			
-		}
-		
-		function returnM(userNo){
-			
-			console.log(userNo);
-			
-			swal({
-				  title: "정말로 복구 하시겠습니까?",
-				  icon: "warning",
-				  buttons: true,
-				  dangerMode: true,
-				  closeOnClickOutside: false
-				}).then((willDelete) => {
-					if(willDelete){
-						$.ajax({
-				            url  : "${pageContext.request.contextPath}/member/memberReturn.do",
-				            data : {userNo : userNo},
-				            success : function(data){
-				            	swal("회원복구가 완료되었습니다.");
-				            }, error : function(jqxhr, textStatus, errorThrown){
-				                console.log("ajax 처리 실패");
-				                //에러로그
-				                console.log(jqxhr);
-				                console.log(textStatus);
-				                console.log(errorThrown);
-				            }
-			        	});
+               }else {
+                   return false;
+                }
+            });
+         
+      }
+      
+      function returnM(userNo){
+         
+         console.log(userNo);
+         
+         swal({
+              title: "정말로 복구 하시겠습니까?",
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+              closeOnClickOutside: false
+            }).then((willDelete) => {
+               if(willDelete){
+                  $.ajax({
+                        url  : "${pageContext.request.contextPath}/member/memberReturn.do",
+                        data : {userNo : userNo},
+                        success : function(data){
+                           swal("회원복구가 완료되었습니다.")
+                           .then((value) => {
+                              location.reload(true);
+                           });
+                        }, error : function(jqxhr, textStatus, errorThrown){
+                            console.log("ajax 처리 실패");
+                            //에러로그
+                            console.log(jqxhr);
+                            console.log(textStatus);
+                            console.log(errorThrown);
+                        }
+                    });
 
-						location.reload(true);
-					}else {
-					    return false;
-					 }
-				});
-			
-		}
+               }else {
+                   return false;
+                }
+            });
+         
+      }
 
 </script> 

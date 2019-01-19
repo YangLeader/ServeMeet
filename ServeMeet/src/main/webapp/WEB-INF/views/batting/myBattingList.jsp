@@ -15,8 +15,6 @@
 
 <title>내가 한 배팅들</title>
 
-
-
 </head>
 <body>
 
@@ -40,7 +38,7 @@
 				<div id="bbs-list-top">
 					<!-- 게시판 타이틀 -->
 					<div class="bbs_title_wrap">
-						<a class="bbs_title" href="${pageContext.request.contextPath }/batting/myBattingList.do">배팅 히스토리</a>
+						<a class="bbs_title" href="${pageContext.request.contextPath }/batting/myBattingList.ba?userName=${member.userName}">배팅 히스토리</a>
 						<c:if test="${!empty totalContents }">
 							<p>총 ${totalContents }개의 배팅기록이 있습니다.</p>
 						</c:if>
@@ -52,58 +50,62 @@
 
 					<div class="bbs-list">
 						<ul id="bbs-list-ul">
-							<li class="bbs_list_top"><!-- 
-								<span class="subject" >  -->
-									<span class="w45 wr_count"  style="width:6.5em"> 
-										<span class="glyphicon"></span>배팅번호</span>
-								<!-- </span>  -->
-								
+							<li class="bbs_list_top">
+								<span class="subject" style="padding-right: 13px;"> 
 									<span class="subject_text"> 
-										<span class="glyphicon"></span>카테고리
+										<span class="glyphicon"></span>배팅 제목</span>
+								</span> 
+								<span class="dec">
+									<span class="w45 wr_name" style="width:100px;"> 
+										<span class="glyphicon"></span>매칭유저
 									</span> 
-									<span class="dec"> 
-									<span class="subject_text"> 
-										<span class="glyphicon"></span> 제목
-										</span> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon"></span> 고른 배팅
-									</span> 
-									<span class="w45 wr_name"> 
+									<span class="w45 wr_name" style="width:80px;"> 
 										<span class="glyphicon"></span>배당
 									</span> 
-									<span class="w45 wr_name" style="width:6.5em"> 
-										<span class="glyphicon"></span> 진행 여부
+									<span class="w45 wr_date" style="width:100px;"> 
+										<span class="glyphicon"></span> 승리팀
 										</span> 
-									<span class="w45 wr_name"> 
-										<span class="glyphicon"></span> 승리 여부
+									
+									<span class="w45 wr_hit" style="width:130px;"> 
+										<span class="glyphicon"></span> 배팅결과
 									</span> 
 								</span>
 							</li>
 							<form id="chatting" method="post">
 							<c:forEach items="${list}" var="m">
-							
-							<c:set var = "pNumA">${mybatting.BATTINGPNUMA}</c:set>
-							<c:set var = "pNumB">${mybatting.BATTINGPNUMB}</c:set>
-							
 							<li class="bbs_list_basic">
 								<span class="subject text" align="center">
 									<a data-mytext="getNo" id="${m.BATTINGID}">
-										<b>${m.MTITLE }</b>
+										<b>${m.MTITLE}</b>
 									</a>  
 									<span class="w45 icon"> </span>
 								</span> 
 								<span class="dec"> 
-									<span class="w45 wr_name" id="dropdownlist"> 
-										<span class="glyphicon glyphicon-user"></span> ${m.MWRITER }
-											
-		         					</span> 
-									<span class="w45 wr_date" style="width:6.5em"> 
-										<span class="glyphicon glyphicon-time"></span> 
-											${m.BATTINGPNUMA }
+								<span class="w45 wr_name" style="width:100px;"> 
+										<span class="glyphicon"></span> ${m.MWRITER }
 									</span> 
-									<span class="w45 wr_hit"> 
+									
+									<c:set var = "pNumA">${m.BATTINGPNUMA}</c:set>
+									<c:set var = "pNumB">${m.BATTINGPNUMB}</c:set>
+									<span class="w45 wr_name" style="width:80px;"> 
+										<span class="glyphicon glyphicon-user"></span>
+										<c:if test='${m.BATTINGSELECT eq "A"}'><fmt:formatNumber value="${(100-pNumA/(pNumA + pNumB)*100)*15/1000 + 1}" pattern=".00"/>배</c:if>
+										<c:if test='${m.BATTINGSELECT eq "B"}'><fmt:formatNumber value="${(100-pNumB/(pNumA + pNumB)*100)*15/1000 + 1}" pattern=".00"/>배</c:if>
+		         					</span> 
+									<span class="w45 wr_date" style="width:100px;"> 
+										<span class="glyphicon glyphicon-time"></span> 
+											<c:choose>
+												<c:when test='${m.WIN eq "N"}'>진행중</c:when>
+												<c:otherwise>${m.WIN}</c:otherwise>
+											</c:choose>
+									</span> 
+									<span class="w45 wr_hit" style="width:130px;"> 
 										<span class="glyphicon glyphicon-eye-open"></span> 
-											${m.BATTINGPNUMB }
+											<c:choose>
+												<c:when test='${m.WIN eq "N"}'>진행중</c:when>
+												<c:when test="${m.WIN eq m.BATTINGSELECT}">승리</c:when>
+												<c:otherwise>패배</c:otherwise>
+											</c:choose>
 									</span> 
 								
 								</span>

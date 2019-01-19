@@ -105,7 +105,7 @@
                 <br>
                   <button type="reset" id="cancelbutton" name="cancelbutton" class="btn btn-default">Cancel</button> 
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <button type ="submit" id="sendbutton" name="sendbutton" class="btn btn-default" onclick="sendBtn();">Sign up</button>
+                  <button type="button" id="sendbutton" class="btn btn-default" onclick="sendBtn();">Sign up</button>
                 </div>
               </div>
             </form>
@@ -158,19 +158,23 @@
 		
 		if(idFlag==false){
 			swal("아이디를 다시 확인해주세요.");
-		}else if(pwdFlag==false){
+			return false;
+		}else if(pwdFlag1==false){
 			swal("비밀번호를 다시 확인해주세요.");
+			return false;
 		}else if(pwdFlag2==false){
 			swal("비밀번호 확인이 일치하지 않습니다.");
+			return false;
 		}else if(nameFlag==false){
 			swal("이름을 다시 확인해주세요.");
 			$("name").focus();
+			return false;
 		}else if(emailFlag==false){
 			swal("이메일을 다시 확인해주세요.");
 			$("#email").focus();
+			return false;
 		}else{
 			$("#enrollForm").submit();
-			location.href="${pageContext.request.contextPath}/member/memberEnrollEnd.do";
 		}
 		
 	}
@@ -220,19 +224,30 @@
 	
 	
 	function checkPswd1(){
-		$("#pwd").on("keyup",function(){
-		var p1 = $("#pwd").val();
-		
-		var isPwd = /^[A-Za-z0-9_-]{6,18}$/; 
-		if(p1.length < 5 || !isPwd.test(p1)){
-			$("#pwdMsg").show();
-			pwdFlag = false;
-		}else{
-			$("#pwdMsg").hide();
-			pwdFlag = true;
-		}
-	});
-	}
+
+	      $("#pwd").on("keyup",function(){
+	      var p1 = $("#pwd").val();
+	      var p2 = $("#pwd2").val();
+	      
+	      var isPwd = /^[A-Za-z0-9_-]{6,18}$/; 
+	      if(p1.length < 5 || !isPwd.test(p1)){
+	         $("#pwdMsg").show();
+	         pwdFlag1 = false;
+	      }else{
+	         if(p1 != p2){
+	            $("#pwdMsg2").show();
+	            $("#pwdMsg").hide();
+	            pwdFlag2 = false;
+	            pwdFlag1 = true;
+	         }else{
+	            $("#pwdMsg").hide();
+	            pwdFlag1 = true;
+	         }
+	         
+	      }
+	   });
+	   }
+
 	
 	function checkPswd2(){
 		$("#pwd2").on("keyup",function(){
@@ -253,7 +268,7 @@
 		$("#name").on("keyup",function(){
 			var userName = $(this).val();
 			
-			if(userName.length<3){
+			if(userName.length<3|| userName.length>7){
 				$("#nameErr").hide();
 	        	$("#nameOk").hide();
 	        	$("#nameInvalid").show();

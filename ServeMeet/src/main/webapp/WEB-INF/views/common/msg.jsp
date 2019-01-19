@@ -24,7 +24,7 @@ if("${msg}" !="login"){
 		    	  location.href="${pageContext.request.contextPath}/member/memberView.do";
 		      });
 		    });
-	}else if("${msg}" == "회원가입이 완료되었습니다!" ){
+	}else if("${msg}" == "회원가입이 완료되었습니다!" || "${msg}" =="공지글이 등록되었습니다." ){
 		document.addEventListener("DOMContentLoaded", function(event) {
 		      swal({
 		    	  text : "${msg}",

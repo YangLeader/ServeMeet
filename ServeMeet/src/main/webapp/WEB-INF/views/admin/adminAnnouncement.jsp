@@ -73,6 +73,8 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
+	<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/board_style.css">
 
 	<link href="${pageContext.request.contextPath}/resources/css/adminMember.css"
 	rel="stylesheet">
@@ -94,6 +96,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -126,22 +130,22 @@
                         <p>회원 관리</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="${pageContext.request.contextPath}/admin/reportList.do">
                         <i class="ti-view-list-alt"></i>
                         <p>신고 관리</p>
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-heart"></i>
-                        <p>매칭 관리</p>
-                    </a>
-                </li>
-                <li>
                     <a href="${pageContext.request.contextPath}/admin/adminPoint.do">
                         <i class="ti-money"></i>
                         <p>포인트 관리</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/admin/adminAnnouncement.do">
+                        <i class="ti-announcement"></i>
+                        <p>공지 관리</p>
                     </a>
                 </li>
                 <!-- <li>
@@ -176,31 +180,10 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">신고 관리</a>
+                    <a class="navbar-brand" href="#">공지 관리</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-								<p>Stats</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
 						<li>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-settings"></i>
@@ -218,20 +201,28 @@
         </nav>   
 
         <!-- CONTENTS -->
-		<div id="content" class="loginlist">
+		<div id="content" class="content">
 		<div class="col-lg-3 col-sm-6" style="margin-left:auto; margin-right:auto;">
                         <div class="card">
                             <div class="content">
                                 <div class="row">
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-danger text-center">
-                                            <i class="ti-alert"></i>
+                                            <i class="ti-announcement"></i>
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>신고된 게시글 수</p>
-                                            	<span id="totalUser">${reportCount } 개</span>
+                                            <p>공지글 수</p>
+                                            	
+                                            	<span id="totalUser">
+                                            	<c:forEach items="${list}" var="b">
+                                            	<c:if test="${b.isAnnounce eq 'Y'}" >
+                                            	<c:set var="count" value="${count + 1 }"/>
+                                            	</c:if>
+                                            	</c:forEach>${count } 개
+                                            	</span>
+                                            	
                                         </div>
                                     </div>
                                 </div>
@@ -240,43 +231,51 @@
                     </div>
                     
                      <br /><br /><br /><br /><br />
+                     
+        
+		<div class="col-md-12">
+                        <div class="card">
+				<div class="content">
 		<div class="c_header">
-			<h2>게시글 신고 목록</h2>
-			<p class="contxt">신고된 게시글을 블라인드 처리하세요.</p>
+			<h2>공지글 목록</h2>
+			<p class="contxt">공지사항 리스트</p>
 		</div>
-				
+		
+		
 		<ul class="tab_viewrecord" style="margin-bottom: -1px;">
 		<!-- [D] 탭 링크 선택시 class 에 on" 추가 -->
-			<li class="item1" style="margin-top:2px"><a href="#" class="on">신고 목록</a></li>
-			<li class="item2" style="margin-top:2px"><a href="${pageContext.request.contextPath}/admin/blindList.do">블라인드 목록</a></li>
+			<li class="item1" style="margin-top:2px"><a href="#" class="on">공지글 목록</a></li>
+			<li class="item2" style="margin-top:2px"><a href="${pageContext.request.contextPath}/admin/announcementForm.do">공지글 작성</a></li>
 		</ul>
 		
 		<div class="section">
 	        <!-- <div class="all_logout"><a href="javascript:;" class="btn_model" onclick="logoutAll();"><span class="btn6">전체 로그아웃</span></a></div> -->
 			<table border="1" class="tbl_row">
-			<col width="700"><col width="110"><col width="80"><col width="80"><col width="80"><col width="80">
+			<col width="700"><col width="110"><col width="80"><col width="80"><col width="80"><col width="80"><col width="80">
 				<thead>
 					<tr>
 						<th scope="col" class="ti-menu-alt"> 제목 (클릭시 내용 확인)</th>
 						<th scope="col" class="ti-user"> 작성자</th>
 						<th scope="col" class="ti-alarm-clock"> 작성일</th>
 						<th scope="col" class="ti-eye"> 조회수</th>
-						<th scope="col" class="ti-bell"> 신고 횟수</th>
-						<th scope="col" class="ti-eraser"> 블라인드 처리</th>
+						
+						<th scope="col" class="ti-pencil-alt"> 공지글 수정</th>
+						<th scope="col" class="ti-trash"> 공지글 삭제</th>
 					</tr>
 				</thead>
 				<tbody>
 	        		<c:forEach items="${list}" var="b" >
-	        		<c:if test="${b.reportCount ne 0 }">
+	        		<c:if test="${b.isAnnounce eq 'Y'}" >
 					<tr >
 						<td><a class="myBtn" name='${b.boardContent }'>${b.boardTitle }<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+ ${b.commentCount  }</span></c:if></a></td>
 						<td>${b.userName }</td>	
 						<td>${b.boardDate }</td>
 						<td>${b.boardCount }</td>	
-						<td>${b.reportCount }</td>		
-						<td><input type="button" name="blind" id="${b.boardNo }" value="블라인드" /></td>
+						
+						<td><button type="button" name="update" id="${b.boardNo }" class="btn btn-info btn-sm"><span class="ti-pencil-alt"></span> 수정</button></td>
+						<td><button type="button" name="blind" id="${b.boardNo }" class="btn btn-info btn-sm"><span class="ti-trash"></span> 삭제</button></td>
 					</tr>		
-					</c:if>
+					
 					<!-- The Modal -->
 					    <div id="myModal" class="modal">
 					 
@@ -287,12 +286,26 @@
 					      </div>
 					 
 					    </div>
+					   </c:if>
 					</c:forEach>
 	        	</tbody> 
 	    	</table> 
 		</div> 
-
+		<div class="pager">
+			<c:out value="${pageBar}" escapeXml="false"/>
+					
+		</div>
+		
 	</div>
+	</div>
+	
+	</div>
+	</div>
+	
+	
+	
+	
+	
     
  
     
@@ -310,7 +323,9 @@
         </footer>
 
     </div>
+    
 </div>
+
 
 
 </body>
@@ -336,23 +351,35 @@
 
 	<script type="text/javascript">
 	
-    	$('input[name="blind"]').click(function(){
+    	$('button[name="blind"]').click(function(){
     		
     		var boardNo = $(this).attr("id");
     		
-    		console.log(boardNo);
+    		var msg ='공지글을 삭제 하시겠습니까?';
     		
-    		var msg = boardNo+'번 글을 블라인드 처리 하시겠습니까?';
+    		swal({
+  			  title: "공지글 삭제",
+  			  text: msg,
+  			  icon: "warning",
+  			  buttons: true,
+  			  dangerMode: true,
+  			  closeOnClickOutside: false
+  			}).then((willDelete) => {
+  				if(willDelete){
+  					location.href="${pageContext.request.contextPath}/admin/announceDelete.do?boardNo="+boardNo;
+  				}else {
+  				    return false;
+  				 }
+  			});
     		
-    		if (confirm(msg)!=0) {
-                 
-    			 location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
-    			 
-            } else {
-                
-            	return false;
-            }
     		
+    	});
+    	
+    	$('button[name="update"]').click(function(){
+    		
+    		var boardNo = $(this).attr("id");
+    		
+    		location.href="${pageContext.request.contextPath}/admin/announceUpdateView.do?no="+boardNo;
     		
     	});
     	
@@ -371,7 +398,7 @@
         	
         	$('.modal-content pre').html(content);
         	
-        	$('#myModal').addClass('animated pulse');
+        	$('#myModal').addClass('animated fadeIn');
         	
             modal.style.display = "block";
         });

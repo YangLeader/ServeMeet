@@ -75,24 +75,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-heart"></i>
-                        <p>매칭 관리</p>
-                    </a>
-                </li>
-                <li>
                     <a href="${pageContext.request.contextPath}/admin/adminPoint.do">
                         <i class="ti-money"></i>
                         <p>포인트 관리</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Maps</p>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/adminAnnouncement.do">
+                        <i class="ti-announcement"></i>
+                        <p>공지 관리</p>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="notifications.html">
                         <i class="ti-bell"></i>
                         <p>Notifications</p>

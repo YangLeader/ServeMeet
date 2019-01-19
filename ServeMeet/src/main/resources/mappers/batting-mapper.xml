@@ -5,7 +5,7 @@
 <mapper namespace="Batting_Mapper">
 	
 	<select id="battingSelectOne" resultType="map">
-		SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID) WHERE BATTINGID = #{battingId}
+		SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID) JOIN CATEGORY USING(CATEGORYID) WHERE BATTINGID = #{battingId}
 	</select>
 	
 	<select id="battingSelect" resultType="Batting">
@@ -45,6 +45,10 @@
 		</where>
 	</select>
 	
+	<update id="battingStartUpdate">
+		UPDATE BATTING SET BSTATUS = 'N' WHERE MATCHINGID = #{matchingId}
+	</update>
+	
 
 	<insert id="battingPickUser" parameterType="BattingUser">
 		INSERT INTO BATTINGUSER VALUES (#{battingId},#{userName},#{battingSelect})
@@ -71,7 +75,7 @@
 	</update>
 	
 	<select id="myBattingList" resultType="map">
-		SELECT * FROM (SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID)JOIN BATTINGUSER USING(BATTINGID)) JOIN CATEGORY USING(CATEGORYID) WHERE userName= #{userName}
+		SELECT * FROM (SELECT * FROM BATTING JOIN MATCHING USING(MATCHINGID)JOIN BATTINGUSER USING(BATTINGID)) JOIN CATEGORY USING(CATEGORYID) WHERE userName= #{userName} ORDER BY BATTINGID
 	</select>
 	
 	<update id="winnerUpdate" parameterType="map">

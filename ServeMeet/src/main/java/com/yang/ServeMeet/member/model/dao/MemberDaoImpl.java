@@ -119,9 +119,9 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public int returnMember(int userNo) {
-		return sqlSession.selectOne("member.returnMember",userNo);
-	}
+	   public int returnMember(int userNo) {
+	      return sqlSession.update("member.returnMember",userNo);
+	   }
 
 	
 

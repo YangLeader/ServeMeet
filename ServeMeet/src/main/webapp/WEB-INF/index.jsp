@@ -85,7 +85,7 @@ font-size: 18px;
 			        class="sContent matting col-lg-8 col-md-8 col-sm-12 col-xs-12 listSec">
 			        <div>
 			          <div class="midTitle">
-			            <a> <span class="midTitleName"><b>소모임</b></span> <span>+</span>
+			            <a href="${pageContext.request.contextPath }/matching/matchingList.ma?type=M"> <span class="midTitleName"><b>소모임</b></span> <span>+</span>
 			            </a>
 			          </div>
 			          <div class="sList" id="meeting">
@@ -94,7 +94,7 @@ font-size: 18px;
 			        </div>
 			        <div>
 			          <div class="midTitle">
-			            <a> <span class="midTitleName"><b>e-스포츠</b></span> <span>+</span>
+			            <a href="${pageContext.request.contextPath }/matching/matchingList.ma?type=E"> <span class="midTitleName"><b>e-스포츠</b></span> <span>+</span>
 			            </a>
 			          </div>
 			          <div class="sList">
@@ -105,7 +105,7 @@ font-size: 18px;
 			        </div>
 			        <div>
 			          <div class="midTitle">
-			            <a> <span class="midTitleName"><b>스포츠</b></span> <span>+</span>
+			            <a href="${pageContext.request.contextPath }/matching/matchingList.ma?type=S"> <span class="midTitleName"><b>스포츠</b></span> <span>+</span>
 			            </a>
 			          </div>
 			          <div class="sList">
@@ -116,7 +116,7 @@ font-size: 18px;
 			        </div>
 			        <div>
 			          <div class="midTitle">
-			            <a> <span class="midTitleName"><b>배팅</b></span> <span>+</span>
+			            <a href="${pageContext.request.contextPath }/batting/battingList.ba?type=I"> <span class="midTitleName"><b>배팅</b></span> <span>+</span>
 			            </a>
 			          </div>
 			          <div class="sList">
@@ -138,15 +138,14 @@ font-size: 18px;
 							<div style="padding: 15px 0px;">
 								<ul class="post-list"
 									style="list-style: none; padding: 10px 0px;">
-
-
+									
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="sContent conList">
 						<div class="midTitle">
-							<a href="${pageContext.request.contextPath}/matching/matchingHistoryList.ma"> 
+							<a href="${pageContext.request.contextPath}/matching/mHistoryList.ma"> 
 								<span class="midTitleName"><b>후기게시판</b></span> <span>+</span>
 							</a>
 						</div>
@@ -172,8 +171,8 @@ font-size: 18px;
 			topMatchingList("2");
 			topMatchingList("3");
 			topBattingList();
-			$
-					.ajax({
+			
+					$.ajax({
 
 						url : "${pageContext.request.contextPath}/ajax/boardTop7.do",
 						type : "GET",
@@ -182,8 +181,10 @@ font-size: 18px;
 						success : function(data) {
 
 							for ( var i in data) {
-
-								var li = '<li class="ellipsis">'
+								
+								if(data[i].isAnnounce == 'N'){
+									
+									var li = '<li class="ellipsis">'
 										+ '<a href="${pageContext.request.contextPath}/board/boardView.do?no='
 										+ data[i].boardNo
 										+ '" id="inserttitle">'
@@ -199,6 +200,10 @@ font-size: 18px;
 
 								$('.post-list').html(
 										$('.post-list').html() + li);
+									
+								}
+
+								
 
 								//$('#spanname').html();
 
@@ -288,11 +293,11 @@ font-size: 18px;
 												 .attr("class","matchingBox")
 										).attr("href","${pageContext.request.contextPath}/matching/matchingDetail.md?matNum=" + data[i].matchingId)
 						if(category=="1"){							
-							$("#meeting").append(matchingBox);
+							$("#meeting").prepend(matchingBox);
 						}else if(category=="2"){
-							$("#sports").append(matchingBox);
+							$("#sports").prepend(matchingBox);
 						}else if(category="3"){
-							$("#e_sports").append(matchingBox);
+							$("#e_sports").prepend(matchingBox);
 							$("#e_sports").children("a").children(".matchingBox").children(".location").remove();
 						}
 					}

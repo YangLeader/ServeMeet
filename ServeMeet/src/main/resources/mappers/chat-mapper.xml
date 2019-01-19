@@ -25,7 +25,7 @@
 		    where mindate=Chdate <!-- and Chcontent is not null -->
 		     Order by mindate desc)LD
 		on G.Chattingid=Ld.Chattingid
-		where G.Userno=#{userNo} and G.STATUS='Y' <!-- and Chcontent is not null -->
+		where G.Userno=#{userNo} and G.STATUS='Y' and Chcontent is not null 
 		
 	</sql>
 

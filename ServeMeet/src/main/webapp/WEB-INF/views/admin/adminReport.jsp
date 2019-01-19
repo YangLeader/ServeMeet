@@ -96,6 +96,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/assets/css/themify-icons.css" rel="stylesheet">
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
@@ -134,36 +136,19 @@
                         <p>신고 관리</p>
                     </a>
                 </li>
-                <li>
-                    <a href="${pageContext.request.contextPath}/admin/adminMatching.do">
-                        <i class="ti-heart"></i>
-                        <p>매칭 관리</p>
-                    </a>
-                </li>
+
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/adminPoint.do">
                         <i class="ti-money"></i>
                         <p>포인트 관리</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="maps.html">
-                        <i class="ti-map"></i>
-                        <p>Maps</p>
-                    </a>
-                </li>
                 <li>
-                    <a href="notifications.html">
-                        <i class="ti-bell"></i>
-                        <p>Notifications</p>
+                    <a href="${pageContext.request.contextPath}/admin/adminAnnouncement.do">
+                        <i class="ti-announcement"></i>
+                        <p>공지 관리</p>
                     </a>
                 </li>
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="ti-export"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li> -->
             </ul>
     	</div>
     </div>
@@ -182,27 +167,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="ti-panel"></i>
-								<p>Stats</p>
-                            </a>
-                        </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
+                       
 						<li>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="ti-settings"></i>
@@ -363,18 +328,22 @@
     		
     		var boardNo = $(this).attr("id");
     		
-    		console.log(boardNo);
-    		
     		var msg = boardNo+'번 글을 블라인드 처리 하시겠습니까?';
     		
-    		if (confirm(msg)!=0) {
-                 
-    			 location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
-    			 
-            } else {
-                
-            	return false;
-            }
+    		swal({
+  			  title: "블라인드 처리",
+  			  text: msg,
+  			  icon: "warning",
+  			  buttons: true,
+  			  dangerMode: true,
+  			  closeOnClickOutside: false
+  			}).then((willDelete) => {
+  				if(willDelete){
+  					location.href="${pageContext.request.contextPath}/admin/blindBoard.do?boardNo="+boardNo;
+  				}else {
+  				    return false;
+  				 }
+  			});
     		
     		
     	});

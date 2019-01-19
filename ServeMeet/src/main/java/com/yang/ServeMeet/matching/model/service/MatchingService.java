@@ -25,7 +25,7 @@ public interface MatchingService {
 	Map<String,String> mHistorySelectOne(int mHistoryId);
 
 	
-	Matching matchingSelectOne(int matchingId);
+	Map matchingSelectOne(int matchingId);
 	
 	int mHistoryInsert(MatchingHistory mHistory , List<BoardFile> fileList);
 
@@ -52,5 +52,9 @@ public interface MatchingService {
 	String matchingDecline(int conId);
 
 	String matchingDeclineAll(Map<String,Integer> map);
+	
+	int mHistoryContentCount();
+	
+	int battingIdSelect(int matchingId);
 
 }

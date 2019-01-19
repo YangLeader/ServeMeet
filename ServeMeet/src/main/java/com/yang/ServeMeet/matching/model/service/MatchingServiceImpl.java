@@ -56,7 +56,7 @@ public class MatchingServiceImpl implements MatchingService {
 	}
 	
 	@Override
-	public Matching matchingSelectOne(int matchingId) {
+	public Map matchingSelectOne(int matchingId) {
 		
 		return matchingDao.matchingSelectOne(matchingId);
 	}
@@ -136,6 +136,16 @@ public class MatchingServiceImpl implements MatchingService {
 	@Override
 	public String matchingDeclineAll(Map<String,Integer> map) {
 		return matchingDao.matchingDeclineAll(map);
+	}
+	
+	@Override
+	public int mHistoryContentCount() {
+		return matchingDao.mHistoryContentCount();
+	}
+	
+	@Override
+	public int battingIdSelect(int matchingId) {
+		return matchingDao.battingIdSelect(matchingId);
 	}
 	
 }

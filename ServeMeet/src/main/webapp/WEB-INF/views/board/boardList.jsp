@@ -42,7 +42,9 @@
 
 </head>
 <body>
-
+<div class="ad_side" style="position:fixed; top:10; left:3">
+         <c:import url="../point/adSide.jsp"/>
+      </div>
 	<!-- preloader (화면 전환 효과) -->
 	
 	<!-- <div class="preloader"></div>
@@ -105,7 +107,7 @@
 					<div class="bbs-list">
 						<ul id="bbs-list-ul">
 							<li class="bbs_list_top">
-								<span class="subject" > 
+								<span class="subject"  > 
 									<span class="subject_text"> 
 										<span class="glyphicon glyphicon-tag"></span> 
 											제목
@@ -132,8 +134,13 @@
 							</li>
 							<form id="chatting" method="post">
 							<c:forEach items="${list}" var="b">
+							<c:if test="${b.isAnnounce eq 'Y' }">
+							<li class="bbs_list_basic" style="background-color: aliceblue;">
+							</c:if>
+							<c:if test="${b.isAnnounce ne 'Y' }">
 							<li class="bbs_list_basic">
-								<span class="subject text" style="width: 815px;">
+							</c:if>
+								<span class="subject text" >
 									<a data-mytext="getNo" id="${b.boardNo }">
 										<b>${b.boardTitle }</b>
 										<c:if test="${b.commentCount ne 0 }"><span class="count orangered">&nbsp;&nbsp;+ ${b.commentCount  }</span></c:if>
@@ -147,9 +154,11 @@
 											<ul style="padding-inline-start: 0px;">
 												<li class="dropdown"><a class="drop">${b.userName }</a>
 										        	<ul style="width: auto; dispaly:none;" id="downlist">
+										        	<c:if test="${member.userName ne null }">
 										         		<c:if test="${member.userName ne b.userName }">
-										            	<li><input type="button" value="1:1 채팅" onclick="chatting('${b.userName}');"></li>
+										            	<a class="btn btn-default btn-sm" style="display: inherit;" onclick="chatting('${b.userName}');">'${b.userName }'와 채팅</a>
 										            	</c:if>
+										        	</c:if> 
 										         	</ul>
 										    	</li>
 										    </ul>
@@ -262,7 +271,7 @@
 						$("#sfl").removeClass("dno");
 					});
 
-					 bbs_list_width_fixed();
+					/*  bbs_list_width_fixed();
 
 					setTimeout(function() {
 						bbs_list_width_fixed();
@@ -271,7 +280,7 @@
 					$(window).resize(function() {
 						bbs_list_width_fixed();
 					}); 
-
+ */
 				});
 
 				// 리스트 제목 부분 width 자동조절

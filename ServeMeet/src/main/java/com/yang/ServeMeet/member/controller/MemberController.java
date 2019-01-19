@@ -77,7 +77,7 @@ public class MemberController {
 			System.out.println("비밀번호 암호화 후 : "+member.getUserPwd());
 			
 			int result = memberService.insertMember(member);
-			
+			memberService.updatePoint(member.getUserNo(), 300);
 			String loc = "/";
 			String msg = "";
 			
@@ -206,7 +206,10 @@ public class MemberController {
 		
 		if(result > 0) {
 			msg = "탈퇴되었습니다.";
+			
 			sessionStatus.setComplete();
+				
+			
 		} else {
 			msg = "회원 탈퇴 실패!";
 		}
@@ -217,6 +220,30 @@ public class MemberController {
 		return "common/msg";
 		
 	}
+	@RequestMapping("/member/otherMemberDel.do")
+	   public String otherMemberDel(SessionStatus sessionStatus, 
+	         @RequestParam int userNo, Model model) {
+	      
+	      if(logger.isDebugEnabled()) logger.debug("회원 정보 삭제 확인!");
+	      
+	      int result = memberService.deleteMember(userNo);
+	      
+	      String loc = "/";
+	      String msg = "";
+	      
+	      if(result > 0) {
+	         msg = "탈퇴 처리되었습니다.";
+	         
+	      } else {
+	         msg = "회원 탈퇴 실패!";
+	      }
+	      
+	      model.addAttribute("loc", loc)
+	      .addAttribute("msg", msg);
+	      
+	      return "common/msg";
+	      
+	   }
 	
 	@RequestMapping("/member/memberReturn.do")
 	public String memberReturn(SessionStatus sessionStatus, 
@@ -231,7 +258,6 @@ public class MemberController {
 		
 		if(result > 0) {
 			msg = "회원 복구 성공!";
-			sessionStatus.setComplete();
 		} else {
 			msg = "회원 복구 실패!";
 		}
@@ -316,8 +342,8 @@ public class MemberController {
 		// Mail Server 설정
 			String charSet = "utf-8";
 			String hostSMTP = "smtp.naver.com";		
-			String hostSMTPid = "**@naver.com"; // 본인의 아이디 입력		
-			String hostSMTPpwd = "**"; // 비밀번호 입력
+			String hostSMTPid = "servemeet19@naver.com"; // 본인의 아이디 입력		
+			String hostSMTPpwd = "@Qlalf0118"; // 비밀번호 입력
 			
 			// 보내는 사람 EMail, 제목, 내용 
 			String fromEmail = "servemeet19@naver.com"; // 보내는 사람 eamil

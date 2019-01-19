@@ -22,7 +22,7 @@ public interface MatchingDao {
 
 	Map<String,String> mHistorySelectOne(int mHistoryId);
 	
-	Matching matchingSelectOne(int matchingId);
+	Map matchingSelectOne(int matchingId);
 	
 	int insertMHistory(MatchingHistory mHistory);
 	
@@ -51,5 +51,9 @@ public interface MatchingDao {
 	String matchingDecline(int conId);
 
 	String matchingDeclineAll(Map<String,Integer> map);
+	
+	int mHistoryContentCount();
+	
+	int battingIdSelect(int matchingId);
 
 }

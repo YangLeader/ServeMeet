@@ -1,6 +1,7 @@
 package com.yang.ServeMeet.matching.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,6 @@ public class MatchingDaoImpl implements MatchingDao {
 	
 	@Override
 	public Map<String,String> mHistorySelectOne(int mHistoryId) {
-		
 		return session.selectOne("Matching.mHistorySelectOne",mHistoryId);
 	}
 
@@ -47,9 +47,11 @@ public class MatchingDaoImpl implements MatchingDao {
 	}
 
 
-	public Matching matchingSelectOne(int matchingId) {
-		
-		return session.selectOne("Matching.matchingSelectOne",matchingId);
+	public Map matchingSelectOne(int matchingId) {
+
+		Map map = new HashMap();
+		map = session.selectOne("Matching.matchingSelectOne",matchingId);
+		return map;
 	}
 	
 	@Override
@@ -95,7 +97,6 @@ public class MatchingDaoImpl implements MatchingDao {
 
 	@Override
 	public MatchingListObj matchingDetail(Map map) {
-		System.out.println("객체 : " + session.selectOne("Matching.matchingDetail", map));
 		return session.selectOne("Matching.matchingDetail", map);
 	}
 
@@ -167,5 +168,17 @@ public class MatchingDaoImpl implements MatchingDao {
 		int resutl = session.update("Matching.matchingDeclineAll",map);
 		String str=String.valueOf(resutl);
 		return str;
+	}
+	
+	@Override
+	public int mHistoryContentCount() {
+		
+		return session.selectOne("Matching.mHistoryContentCount");
+	}
+	
+	@Override
+	public int battingIdSelect(int matchingId) {
+		
+		return session.selectOne("Matching.battingIdSelect",matchingId);
 	}
 }

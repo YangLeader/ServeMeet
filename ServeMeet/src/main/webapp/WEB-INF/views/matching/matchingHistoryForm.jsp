@@ -106,13 +106,15 @@ function pasteHTML(filepath){
 						<input type="text" class="form-control" name="userName" value="${member.userName}" readonly required>
 					</div>
 					<c:if test="${matching.categoryId>300}">
-						<div class="wr_option wr_content">
-							<label>매칭승리 팀 : </label>&nbsp;&nbsp;&nbsp;&nbsp;
-							<td>
-								<label for="batTrue"><input type="radio" name="winnerChk" class="winner" value="A"/>A팀</label>
-								<label for="batFalse"><input type="radio" name="winnerChk" class = "winner" value="B" checked="checked"/>B팀</label>
-							</td>
-						</div>
+						<c:if test="${matching.battingId ne null }">
+							<div class="wr_option wr_content">
+								<label>매칭승리 팀 : </label>&nbsp;&nbsp;&nbsp;&nbsp;
+								<td>
+									<label for="batTrue"><input type="radio" name="winnerChk" class="winner" value="A"/>A팀</label>
+									<label for="batFalse"><input type="radio" name="winnerChk" class = "winner" value="B" checked="checked"/>B팀</label>
+								</td>
+							</div>
+						</c:if>
 					</c:if> 
 					<c:if test="${matching.categoryId<300}">
 						<input type="hidden" name="winnerChk" value="N" />
